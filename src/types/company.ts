@@ -14,4 +14,5 @@ export interface Company {
   scorecard: Scorecard
   flags: AnalysisFlag[]
   keyQuestion: string
+  mayaCompanyId?: number | null
 }

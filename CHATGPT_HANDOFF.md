@@ -1,5 +1,25 @@
 # ChatGPT Handoff: Israel Stocks Phase 2
 
+## Phase 4B MAYA discovery
+
+### Summary
+Added nullable `mayaCompanyId` metadata (Sano `813`), D1 migration `0005_maya_discovery.sql`, reusable `ReportDiscoveryProvider`/`MayaReportDiscoveryProvider`, MAYA report classification/ID parsing, attachment priority XBRL > HTML > PDF, manual URL parsing, and MAYA-first Cron discovery.
+
+### MAYA mechanism discovered
+The official page is `https://maya.tase.co.il/he/reports/companies?companyId=813`; the static response is an Angular shell. Its bundle identifies the company financial-report route and `mayafiles.tase.co.il` attachment host, but no stable unauthenticated report-list JSON request was exposed in the initial response. The provider therefore uses deterministic HTML/API fallback and safely returns no invented records until a structured request is identified.
+
+### Sano discovery/manual URL
+Sano MAYA company ID is `813`. The provider dynamically targets the company ID; report IDs are extracted from `/companies/{id}` links and deduplicated. The example report ID `1766669` is supported by `parseMayaReportUrl`; attachment URL variants are recognized as candidates, but no claim is made that the example is current Sano data without MAYA metadata.
+
+### Freshness/Cron/database
+Migration `0005_maya_discovery.sql` applied remotely. Existing freshness endpoint now has MAYA-capable schema fields; Worker Cron is `0 6 * * *`. Worker redeployed at https://israel-stocks-api.karu-lior.workers.dev, version `8d35b1ca-39cc-4759-b349-6901a2b960b3`.
+
+### Tests/deployment
+`npm test` passed (5/5), `npm run worker:test` passed, `npm run build` passed, and `npm run worker:check` passed. No LLM features or credentials were added. Pages remains unchanged; frontend environment/redeploy is still managed in the Pages dashboard.
+
+### Known limitation
+Dynamic report discovery cannot yet enumerate reports because MAYA's initial HTML has no report entries and the stable structured API endpoint is not exposed by the public shell inspection. This is documented rather than bypassed with brittle or guessed scraping.
+
 ## Phase 4 freshness and report discovery
 
 ### Summary

@@ -1,0 +1,13 @@
+ALTER TABLE companies ADD COLUMN maya_company_id INTEGER;
+ALTER TABLE discovered_reports ADD COLUMN provider TEXT NOT NULL DEFAULT 'COMPANY_IR';
+ALTER TABLE discovered_reports ADD COLUMN external_company_id TEXT;
+ALTER TABLE discovered_reports ADD COLUMN external_report_id TEXT;
+ALTER TABLE discovered_reports ADD COLUMN report_type TEXT;
+ALTER TABLE discovered_reports ADD COLUMN fiscal_year INTEGER;
+ALTER TABLE discovered_reports ADD COLUMN published_at TEXT;
+ALTER TABLE discovered_reports ADD COLUMN report_page_url TEXT;
+ALTER TABLE discovered_reports ADD COLUMN pdf_url TEXT;
+ALTER TABLE discovered_reports ADD COLUMN html_url TEXT;
+ALTER TABLE discovered_reports ADD COLUMN xbrl_url TEXT;
+CREATE UNIQUE INDEX idx_discovered_maya_report ON discovered_reports(provider,external_report_id) WHERE external_report_id IS NOT NULL;
+UPDATE companies SET maya_company_id=813 WHERE id='sano';

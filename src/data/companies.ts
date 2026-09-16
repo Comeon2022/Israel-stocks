@@ -13,7 +13,7 @@ const base = [
   { id: 'neto-malinda', ticker: 'NTML', name: 'נטו מלינדה', subsector: 'Food Import & Distribution' as const, isRetailer: false, market: { marketCap: 1900, sharePrice: 94, pe: 10.2, enterpriseValue: 2550, peerPe: 13, historicalPe: 12 }, history: periods([3.55, 4.19, 4.36, 4.8, 5.22], [null, null, .03, .054, .061], [86, -74, 213, 324, -61], [800, 980, 1100, 1230, 1400], [150, 170, 180, 210, 230], [null, null, null, null, null], [650, 750, 800, 880, 970], [720, 830, 900, 980, 1080], [1050, 1200, 1300, 1400, 1500]), scorecard: { quality: 18, cash: 5, growth: 17, balance: 10, valuation: 14 }, keyQuestion: 'מדוע הרווח החשבונאי אינו מתורגם כעת לתזרים מפעילות?' },
 ]
 
-export const companies: Company[] = base.map((company) => ({ ...company, flags: generateAnalysisFlags(company), scorecard: company.scorecard }))
+export const companies: Company[] = base.map((company) => ({ ...company, mayaCompanyId: company.id === 'sano' ? 813 : null, flags: generateAnalysisFlags(company), scorecard: company.scorecard }))
 export const totalScore = (company: Company) => scoreTotal(company.scorecard)
 export const canonicalCompanyId = (value: string) => value.trim().toLowerCase()
 export const companyRoute = (company: Pick<Company, 'id'>) => `/company/${canonicalCompanyId(company.id)}`
