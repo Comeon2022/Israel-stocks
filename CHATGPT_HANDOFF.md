@@ -1,5 +1,31 @@
 # ChatGPT Handoff: Israel Stocks Phase 2
 
+## Scorecard spacing fix
+
+### Task summary
+Improved the shared company-page scorecard readability without changing score logic or values.
+
+### UI changes
+Category labels now occupy their own line, score fractions remain explicit LTR actual/max values, progress bars stay aligned, and category cells have improved horizontal and vertical spacing. Tablet and mobile layouts retain readable two-column/stacked behavior.
+
+### Files changed
+`src/App.css`, `CHATGPT_HANDOFF.md`.
+
+### Verification
+The shared scorecard is used by Sano, Shufersal, Rami Levy, Yochananof, and Neto Malinda.
+
+### Tests
+`npm test` — passed (3/3).
+
+### Build
+`npm run build` — passed.
+
+### Git
+Commit and push status are recorded in the completion commit below.
+
+### Known limitations
+None related to this scorecard spacing change.
+
 ## Company section order fix
 
 ### Task summary
