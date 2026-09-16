@@ -1,5 +1,25 @@
 # ChatGPT Handoff: Israel Stocks Phase 2
 
+## Sano route fix
+
+### Root cause
+Table links used the display ticker `SANO`, while the live API/D1 canonical company ID is lowercase `sano`. Lookup and route handling were case-sensitive/duplicated, so the route could enter the local not-found path instead of the API path.
+
+### Canonical identity
+Internal IDs are lowercase; display tickers remain uppercase. `canonicalCompanyId` normalizes route and lookup values, and `companyRoute` is the single table-link helper.
+
+### Async/error behavior
+`CompanyRoute` accepts both `/company/SANO` and `/company/sano`; API mode sends Sano to the async API page. Loading, API error, and local true-not-found states remain distinct; peers continue using local mock routes.
+
+### Production verification
+Live API `/api/companies/sano` returns 200. Production Pages routes `/company/SANO` and `/company/sano` both return 200. Shared peer route resolution remains available for Shufersal, Rami Levy, Yochananof, and Neto Malinda.
+
+### Tests/build
+`npm test` passed (4/4); `npm run build` passed; `npm run worker:check` passed.
+
+### Git
+Commit and push status are recorded in the completion commit below.
+
 ## Phase 3D live frontend activation
 
 Added an asynchronous API-backed Sano route at `/company/SANO` when `VITE_DATA_SOURCE=api`. It loads annual periods, sources, validation, and market status from the live Worker with explicit loading/error states. It never falls back to Sano mock data in API mode; peer companies remain local MOCK. Missing market data produces a partial score state and unavailable valuation.

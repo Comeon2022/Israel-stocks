@@ -15,6 +15,8 @@ const base = [
 
 export const companies: Company[] = base.map((company) => ({ ...company, flags: generateAnalysisFlags(company), scorecard: company.scorecard }))
 export const totalScore = (company: Company) => scoreTotal(company.scorecard)
-export const findCompany = (ticker: string) => companies.find((company) => company.ticker === ticker)
+export const canonicalCompanyId = (value: string) => value.trim().toLowerCase()
+export const companyRoute = (company: Pick<Company, 'id'>) => `/company/${canonicalCompanyId(company.id)}`
+export const findCompany = (value: string) => { const key = canonicalCompanyId(value); return companies.find((company) => canonicalCompanyId(company.id) === key || canonicalCompanyId(company.ticker) === key) }
 export const periodFcf = (company: Company, period: FinancialPeriod) => company.isRetailer ? (period.cfo !== null && period.capex !== null && period.leasePayments !== null ? period.cfo - period.capex - period.leasePayments : null) : fcf(period)
 export const companyCagr = (company: Company) => cagr(company.history[0].revenue, latest(company.history)?.revenue ?? null, 4)
