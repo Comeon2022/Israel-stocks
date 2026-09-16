@@ -1,5 +1,22 @@
 # ChatGPT Handoff: Israel Stocks Phase 2
 
+## Phase 3B provision and Sano pipeline
+
+### Summary
+Added official Sano source metadata, normalized JSON seed records, an idempotent typed upsert importer, API/local repository selection via `VITE_DATA_SOURCE`, and Worker/D1 operational scaffolding.
+
+### Sano sources/data
+Official URLs are recorded in `worker/seed/sano/sources.json`: annual 2021, 2023, 2024, and 2025 Sano reports. The 2023–2025 seed includes manually normalized values from official reports converted from thousands of ILS to ILS millions; 2021 remains incomplete because no values were extracted. All real seed periods are `MANUALLY_NORMALIZED`, never `VERIFIED`.
+
+### Cloudflare authentication/D1/Worker
+`npx wrangler whoami` was run and returned: `You are not authenticated. Please run wrangler login.` No D1 database was provisioned, no migrations were applied remotely, and no Worker was deployed. After login, run `npx wrangler d1 create israel-stocks-db`, copy its database ID into `wrangler.toml`, then run `npx wrangler d1 migrations apply israel-stocks-db --local`, `--remote`, and `npx wrangler deploy`.
+
+### Frontend/API
+Added `configuredFinancialRepository` selecting API or local mode from `VITE_DATA_SOURCE`; the existing static page still requires an asynchronous React data-loading integration before it can consume API periods without architectural changes. This is explicitly not claimed as live Sano API UI.
+
+### Checks
+`npm test`, `npm run build`, and `npm run worker:check` pass before this task's final commit.
+
 ## Phase 3 real data pipeline
 
 ### Architecture

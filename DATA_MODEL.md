@@ -9,3 +9,5 @@ Derived formulas include gross/operating margin, net debt (with an explicit leas
 TTM sums the latest four sequential quarters for flows and takes the latest quarter-end value for balances; fewer than four quarters returns `null`. Validation checks accounting reconciliations, margin sanity, capex signs, and source completeness.
 
 Sano has an ingestion-ready annual template for 2021–2025. No official source files were present locally, so it is `INCOMPLETE`; existing Sano figures remain isolated Phase 1 mock data and are never labeled verified. Add another real company by supplying normalized periods, source records, a market snapshot, and a repository adapter.
+
+Phase 3B seed records are stored as JSON under `worker/seed/sano/`, with source IDs per period and ILS-thousands-to-millions conversion applied to extracted values. Official-source values are `MANUALLY_NORMALIZED`; unavailable fields remain null. The Worker importer uses conflict-safe upserts and requires at least one source ID.

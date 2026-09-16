@@ -1,0 +1,6 @@
+[
+ {"id":"sano-annual-2021","fiscalYear":2021,"periodEnd":"2021-12-31","sourceIds":["sano-annual-2021"],"dataStatus":"INCOMPLETE","financials":{}},
+ {"id":"sano-annual-2023","fiscalYear":2023,"periodEnd":"2023-12-31","sourceIds":["sano-annual-2023"],"dataStatus":"MANUALLY_NORMALIZED","financials":{"revenue":2129.458,"operatingIncome":284.372,"netIncome":239.826}},
+ {"id":"sano-annual-2024","fiscalYear":2024,"periodEnd":"2024-12-31","sourceIds":["sano-annual-2024"],"dataStatus":"MANUALLY_NORMALIZED","financials":{"revenue":2273.947,"operatingIncome":317.617,"netIncome":265.340}},
+ {"id":"sano-annual-2025","fiscalYear":2025,"periodEnd":"2025-12-31","sourceIds":["sano-annual-2025"],"dataStatus":"MANUALLY_NORMALIZED","financials":{"revenue":2239.742,"costOfRevenue":1408.221,"grossProfit":831.521,"operatingIncome":339.346,"financeIncome":33.760,"financeExpense":14.646,"profitBeforeTax":358.459,"incomeTaxExpense":73.529,"netIncome":284.930}}
+]

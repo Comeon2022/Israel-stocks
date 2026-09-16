@@ -27,6 +27,8 @@ Deploy with `npx wrangler d1 migrations apply israel-stocks --remote` followed b
 
 Sano has an incomplete, source-traceable seed template only. No official Sano/TASE/Maya report files were available locally, so no real figures are imported or labeled verified. Missing values remain null.
 
+Phase 3B adds official report URLs and manually normalized Sano annual seed records under `worker/seed/sano/`. The importer (`worker/src/importer.ts`) validates source linkage and performs idempotent upserts. Run it from a Wrangler-authenticated deployment process after provisioning D1. API mode selection is exposed by `src/data/dataSource.ts`; the current synchronous legacy view remains local until async page loading is enabled.
+
 ## Production build
 
 ```bash
