@@ -1,0 +1,2 @@
+import type { FinancialSource } from '../../../types/normalized'
+export const sanoSources: FinancialSource[] = [{ id: 'sano-real-data-required', companyId: 'sano', title: 'Official Sano/TASE annual reports required for normalization', sourceType: 'ANNUAL_REPORT', url: null, publicationDate: null, reportPeriodEnd: null, retrievedAt: '2026-09-16', notes: 'No authoritative Sano source files were available in the repository. This is an ingestion template, not verified data.' }]
