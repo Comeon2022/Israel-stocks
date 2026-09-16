@@ -7,3 +7,6 @@ binding = "DB"
 database_name = "israel-stocks-db"
 database_id = "d3e038bc-762a-4dc0-89dc-8e4e942335f7"
 migrations_dir = "migrations"
+
+[vars]
+ALLOWED_ORIGINS = "https://israel-stocks.pages.dev,http://localhost:5173"

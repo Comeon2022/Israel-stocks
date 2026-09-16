@@ -1,5 +1,13 @@
 # ChatGPT Handoff: Israel Stocks Phase 2
 
+## Phase 3D live frontend activation
+
+Added an asynchronous API-backed Sano route at `/company/SANO` when `VITE_DATA_SOURCE=api`. It loads annual periods, sources, validation, and market status from the live Worker with explicit loading/error states. It never falls back to Sano mock data in API mode; peer companies remain local MOCK. Missing market data produces a partial score state and unavailable valuation.
+
+Worker CORS now allows `https://israel-stocks.pages.dev` and `http://localhost:5173`; deployment version `3d857ecf-f1eb-48c9-8005-5c40b7009321` is live at https://israel-stocks-api.karu-lior.workers.dev. Production Pages project exists, but Pages build variables could not be set through available Wrangler commands. Set Production `VITE_DATA_SOURCE=api` and `VITE_API_BASE_URL=https://israel-stocks-api.karu-lior.workers.dev` in Pages Settings → Environment variables, save, and redeploy. This is the only remaining production verification blocker.
+
+`npm test`, `npm run build`, and `npm run worker:check` pass. No credentials or secrets were committed.
+
 ## Phase 3C activation
 
 ### Summary

@@ -83,3 +83,7 @@ No environment variables or paid services are required for Phase 1.
 ## Data policy
 
 The UI is explicitly marked `נתוני הדגמה / Prototype`. Missing values remain `null` and render as `אין נתון`. No external financial API or scraping is used yet.
+
+## Production API mode
+
+The live API is `https://israel-stocks-api.karu-lior.workers.dev`. To activate Sano API mode in Cloudflare Pages, set Production variables `VITE_DATA_SOURCE=api` and `VITE_API_BASE_URL=https://israel-stocks-api.karu-lior.workers.dev`, then redeploy. Sano shows API loading/error states and a partial score when market data is null; the other four companies remain local MOCK peers.
