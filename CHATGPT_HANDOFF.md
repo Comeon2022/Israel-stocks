@@ -1,5 +1,13 @@
 # ChatGPT Handoff: Israel Stocks Phase 2
 
+## Score clarity and conclusions UX
+
+Score totals and category fractions now use explicit LTR numeric groups so they render as actual/max (`81 / 100`, `26 / 30`) inside the Hebrew RTL interface. Category maximums are visually subordinate to actual scores. Existing company-page analytical content, strengths, risks, and key-question components remain present; no financial or scoring logic changed.
+
+Files changed: `src/App.tsx`, `CHATGPT_HANDOFF.md`.
+
+Tests: `npm test` — passed. Build: `npm run build` — passed. Git status for this task is recorded in the completion commit.
+
 ## Phase 2 status
 
 Added `src/types/normalized.ts`, normalized calculation helpers including TTM flow/balance behavior, validation rules, source metadata, market-data separation, a local `FinancialRepository`, and Sano annual ingestion templates for 2021–2025. Sano is explicitly `INCOMPLETE`: no official Sano/TASE/Maya files were available locally, so no real figures were fabricated. Existing Sano and peer figures remain Phase 1 `MOCK` data.
