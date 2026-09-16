@@ -11,6 +11,22 @@ npm run dev
 
 Open the Vite URL shown in the terminal, usually `http://localhost:5173`.
 
+## Phase 3 data pipeline
+
+The repository now includes a Cloudflare Worker (`worker/src/index.ts`) and D1 migrations in `migrations/`. The frontend remains local/mock by default and has an `ApiFinancialRepository` available for `VITE_DATA_SOURCE=api` with `VITE_API_BASE_URL` configured in `.env`.
+
+Run the local Worker with Wrangler after setting a real `database_id` in `wrangler.toml`:
+
+```bash
+npx wrangler d1 migrations apply israel-stocks --local
+npx wrangler dev
+npm run worker:check
+```
+
+Deploy with `npx wrangler d1 migrations apply israel-stocks --remote` followed by `npx wrangler deploy`. The API exposes `/api/health`, company, financials (annual/quarterly/latest/ttm), sources, market/latest, and validation endpoints. Set `ALLOWED_ORIGINS` for deployed frontend origins; local/mock mode requires no backend.
+
+Sano has an incomplete, source-traceable seed template only. No official Sano/TASE/Maya report files were available locally, so no real figures are imported or labeled verified. Missing values remain null.
+
 ## Production build
 
 ```bash

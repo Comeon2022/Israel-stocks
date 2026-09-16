@@ -1,5 +1,34 @@
 # ChatGPT Handoff: Israel Stocks Phase 2
 
+## Phase 3 real data pipeline
+
+### Architecture
+Added a TypeScript Cloudflare Worker with D1 bindings, a typed API repository adapter, and a retained local repository fallback. No LLM features were added.
+
+### Database
+Added `migrations/0001_initial.sql` and `0002_indexes.sql` for companies, financial periods/statements, sources, market snapshots, and validation results. Canonical units are ILS/MILLIONS with nullable numeric fields.
+
+### API
+Implemented `/api/health`, `/api/companies`, `/api/companies/:id`, `/financials`, `/financials?periodType=ANNUAL|QUARTERLY`, `/financials/latest`, `/financials/ttm`, `/sources`, `/market/latest`, and `/validation`, with structured errors and configurable CORS.
+
+### Sano migration status
+No official Sano/TASE/Maya source files were available locally. Therefore 2021–2025 remain an explicit incomplete seed/template with null values and a source-required record; no periods or figures are falsely marked verified. Sano’s existing frontend figures remain local Phase 1 mock data.
+
+### Calculations, scorecard, flags, validation
+Existing deterministic frontend calculations remain unchanged. The Worker persistence/API layer is ready for normalized sourced data; API-backed score/flags are not yet activated because no real Sano periods exist. Validation schema and endpoints are present; importer-time validation remains a Phase 4 follow-up.
+
+### Tests/build
+`npm test`, `npm run build`, and `npm run worker:check` pass.
+
+### Cloudflare
+`wrangler.toml` is configured with placeholder `database_id`; no D1 database or Worker deployment was created from this environment. Run the documented Wrangler migration/deploy commands after supplying the account database ID.
+
+### Git
+Commit/push status is recorded in the completion commit below.
+
+### Known limitations / Phase 4
+The API repository is available but the current static page still imports its legacy local company collection directly; wiring asynchronous API loading into React is pending real backend provisioning. Phase 4 should add official report ingestion, importer validation/upserts, and current market-data refresh.
+
 ## Scorecard spacing fix
 
 ### Task summary

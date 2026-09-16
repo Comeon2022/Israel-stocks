@@ -1,0 +1,1 @@
+export async function apiGet<T>(path: string): Promise<T> { const base = import.meta.env.VITE_API_BASE_URL ?? ''; const response = await fetch(`${base}${path}`); if (!response.ok) throw new Error((await response.json()).error?.message ?? 'API request failed'); return response.json() as Promise<T> }

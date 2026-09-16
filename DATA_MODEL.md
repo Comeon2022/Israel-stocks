@@ -2,6 +2,8 @@
 
 Financial periods use ILS millions, nullable numeric fields, and `ANNUAL`, `QUARTERLY`, or `TTM` period types. Missing data stays `null`. Sources and market snapshots are separate from statements.
 
+Cloudflare persistence maps normalized periods/statements into `financial_periods` and `financial_statements`; companies, sources, market snapshots, and validation results map to their respective D1 tables. `source_ids_json` links every period to traceability records. Apply `migrations/0001_initial.sql` and `0002_indexes.sql` with Wrangler.
+
 Derived formulas include gross/operating margin, net debt (with an explicit lease-inclusive variant), FCF = CFO - capex, and retailer adjusted FCF = CFO - capex - total lease cash payments. Lease liabilities and payments remain explicit IFRS 16 fields.
 
 TTM sums the latest four sequential quarters for flows and takes the latest quarter-end value for balances; fewer than four quarters returns `null`. Validation checks accounting reconciliations, margin sanity, capex signs, and source completeness.

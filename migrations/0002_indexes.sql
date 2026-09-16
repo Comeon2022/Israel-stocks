@@ -1,0 +1,1 @@
+CREATE INDEX idx_periods_company_end ON financial_periods(company_id,period_end); CREATE INDEX idx_sources_company ON financial_sources(company_id); CREATE INDEX idx_validation_company ON validation_results(company_id);
