@@ -1,5 +1,9 @@
 # ישראל סטוקס / Israel Stocks
 
+## MAYA live enumeration
+
+The MAYA provider uses the confirmed public structured requests: POST `/api/v1/reports/finance` with `pageSize`, `pageNumber`, and `companyId`, then GET `/api/v1/reports/{reportId}`. Responses provide real report IDs, publication dates, issuer IDs, and attachment metadata. Attachments are selected XBRL > HTML > PDF. Company IR remains secondary.
+
 Phase 2 of a Hebrew RTL financial-analysis dashboard. The legacy UI remains intact while normalized periods, source metadata, validation, TTM calculations, and a local repository boundary are introduced. Sano has an ingestion-ready template but remains INCOMPLETE because no authoritative report files are local; all existing figures are MOCK.
 
 ## Local development

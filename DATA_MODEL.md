@@ -1,5 +1,7 @@
 # Normalized financial data model
 
+MAYA report records use external report IDs, issuer IDs, report type, publication date, report page, and XBRL/HTML/PDF attachment URLs. Freshness compares persisted MAYA report periods to processed periods; no discovered report is activated without deterministic extraction and validation.
+
 The live Phase 3D frontend can load Sano periods, sources, validation, and market status asynchronously from the Worker API. Null market data keeps valuation and the total score explicitly incomplete; peer companies remain local mock data.
 
 `discovered_reports` records official Sano links and lifecycle status (`DISCOVERED`, `PROCESSED`, `IGNORED`, `FAILED`) with discovery/processing timestamps. Freshness compares the newest discovered period with the latest ingested period; a discovered newer report is not active financial data until deterministic validation passes. The Worker Cron runs daily at 06:00 UTC.

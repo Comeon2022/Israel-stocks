@@ -1,5 +1,28 @@
 # ChatGPT Handoff: Israel Stocks Phase 2
 
+## Phase 4C MAYA live enumeration
+
+### Root blocker resolved
+Phase 4B could only inspect the Angular shell. The actual public mechanism was identified from the MAYA application bundle and verified directly.
+
+### MAYA endpoint/mechanism
+`POST https://maya.tase.co.il/api/v1/reports/finance` with JSON `{pageSize,pageNumber,companyId}` returns report summaries. `GET https://maya.tase.co.il/api/v1/reports/{reportId}` resolves issuer, title, publication date, and attachment metadata. Sano uses MAYA company ID `813`.
+
+### Sano real enumeration
+Live request returned report `1766669`, title `דוח רבעון 2/חצי שנתי לשנת 2026`, type `Q2`, fiscal year 2026, period end `2026-06-30`, published `2026-08-27T12:47:01.627`. Attachments: XBRL, HTML, and PDF on `mayafiles.tase.co.il`. It was persisted as `MAYA`/`DISCOVERED`; no numeric financial values were activated.
+
+### Example URL
+`https://maya.tase.co.il/he/reports/companies/1766669?attachmentType=pdf1` resolves report ID `1766669`; the detail API confirms the same issuer and all three attachment types.
+
+### Freshness/Cron/database
+Remote migration `0005_maya_discovery.sql` is applied. Freshness now reports latest processed `2025-12-31` versus latest discovered `2026-06-30`, with `newerReportAvailable: true`. Cron remains daily at `0 6 * * *` and uses the MAYA provider.
+
+### Tests/deployments
+MAYA parser/provider tests, frontend tests, build, and Worker check pass. Worker redeployed at https://israel-stocks-api.karu-lior.workers.dev. Pages remains a separate Git-integrated deployment; API freshness verification is live.
+
+### Known limitations
+Automatic numeric XBRL/HTML ingestion is intentionally not enabled until deterministic extraction and validation are complete. Market data remains separate and unavailable.
+
 ## Phase 4B MAYA discovery
 
 ### Summary

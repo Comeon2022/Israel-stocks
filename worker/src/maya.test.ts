@@ -1,0 +1,3 @@
+import { describe, expect, it } from 'vitest'
+import { classifyMayaReport, parseMayaReportUrl, resolveMayaReport } from './maya'
+describe('MAYA provider',()=>{it('resolves report IDs and attachment priority metadata',()=>{const r=resolveMayaReport({id:1766669,reporterId:813,title:'דוח רבעון 2/חצי שנתי לשנת 2026',publishDate:'2026-08-27T12:47:01.627',attachments:[{fileType:'htm',url:'rhtm/a.htm'},{fileType:'pdf1',url:'rpdf/a.pdf'},{fileType:'xbrl',url:'xbrl/a.xbrl'}]});expect(r.externalReportId).toBe('1766669');expect(r.reportType).toBe('Q2');expect(r.xbrlUrl).toContain('mayafiles');expect(parseMayaReportUrl('https://maya.tase.co.il/he/reports/companies/1766669?attachmentType=pdf1')).toBe('1766669');expect(classifyMayaReport('general announcement')).toBe('UNKNOWN')})})
