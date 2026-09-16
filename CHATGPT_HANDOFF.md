@@ -1,5 +1,25 @@
 # ChatGPT Handoff: Israel Stocks Phase 2
 
+## Company section order fix
+
+### Task summary
+The existing company-page `analysis-grid` was moved above historical charts and detailed financial data using route-scoped layout ordering. No content was duplicated and no financial, score, flag, validation, route, or data logic changed.
+
+### Before
+Company conclusions (automatic analysis, strengths, risks, and key question) appeared below the financial table.
+
+### After
+Company header → KPI strip → score → score breakdown → automatic analysis/strengths/risks/key question → historical trends/charts → detailed financial table. The existing single analysis block is reused for Sano, Shufersal, Rami Levy, Yochananof, and Neto Malinda.
+
+### Files changed
+`src/App.css`, `CHATGPT_HANDOFF.md`.
+
+### Verification
+All five company routes use the same ordering through the shared `CompanyPage` component. `npm test` passed. `npm run build` passed.
+
+### Git
+Commit and push status are recorded below after completion.
+
 ## Score clarity and conclusions UX
 
 Score totals and category fractions now use explicit LTR numeric groups so they render as actual/max (`81 / 100`, `26 / 30`) inside the Hebrew RTL interface. Category maximums are visually subordinate to actual scores. Existing company-page analytical content, strengths, risks, and key-question components remain present; no financial or scoring logic changed.
