@@ -8,6 +8,8 @@ import type { Company } from './types/company'
 import type { FinancialPeriod } from './types/financial'
 import './App.css'
 
+// Product brand: תיקה שוק — מערכת לניתוח מניות בישראל.
+
 const money = (value: number | null, digits = 1) => value === null ? 'אין נתון' : `${value.toFixed(digits)} מ׳ ₪`
 const pct = (value: number | null) => value === null ? 'אין נתון' : `${(value * 100).toFixed(1)}%`
 const scoreColor = (score: number) => score >= 75 ? 'text-emerald-400' : score >= 65 ? 'text-amber-300' : 'text-rose-400'
