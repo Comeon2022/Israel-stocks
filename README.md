@@ -94,6 +94,6 @@ The live API is `https://israel-stocks-api.karu-lior.workers.dev`. To activate S
 
 Phase 4 adds daily Sano discovery at 06:00 UTC. The Worker parses the official IR page, persists new links in `discovered_reports`, and exposes `/api/companies/sano/freshness`. Discovery only records reports; automatic financial activation waits for deterministic extraction and validation. Run `npm run worker:test` for parser tests.
 
-## MAYA discovery (Phase 4B)
+## MAYA XBRL ingestion (Phase 5)
 
-Companies may carry a nullable `mayaCompanyId`; Sano uses `813`. `MayaReportDiscoveryProvider` targets the official MAYA financial-report page, persists canonical report IDs and attachment candidates with XBRL > HTML > PDF preference, and runs from the daily Cron. Manual MAYA URLs can be parsed with `parseMayaReportUrl`; no unauthenticated admin endpoint is exposed. The current MAYA Angular shell does not embed report records in its initial HTML, so a stable structured endpoint must be supplied before dynamic report IDs can be imported; the provider fails safely without inventing records. Company IR remains secondary for existing source records.
+Companies may carry a nullable `mayaCompanyId`; Sano uses `813`. `MayaReportDiscoveryProvider` calls the official MAYA finance-list and report-detail APIs, persists canonical IDs and XBRL/HTML/PDF attachments, and runs from daily Cron. Report 1766669 is the deterministic XBRL seed: Q2 quarter-only facts are normalized to ILS millions and activated only after validation; missing market data remains incomplete. Company IR remains secondary.

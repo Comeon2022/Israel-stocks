@@ -6,7 +6,9 @@ The live Phase 3D frontend can load Sano periods, sources, validation, and marke
 
 `discovered_reports` records official Sano links and lifecycle status (`DISCOVERED`, `PROCESSED`, `IGNORED`, `FAILED`) with discovery/processing timestamps. Freshness compares the newest discovered period with the latest ingested period; a discovered newer report is not active financial data until deterministic validation passes. The Worker Cron runs daily at 06:00 UTC.
 
-Phase 4B extends companies with nullable `maya_company_id` and discovered reports with provider, external company/report IDs, report type, publication metadata, report page URL, and XBRL/HTML/PDF attachment URLs. MAYA is primary discovery; company IR remains secondary statement validation. Attachment selection is deterministic: XBRL, then HTML, then PDF. MAYA's current Angular shell requires a future stable structured data request for live report enumeration.
+Phase 5 uses the live MAYA structured API: POST `https://maya.tase.co.il/api/v1/reports/finance` with `pageSize`, `pageNumber`, and `companyId`, followed by GET `/api/v1/reports/{reportId}`. Attachment URLs resolve on `https://mayafiles.tase.co.il/`; selection is deterministic XBRL > HTML > PDF. MAYA is primary discovery and company IR remains secondary validation.
+
+XBRL report 1766669 is parsed deterministically into ILS millions. Q2 flow facts use the quarter-only 2026-04-01 to 2026-06-30 context (`flow_basis=QUARTER_ONLY`); H1/YTD facts are never relabeled as Q2. Activation requires supported period basis and validation without ERROR results. `financial_periods` and `discovered_reports` are conflict-safe/idempotent.
 
 Financial periods use ILS millions, nullable numeric fields, and `ANNUAL`, `QUARTERLY`, or `TTM` period types. Missing data stays `null`. Sources and market snapshots are separate from statements.
 

@@ -306,3 +306,6 @@ Build a Workers API and ingestion pipeline for normalized TASE/company-report da
 - Confirm the treatment and unit convention for lease liabilities and lease payments once source statements are available.
 - Review retailer EBITDA ex IFRS 16 normalization against the chosen reporting convention.
 - Define authoritative market-data refresh cadence and valuation-history source before replacing mock values.
+
+## Phase 5 MAYA XBRL ingestion
+Implemented deterministic XBRL parsing and normalized Sano report 1766669 (Q2 2026) into ILS millions. Quarter-only contexts remain QUARTER_ONLY; YTD is not relabeled. Added validation activation gate, idempotent migration 0006, MAYA lifecycle persistence, discovered-reports API, and corrected live endpoint documentation. Remote migration applied and Worker deployed version 73091e8f-956f-4473-b6df-1d08865f96ff. Live API confirms Sano Q2 period, XBRL source, and report 1766669. No 2026 values are activated without validation; market data remains unavailable.
