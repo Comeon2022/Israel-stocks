@@ -2,6 +2,8 @@
 
 The live Phase 3D frontend can load Sano periods, sources, validation, and market status asynchronously from the Worker API. Null market data keeps valuation and the total score explicitly incomplete; peer companies remain local mock data.
 
+`discovered_reports` records official Sano links and lifecycle status (`DISCOVERED`, `PROCESSED`, `IGNORED`, `FAILED`) with discovery/processing timestamps. Freshness compares the newest discovered period with the latest ingested period; a discovered newer report is not active financial data until deterministic validation passes. The Worker Cron runs daily at 06:00 UTC.
+
 Financial periods use ILS millions, nullable numeric fields, and `ANNUAL`, `QUARTERLY`, or `TTM` period types. Missing data stays `null`. Sources and market snapshots are separate from statements.
 
 Cloudflare persistence maps normalized periods/statements into `financial_periods` and `financial_statements`; companies, sources, market snapshots, and validation results map to their respective D1 tables. `source_ids_json` links every period to traceability records. Apply `migrations/0001_initial.sql` and `0002_indexes.sql` with Wrangler.

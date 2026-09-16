@@ -87,3 +87,5 @@ The UI is explicitly marked `נתוני הדגמה / Prototype`. Missing values 
 ## Production API mode
 
 The live API is `https://israel-stocks-api.karu-lior.workers.dev`. To activate Sano API mode in Cloudflare Pages, set Production variables `VITE_DATA_SOURCE=api` and `VITE_API_BASE_URL=https://israel-stocks-api.karu-lior.workers.dev`, then redeploy. Sano shows API loading/error states and a partial score when market data is null; the other four companies remain local MOCK peers.
+
+Phase 4 adds daily Sano discovery at 06:00 UTC. The Worker parses the official IR page, persists new links in `discovered_reports`, and exposes `/api/companies/sano/freshness`. Discovery only records reports; automatic financial activation waits for deterministic extraction and validation. Run `npm run worker:test` for parser tests.
