@@ -1,5 +1,22 @@
 # ChatGPT Handoff: Israel Stocks Phase 2
 
+## Phase 4 freshness and report discovery
+
+### Summary
+Added a persisted `discovered_reports` D1 table, deterministic official Sano IR report-link parser, freshness API endpoint, and daily Worker Cron discovery at 06:00 UTC. New reports are recorded but not activated as financial data until deterministic extraction/validation is available.
+
+### Freshness UI/API
+The Worker exposes `/api/companies/sano/freshness` with latest ingested period/source/status/timestamps and newer-discovered-report fields. Production verification returned HTTP 200 and latest processed period `2025-12-31`, source title for the official 2025 report, status `MANUALLY_NORMALIZED`, and no discovered newer report yet.
+
+### Discovery/scheduling
+Official source: `https://www.sano.co.il/company/%D7%93%D7%95%D7%97%D7%95%D7%AA-%D7%9B%D7%A1%D7%A4%D7%99%D7%99%D7%9D/`. Parser extracts report links/titles, deduplicates URLs, and persists `DISCOVERED` records. Schedule: `0 6 * * *`. No LLM extraction or automatic unvalidated activation was added.
+
+### Deployments/checks
+Worker `israel-stocks-api` redeployed at https://israel-stocks-api.karu-lior.workers.dev, version `fda95139-49c0-415a-a889-ddf060dff30e`. `npm test`, `npm run worker:test`, `npm run build`, and `npm run worker:check` pass. Pages was not redeployed/configured because the existing Pages build environment requires dashboard configuration; exact API values remain documented in the Phase 3D section.
+
+### Git
+Commit and push status are recorded in the completion commit below.
+
 ## Sano route fix
 
 ### Root cause
