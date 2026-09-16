@@ -1,5 +1,34 @@
 # ChatGPT Handoff: Israel Stocks Phase 2
 
+## Phase 3C activation
+
+### Summary
+Cloudflare account activation completed. D1 was provisioned, migrations applied remotely, Sano seed data imported idempotently, and the Worker deployed.
+
+### Wrangler authentication
+`npx wrangler whoami` passed with OAuth authentication. No credentials were committed.
+
+### D1
+Database: `israel-stocks-db`. Database ID: `d3e038bc-762a-4dc0-89dc-8e4e942335f7`. Remote migrations `0001_initial.sql`, `0002_indexes.sql`, and `0003_seed_sano.sql` applied successfully. Remote verification returned one Sano company, three imported annual periods, and three official sources.
+
+### Sano
+Imported 2023–2025 annual periods with official Sano report URLs, status `MANUALLY_NORMALIZED`, and ILS-thousands-to-millions conversion. 2021 remains incomplete; unavailable fields remain null. Market snapshot is intentionally null; no mock valuation is presented as real.
+
+### Worker/API
+Worker `israel-stocks-api` deployed at https://israel-stocks-api.karu-lior.workers.dev (deployment version `74a6f0a2-f25e-4beb-8c24-c3052ee2bed2`). Verified HTTP 200 for health, companies, Sano company, financials, sources, validation, and market/latest. Market response is null by design.
+
+### Frontend/Pages
+`VITE_DATA_SOURCE=api` selection and `ApiFinancialRepository` exist, but the current synchronous React page still imports the legacy collection directly; full async React page data loading and Pages environment configuration remain required. Exact Pages actions: set production `VITE_DATA_SOURCE=api` and `VITE_API_BASE_URL=https://israel-stocks-api.karu-lior.workers.dev`, save, and redeploy. Do not label the current production frontend API-backed until this is done.
+
+### Checks
+`npm test`, `npm run build`, and `npm run worker:check` pass. Production API checks passed as listed above.
+
+### Git
+Commit and push status are recorded in the completion commit below.
+
+### Known limitations / next step
+Complete asynchronous React integration for Sano identity, periods, sources, validation, charts, and truthful incomplete scoring; then configure/redeploy Cloudflare Pages. Do not add LLM features.
+
 ## Phase 3B provision and Sano pipeline
 
 ### Summary

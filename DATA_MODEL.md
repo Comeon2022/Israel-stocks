@@ -11,3 +11,5 @@ TTM sums the latest four sequential quarters for flows and takes the latest quar
 Sano has an ingestion-ready annual template for 2021–2025. No official source files were present locally, so it is `INCOMPLETE`; existing Sano figures remain isolated Phase 1 mock data and are never labeled verified. Add another real company by supplying normalized periods, source records, a market snapshot, and a repository adapter.
 
 Phase 3B seed records are stored as JSON under `worker/seed/sano/`, with source IDs per period and ILS-thousands-to-millions conversion applied to extracted values. Official-source values are `MANUALLY_NORMALIZED`; unavailable fields remain null. The Worker importer uses conflict-safe upserts and requires at least one source ID.
+
+Production Phase 3C uses D1 `israel-stocks-db` (database ID is in `wrangler.toml`) and the deployed Worker API. Sano production currently contains annual periods 2023–2025 and their official report sources; 2021 is incomplete. Market snapshots are separate and currently null, so valuation must not be treated as source-backed.

@@ -15,7 +15,7 @@ Open the Vite URL shown in the terminal, usually `http://localhost:5173`.
 
 The repository now includes a Cloudflare Worker (`worker/src/index.ts`) and D1 migrations in `migrations/`. The frontend remains local/mock by default and has an `ApiFinancialRepository` available for `VITE_DATA_SOURCE=api` with `VITE_API_BASE_URL` configured in `.env`.
 
-Run the local Worker with Wrangler after setting a real `database_id` in `wrangler.toml`:
+The production Worker is `https://israel-stocks-api.karu-lior.workers.dev`, backed by D1 database `israel-stocks-db`. Run the local Worker with Wrangler:
 
 ```bash
 npx wrangler d1 migrations apply israel-stocks --local
@@ -25,7 +25,7 @@ npm run worker:check
 
 Deploy with `npx wrangler d1 migrations apply israel-stocks --remote` followed by `npx wrangler deploy`. The API exposes `/api/health`, company, financials (annual/quarterly/latest/ttm), sources, market/latest, and validation endpoints. Set `ALLOWED_ORIGINS` for deployed frontend origins; local/mock mode requires no backend.
 
-Sano has an incomplete, source-traceable seed template only. No official Sano/TASE/Maya report files were available locally, so no real figures are imported or labeled verified. Missing values remain null.
+Sano annual source records for 2023–2025 are loaded in production D1 as `MANUALLY_NORMALIZED`; the market endpoint is intentionally null because no authoritative market feed is integrated. 2021 remains incomplete and missing values remain null. Production frontend configuration requires `VITE_DATA_SOURCE=api` and `VITE_API_BASE_URL=https://israel-stocks-api.karu-lior.workers.dev` in Cloudflare Pages, followed by a redeploy.
 
 Phase 3B adds official report URLs and manually normalized Sano annual seed records under `worker/seed/sano/`. The importer (`worker/src/importer.ts`) validates source linkage and performs idempotent upserts. Run it from a Wrangler-authenticated deployment process after provisioning D1. API mode selection is exposed by `src/data/dataSource.ts`; the current synchronous legacy view remains local until async page loading is enabled.
 
