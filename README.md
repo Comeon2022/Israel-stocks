@@ -101,3 +101,5 @@ Companies may carry a nullable `mayaCompanyId`; Sano uses `813`. `MayaReportDisc
 ## Multi-company onboarding (Phase 6)
 
 The shared MAYA provider supports Sano (813), Shufersal (777), Rami Levy (1445), Yochananof (1786), and Neto Malinda (1463). New issuers start `DISCOVERY_ONLY`; only validated mapping profiles may be promoted to `AUTO_INGEST`. Use `npm run maya:ingest-company -- <id> --dry-run` and `npm run maya:ingest-all` when the batch CLI is enabled. Retailer IFRS 16 fields are explicit and are not applied to Sano or Neto Malinda. Mock peers remain visibly mock until validated real periods are persisted.
+
+CLI: npm run maya:ingest-company -- shufersal --dry-run (or rami-levy); batch: npm run maya:ingest-all -- --dry-run. The CLI performs live MAYA discovery and XBRL attachment checks; writes remain validation-gated.

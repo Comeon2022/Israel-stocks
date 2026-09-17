@@ -10,7 +10,9 @@
     "test": "vitest run",
     "preview": "vite preview",
     "worker:check": "tsc -p worker/tsconfig.json",
-    "worker:test": "vitest run worker/src"
+    "worker:test": "vitest run worker/src",
+    "maya:ingest-company": "node scripts/maya-ingest.mjs company",
+    "maya:ingest-all": "node scripts/maya-ingest.mjs all"
   },
   "dependencies": {
     "lucide-react": "^1.46.0",
