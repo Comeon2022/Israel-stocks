@@ -10,6 +10,8 @@ Phase 5 uses the live MAYA structured API: POST `https://maya.tase.co.il/api/v1/
 
 XBRL report 1766669 is parsed deterministically into ILS millions. Q2 flow facts use the quarter-only 2026-04-01 to 2026-06-30 context (`flow_basis=QUARTER_ONLY`); H1/YTD facts are never relabeled as Q2. Activation requires supported period basis and validation without ERROR results. `financial_periods` and `discovered_reports` are conflict-safe/idempotent.
 
+Phase 6 onboarding metadata includes MAYA issuer ID, ingestion enabled state, discovery provider, mapping profile, and readiness (`DISCOVERY_ONLY`, `PARSER_VALIDATED`, `AUTO_INGEST`). Current verified IDs are Sano 813, Shufersal 777, Rami Levy 1445, Yochananof 1786, and Neto Malinda 1463. Derivations must retain source-period provenance; TTM requires four valid quarter-only periods. Retailer IFRS 16 fields remain explicit.
+
 Financial periods use ILS millions, nullable numeric fields, and `ANNUAL`, `QUARTERLY`, or `TTM` period types. Missing data stays `null`. Sources and market snapshots are separate from statements.
 
 Cloudflare persistence maps normalized periods/statements into `financial_periods` and `financial_statements`; companies, sources, market snapshots, and validation results map to their respective D1 tables. `source_ids_json` links every period to traceability records. Apply `migrations/0001_initial.sql` and `0002_indexes.sql` with Wrangler.

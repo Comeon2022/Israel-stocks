@@ -309,3 +309,18 @@ Build a Workers API and ingestion pipeline for normalized TASE/company-report da
 
 ## Phase 5 MAYA XBRL ingestion
 Implemented deterministic XBRL parsing and normalized Sano report 1766669 (Q2 2026) into ILS millions. Quarter-only contexts remain QUARTER_ONLY; YTD is not relabeled. Added validation activation gate, idempotent migration 0006, MAYA lifecycle persistence, discovered-reports API, and corrected live endpoint documentation. Remote migration applied and Worker deployed version 73091e8f-956f-4473-b6df-1d08865f96ff. Live API confirms Sano Q2 period, XBRL source, and report 1766669. No 2026 values are activated without validation; market data remains unavailable.
+## Phase 6 multi-company ingestion
+
+Added shared onboarding metadata and migration `0007_multi_company_onboarding.sql`; the existing MAYA provider and generic XBRL parser are reused without issuer-specific parser files. Verified against the official MAYA finance endpoint on 2026-09-17:
+
+- Sano: MAYA ID 813; report 1766669; XBRL-backed Q2 2026 already active.
+- Shufersal: MAYA ID 777; live report 1766686; discovery verified, not yet activated.
+- Rami Levy: MAYA ID 1445; live report 1767163; discovery verified, not yet activated.
+- Yochananof: MAYA ID 1786; live report 1764706; discovery verified, not yet activated.
+- Neto Malinda: MAYA ID 1463; live report 1764798; discovery verified, not yet activated.
+
+The live requests returned matching company names, proving the IDs without inventing identifiers. Peer companies remain `DISCOVERY_ONLY`/local mock until their real XBRL is parsed, mapped, validated, and persisted. No peer numeric values were fabricated. Retailer IFRS 16 handling remains reserved for Shufersal, Rami Levy, and Yochananof; it is not applied to Sano or Neto Malinda.
+
+Remote D1 migration was attempted but blocked by Cloudflare API authorization (`/accounts/8726b638467ff31b62f92d1a8b00db8c/d1/database/d3e038bc-762a-4dc0-89dc-8e4e942335f7/query`, error 7403: account invalid or unauthorized). Exact retry: `npx wrangler d1 migrations apply israel-stocks-db --remote` after authenticating the Wrangler user to account `8726b638467ff31b62f92d1a8b00db8c`. Consequently no claim is made that peer IDs or periods are in remote D1, and the Worker was not redeployed with an unapplied migration.
+
+Checks: `npm test` passed (9 tests), `npm run build` passed, and `npm run worker:check` passed. Pages was not redeployed because the frontend metadata-only change is still mock/readiness metadata and production account deployment was not required; verify the Git-integrated Pages build after the migration is authorized. Commit/push remains pending until the blocked migration/deployment path can be safely completed.

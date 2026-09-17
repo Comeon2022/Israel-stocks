@@ -15,4 +15,8 @@ export interface Company {
   flags: AnalysisFlag[]
   keyQuestion: string
   mayaCompanyId?: number | null
+  ingestionEnabled?: boolean
+  discoveryProvider?: 'MAYA' | null
+  mappingProfile?: string | null
+  ingestionReadiness?: 'DISCOVERY_ONLY' | 'PARSER_VALIDATED' | 'AUTO_INGEST'
 }

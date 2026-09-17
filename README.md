@@ -97,3 +97,7 @@ Phase 4 adds daily Sano discovery at 06:00 UTC. The Worker parses the official I
 ## MAYA XBRL ingestion (Phase 5)
 
 Companies may carry a nullable `mayaCompanyId`; Sano uses `813`. `MayaReportDiscoveryProvider` calls the official MAYA finance-list and report-detail APIs, persists canonical IDs and XBRL/HTML/PDF attachments, and runs from daily Cron. Report 1766669 is the deterministic XBRL seed: Q2 quarter-only facts are normalized to ILS millions and activated only after validation; missing market data remains incomplete. Company IR remains secondary.
+
+## Multi-company onboarding (Phase 6)
+
+The shared MAYA provider supports Sano (813), Shufersal (777), Rami Levy (1445), Yochananof (1786), and Neto Malinda (1463). New issuers start `DISCOVERY_ONLY`; only validated mapping profiles may be promoted to `AUTO_INGEST`. Use `npm run maya:ingest-company -- <id> --dry-run` and `npm run maya:ingest-all` when the batch CLI is enabled. Retailer IFRS 16 fields are explicit and are not applied to Sano or Neto Malinda. Mock peers remain visibly mock until validated real periods are persisted.
