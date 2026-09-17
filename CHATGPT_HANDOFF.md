@@ -407,3 +407,10 @@ Pages route checks returned HTTP 200 for `/company/SANO`, `/company/shufersal`, 
 - Comparison/table labels now derive from `ingestionReadiness` and show `SOURCE_BACKED` for activated companies; mock score/flag data is not used by the API-backed peer pages. Valuation remains incomplete because market data is unavailable.
 - Checks: `npm test` passed (12 tests), `npm run worker:test` passed (5 tests), `npm run worker:check` passed, and `npm run build` passed.
 - No Worker redeploy was required; no new Worker or D1 was created. Remaining limitation is the unavailable market-data/valuation provider. Recommended next phase: Phase 7 market data and valuation.
+## Phase 7A real market data + valuation
+
+- Source discovery: TASE Data Hub is the authoritative structured market-data source. TASE’s public documentation identifies the Data Hub API/products, but authenticated developer-portal access is required. The public client-rendered security pages are not used as an unverified scraping substitute.
+- Verified mappings: Sano `SANO1` / security `813014`; Shufersal `SAE` / `777037`; Rami Levy `RMLI` / `1104249`; Yochananof `YHNF` / `1161264`; Neto Malinda `NTML` / `1105097`. Exchange is TASE and currency is ILS.
+- Blocker: no TASE Data Hub credentials/API entitlement are available in the workspace. Therefore no current price, shares, market cap, snapshot, or valuation multiple was activated. Existing `/market/latest` responses remain truthfully null and valuation remains incomplete.
+- Exact remaining action: obtain TASE Data Hub developer-portal credentials/terms, provide the endpoint contract and secret through the deployment environment (never commit it), then run the market fetch dry-run, validate declared units/timestamps, persist remote D1 snapshots, deploy the existing Worker, and verify all five API/Pages routes.
+- No market data was fabricated and no LLM features were added.

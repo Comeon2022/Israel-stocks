@@ -39,3 +39,7 @@ Phase 6 CLI tooling provides dry-run discovery/attachment checks with no D1 writ
 Yochananof (canonical ID `yochananof`, MAYA 1786) and Neto Malinda (canonical ID `neto-malinda`, MAYA 1463) are configured for the same generic MAYA → XBRL → normalized D1 pipeline as the earlier activated issuers. Reports are activated only after deterministic validation; unsupported or unavailable concepts stay null and valuation remains incomplete without market data.
 
 Production closeout marks Sano, Shufersal, Rami Levy, Yochananof, and Neto Malinda as `AUTO_INGEST`/`SOURCE_BACKED`. This status does not imply market-data availability; valuation remains incomplete.
+
+## Market snapshots and valuation
+
+`market_snapshots` remains the persistence target for provider snapshots. Values must carry provider, security mapping, ILS units, source timestamp, and validation status before activation. TASE Data Hub is the selected authoritative source; access is currently blocked on developer-portal authentication, so no market row or valuation multiple is fabricated. Missing market inputs remain NULL. Once provisioned, market cap is stored in ILS millions, price is normalized from the provider-declared ILS/agorot unit, and valuation denominators are labeled FY or TTM only when the required source-backed periods exist. Retailer adjusted FCF continues to require explicit lease cash payments.
