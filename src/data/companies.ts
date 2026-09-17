@@ -14,7 +14,8 @@ const base = [
 ]
 
 const mayaIds:Record<string,number>={sano:813,shufersal:777,'rami-levy':1445,yochananof:1786,'neto-malinda':1463}
-export const companies: Company[] = base.map((company) => ({ ...company, mayaCompanyId: mayaIds[company.id] ?? null, ingestionEnabled: company.id === 'sano', discoveryProvider: 'MAYA', mappingProfile: 'ifrs-full-default', ingestionReadiness: company.id === 'sano' ? 'AUTO_INGEST' : 'DISCOVERY_ONLY', flags: generateAnalysisFlags(company), scorecard: company.scorecard }))
+const activated = new Set(['sano', 'shufersal', 'rami-levy'])
+export const companies: Company[] = base.map((company) => ({ ...company, mayaCompanyId: mayaIds[company.id] ?? null, ingestionEnabled: activated.has(company.id), discoveryProvider: 'MAYA', mappingProfile: 'ifrs-full-default', ingestionReadiness: activated.has(company.id) ? 'AUTO_INGEST' : 'DISCOVERY_ONLY', flags: generateAnalysisFlags(company), scorecard: company.scorecard }))
 export const totalScore = (company: Company) => scoreTotal(company.scorecard)
 export const canonicalCompanyId = (value: string) => value.trim().toLowerCase()
 export const companyRoute = (company: Pick<Company, 'id'>) => `/company/${canonicalCompanyId(company.id)}`
