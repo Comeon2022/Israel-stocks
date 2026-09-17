@@ -437,3 +437,11 @@ No endpoint was guessed, no unofficial TASE HTML scraping was used, and no marke
 - Yahoo units and timestamps remain unresolved because no valid payload was returned. No TradingView values were persisted or used as a production contract.
 - No production D1 writes, `/market/latest` changes, valuation activation, or market cron changes were performed. Market data remains null and valuation incomplete.
 - Checks passed: `npm test` (12), `npm run worker:test` (5), `npm run worker:check`, and `npm run build`.
+-## Phase 7D alternative market-data provider evaluation
+
+- Official documentation matrix is in `provider-evaluation.md`.
+- Twelve Data: `CONDITIONAL`; its official exchange directory lists Tel Aviv Stock Exchange / `XTAE`, and its docs provide `/stocks` and `/price`/`/quote` mechanisms. No API key or paid-plan entitlement is present, so all-five symbol discovery and live quote tests could not be run without guessing. No provider-specific symbols were fabricated.
+- Marketstack, Alpha Vantage, and FMP: `NO-GO` for this phase because no official documentation evidence of TASE support was found. EODHD: `NO-GO`; its official supported-exchange list does not list Tel Aviv/TASE.
+- TradingView remains `REFERENCE_ONLY`; no private websocket/session API was used.
+- No best-candidate provider spike was justified, no D1 writes were made, `/market/latest` and valuation were unchanged, and no production deployment occurred.
+- Required next input: a Twelve Data API key/plan entitlement (environment only), then documented symbol discovery filtered to `XTAE`, all-five identity/quote tests, unit/timestamp/terms validation, and only then a dry-run provider spike.

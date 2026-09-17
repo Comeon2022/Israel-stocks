@@ -120,3 +120,5 @@ All five tracked companies are now marked AUTO_INGEST/SOURCE_BACKED in productio
 Market-data source discovery is documented in `market-data.md`. TASE Data Hub is the authoritative structured source, but its developer-portal credentials are not available in this workspace. No guessed endpoint, scraped quote, or fabricated market value is used; production market snapshots and valuation remain NULL until access is provisioned.
 
 Phase 7C evaluated Yahoo and TradingView. Yahoo's tested chart endpoint returned HTTP 404 for all five requested symbols, so Yahoo is currently NO-GO and is not wired into production. TradingView is reference-only; no production market data or valuation was activated.
+
+Phase 7D evaluated documented alternative providers in `provider-evaluation.md`. Twelve Data is CONDITIONAL because its official exchange directory lists Tel Aviv (`XTAE`) but no API key/plan is available for symbol and quote testing. Marketstack, Alpha Vantage, EODHD, and FMP remain NO-GO on verified documentation evidence. Production market data remains disabled.
