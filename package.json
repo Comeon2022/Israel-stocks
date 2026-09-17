@@ -13,6 +13,7 @@
     "worker:test": "vitest run worker/src",
     "maya:ingest-company": "tsx scripts/maya-ingest.ts company",
     "maya:ingest-all": "tsx scripts/maya-ingest.ts all"
+    ,"maya:discover-history": "tsx scripts/maya-discover-history.ts"
     ,"market:globes-test": "tsx scripts/globes-market-test.ts"
     ,"market:globes-ingest": "tsx scripts/globes-market-ingest.ts"
   },

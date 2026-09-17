@@ -476,6 +476,10 @@ The official `GET /quote?symbol=...&exchange=TASE` probe was attempted at low ra
 
 ## Phase 7I market and valuation UI polish
 
+## Phase 8B historical filing discovery and fallback-source evaluation
+
+Investigated MAYA pagination/detail behavior and official issuer fallback pages with zero database writes. MAYA page size remained 30; Shufersal page 1 returned one item and pages 2–5 were empty. Rami Levy’s official financial-reports page exposed 2023–2026 labels, but tested HTML did not provide stable report IDs/attachments. Observed Rami Levy `1767163` and Yochananof `1764706` detail records had no XBRL. No stable official HTML/PDF parser route was proven, so no parser spike or activation was performed. IFRS16 lease cash payments remain unverified and Neto remains non-retailer. Discovery CLI: `npm run maya:discover-history -- --all`. Full matrix: `docs/historical-filing-discovery.md`.
+
 ## Phase 8A peer historical financial backfill
 
 Dry-run backfill was executed for Shufersal, Rami Levy, Yochananof, and Neto Malinda through the shared MAYA/XBRL validation path with zero writes. MAYA IDs were queried with pageSize 30; the official endpoint exposed no usable historical 2023–2025 XBRL set. Rami Levy report 1767163 and Yochananof report 1764706 had no XBRL attachment and were rejected by the existing gate. No invalid or fabricated history was activated; TTM remains blocked and retailer IFRS16 fields remain NULL unless explicitly sourced. Evidence is in `docs/peer-history-backfill.md`.

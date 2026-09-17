@@ -115,6 +115,10 @@ Yochananof (MAYA 1786) and Neto Malinda (MAYA 1463) now use the generic MAYA/XBR
 
 All five tracked companies are now marked AUTO_INGEST/SOURCE_BACKED in production; market data and valuation remain unavailable/incomplete.
 
+## Phase 8B historical filing discovery and fallback-source evaluation
+
+MAYA archive/detail behavior and official issuer IR fallback pages were investigated in zero-write mode. Report IDs and attachment/parser status are documented in `docs/historical-filing-discovery.md`; no unofficial source or synthetic history was used.
+
 ## Phase 7I market and valuation UI polish
 
 Phase 8A peer historical backfill was safely attempted through the generic MAYA/XBRL runtime. The official discovery response currently exposes no usable 2023–2025 historical XBRL set for the four peers, and some current candidates have no XBRL attachment. No synthetic history was added; see `docs/peer-history-backfill.md`.

@@ -40,6 +40,10 @@ Yochananof (canonical ID `yochananof`, MAYA 1786) and Neto Malinda (canonical ID
 
 Production closeout marks Sano, Shufersal, Rami Levy, Yochananof, and Neto Malinda as `AUTO_INGEST`/`SOURCE_BACKED`. This status does not imply market-data availability; valuation remains incomplete.
 
+## Phase 8B historical filing discovery and fallback-source evaluation
+
+No schema or data rows were added. Historical archive/IR candidates retain provenance requirements and remain unactivated until deterministic selectors, units, and validation are proven.
+
 ## Phase 7I market and valuation UI polish
 
 Phase 8A preserves annual, YTD, and QUARTER_ONLY semantics. Peer TTM remains unavailable when official MAYA data lacks compatible historical periods or XBRL attachments; missing financial and explicit lease cash-payment fields remain NULL.
