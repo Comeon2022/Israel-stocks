@@ -15,6 +15,7 @@ Phase 6 onboarding metadata includes MAYA issuer ID, ingestion enabled state, di
 Current activation state is unambiguous: only Sano has activated real XBRL data. Shufersal and Rami Levy have verified MAYA IDs and discovery evidence but remain unactivated until the generic CLI completes parse, mapping, validation, and D1 persistence. Mock data is retained only for companies not activated.
 The CLI distinguishes malformed/transient MAYA payloads with bounded retries and diagnostics, and must not mark a report processed merely because an attachment downloads. Current peer CLI runs reach XBRL download but remain unactivated until the shared TypeScript mapper, validation gate, and D1 persistence adapter are invoked.
 Current Windows persistence remains blocked before mutation by executable resolution (`npx` is unavailable to `spawnSync`); no peer lifecycle is falsely marked PROCESSED.
+The executable resolver is now applied; the remaining Windows blocker is safe quoting of the SQL argument passed through the `npx.cmd` batch wrapper.
 
 Financial periods use ILS millions, nullable numeric fields, and `ANNUAL`, `QUARTERLY`, or `TTM` period types. Missing data stays `null`. Sources and market snapshots are separate from statements.
 
