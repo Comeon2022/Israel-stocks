@@ -112,3 +112,5 @@ Real Windows runs now select `npx.cmd` and pass the spawn stage; Wrangler SQL ar
 ### Phase 6L activation
 
 Yochananof (MAYA 1786) and Neto Malinda (MAYA 1463) now use the generic MAYA/XBRL discovery, parsing, validation, and remote D1 persistence path. Missing concepts remain null; valuation is intentionally incomplete while market data is unavailable. No LLM processing is used.
+
+All five tracked companies are now marked AUTO_INGEST/SOURCE_BACKED in production; market data and valuation remain unavailable/incomplete.

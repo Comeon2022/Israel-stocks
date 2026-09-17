@@ -396,3 +396,14 @@ Pages route checks returned HTTP 200 for `/company/SANO`, `/company/shufersal`, 
 - Dry-runs for both issuers reported `Database writes: 0`; real runs completed through the remote D1 temp-SQL transport. `npm test`, `npm run worker:test`, `npm run worker:check`, and `npm run build` passed.
 - Worker code was not changed, so no Worker redeploy was required. Pages deployment is triggered by the pending push; live verification is recorded after push.
 - No LLM features were added. Remaining limitation: MAYA report availability can change between discovery runs; reports without XBRL remain unactivated.
+
+## Phase 6M five-company production closeout
+
+- Git: branch `main`; Phase 6L commit `6b255277f642ac1dfa2cb5c25a6fe39649a9a4b1` was already pushed and matched `origin/main`. Closeout migration/frontend-label changes are committed below.
+- Remote migration `0011_activate_yochananof_neto.sql` was already applied; closeout migration `0012_promote_all_source_backed.sql` was applied successfully to the existing D1. All five company rows report `AUTO_INGEST` with MAYA IDs 813, 777, 1445, 1786, and 1463.
+- Remote D1 confirms Yochananof report 1764694 and source `maya-1764694-xbrl`, and Neto report 1764798 and source `maya-1764798-xbrl`, each with one period and statement and no duplicate identities. Yochananof report 1764706 remains unactivated because it lacks XBRL.
+- Production API verification: all six endpoint families returned HTTP 200 for each of Sano, Shufersal, Rami Levy, Yochananof, and Neto Malinda.
+- Pages verification: `/`, `/company/sano`, `/company/shufersal`, `/company/rami-levy`, `/company/yochananof`, and `/company/neto-malinda` returned HTTP 200. The generic API peer route has no silent mock fallback and displays source-backed/validated state with incomplete valuation.
+- Comparison/table labels now derive from `ingestionReadiness` and show `SOURCE_BACKED` for activated companies; mock score/flag data is not used by the API-backed peer pages. Valuation remains incomplete because market data is unavailable.
+- Checks: `npm test` passed (12 tests), `npm run worker:test` passed (5 tests), `npm run worker:check` passed, and `npm run build` passed.
+- No Worker redeploy was required; no new Worker or D1 was created. Remaining limitation is the unavailable market-data/valuation provider. Recommended next phase: Phase 7 market data and valuation.
