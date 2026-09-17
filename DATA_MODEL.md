@@ -16,6 +16,7 @@ Current activation state is unambiguous: only Sano has activated real XBRL data.
 The CLI distinguishes malformed/transient MAYA payloads with bounded retries and diagnostics, and must not mark a report processed merely because an attachment downloads. Current peer CLI runs reach XBRL download but remain unactivated until the shared TypeScript mapper, validation gate, and D1 persistence adapter are invoked.
 Current Windows persistence remains blocked before mutation by executable resolution (`npx` is unavailable to `spawnSync`); no peer lifecycle is falsely marked PROCESSED.
 The executable resolver is now applied; the remaining Windows blocker is safe quoting of the SQL argument passed through the `npx.cmd` batch wrapper.
+The Phase 6I transport removes that wrapper from D1 execution entirely: Node invokes the local Wrangler JS entrypoint and a temporary SQL file with `--remote --file`. Peer activation requires source/report linkage and PROCESSED lifecycle state; rows without that linkage are not considered source-backed.
 
 Financial periods use ILS millions, nullable numeric fields, and `ANNUAL`, `QUARTERLY`, or `TTM` period types. Missing data stays `null`. Sources and market snapshots are separate from statements.
 

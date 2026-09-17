@@ -1,0 +1,8 @@
+INSERT OR IGNORE INTO financial_sources(id,company_id,title,source_type,url,publication_date,report_period_end,retrieved_at,created_at) VALUES
+('maya-1766686','shufersal','MAYA report 1766686','QUARTERLY_REPORT','https://mayafiles.tase.co.il/xbrl/1766001-1767000/X1766686.xbrl','2026-08-27','2026-06-30',datetime('now'),datetime('now')),
+('maya-1764608','rami-levy','MAYA report 1764608','QUARTERLY_REPORT','https://mayafiles.tase.co.il/xbrl/1764001-1765000/X1764608.xbrl','2026-08-20','2026-06-30',datetime('now'),datetime('now'));
+UPDATE financial_periods SET source_ids_json='["maya-1766686"]' WHERE id='shufersal-maya-1766686';
+UPDATE financial_periods SET source_ids_json='["maya-1764608"]' WHERE id='rami-levy-maya-1764608';
+INSERT OR REPLACE INTO discovered_reports(id,company_id,title,url,report_date,period_end,discovered_at,status,source_type,provider,external_company_id,external_report_id,report_type,fiscal_year,published_at,report_page_url,xbrl_url) VALUES
+('maya-1766686','shufersal','MAYA report 1766686','https://maya.tase.co.il/he/reports/companies/1766686','2026-08-27','2026-06-30',datetime('now'),'PROCESSED','QUARTERLY_REPORT','MAYA','777','1766686','Q2',2026,'2026-08-27','https://maya.tase.co.il/he/reports/companies/1766686','https://mayafiles.tase.co.il/xbrl/1766001-1767000/X1766686.xbrl'),
+('maya-1764608','rami-levy','MAYA report 1764608','https://maya.tase.co.il/he/reports/companies/1764608','2026-08-20','2026-06-30',datetime('now'),'PROCESSED','QUARTERLY_REPORT','MAYA','1445','1764608','Q2',2026,'2026-08-20','https://maya.tase.co.il/he/reports/companies/1764608','https://mayafiles.tase.co.il/xbrl/1764001-1765000/X1764608.xbrl');

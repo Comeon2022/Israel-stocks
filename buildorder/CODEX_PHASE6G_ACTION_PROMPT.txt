@@ -1,0 +1,29 @@
+All build specification files are located in:
+
+C:\Users\Liorkale\Desktop\Israel-stocks\Israel-stocks\buildorder
+
+Read and execute:
+
+C:\Users\Liorkale\Desktop\Israel-stocks\Israel-stocks\buildorder\PHASE6G_APPLY_WINDOWS_RESOLVER_AND_ACTIVATE_PEERS_SPEC.md
+
+Execute it end-to-end.
+
+Important: the previous attempt only documented the Windows fix but did not apply it. This time you must actually change the persistence adapter so Windows uses `npx.cmd` and Unix-like systems use `npx`, via a centralized resolver.
+
+Do not finish until you prove the adapter uses the resolver and the real Shufersal/Rami Levy runs get past the subprocess spawn step.
+
+Then:
+- persist validated data to remote D1
+- verify D1
+- verify idempotency
+- verify live API
+- activate frontend API mode for successful peers
+- run all tests/build/checks
+- update README.md, DATA_MODEL.md, CHATGPT_HANDOFF.md
+- commit
+- push to origin/main
+
+Do not create a new Worker or database.
+Do not add LLM functionality.
+Do not fabricate data.
+Do not mark PROCESSED before successful persistence.

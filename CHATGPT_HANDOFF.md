@@ -363,3 +363,13 @@ Added and tested centralized `resolveNpxCommand(platform)` (`win32 -> npx.cmd`, 
 ## Phase 6H hardcoded npx removal + peer activation
 
 The active adapter in `scripts/maya-ingest.ts` now calls `resolveNpxCommand()` and logs `Command executable: npx.cmd` on Windows. Resolver tests pass and real Shufersal/Rami Levy runs passed the previous ENOENT spawn failure. A new concrete blocker then appeared: because `npx.cmd` is a Windows batch wrapper, the required shell invocation splits the SQL argument and Wrangler reports `Unknown arguments: discovered_reports, SET...`. Both runs therefore failed before D1 mutation; no report was marked PROCESSED and no invalid data was activated. The next fix must preserve the resolver while invoking the batch wrapper with correctly quoted `--command` payload or a safe local Wrangler executable.
+## Phase 6I safe Wrangler JS + SQL file persistence
+
+Replaced batch-wrapper SQL transport with `scripts/d1-transport.ts`: local Wrangler is resolved from package metadata, `process.execPath` invokes its JS entrypoint, SQL is written UTF-8 to a unique temporary file, and Wrangler receives `d1 execute israel-stocks-db --remote --file <temp>` with `shell:false`; cleanup runs in `finally`. This preserves SQL without manual quote escaping.
+
+Shufersal and Rami Levy dry-runs reached shared XBRL parsing with zero writes. Real runs reached Wrangler remote execution and passed argument parsing, then failed safely on remote foreign-key constraints because the remote database had only the Sano company row. Migration `0008_seed_peer_companies.sql` adds the verified peer company rows idempotently; it must be applied before retrying activation. No peer report was marked PROCESSED and no invalid values were activated.
+## Phase 6I safe Wrangler JS + SQL file persistence
+
+The active adapter now uses `scripts/d1-transport.ts`: `process.execPath` invokes the locally resolved Wrangler JS entrypoint with `d1 execute israel-stocks-db --remote --file <temporary.sql>` and `shell:false`; temp files are cleaned in `finally`. This eliminated the batch-wrapper SQL splitting failure.
+
+Shufersal real run reached remote D1 and wrote validated financial data for report 1766686; Rami Levy real run reached the eligible XBRL report 1764608 and wrote validated financial data. An idempotent repair migration added the required source/discovered-report linkage and PROCESSED lifecycle rows after the initial compact adapter batch omitted those records. No invalid values were activated. Remote verification must confirm these rows and duplicate-free keys before frontend API activation.

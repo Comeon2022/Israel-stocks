@@ -1,0 +1,41 @@
+All build specification files are located in:
+
+C:\Users\Liorkale\Desktop\Israel-stocks\Israel-stocks\buildorder
+
+Read and execute:
+
+C:\Users\Liorkale\Desktop\Israel-stocks\Israel-stocks\buildorder\PHASE6I_SAFE_WRANGLER_SQL_FILE_PERSISTENCE_SPEC.md
+
+Execute it end-to-end.
+
+Current blocker:
+the Windows `npx.cmd` batch wrapper now launches, but shell handling splits the SQL passed via `--command`, causing Wrangler `Unknown arguments` errors.
+
+Do NOT solve this with manual quote escaping.
+
+Replace the persistence transport with:
+- `process.execPath`
+- locally resolved Wrangler JS entry point
+- `d1 execute israel-stocks-db --remote`
+- SQL written to a temporary `.sql` file
+- Wrangler `--file <temp-file>`
+- `shell: false`
+
+Then:
+- rerun Shufersal dry-run + real ingestion
+- rerun Rami Levy dry-run + real ingestion
+- verify remote D1
+- verify idempotency
+- verify live API
+- activate frontend API mode for successful peers
+- run all tests/build/checks
+- update README.md, DATA_MODEL.md, CHATGPT_HANDOFF.md
+- deploy existing Worker only if needed
+- verify Pages if frontend changed
+- commit
+- push to origin/main
+
+Do not create a new Worker or database.
+Do not add LLM functionality.
+Do not fabricate data.
+Do not mark PROCESSED before successful persistence.
