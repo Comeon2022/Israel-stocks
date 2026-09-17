@@ -429,3 +429,11 @@ Missing inputs required before implementation:
 - rate limits and permitted refresh cadence
 
 No endpoint was guessed, no unofficial TASE HTML scraping was used, and no market snapshot or valuation value was activated. `/market/latest` remains truthfully null and valuation remains incomplete. After the contract and credentials are supplied through environment/Cloudflare secrets, run the Phase 7B dry-run sequence before any D1 writes.
+## Phase 7C Yahoo Finance / TradingView market-source evaluation
+
+- Yahoo chart mechanism tested: `GET https://query1.finance.yahoo.com/v8/finance/chart/{symbol}?range=5d&interval=1d` without credentials or browser emulation. All five requested symbols returned HTTP 404: `SANO1.TA`, `SAE.TA`, `RMLI.TA`, `YHNF.TA`, and `NTML.TA`. No quote fields were accepted.
+- Five low-rate sequential requests were stable but uniformly unsuccessful. Yahoo classification: `NO-GO` for current backend use. No provider spike or production wiring was added.
+- TradingView public `TASE:` pages were checked; public results confirmed issuer identity and visible ILA prices for SANO1 and NTML. TradingView is classified `REFERENCE_ONLY`; no undocumented websocket/session mechanism or scraper was used.
+- Yahoo units and timestamps remain unresolved because no valid payload was returned. No TradingView values were persisted or used as a production contract.
+- No production D1 writes, `/market/latest` changes, valuation activation, or market cron changes were performed. Market data remains null and valuation incomplete.
+- Checks passed: `npm test` (12), `npm run worker:test` (5), `npm run worker:check`, and `npm run build`.
