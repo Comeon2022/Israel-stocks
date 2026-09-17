@@ -117,6 +117,8 @@ All five tracked companies are now marked AUTO_INGEST/SOURCE_BACKED in productio
 
 ## Phase 7I market and valuation UI polish
 
+Phase 8A peer historical backfill was safely attempted through the generic MAYA/XBRL runtime. The official discovery response currently exposes no usable 2023–2025 historical XBRL set for the four peers, and some current candidates have no XBRL attachment. No synthetic history was added; see `docs/peer-history-backfill.md`.
+
 API-backed company pages now use reusable market and valuation sections. Prices, daily changes, and multiples use isolated LTR financial spans; market caps use Hebrew million/billion units; valuation basis and concise Hebrew unavailable reasons are shown without raw reason codes. The valuation /15 status remains inactive and no backend logic or mock valuation was changed.
 
 ## Phase 7H-Fix frontend market/valuation wiring and period deduplication

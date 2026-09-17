@@ -42,6 +42,8 @@ Production closeout marks Sano, Shufersal, Rami Levy, Yochananof, and Neto Malin
 
 ## Phase 7I market and valuation UI polish
 
+Phase 8A preserves annual, YTD, and QUARTER_ONLY semantics. Peer TTM remains unavailable when official MAYA data lacks compatible historical periods or XBRL attachments; missing financial and explicit lease cash-payment fields remain NULL.
+
 Presentation only: the reusable API company view separates market cards from valuation metrics, translates basis/reason enums, and preserves raw nulls. No financial calculation, provider normalization, D1 schema, or scoring logic changed.
 
 ## Phase 7H-Fix frontend market/valuation wiring and period deduplication

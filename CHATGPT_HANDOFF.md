@@ -476,6 +476,10 @@ The official `GET /quote?symbol=...&exchange=TASE` probe was attempted at low ra
 
 ## Phase 7I market and valuation UI polish
 
+## Phase 8A peer historical financial backfill
+
+Dry-run backfill was executed for Shufersal, Rami Levy, Yochananof, and Neto Malinda through the shared MAYA/XBRL validation path with zero writes. MAYA IDs were queried with pageSize 30; the official endpoint exposed no usable historical 2023–2025 XBRL set. Rami Levy report 1767163 and Yochananof report 1764706 had no XBRL attachment and were rejected by the existing gate. No invalid or fabricated history was activated; TTM remains blocked and retailer IFRS16 fields remain NULL unless explicitly sourced. Evidence is in `docs/peer-history-backfill.md`.
+
 Pages deployment verification: active production deployment `9d2a6117-dfca-41c8-a1f6-3cf0c5a69626` corresponds to commit `7787720`. All five company routes and `/companies` returned HTTP 200. No Worker/D1 changes were made.
 
 Created reusable `MarketValuation`/`Metric` presentation components in `src/LiveApiCompanyPage.tsx` with responsive styling in `src/LiveApiCompanyPage.css`. Market cards and valuation grids are visually separated; values use LTR isolation, ILS/Hebrew units, `×` multiples, translated basis labels, and concise Hebrew unavailable reasons. The inactive `/15` score status is explicit. Financial history rendering and all backend logic were left unchanged. Tests, Worker tests/check, and build pass; Pages deployment follows the pushed commit.
