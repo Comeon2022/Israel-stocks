@@ -476,6 +476,8 @@ The official `GET /quote?symbol=...&exchange=TASE` probe was attempted at low ra
 
 ## Phase 7I market and valuation UI polish
 
+Pages deployment verification: active production deployment `9d2a6117-dfca-41c8-a1f6-3cf0c5a69626` corresponds to commit `7787720`. All five company routes and `/companies` returned HTTP 200. No Worker/D1 changes were made.
+
 Created reusable `MarketValuation`/`Metric` presentation components in `src/LiveApiCompanyPage.tsx` with responsive styling in `src/LiveApiCompanyPage.css`. Market cards and valuation grids are visually separated; values use LTR isolation, ILS/Hebrew units, `×` multiples, translated basis labels, and concise Hebrew unavailable reasons. The inactive `/15` score status is explicit. Financial history rendering and all backend logic were left unchanged. Tests, Worker tests/check, and build pass; Pages deployment follows the pushed commit.
 
 Frontend deployment verification: Pages production deployment `eae8f14a-0692-4311-9e85-a8cac415e88e` is Active for commit `1faaaeb`. It was triggered by the live market/valuation page wiring commit; `/company/sano`, all four peer routes, and `/companies` returned HTTP 200. The deployed SPA loads the API-backed route component; client-side values require JavaScript execution because the HTML shell does not contain rendered React text.
