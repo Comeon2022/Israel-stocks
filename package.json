@@ -11,8 +11,8 @@
     "preview": "vite preview",
     "worker:check": "tsc -p worker/tsconfig.json",
     "worker:test": "vitest run worker/src",
-    "maya:ingest-company": "node scripts/maya-ingest.mjs company",
-    "maya:ingest-all": "node scripts/maya-ingest.mjs all"
+    "maya:ingest-company": "tsx scripts/maya-ingest.ts company",
+    "maya:ingest-all": "tsx scripts/maya-ingest.ts all"
   },
   "dependencies": {
     "lucide-react": "^1.46.0",
@@ -30,6 +30,7 @@
     "oxlint": "^1.81.0",
     "postcss": "^8.5.28",
     "tailwindcss": "^3.4.17",
+    "tsx": "^4.23.13",
     "typescript": "~6.0.2",
     "vite": "^8.3.0",
     "vitest": "^5.0.1"
