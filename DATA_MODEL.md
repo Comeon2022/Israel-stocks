@@ -34,3 +34,6 @@ Phase 3B seed records are stored as JSON under `worker/seed/sano/`, with source 
 Production Phase 3C uses D1 `israel-stocks-db` (database ID is in `wrangler.toml`) and the deployed Worker API. Sano production currently contains annual periods 2023–2025 and their official report sources; 2021 is incomplete. Market snapshots are separate and currently null, so valuation must not be treated as source-backed.
 
 Phase 6 CLI tooling provides dry-run discovery/attachment checks with no D1 writes. Production activation remains gated by generic XBRL mapping and validation.
+## Phase 6L source-backed peers
+
+Yochananof (canonical ID `yochananof`, MAYA 1786) and Neto Malinda (canonical ID `neto-malinda`, MAYA 1463) are configured for the same generic MAYA → XBRL → normalized D1 pipeline as the earlier activated issuers. Reports are activated only after deterministic validation; unsupported or unavailable concepts stay null and valuation remains incomplete without market data.

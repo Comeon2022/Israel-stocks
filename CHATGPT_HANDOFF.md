@@ -385,3 +385,14 @@ Checks: 12 tests passed, 5 Worker tests passed, Worker check passed, build passe
 Git audit: branch `main`; prior Phase 6J commit `700f287e3f759d6e8bfebc094db978fcf3fb85b0` matched `origin/main`; this closeout adds production API configuration and activated-peer metadata. Pages production uses `.env.production` with `VITE_DATA_SOURCE=api` and the live Worker URL. Sano, Shufersal, and Rami Levy are marked `AUTO_INGEST`; Yochananof and Neto remain `DISCOVERY_ONLY`.
 
 Pages route checks returned HTTP 200 for `/company/SANO`, `/company/shufersal`, and `/company/rami-levy` from `https://israel-stocks.pages.dev`; the production HTML is served by Cloudflare. The Git-integrated deployment commit is not exposed in response headers, so the deployment commit itself cannot be independently identified from the public response. Live API evidence for both peers remains: company, financials, sources, validation, freshness, and discovered-reports endpoints returned 200 with one persisted period/source/report each. Valuation remains incomplete due to absent market data and activated peer routes have no silent mock fallback.
+## Phase 6L Yochananof + Neto source-backed activation
+
+- Yochananof: canonical `yochananof`, MAYA `1786`; live discovery selected report `1764694` on the final run. It was processed through the shared parser/mapper/validation/persistence runtime and linked to `maya-1764694-xbrl`. The earlier discovered `1764706` had no XBRL attachment and was not activated.
+- Neto Malinda: canonical `neto-malinda`, MAYA `1463`; selected report `1764798`, linked to `maya-1764798-xbrl`.
+- Both companies have one persisted financial period, one statement, validation rows, source linkage, and `PROCESSED` lifecycle rows in remote D1. Repeated real runs were idempotent (same canonical IDs/report/source/period/statement rows; no duplicate records).
+- Missing concepts remain NULL. Yochananof remains classified as a retailer; no lease cash payments were inferred. Valuation remains incomplete because market data is unavailable.
+- Frontend metadata and routing now activate both IDs through the generic API-backed peer page with no silent mock fallback. Existing mock data remains only for non-activated paths.
+- Remote migration `0011_activate_yochananof_neto.sql` promotes both rows to `AUTO_INGEST`.
+- Dry-runs for both issuers reported `Database writes: 0`; real runs completed through the remote D1 temp-SQL transport. `npm test`, `npm run worker:test`, `npm run worker:check`, and `npm run build` passed.
+- Worker code was not changed, so no Worker redeploy was required. Pages deployment is triggered by the pending push; live verification is recorded after push.
+- No LLM features were added. Remaining limitation: MAYA report availability can change between discovery runs; reports without XBRL remain unactivated.

@@ -109,3 +109,6 @@ Current verified API-backed companies are Sano, Shufersal, and Rami Levy. Their 
 The centralized resolver is `scripts/command-resolver.ts`; its tests cover win32, linux, and darwin.
 Safe D1 transport resolves the local Wrangler JavaScript entrypoint, runs with `process.execPath`, `shell:false`, and sends UTF-8 SQL through a temporary `--file`.
 Real Windows runs now select `npx.cmd` and pass the spawn stage; Wrangler SQL argument quoting remains under remediation.
+### Phase 6L activation
+
+Yochananof (MAYA 1786) and Neto Malinda (MAYA 1463) now use the generic MAYA/XBRL discovery, parsing, validation, and remote D1 persistence path. Missing concepts remain null; valuation is intentionally incomplete while market data is unavailable. No LLM processing is used.
