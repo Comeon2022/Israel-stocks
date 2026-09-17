@@ -470,6 +470,14 @@ The official `GET /quote?symbol=...&exchange=TASE` probe was attempted at low ra
 
 ## Phase 7G Globes market-data activation + valuation
 
+## Phase 7H real valuation completion and scoring audit
+
+Audited all five companies against live Globes market snapshots and source-backed D1 financial rows. The API now returns deterministic valuation fields, explicit financial period/basis metadata, capital-structure ratios, and unavailable reason codes. A single quarter is never relabeled as annual; unsupported TTM composition remains unavailable. Retailer IFRS16 pairings and adjusted FCF require compatible sourced inputs, including explicit cash lease payments.
+
+The existing `/15` valuation contribution is classified `MOCK_OR_HARDCODED`: fixed values in `src/data/companies.ts` are summed by `src/lib/calculations.ts` without live market inputs, documented thresholds, or transparent missing-value rules. It remains inactive for API-backed valuation. See `docs/valuation-audit.md` and `docs/valuation-scoring-proposal.md`.
+
+The API-backed company view now presents live market/valuation status, basis and unavailable reasons without falling back to mock valuation values. All five API routes, `/companies`, and Pages routes were verified HTTP 200. Tests, Worker tests/check, type-check, and build pass. Worker deployment: `8bd274c8-e596-4803-b584-dc784e1f2926`. Follow-up: review and approve a reproducible scoring framework before activating valuation points.
+
 ### Production activation completed
 
 Remote D1 was verified and compatibility migrations 0014/0015 added the missing snapshot columns. All five validated Globes snapshots were ingested; a second run found one row per company/provider/as-of identity. Live market/latest returns normalized ILS price, ILS-million market cap, source timestamp, and 15-minute delay. Deterministic valuation fields are returned only for available positive denominators with an explicit period basis. Worker redeployed at `https://israel-stocks-api.karu-lior.workers.dev`, version `c9af6960-93c9-4557-949d-0141972fc1da`; Pages routes returned HTTP 200. `npm test`, `npm run worker:test`, `npm run worker:check`, and `npm run build` pass.
