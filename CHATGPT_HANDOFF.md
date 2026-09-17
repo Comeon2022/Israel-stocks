@@ -347,3 +347,10 @@ Observed runs on 2026-09-17: Shufersal (`777`) discovered 1 report and parsed 1 
 ## Phase 6D shared runtime CLI completion
 
 Added a TypeScript CLI entrypoint using `tsx` and the shared `worker/src/ingestion.ts` service. Dry-run now performs MAYA discovery, XBRL resolution, shared parsing, mapping, and validation with zero writes. Shufersal dry-run parsed one report with 10 mapped fields and no validation errors. Rami Levy discovered a report without an XBRL attachment; another eligible report was parsed, while the missing attachment was safely classified as a failure. The current CLI passes no persistence adapter, so real-mode runs remain non-mutating pending a shared D1 adapter implementation; no invalid values were activated.
+## Phase 6E remote D1 persistence + peer activation
+
+Added the shared `IngestionPersistence` contract and wired ingestion results through lifecycle-aware `begin`, `activate`, and `fail` operations. The CLI real mode now attempts to use the existing remote D1 through Wrangler, with idempotent source/period/statement upserts and PROCESSED only after activation SQL.
+
+Dry-runs: Shufersal parsed 1 report with 10 mapped fields and zero writes. Rami Levy found one report without XBRL and safely rejected it; another report was parsed, also with zero dry-run writes. Real runs were attempted but Windows could not spawn `npx` from the TypeScript child-process adapter (`spawnSync npx ENOENT`), so zero peer rows were written and neither company was marked PROCESSED. This is a tooling-path blocker, not a financial-data validation bypass. Fix by invoking `npx.cmd` on Windows, then rerun the two real commands.
+
+Tests/build/checks passed: 9 tests, 5 Worker tests, Worker check, and frontend build. No Worker deployment was performed in this attempt because the Worker source was unchanged; remote D1 and peer API verification remain pending successful CLI persistence.

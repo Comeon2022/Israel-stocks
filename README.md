@@ -104,3 +104,4 @@ The shared MAYA provider supports Sano (813), Shufersal (777), Rami Levy (1445),
 
 CLI: npm run maya:ingest-company -- shufersal --dry-run (or rami-levy); batch: npm run maya:ingest-all -- --dry-run. The CLI performs live MAYA discovery and XBRL attachment checks; writes remain validation-gated.
 MAYA requests are shape-checked, retried up to three times with bounded backoff, paginated at a maximum page size of 30, and deduplicated. The TypeScript CLI now invokes the shared parser/mapper/validation runtime in dry-run mode; financial activation remains validation-gated.
+Remote CLI persistence uses the existing D1 database and idempotent lifecycle writes. On Windows, the adapter must invoke `npx.cmd`; dry-run mode never invokes persistence and always reports zero writes.
