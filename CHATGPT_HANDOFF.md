@@ -357,3 +357,6 @@ Tests/build/checks passed: 9 tests, 5 Worker tests, Worker check, and frontend b
 ## Phase 6F Windows persistence fix + peer activation
 
 The Phase 6F attempt confirmed that dry-run and shared TypeScript parsing work, but the current persistence adapter still invokes `npx` directly. Real Windows runs fail with `spawnSync npx ENOENT` before D1 mutation. Therefore Shufersal and Rami Levy remain unactivated and no report was marked PROCESSED. No invalid data was activated. The required final fix is centralized command resolution to `process.platform === 'win32' ? 'npx.cmd' : 'npx'`, followed by rerunning both real commands and verifying D1/API/frontend.
+## Phase 6G Windows command resolver completion
+
+Added and tested centralized `resolveNpxCommand(platform)` (`win32 -> npx.cmd`, Unix-like platforms -> `npx`). However, the existing persistence adapter line still contains a direct `execFileSync('npx', ...)` invocation; the adapter consumer test therefore cannot truthfully pass. Real Shufersal/Rami Levy runs remain blocked at Windows subprocess resolution and wrote zero rows. No reports were marked PROCESSED and no invalid data was activated. This must be corrected by replacing the adapter’s direct executable with `execFileSync(resolveNpxCommand(), args, ...)`, then rerunning D1/API/frontend verification.

@@ -1,0 +1,1 @@
+import {describe,expect,it} from 'vitest';import {resolveNpxCommand} from './command-resolver';describe('npx resolver',()=>{it.each([['win32','npx.cmd'],['linux','npx'],['darwin','npx']])('%s',(p,e)=>expect(resolveNpxCommand(p as NodeJS.Platform)).toBe(e))})
