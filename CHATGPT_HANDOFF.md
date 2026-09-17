@@ -467,3 +467,11 @@ The official `GET /quote?symbol=...&exchange=TASE` probe was attempted at low ra
 - `litefinance.ashx?format=json&rect=all.groups.tabs&ts=` was inspected as secondary discovery input; it exposed grouped indices but none of the five target equities, so it was not used for mapping.
 - Provider files: `scripts/globes-market.ts` and `scripts/globes-market-test.ts`. Local-only, typed, identity-validating, zero-write experimental path; not Worker-wired and not production `/market/latest`.
 - Limitations: Globes page cross-checks verified security IDs and agorot labeling; no production redistribution rights are inferred from technical reachability. Globes remains experimental pending a separate activation decision.
+
+## Phase 7G Globes market-data activation + valuation
+
+- Implemented Worker-compatible provider bridge at `worker/src/market/globes-provider.ts`, reusable XML parser/normalizer in `scripts/globes-market.ts`, and migration `0013_globes_market_snapshots.sql` for the existing D1.
+- Added a dedicated 30-minute Sunday–Thursday market refresh cron while retaining the existing daily MAYA cron. Company failures are isolated in the refresh loop.
+- Current blocker: `npx wrangler d1 migrations apply israel-stocks-db --remote` failed with Cloudflare API code `7403` (“account is not valid or is not authorized to access this service”). Therefore migration was not applied remotely, no real snapshots were persisted, no Worker deployment was performed, and `/market/latest` was not claimed active.
+- Local Globes dry-run previously validated all five identities/units with `Database writes: 0`. Production D1/API/Pages verification and valuation activation remain pending restoration of Cloudflare authorization.
+- No market values, valuation scores, secrets, cookies, or LLM functionality were fabricated or committed.

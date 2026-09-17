@@ -12,4 +12,4 @@ migrations_dir = "migrations"
 ALLOWED_ORIGINS = "https://israel-stocks.pages.dev,http://localhost:5173"
 
 [triggers]
-crons = ["0 6 * * *"]
+crons = ["0 6 * * *", "*/30 * * * 0-4"]

@@ -1,0 +1,11 @@
+ALTER TABLE market_snapshots ADD COLUMN provider TEXT NOT NULL DEFAULT 'UNKNOWN';
+ALTER TABLE market_snapshots ADD COLUMN provider_instrument_id INTEGER;
+ALTER TABLE market_snapshots ADD COLUMN security_id TEXT;
+ALTER TABLE market_snapshots ADD COLUMN exchange TEXT;
+ALTER TABLE market_snapshots ADD COLUMN as_of TEXT;
+ALTER TABLE market_snapshots ADD COLUMN fetched_at TEXT;
+ALTER TABLE market_snapshots ADD COLUMN delay_minutes INTEGER;
+ALTER TABLE market_snapshots ADD COLUMN validation_status TEXT;
+ALTER TABLE market_snapshots ADD COLUMN raw_price REAL;
+ALTER TABLE market_snapshots ADD COLUMN raw_price_unit TEXT;
+CREATE UNIQUE INDEX IF NOT EXISTS idx_market_snapshot_identity ON market_snapshots(company_id,provider,as_of);
