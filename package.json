@@ -14,6 +14,7 @@
     "maya:ingest-company": "tsx scripts/maya-ingest.ts company",
     "maya:ingest-all": "tsx scripts/maya-ingest.ts all"
     ,"market:globes-test": "tsx scripts/globes-market-test.ts"
+    ,"market:globes-ingest": "tsx scripts/globes-market-ingest.ts"
   },
   "dependencies": {
     "lucide-react": "^1.46.0",

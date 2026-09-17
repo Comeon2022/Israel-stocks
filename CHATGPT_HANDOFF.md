@@ -470,6 +470,10 @@ The official `GET /quote?symbol=...&exchange=TASE` probe was attempted at low ra
 
 ## Phase 7G Globes market-data activation + valuation
 
+### Production activation completed
+
+Remote D1 was verified and compatibility migrations 0014/0015 added the missing snapshot columns. All five validated Globes snapshots were ingested; a second run found one row per company/provider/as-of identity. Live market/latest returns normalized ILS price, ILS-million market cap, source timestamp, and 15-minute delay. Deterministic valuation fields are returned only for available positive denominators with an explicit period basis. Worker redeployed at `https://israel-stocks-api.karu-lior.workers.dev`, version `c9af6960-93c9-4557-949d-0141972fc1da`; Pages routes returned HTTP 200. `npm test`, `npm run worker:test`, `npm run worker:check`, and `npm run build` pass.
+
 - Implemented Worker-compatible provider bridge at `worker/src/market/globes-provider.ts`, reusable XML parser/normalizer in `scripts/globes-market.ts`, and migration `0013_globes_market_snapshots.sql` for the existing D1.
 - Added a dedicated 30-minute Sunday–Thursday market refresh cron while retaining the existing daily MAYA cron. Company failures are isolated in the refresh loop.
 - Current blocker: `npx wrangler d1 migrations apply israel-stocks-db --remote` failed with Cloudflare API code `7403` (“account is not valid or is not authorized to access this service”). Therefore migration was not applied remotely, no real snapshots were persisted, no Worker deployment was performed, and `/market/latest` was not claimed active.

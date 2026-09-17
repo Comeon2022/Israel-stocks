@@ -54,4 +54,4 @@ The key enabled documented XTAE discovery for all five securities, but the curre
 
 Globes Phase 7F experimental output is not persisted. Its ASMX service returns quote prices in agorot (verified against Globes instrument pages), market cap in thousands of NIS, and share counts as units; the provider normalizes these only in local dry-run output. Production market snapshots and valuation remain unchanged.
 
-Phase 7G adds columns for Globes provider identity, canonical ILS price, market cap in ILS millions, timestamps, delay, raw agorot price, and validation. Remote migration and activation are pending Cloudflare D1 authorization; until then production values remain unchanged.
+Phase 7G is activated. `GLOBES` snapshots for all five issuers use canonical ILS price and ILS-million market cap, retain raw agorot values, and include source timestamps, 15-minute delay, and validation status. Valuation is calculated only from available financial denominators and identifies its period basis; missing metrics remain NULL.
