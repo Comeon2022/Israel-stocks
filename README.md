@@ -124,3 +124,5 @@ Phase 7C evaluated Yahoo and TradingView. Yahoo's tested chart endpoint returned
 Phase 7D evaluated documented alternative providers in `provider-evaluation.md`. Twelve Data is CONDITIONAL because its official exchange directory lists Tel Aviv (`XTAE`) but no API key/plan is available for symbol and quote testing. Marketstack, Alpha Vantage, EODHD, and FMP remain NO-GO on verified documentation evidence. Production market data remains disabled.
 
 Phase 7E remains blocked because `TWELVE_DATA_API_KEY` is not available. No Twelve Data symbols or quotes were guessed or activated.
+
+Phase 7E credentialed discovery later succeeded using the locally supplied key: Twelve Data `/stocks?exchange=XTAE` resolved all five issuers (`SANO1`, `SAE`, `RMLI`, `YHNF`, `NTML`) with TASE exchange and `ILA` currency. The documented `/quote` endpoint returned plan-entitlement errors for the symbols, so Twelve Data remains CONDITIONAL and no production data or provider spike was activated.

@@ -49,3 +49,5 @@ Yahoo/TradingView evaluation produced no accepted market snapshot. Yahoo's teste
 Phase 7D evaluated documented alternatives without changing the schema or production API. Twelve Data is conditional on authenticated `XTAE` coverage and verified units; no alternative provider is active. Market snapshots and valuation remain NULL until a provider passes all-five identity/quote validation.
 
 Twelve Data validation is pending secure API-key provision. Until discovery and quote responses verify identity, units, and timestamps, market snapshot fields and valuation outputs remain NULL.
+
+The key enabled documented XTAE discovery for all five securities, but the current Twelve Data plan rejected quote access (`symbol is available starting with the Pro or Venture plan`). Consequently price units/timestamps and live quote values are not accepted, and market/valuation fields remain NULL.
