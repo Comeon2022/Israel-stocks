@@ -40,6 +40,10 @@ Yochananof (canonical ID `yochananof`, MAYA 1786) and Neto Malinda (canonical ID
 
 Production closeout marks Sano, Shufersal, Rami Levy, Yochananof, and Neto Malinda as `AUTO_INGEST`/`SOURCE_BACKED`. This status does not imply market-data availability; valuation remains incomplete.
 
+## Phase 7H-Fix frontend market/valuation wiring and period deduplication
+
+Globes daily change is canonical ILS while raw provider values remain agorot. Valuation fallback selects only true annual financial periods; H1/Q2/QUARTER_ONLY data is never relabeled annual. API financial rows use canonical period identity to prevent duplicate rendering.
+
 ## Market snapshots and valuation
 
 `market_snapshots` remains the persistence target for provider snapshots. Values must carry provider, security mapping, ILS units, source timestamp, and validation status before activation. TASE Data Hub is the selected authoritative source; access is currently blocked on developer-portal authentication, so no market row or valuation multiple is fabricated. Missing market inputs remain NULL. Once provisioned, market cap is stored in ILS millions, price is normalized from the provider-declared ILS/agorot unit, and valuation denominators are labeled FY or TTM only when the required source-backed periods exist. Retailer adjusted FCF continues to require explicit lease cash payments.

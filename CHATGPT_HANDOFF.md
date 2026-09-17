@@ -472,6 +472,10 @@ The official `GET /quote?symbol=...&exchange=TASE` probe was attempted at low ra
 
 ## Phase 7H real valuation completion and scoring audit
 
+## Phase 7H-Fix frontend market/valuation wiring and period deduplication
+
+Worker correction completed: Globes daily change is normalized from agorot to ILS at persistence and API boundaries. Latest-annual valuation now queries only `period_type='ANNUAL'`, so H1/Q2/QUARTER_ONLY rows cannot be labeled annual. Financial API rows are deduplicated by period end/type/flow basis while preserving distinct periods. UTF-8 JSON content type is explicit. Existing valuation /15 remains inactive as `MOCK_OR_HARDCODED`; no mock valuation was reintroduced. Tests, Worker tests/check, type-check, and build pass.
+
 Audited all five companies against live Globes market snapshots and source-backed D1 financial rows. The API now returns deterministic valuation fields, explicit financial period/basis metadata, capital-structure ratios, and unavailable reason codes. A single quarter is never relabeled as annual; unsupported TTM composition remains unavailable. Retailer IFRS16 pairings and adjusted FCF require compatible sourced inputs, including explicit cash lease payments.
 
 The existing `/15` valuation contribution is classified `MOCK_OR_HARDCODED`: fixed values in `src/data/companies.ts` are summed by `src/lib/calculations.ts` without live market inputs, documented thresholds, or transparent missing-value rules. It remains inactive for API-backed valuation. See `docs/valuation-audit.md` and `docs/valuation-scoring-proposal.md`.

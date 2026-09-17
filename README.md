@@ -115,6 +115,10 @@ Yochananof (MAYA 1786) and Neto Malinda (MAYA 1463) now use the generic MAYA/XBR
 
 All five tracked companies are now marked AUTO_INGEST/SOURCE_BACKED in production; market data and valuation remain unavailable/incomplete.
 
+## Phase 7H-Fix frontend market/valuation wiring and period deduplication
+
+Market API output uses canonical ILS daily change and true annual valuation fallback only. Interim and quarter-only periods remain explicitly non-annual; duplicate API period rows are removed by canonical period identity. The valuation score remains inactive pending approved methodology.
+
 ## Market data (Phase 7A)
 
 Market-data source discovery is documented in `market-data.md`. TASE Data Hub is the authoritative structured source, but its developer-portal credentials are not available in this workspace. No guessed endpoint, scraped quote, or fabricated market value is used; production market snapshots and valuation remain NULL until access is provisioned.
