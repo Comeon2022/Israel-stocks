@@ -327,3 +327,10 @@ Checks: `npm test` passed (9 tests), `npm run build` passed, and `npm run worker
 
 ## Phase 6 CLI completion
 Added npm scripts maya:ingest-company and maya:ingest-all with canonical IDs, aliases, isolated batch errors, and --dry-run. Shufersal and Rami Levy dry-runs executed successfully against MAYA; no database writes were performed and no invalid values activated. The CLI reports discovery, eligibility, XBRL availability, and validation-gated persistence status. Existing migration 0007 and Worker deployment were reused; no new Worker/database created. Tests/build/checks pass. Peer real activation remains deferred until the shared runtime persistence path performs full XBRL parse/map/validate for each issuer.
+## Phase 6B real peer XBRL activation
+
+The Phase 6B activation attempt did not activate Shufersal or Rami Levy because the existing CLI cannot yet complete the required generic XBRL parse/map/validate/persist path. No invalid peer data was written.
+
+Live evidence: MAYA issuer IDs remain Shufersal `777` and Rami Levy `1445`. Earlier direct requests returned real reports `1766686` and `1767163`, respectively. During this activation attempt, repeated POST requests to `https://maya.tase.co.il/api/v1/reports/finance` intermittently returned a JSON array and a non-array/error payload, causing the CLI to fail safely before report selection. The current CLI also reports `Database writes: 0`; it does not claim activation.
+
+Current status: Sano remains source-backed; Shufersal and Rami Levy remain discovery-only/mock; Yochananof and Neto Malinda remain discovery-only/mock. Retailer IFRS 16 values were not fabricated. Market data and valuation remain incomplete. The existing Worker and D1 were not recreated; no Worker deployment was required because no Worker code changed. Full Phase 6B completion requires making the CLI call the shared TypeScript parser, context selector, mapping profiles, validation gate, and idempotent D1 persistence, then retrying the live reports after MAYA responses are stable.
