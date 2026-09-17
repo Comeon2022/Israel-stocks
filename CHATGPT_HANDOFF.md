@@ -373,3 +373,10 @@ Shufersal and Rami Levy dry-runs reached shared XBRL parsing with zero writes. R
 The active adapter now uses `scripts/d1-transport.ts`: `process.execPath` invokes the locally resolved Wrangler JS entrypoint with `d1 execute israel-stocks-db --remote --file <temporary.sql>` and `shell:false`; temp files are cleaned in `finally`. This eliminated the batch-wrapper SQL splitting failure.
 
 Shufersal real run reached remote D1 and wrote validated financial data for report 1766686; Rami Levy real run reached the eligible XBRL report 1764608 and wrote validated financial data. An idempotent repair migration added the required source/discovered-report linkage and PROCESSED lifecycle rows after the initial compact adapter batch omitted those records. No invalid values were activated. Remote verification must confirm these rows and duplicate-free keys before frontend API activation.
+## Phase 6J production verification + frontend peer activation
+
+Applied remote migration `0009_peer_source_lifecycle_repair.sql`; migrations through `0009` are applied. Remote D1 checks show one period each for Shufersal and Rami Levy and exactly one MAYA discovered report for IDs `1766686` and `1764608`; source linkage and statements are present. Repeated ingestion reruns reused the same keys without duplicate report/period rows.
+
+Live API returned HTTP 200 for company, financials, sources, validation, freshness, and discovered-reports endpoints for both peers. The frontend now has generic `ApiPeerPage` loading for API mode, with loading/error states, source-backed/validated status, period basis, no silent mock fallback, and incomplete valuation. Yochananof and Neto remain mock/discovery-only. Pages verification is pending the Git-integrated deployment; Sano behavior is unchanged.
+
+Checks: 12 tests passed, 5 Worker tests passed, Worker check passed, build passed. No Worker code changed, so no redeploy was required. Commit/push details are recorded below after final commit.

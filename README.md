@@ -105,6 +105,7 @@ The shared MAYA provider supports Sano (813), Shufersal (777), Rami Levy (1445),
 CLI: npm run maya:ingest-company -- shufersal --dry-run (or rami-levy); batch: npm run maya:ingest-all -- --dry-run. The CLI performs live MAYA discovery and XBRL attachment checks; writes remain validation-gated.
 MAYA requests are shape-checked, retried up to three times with bounded backoff, paginated at a maximum page size of 30, and deduplicated. The TypeScript CLI now invokes the shared parser/mapper/validation runtime in dry-run mode; financial activation remains validation-gated.
 Remote CLI persistence uses the existing D1 database and idempotent lifecycle writes. On Windows, the adapter must invoke `npx.cmd`; dry-run mode never invokes persistence and always reports zero writes.
+Current verified API-backed companies are Sano, Shufersal, and Rami Levy. Their peer routes use the generic API page; valuation remains incomplete without real market data. Yochananof and Neto remain mock/discovery-only.
 The centralized resolver is `scripts/command-resolver.ts`; its tests cover win32, linux, and darwin.
 Safe D1 transport resolves the local Wrangler JavaScript entrypoint, runs with `process.execPath`, `shell:false`, and sends UTF-8 SQL through a temporary `--file`.
 Real Windows runs now select `npx.cmd` and pass the spawn stage; Wrangler SQL argument quoting remains under remediation.
