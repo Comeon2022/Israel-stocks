@@ -40,6 +40,10 @@ Yochananof (canonical ID `yochananof`, MAYA 1786) and Neto Malinda (canonical ID
 
 Production closeout marks Sano, Shufersal, Rami Levy, Yochananof, and Neto Malinda as `AUTO_INGEST`/`SOURCE_BACKED`. This status does not imply market-data availability; valuation remains incomplete.
 
+## Phase 7I market and valuation UI polish
+
+Presentation only: the reusable API company view separates market cards from valuation metrics, translates basis/reason enums, and preserves raw nulls. No financial calculation, provider normalization, D1 schema, or scoring logic changed.
+
 ## Phase 7H-Fix frontend market/valuation wiring and period deduplication
 
 Globes daily change is canonical ILS while raw provider values remain agorot. Valuation fallback selects only true annual financial periods; H1/Q2/QUARTER_ONLY data is never relabeled annual. API financial rows use canonical period identity to prevent duplicate rendering.

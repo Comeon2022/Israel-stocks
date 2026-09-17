@@ -474,6 +474,10 @@ The official `GET /quote?symbol=...&exchange=TASE` probe was attempted at low ra
 
 ## Phase 7H-Fix frontend market/valuation wiring and period deduplication
 
+## Phase 7I market and valuation UI polish
+
+Created reusable `MarketValuation`/`Metric` presentation components in `src/LiveApiCompanyPage.tsx` with responsive styling in `src/LiveApiCompanyPage.css`. Market cards and valuation grids are visually separated; values use LTR isolation, ILS/Hebrew units, `×` multiples, translated basis labels, and concise Hebrew unavailable reasons. The inactive `/15` score status is explicit. Financial history rendering and all backend logic were left unchanged. Tests, Worker tests/check, and build pass; Pages deployment follows the pushed commit.
+
 Frontend deployment verification: Pages production deployment `eae8f14a-0692-4311-9e85-a8cac415e88e` is Active for commit `1faaaeb`. It was triggered by the live market/valuation page wiring commit; `/company/sano`, all four peer routes, and `/companies` returned HTTP 200. The deployed SPA loads the API-backed route component; client-side values require JavaScript execution because the HTML shell does not contain rendered React text.
 
 Deployment-focused investigation (2026-09-18): local HEAD and `origin/main` are both `02abea3351ec9579798654cabc8ad39a8e8d8544`. Cloudflare Pages production deployment `b0e1bca6-4406-406f-b756-ef8296e508d1` is on commit `02abea3` and is current. However, source inspection proves the frontend wiring was never committed: `ApiSanoPage` and `ApiPeerPage` still render the obsolete “אין נתוני שוק ולכן אין ציון תמחור” copy and do not fetch `/market/latest`. Therefore Pages is correctly deploying the current commit, but that commit still contains the stale UI. No Pages retry was needed; a frontend code change is required before the next deployment.

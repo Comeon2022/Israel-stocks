@@ -115,6 +115,10 @@ Yochananof (MAYA 1786) and Neto Malinda (MAYA 1463) now use the generic MAYA/XBR
 
 All five tracked companies are now marked AUTO_INGEST/SOURCE_BACKED in production; market data and valuation remain unavailable/incomplete.
 
+## Phase 7I market and valuation UI polish
+
+API-backed company pages now use reusable market and valuation sections. Prices, daily changes, and multiples use isolated LTR financial spans; market caps use Hebrew million/billion units; valuation basis and concise Hebrew unavailable reasons are shown without raw reason codes. The valuation /15 status remains inactive and no backend logic or mock valuation was changed.
+
 ## Phase 7H-Fix frontend market/valuation wiring and period deduplication
 
 Market API output uses canonical ILS daily change and true annual valuation fallback only. Interim and quarter-only periods remain explicitly non-annual; duplicate API period rows are removed by canonical period identity. The valuation score remains inactive pending approved methodology.
