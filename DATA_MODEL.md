@@ -47,3 +47,5 @@ Production closeout marks Sano, Shufersal, Rami Levy, Yochananof, and Neto Malin
 Yahoo/TradingView evaluation produced no accepted market snapshot. Yahoo's tested public chart mechanism returned 404 for all five requested symbols; TradingView remains reference-only. Market and valuation outputs remain NULL/unavailable.
 
 Phase 7D evaluated documented alternatives without changing the schema or production API. Twelve Data is conditional on authenticated `XTAE` coverage and verified units; no alternative provider is active. Market snapshots and valuation remain NULL until a provider passes all-five identity/quote validation.
+
+Twelve Data validation is pending secure API-key provision. Until discovery and quote responses verify identity, units, and timestamps, market snapshot fields and valuation outputs remain NULL.
