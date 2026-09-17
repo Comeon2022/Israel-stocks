@@ -13,7 +13,7 @@ XBRL report 1766669 is parsed deterministically into ILS millions. Q2 flow facts
 Phase 6 onboarding metadata includes MAYA issuer ID, ingestion enabled state, discovery provider, mapping profile, and readiness (`DISCOVERY_ONLY`, `PARSER_VALIDATED`, `AUTO_INGEST`). Current verified IDs are Sano 813, Shufersal 777, Rami Levy 1445, Yochananof 1786, and Neto Malinda 1463. Derivations must retain source-period provenance; TTM requires four valid quarter-only periods. Retailer IFRS 16 fields remain explicit.
 
 Current activation state is unambiguous: only Sano has activated real XBRL data. Shufersal and Rami Levy have verified MAYA IDs and discovery evidence but remain unactivated until the generic CLI completes parse, mapping, validation, and D1 persistence. Mock data is retained only for companies not activated.
-The CLI now distinguishes malformed/transient MAYA payloads with bounded retries and diagnostics; it must not mark a report processed merely because an attachment downloads.
+The CLI distinguishes malformed/transient MAYA payloads with bounded retries and diagnostics, and must not mark a report processed merely because an attachment downloads. Current peer CLI runs reach XBRL download but remain unactivated until the shared TypeScript mapper, validation gate, and D1 persistence adapter are invoked.
 
 Financial periods use ILS millions, nullable numeric fields, and `ANNUAL`, `QUARTERLY`, or `TTM` period types. Missing data stays `null`. Sources and market snapshots are separate from statements.
 
