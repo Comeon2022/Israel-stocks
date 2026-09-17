@@ -414,3 +414,18 @@ Pages route checks returned HTTP 200 for `/company/SANO`, `/company/shufersal`, 
 - Blocker: no TASE Data Hub credentials/API entitlement are available in the workspace. Therefore no current price, shares, market cap, snapshot, or valuation multiple was activated. Existing `/market/latest` responses remain truthfully null and valuation remains incomplete.
 - Exact remaining action: obtain TASE Data Hub developer-portal credentials/terms, provide the endpoint contract and secret through the deployment environment (never commit it), then run the market fetch dry-run, validate declared units/timestamps, persist remote D1 snapshots, deploy the existing Worker, and verify all five API/Pages routes.
 - No market data was fabricated and no LLM features were added.
+## Phase 7B credentialed TASE Data Hub integration
+
+Phase 7B was not activated because the required official contract and credentials remain unavailable in the workspace. Environment inspection found no TASE/Data Hub variables, `.dev.vars` contains no credentials, and `wrangler.toml` contains no market-data configuration.
+
+Missing inputs required before implementation:
+
+- official TASE Data Hub base URL
+- exact quote/snapshot endpoint and HTTP method
+- authentication method and securely supplied secret/API key
+- official response schema or live sample response
+- declared price, market-cap, and shares units
+- timestamp timezone and delayed/real-time semantics
+- rate limits and permitted refresh cadence
+
+No endpoint was guessed, no unofficial TASE HTML scraping was used, and no market snapshot or valuation value was activated. `/market/latest` remains truthfully null and valuation remains incomplete. After the contract and credentials are supplied through environment/Cloudflare secrets, run the Phase 7B dry-run sequence before any D1 writes.
