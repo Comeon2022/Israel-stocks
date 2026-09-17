@@ -1,0 +1,2 @@
+import { fetchGlobesSnapshot, GLOBES_MAP } from './globes-market'
+const args=process.argv.slice(2),all=args.includes('--all'),ids=all?Object.keys(GLOBES_MAP):[args.find(x=>!x.startsWith('--'))??'sano'];for(const id of ids){try{const s=await fetchGlobesSnapshot(id);console.log(JSON.stringify({...s,validation:s.validation,'Database writes':0}))}catch(e){console.error(`${id}: ${e instanceof Error?e.message:'error'}`)}}

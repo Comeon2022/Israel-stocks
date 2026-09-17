@@ -126,3 +126,5 @@ Phase 7D evaluated documented alternative providers in `provider-evaluation.md`.
 Phase 7E remains blocked because `TWELVE_DATA_API_KEY` is not available. No Twelve Data symbols or quotes were guessed or activated.
 
 Phase 7E credentialed discovery later succeeded using the locally supplied key: Twelve Data `/stocks?exchange=XTAE` resolved all five issuers (`SANO1`, `SAE`, `RMLI`, `YHNF`, `NTML`) with TASE exchange and `ILA` currency. The documented `/quote` endpoint returned plan-entitlement errors for the symbols, so Twelve Data remains CONDITIONAL and no production data or provider spike was activated.
+
+Phase 7F experimentally validates the public Globes Financial ASMX service. The local-only command is `npm run market:globes-test -- --all`; it performs zero database writes. Globes returns 15-minute-delayed TASE quotes; prices are normalized from agorot to ILS and market cap from thousands of NIS to millions. This experimental provider is not production-wired.

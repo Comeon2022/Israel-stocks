@@ -51,3 +51,5 @@ Phase 7D evaluated documented alternatives without changing the schema or produc
 Twelve Data validation is pending secure API-key provision. Until discovery and quote responses verify identity, units, and timestamps, market snapshot fields and valuation outputs remain NULL.
 
 The key enabled documented XTAE discovery for all five securities, but the current Twelve Data plan rejected quote access (`symbol is available starting with the Pro or Venture plan`). Consequently price units/timestamps and live quote values are not accepted, and market/valuation fields remain NULL.
+
+Globes Phase 7F experimental output is not persisted. Its ASMX service returns quote prices in agorot (verified against Globes instrument pages), market cap in thousands of NIS, and share counts as units; the provider normalizes these only in local dry-run output. Production market snapshots and valuation remain unchanged.
