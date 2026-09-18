@@ -44,6 +44,10 @@ Production closeout marks Sano, Shufersal, Rami Levy, Yochananof, and Neto Malin
 
 No schema changes were made. Historical activation remains limited to validated target periods with complete provenance.
 
+## Phase 8C-Final historical activation
+
+Historical activation uses canonical report IDs (`<company>-maya-<reportId>`) and MAYA XBRL source IDs (`maya-<reportId>-xbrl`) so reruns are idempotent. Annual rows use `period_type=ANNUAL` and `flow_basis=ANNUAL`; Q2 rows preserve source context as `QUARTER_ONLY` or `YTD`. Only validation-passing XBRL reports are marked `PROCESSED`; HTML/PDF attachments are not activated. See `docs/historical-report-selection.md`.
+
 ## Phase 8B historical filing discovery and fallback-source evaluation
 
 Historical MAYA discovery uses the UI-equivalent date/event-filtered request and preserves report provenance. Discovery does not change D1; XBRL activation remains gated by issuer, period, mapping, validation, and duplicate checks.

@@ -119,6 +119,10 @@ All five tracked companies are now marked AUTO_INGEST/SOURCE_BACKED in productio
 
 MAYA discovery now uses sequential throttling and bounded 403/429/5xx backoff. Shufersal historical XBRL dry-run completed with zero writes; activation remains target-selection and validation gated.
 
+## Phase 8C-Final historical activation
+
+`npm run maya:select-activate -- --dry-run` discovers and selects official MAYA XBRL reports for peer historical periods. Without `--dry-run`, only validation-passing XBRL reports are idempotently persisted to the existing D1. The selected inventory and semantics are documented in `docs/historical-report-selection.md`; missing concepts remain NULL and quarter data is never annualized.
+
 ## Phase 8B historical filing discovery and fallback-source evaluation
 
 The historical discovery CLI now reproduces MAYA’s filtered finance search using `fromYear`, `toYear`, `period=5`, `by=company`, and financial event IDs `101,103,104,105,106,102`, with bounded pagination and zero-write output. Verified Shufersal and Rami Levy historical report sets include XBRL candidates; see the discovery and backfill documents.

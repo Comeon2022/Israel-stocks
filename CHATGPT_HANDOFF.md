@@ -480,6 +480,18 @@ The official `GET /quote?symbol=...&exchange=TASE` probe was attempted at low ra
 
 ## Phase 8C historical XBRL backfill activation
 
+## Phase 8C-Final historical report selection and D1 activation
+
+Completed final deterministic selection and activation through the existing MAYA → XBRL → parse → map → validate → remote D1 runtime. The selector is `npm run maya:select-activate -- --dry-run [company...]`; real mode uses the existing D1, with no new Worker/database and no LLM extraction.
+
+Selected reports (FY2023, FY2024, FY2025, 2025 comparable Q2, 2026 current Q2): Shufersal `1582311, 1653761, 1734231, 1688899, 1766686`; Rami Levy `1584746, 1654478, 1731570, 1686628, 1764608`; Yochananof `1587708, 1654778, 1732159, 1687009, 1764694`; Neto Malinda `1583630, 1654861, 1732821, 1687465, 1764798`. The selector requires XBRL and selects one deterministic report per target period.
+
+All 20 selected reports passed dry-run validation. Core mapped-field count was 10 for 19 reports and 9 for Yochananof FY2025; the missing optional concept remains NULL. Annual rows are `ANNUAL`; Q2 rows preserve `QUARTER_ONLY`/`YTD`; no single quarter was annualized. Retailer IFRS16 adjusted values remain unavailable unless explicitly present, and Neto remains non-retailer.
+
+Remote D1 verification found five financial-period rows and five distinct period ends per peer for the selected set, with all 20 lifecycle rows `PROCESSED`, MAYA XBRL source provenance, and statements. A second Shufersal activation completed with unchanged canonical IDs and no duplicates, proving idempotent upserts. TTM and valuation remain available only where compatible source-backed inputs exist; no values were fabricated.
+
+The Windows-safe D1 transport now passes Wrangler `--yes` while retaining `process.execPath`, the locally resolved Wrangler entrypoint, temporary SQL files, `--remote`, and `shell:false`. No migration was required. Existing Worker deployment remains `14d6156f-3496-4cb3-9de9-d2ae59c6903b` until final checks determine whether redeployment is needed. See `docs/historical-report-selection.md`.
+
 Added sequential MAYA throttling (1.5 seconds between detail requests) and bounded exponential backoff for 403/429/5xx responses, with five retries. Shufersal’s 15 historical reports completed the shared XBRL dry-run with `Database writes: 0`; Rami Levy used the same throttled path. No historical D1 activation was claimed because conservative annual/H1 target selection and expanded IFRS16 persistence require further safe implementation. TTM remains unavailable until FY2025 + H1 2026 − H1 2025 rows are activated.
 
 ## Phase 8B-Fix MAYA historical filter reproduction
