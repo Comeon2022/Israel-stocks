@@ -606,6 +606,10 @@ Phase 9E Neto coordinate-aware PDF extraction resolved official consolidated pag
 
 Phase 9E completed: migration `0018_phase9e_neto_statement_inputs.sql` was applied twice with stable values and no duplicate period/source identities. Neto now exposes FY2025 P/E 10.8971, EV/EBIT 8.6030, EV/EBITDA 7.4073, P/FCF 136.1658, and FCF Yield 0.7344%; IFRS16-specific metrics remain not applicable. The shared Globes parser now converts raw agorot `change` to canonical ILS exactly once; all five prices/market caps/percentages are unchanged and daily changes are correct. Worker deployed as `15a2f93b-4519-4757-887b-6ddde2825a30`. Full evidence is in `docs/phase9e-neto-and-daily-change-fix.md`.
 
+## Phase 9E final closeout
+
+Closeout verification is documented in `docs/phase9e-final-closeout.md`. The implementation commit is `9c222e0b59f3edb5bc4e26c4e57b3ae03bacc776`; final closeout evidence will record remote D1, all API routes, Chrome CDP, tests/build, deployment state, and HEAD/origin equality. Unrelated `.gitignore` and `buildorder/` remain untouched.
+
 Phase 9B source inspection is in progress. Selected official FY2025 MAYA XBRL reports are Sano `1728715`, Shufersal `1734231`, Rami Levy `1731570`, Yochananof `1732159`, and Neto Malinda `1732821`. Documentation is being updated after each major extraction, validation, persistence, and verification task.
 
 Phase 9B extraction completed: all five selected XBRL files were directly retrieved and parsed. Every file contains annual EBIT and CFO; no file contains explicit cash, financial debt, Capex/PPE purchases, D&A, EBITDA, lease liabilities, or lease cash-payment concepts. Sano CFO `270.320` ILS millions was the only newly validated D1 field and was persisted by idempotent migration `0016_phase9b_sano_cfo.sql` with source `maya-1728715-xbrl`. A second run preserved one source, one period, one statement, stable IDs, and the same value. No other valuation metric unlocked; P/E, TTM-unavailable, and /15-inactive states are preserved. The full concept evidence and report URLs are in `docs/phase9b-fy2025-xbrl-deep-extraction.md`.
