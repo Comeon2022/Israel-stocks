@@ -582,6 +582,14 @@ The `/companies` DOM showed all five canonical company links, each labeled `SOUR
 
 Phase 8G closeout: commit `564c56cd62d820731838a1f41e2b6ab627148cd6` is pushed and local `HEAD` equals `origin/main`. Cloudflare Pages deployment `b67b8fc6-aae8-4f9d-8c87-17fa0f72aa24` is Active for source commit `564c56c` at `https://b67b8fc6.israel-stocks.pages.dev`. The existing Worker remains deployed as `9ea03bff-d060-43e7-b62e-4c04f3ea4a3e`; no Worker code changed. `npm test` passed 7 files/15 tests, `npm run worker:test` passed 5 files/8 tests, `npm run worker:check` passed, and `npm run build` passed. Unrelated `.gitignore` and untracked `buildorder/` were preserved outside the commit.
 
+## Phase 8H five-company UI consistency cleanup
+
+Task 2 checks: `npm test` passed 7 files/15 tests; `npm run worker:test` passed 5 files/8 tests; `npm run worker:check` passed; and `npm run build` passed. No Worker code or production financial data changed.
+
+Baseline recorded for the frontend-only cleanup. The shared API-backed company view needs consistent Hebrew display-name handling, reason-specific unavailable states, non-retailer IFRS16 not-applicable treatment, retailer IFRS16 missing-input treatment, and removal of the global prototype/demo label. Financial calculations, valuation formulas, scoring, D1 data, and period semantics are explicitly out of scope.
+
+Task 1-5 implementation completed: the shared API-backed page now enforces Hebrew names סנו, שופרסל, רמי לוי, יוחננוף, and נטו מלינדה without changing IDs, tickers, or routes. Existing backend reason codes map to specific Hebrew missing-input, incompatible-period, and not-applicable states. Retailer IFRS16 remains visible with truthful missing lease-input messaging; Sano and Neto Malinda show EV / EBITDA ex IFRS 16 as לא רלוונטי. The rendered shell no longer contains Prototype/demo-environment copy, while API/source/provider/delay labels remain. No financial logic, D1 value, or period semantics changed.
+
 The API-backed company view now presents live market/valuation status, basis and unavailable reasons without falling back to mock valuation values. All five API routes, `/companies`, and Pages routes were verified HTTP 200. Tests, Worker tests/check, type-check, and build pass. Worker deployment: `8bd274c8-e596-4803-b584-dc784e1f2926`. Follow-up: review and approve a reproducible scoring framework before activating valuation points.
 
 ### Production activation completed

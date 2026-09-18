@@ -17,10 +17,17 @@ const pct = (value: number | null) => value === null ? 'אין נתון' : `${(v
 const scoreColor = (score: number) => score >= 75 ? 'text-emerald-400' : score >= 65 ? 'text-amber-300' : 'text-rose-400'
 const tagClass = (severity: string) => severity === 'positive' ? 'tag-positive' : 'tag-warning'
 
-function Shell({ children }: { children: React.ReactNode }) {
+function LegacyShell({ children }: { children: React.ReactNode }) {
   const [open, setOpen] = useState(false)
   return <div className="min-h-screen bg-[#0c1015] text-slate-200" dir="rtl"><header className="topbar"><div className="brand"><div className="brand-mark"><Activity size={18} /></div><div><strong>ישראל סטוקס</strong><small>FINANCIAL INTELLIGENCE</small></div></div><nav className={open ? 'nav-open' : ''}>{[['/', 'סקירה'], ['/companies', 'חברות'], ['/sectors', 'סקטורים']].map(([to, label]) => <NavLink key={to} to={to} onClick={() => setOpen(false)} className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>{label}</NavLink>)}</nav><div className="top-actions"><span className="prototype">נתוני הדגמה / Prototype</span><button className="icon-button"><Bell size={17} /></button><button className="mobile-menu icon-button" onClick={() => setOpen(!open)}>{open ? <X size={18} /> : <Menu size={18} />}</button></div></header><main className="app-main">{children}</main><footer className="footer">ישראל סטוקס <span>•</span> סביבת ניתוח מקומית, נתוני הדגמה בלבד <span>•</span> עודכן 16.09.2026</footer></div>
 }
+
+function Shell({ children }: { children: React.ReactNode }) {
+  const [open, setOpen] = useState(false)
+  return <div className="min-h-screen bg-[#0c1015] text-slate-200" dir="rtl"><header className="topbar"><div className="brand"><div className="brand-mark"><Activity size={18} /></div><div><strong>ישראל סטוקס</strong><small>FINANCIAL INTELLIGENCE</small></div></div><nav className={open ? 'nav-open' : ''}>{[['/', 'סקירה'], ['/companies', 'חברות'], ['/sectors', 'סקטורים']].map(([to, label]) => <NavLink key={to} to={to} onClick={() => setOpen(false)} className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>{label}</NavLink>)}</nav><div className="top-actions"><button className="icon-button"><Bell size={17} /></button><button className="mobile-menu icon-button" onClick={() => setOpen(!open)}>{open ? <X size={18} /> : <Menu size={18} />}</button></div></header><main className="app-main">{children}</main><footer className="footer">ישראל סטוקס <span>•</span> נתוני API ומקורות רשמיים <span>•</span> עודכן 16.09.2026</footer></div>
+}
+
+void LegacyShell
 
 function PageTitle({ eyebrow, title, description, action }: { eyebrow: string; title: string; description?: string; action?: React.ReactNode }) { return <div className="page-title"><div><div className="eyebrow">{eyebrow}</div><h1>{title}</h1>{description && <p>{description}</p>}</div>{action}</div> }
 function MetricCard({ label, value, hint, tone = 'default' }: { label: string; value: string; hint?: string; tone?: string }) { return <div className="metric-card"><span>{label}</span><strong className={tone === 'positive' ? 'text-emerald-400' : tone === 'warning' ? 'text-amber-300' : ''}>{value}</strong>{hint && <small>{hint}</small>}</div> }
