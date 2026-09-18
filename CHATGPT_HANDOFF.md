@@ -572,6 +572,14 @@ Audited all five companies against live Globes market snapshots and source-backe
 
 The existing `/15` valuation contribution is classified `MOCK_OR_HARDCODED`: fixed values in `src/data/companies.ts` are summed by `src/lib/calculations.ts` without live market inputs, documented thresholds, or transparent missing-value rules. It remains inactive for API-backed valuation. See `docs/valuation-audit.md` and `docs/valuation-scoring-proposal.md`.
 
+## Phase 8G real browser UI verification
+
+Executed the Phase 8G browser verification against production using Chrome `153.0.8010.48` over the Chrome DevTools Protocol WebSocket. The initial Chrome `--headless --dump-dom` method produced no DOM output, so the second browser automation method executed JavaScript in the real page, waited for React rendering, read `document.body.innerText`, and collected console/runtime events.
+
+Verified routes: `/company/shufersal`, `/company/rami-levy`, `/company/yochananof`, `/company/neto-malinda`, `/company/sano`, and `/companies`. All six rendered successfully. Each company page displayed Globes source metadata with approximately 15-minute delay, the FY2025 annual valuation basis, and distinct annual/interim rows. Peer pages showed FY2023, FY2024, 2025 Q2, FY2025, and 2026 Q2; Sano showed FY2023, FY2024, FY2025, and 2026 Q2. No duplicate period rows were visible. TTM/IFRS16-dependent unavailable states were rendered with Hebrew explanations; Neto remained non-retailer; Sano retained its expected four-row history and FY2025 basis.
+
+The `/companies` DOM showed all five canonical company links, each labeled `SOURCE_BACKED`. Browser-visible market/source and period data matched the live API matrix: peers five rows, Sano four rows, FY2025 annual basis, and 2026 interim data. All six routes produced zero console/runtime errors. A broad mock-text match was traced to the global legacy prototype/demo footer label, not to market or valuation fallback; no activated company route used mock market data. No backend or financial logic was changed for Phase 8G. Full evidence is in `docs/phase8g-browser-ui-verification.md`.
+
 The API-backed company view now presents live market/valuation status, basis and unavailable reasons without falling back to mock valuation values. All five API routes, `/companies`, and Pages routes were verified HTTP 200. Tests, Worker tests/check, type-check, and build pass. Worker deployment: `8bd274c8-e596-4803-b584-dc784e1f2926`. Follow-up: review and approve a reproducible scoring framework before activating valuation points.
 
 ### Production activation completed
