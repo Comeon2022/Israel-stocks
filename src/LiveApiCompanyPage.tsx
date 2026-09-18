@@ -49,6 +49,9 @@ const signalLabels: Record<string, string> = { MARGIN: 'תפעולי', FCF: 'ת�
 const unavailable = 'לא זמין'
 export const annualChartData = (annual: any[], key: string, percent = false) => annual.filter(row => row.periodType === 'ANNUAL').map(row => ({ year: String(row.fiscalYear ?? row.periodEnd?.slice(0, 4)), value: row[key]?.available ? (percent ? row[key].value * 100 : row[key].value) : null })).filter(row => row.value != null)
 
+const signalText = (signal: any) => { const points = String(signal.explanation ?? '').match(/([0-9.]+) percentage points/)?.[1]; if (signal.code === 'EBIT_MARGIN_EXPANDED') return `מרווח EBIT התרחב ב-${points ?? '—'} נקודות אחוז לעומת השנה הקודמת`; if (signal.code === 'EBIT_MARGIN_CONTRACTED') return `מרווח EBIT הצטמצם ב-${points ?? '—'} נקודות אחוז לעומת השנה הקודמת`; if (signal.code === 'FCF_IMPROVED') return 'תזרים FCF השתפר לעומת השנה הקודמת'; if (signal.code === 'FCF_DETERIORATED') return 'תזרים FCF נחלש לעומת השנה הקודמת'; return 'נמצא שינוי דטרמיניסטי לפי כלל המדד' }
+void signalText
+
 function TrendChart({ title, data, percent = false, color = '#1a73e8' }: { title: string; data: any[]; percent?: boolean; color?: string }) {
   return <article className="trend-card"><div className="trend-heading"><h3>{title}</h3><span>שנים מלאות · מקור שנתי</span></div>{data.length ? <ResponsiveContainer width="100%" height={220}><LineChart data={data}><CartesianGrid stroke="#e0e3e7" strokeDasharray="3 3" /><XAxis dataKey="year" /><YAxis tickFormatter={v => percent ? `${v}%` : v} /><Tooltip formatter={(v: unknown) => { const n = typeof v === 'number' ? v : Number(v); return [percent ? `${n.toFixed(1)}%` : `${n.toFixed(1)} מיליון ₪`, title] }} /><Line type="monotone" dataKey="value" stroke={color} strokeWidth={3} dot={{ r: 4 }} connectNulls={false} /></LineChart></ResponsiveContainer> : <div className="trend-empty">{unavailable}: אין מספיק נתונים שנתיים ממקור מאומת</div>}</article>
 }
