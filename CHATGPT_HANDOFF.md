@@ -586,6 +586,8 @@ Phase 8G closeout: commit `564c56cd62d820731838a1f41e2b6ab627148cd6` is pushed a
 
 Task 2 checks: `npm test` passed 7 files/15 tests; `npm run worker:test` passed 5 files/8 tests; `npm run worker:check` passed; and `npm run build` passed. No Worker code or production financial data changed.
 
+Focused frontend tests were added for all five Hebrew display names and the missing-input/incompatible-period reason mappings; the final suite passed 8 files/17 tests.
+
 Phase 8H Pages/browser closeout: Active Pages deployment `77d5576a-98be-47e8-b1ff-c1f0a932ab91` serves source commit `bbbe3f9` at `https://77d5576a.israel-stocks.pages.dev`. Chrome 153 CDP verification with cache-busting confirmed all five company routes and `/companies` after React hydration. Names are סנו, שופרסל, רמי לוי, יוחננוף, and נטו מלינדה; tickers/routes/source-backed labels are preserved. Sano and Neto show EV / EBITDA ex IFRS 16 as לא רלוונטי; the three retailers retain the metric with truthful missing-input messaging. Globes/~15-minute metadata, valid P/E/market values, distinct period rows, and annual/quarter-only semantics are preserved. No console/runtime errors occurred.
 
 Baseline recorded for the frontend-only cleanup. The shared API-backed company view needs consistent Hebrew display-name handling, reason-specific unavailable states, non-retailer IFRS16 not-applicable treatment, retailer IFRS16 missing-input treatment, and removal of the global prototype/demo label. Financial calculations, valuation formulas, scoring, D1 data, and period semantics are explicitly out of scope.

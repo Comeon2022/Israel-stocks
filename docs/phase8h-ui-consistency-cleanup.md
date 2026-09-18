@@ -10,6 +10,8 @@ This phase is limited to frontend presentation. Financial calculations, valuatio
 
 `npm test` passed 7 files/15 tests; `npm run worker:test` passed 5 files/8 tests; `npm run worker:check` passed; and `npm run build` passed. No Worker code or production financial data changed.
 
+Focused frontend tests were added for all five Hebrew display names and the missing-input/incompatible-period reason mappings.
+
 ## Browser and Pages verification
 
 Pages deployment `77d5576a-98be-47e8-b1ff-c1f0a932ab91` is Active for source commit `bbbe3f9` at `https://77d5576a.israel-stocks.pages.dev`. Using Chrome 153 CDP with a cache-busting query after React hydration:

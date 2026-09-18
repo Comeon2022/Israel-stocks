@@ -48,3 +48,5 @@ export function LiveApiCompanyPage({ id }: { id: string }) {
   const periods = state.periods.filter((p: any, i: number, a: any[]) => a.findIndex((x: any) => `${x.periodEnd}|${x.periodType}|${x.flowBasis ?? ''}` === `${p.periodEnd}|${p.periodType}|${p.flowBasis ?? ''}`) === i).sort((a: any, b: any) => String(a.periodEnd).localeCompare(String(b.periodEnd)))
   return <><div className="back-link"><Link to="/companies">חזרה לכל החברות</Link></div><div className="page-title"><div><div className="eyebrow">{state.company.ticker} / API DATA</div><h1>{name}</h1><p>נתונים פיננסיים ממקור API רשמי</p></div></div><MarketValuation market={state.market} companyId={id} /><div className="panel financial-table"><table><thead><tr><th>תקופה</th><th>הכנסות</th><th>רווח תפעולי</th><th>רווח נקי</th><th>בסיס</th></tr></thead><tbody>{periods.map((p: any) => <tr key={p.id}><td>{p.periodEnd ?? '—'}</td><td>{p.revenue ?? '—'}</td><td>{p.operatingIncome ?? p.operating_income ?? '—'}</td><td>{p.netIncome ?? p.net_income ?? '—'}</td><td>{p.flowBasis ?? p.flow_basis ?? p.periodType ?? '—'}</td></tr>)}</tbody></table></div></>
 }
+
+export { displayNames, reasons }
