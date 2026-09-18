@@ -486,6 +486,16 @@ The official `GET /quote?symbol=...&exchange=TASE` probe was attempted at low ra
 
 ## Phase 8E API semantics and TTM route closeout
 
+## Phase 8F frontend browser verification and final Git closeout
+
+Phase 8F verification is in progress. It will establish the Git baseline, inspect Pages deployment state, perform real browser-rendered verification if tooling is available, compare rendered values with the live API, run final checks, and record the final pushed state. Existing Worker deployment: `9ea03bff-d060-43e7-b62e-4c04f3ea4a3e`; unrelated `.gitignore` and `buildorder/` changes remain excluded.
+
+Tasks 1–3: Git baseline was `main` at `94a63b5367aab3a4ed23ae615edcca98102c202a`, matching `origin/main`; unrelated `.gitignore` and `buildorder/` remain untouched. Active Pages deployment is `51b649d3-1207-4646-b599-b1ee673d22af`, source commit `94a63b5`. Chrome is installed, but headless DOM capture returned no output for the six routes and a control page, so rendered browser verification is not claimed and no UI defect was changed.
+
+Tasks 4–7: static Pages checks returned HTTP 200 for all six routes. API consistency checks show peers have 3 annual/2 quarterly rows, Sano 3 annual/1 quarterly row, latest is one FY2025 row, market data is live, basis is `LATEST_ANNUAL`/2025-12-31, and TTM is unavailable for all five. Worker health returned `ok`. No browser-visible fix was made because Chrome returned no DOM/session output.
+
+Task 8 passed: `npm test` 7 files/15 tests, `npm run worker:test` 5 files/8 tests, `npm run worker:check`, and `npm run build`. Task 9 preparation confirms only Phase 8F documentation is relevant; `.gitignore` and `buildorder/` remain excluded.
+
 Phase 8E implementation is in progress. The known issues are being fixed in the existing Worker: route ordering/period filtering, one-row latest response, distinct field-level TTM response, `/api/health`, direct XBRL context evidence, production verification, and deployment. The initial known Worker deployment is `87078b02-1ba8-4e03-8459-f8e61acf69f2`; unrelated `.gitignore` and `buildorder/` changes remain excluded.
 
 Task 1 completed: the routing root cause was the generic `financials` branch swallowing `latest`/`ttm` suffixes and ignoring `periodType`. The Worker now has explicit specialized routing, ANNUAL/QUARTERLY filtering, structured 400 invalid-period errors, one-row latest output, and a distinct field-level TTM response contract. `npm run worker:check` passes.
