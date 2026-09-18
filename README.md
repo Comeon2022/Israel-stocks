@@ -117,6 +117,8 @@ All five tracked companies are now marked AUTO_INGEST/SOURCE_BACKED in productio
 
 ## Phase 8B historical filing discovery and fallback-source evaluation
 
+The historical discovery CLI now reproduces MAYA’s filtered finance search using `fromYear`, `toYear`, `period=5`, `by=company`, and financial event IDs `101,103,104,105,106,102`, with bounded pagination and zero-write output. Verified Shufersal and Rami Levy historical report sets include XBRL candidates; see the discovery and backfill documents.
+
 MAYA archive/detail behavior and official issuer IR fallback pages were investigated in zero-write mode. Report IDs and attachment/parser status are documented in `docs/historical-filing-discovery.md`; no unofficial source or synthetic history was used.
 
 ## Phase 7I market and valuation UI polish

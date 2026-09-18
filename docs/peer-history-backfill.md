@@ -1,5 +1,7 @@
 # Phase 8A peer historical backfill
 
+Phase 8B-Fix confirms the prior blocker was incomplete request parameters, not necessarily absent filings. The corrected request exposed Shufersal (15 reports) and Rami Levy (20 reports) with historical XBRL candidates. No activation was performed in this discovery pass; dry-run activation was interrupted by MAYA rate protection/403 after the discovery probes. Annual/restatement selection and validation must be reviewed before real persistence.
+
 The generic MAYA → XBRL → parse → validate → D1 pipeline was exercised in dry-run mode for all four peers. No historical values were fabricated and no invalid rows were activated.
 
 | Company | 2023–2025 annual | 2025 comparable interim | 2026 interim | TTM | IFRS16 |

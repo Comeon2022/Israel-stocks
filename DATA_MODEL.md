@@ -42,6 +42,8 @@ Production closeout marks Sano, Shufersal, Rami Levy, Yochananof, and Neto Malin
 
 ## Phase 8B historical filing discovery and fallback-source evaluation
 
+Historical MAYA discovery uses the UI-equivalent date/event-filtered request and preserves report provenance. Discovery does not change D1; XBRL activation remains gated by issuer, period, mapping, validation, and duplicate checks.
+
 No schema or data rows were added. Historical archive/IR candidates retain provenance requirements and remain unactivated until deterministic selectors, units, and validation are proven.
 
 ## Phase 7I market and valuation UI polish

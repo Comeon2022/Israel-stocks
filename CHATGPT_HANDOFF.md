@@ -478,6 +478,10 @@ The official `GET /quote?symbol=...&exchange=TASE` probe was attempted at low ra
 
 ## Phase 8B historical filing discovery and fallback-source evaluation
 
+## Phase 8B-Fix MAYA historical filter reproduction
+
+Reproduced the exact structured mechanism: POST `/api/v1/reports/finance` with `pageSize=30`, `pageNumber`, `fromYear`, `toYear`, `period=5`, `by=company`, `companyId`, and `eventsIds=[101,103,104,105,106,102]`; detail remains GET `/api/v1/reports/{id}`. Shufersal 777 returned 15 reports from 2023–2026, including annual 1582311/1653761/1734231 and XBRL attachments. Rami Levy 1445 returned 20 reports, including annual 1582574/1584746/1654478/1731570 and XBRL attachments. A temporary MAYA 403 interrupted Yochananof/Neto completion and dry-run ingestion after the successful probes; no writes or activations were claimed. The new zero-write CLI is `npm run maya:discover-history -- --all --from-date=2023-01-01 --to-date=2026-09-18`. TTM/IFRS16 remain unactivated pending a clean all-peer dry-run and report-selection review.
+
 Investigated MAYA pagination/detail behavior and official issuer fallback pages with zero database writes. MAYA page size remained 30; Shufersal page 1 returned one item and pages 2–5 were empty. Rami Levy’s official financial-reports page exposed 2023–2026 labels, but tested HTML did not provide stable report IDs/attachments. Observed Rami Levy `1767163` and Yochananof `1764706` detail records had no XBRL. No stable official HTML/PDF parser route was proven, so no parser spike or activation was performed. IFRS16 lease cash payments remain unverified and Neto remains non-retailer. Discovery CLI: `npm run maya:discover-history -- --all`. Full matrix: `docs/historical-filing-discovery.md`.
 
 ## Phase 8A peer historical financial backfill
