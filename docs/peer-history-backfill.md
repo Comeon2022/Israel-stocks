@@ -1,5 +1,9 @@
 # Phase 8A peer historical backfill
 
+## Phase 8D verification update
+
+The Phase 8C-Final selected XBRL set is verified in remote D1 for all four peers. Exact before/after idempotency counts and the field-level TTM/valuation audit are recorded in `docs/phase8d-production-closeout.md`. TTM remains unavailable because selected comparable interim rows are `QUARTER_ONLY`, not YTD; no values were annualized or fabricated.
+
 Phase 8B-Fix confirms the prior blocker was incomplete request parameters, not necessarily absent filings. The corrected request exposed Shufersal (15 reports) and Rami Levy (20 reports) with historical XBRL candidates. No activation was performed in this discovery pass; dry-run activation was interrupted by MAYA rate protection/403 after the discovery probes. Annual/restatement selection and validation must be reviewed before real persistence.
 
 The generic MAYA → XBRL → parse → validate → D1 pipeline was exercised in dry-run mode for all four peers. No historical values were fabricated and no invalid rows were activated.

@@ -154,3 +154,7 @@ Phase 7E credentialed discovery later succeeded using the locally supplied key: 
 Phase 7F experimentally validates the public Globes Financial ASMX service. The local-only command is `npm run market:globes-test -- --all`; it performs zero database writes. Globes returns 15-minute-delayed TASE quotes; prices are normalized from agorot to ILS and market cap from thousands of NIS to millions. This experimental provider is not production-wired.
 
 Phase 7G is active: validated delayed Globes snapshots for all five companies are persisted in the existing D1 and exposed by `/api/companies/:id/market/latest`. Prices are canonical ILS, market cap is ILS millions, and valuation remains null where source-backed denominators are unavailable.
+
+## Phase 8D production verification
+
+Remote D1 counts and idempotency were verified for all four peers, along with FY2025 valuation basis, API payloads, Pages route shells, and required tests/build. TTM remains NULL because peer interim rows are quarter-only rather than compatible YTD periods. Specialized financial routes currently alias the full collection and `/api/health` is not implemented; see `docs/phase8d-production-closeout.md`.
