@@ -610,6 +610,20 @@ Phase 9E completed: migration `0018_phase9e_neto_statement_inputs.sql` was appli
 
 Closeout verification is documented in `docs/phase9e-final-closeout.md`. The implementation commit is `9c222e0b59f3edb5bc4e26c4e57b3ae03bacc776`; final closeout evidence will record remote D1, all API routes, Chrome CDP, tests/build, deployment state, and HEAD/origin equality. Unrelated `.gitignore` and `buildorder/` remain untouched.
 
+## Phase 10 analytics and historical valuation
+
+Phase 10 implementation started. Annual financial analytics, deterministic peer comparison, signal rules, explicit ROIC unavailability, and truthful historical valuation unavailability are documented in `docs/phase10-analytics-and-historical-valuation.md`. No historical market prices were fabricated and no TTM or valuation score changes were made.
+
+Phase 10 completed. Added deterministic annual margin, growth, FCF, cash-conversion, CAGR, signal, and peer-comparison analytics using only annual source-backed financial rows. Quarter-only rows remain excluded and are never annualized. FCF is only calculated from CFO less explicit positive PP&E Capex; missing inputs remain NULL with reason codes. ROIC remains unavailable as `ROIC_FORMULA_NOT_APPROVED`, and TTM plus valuation score /15 remain inactive.
+
+Historical market data is current-only: the existing delayed Globes snapshot is not applied to historical financial periods. `/api/companies/:id/valuation/history` returns `available:false`, `reason:HISTORICAL_MARKET_UNAVAILABLE`, and no rows. New endpoints are `/api/companies/:id/analytics`, `/api/companies/:id/valuation/history`, `/api/peers`, and `/api/peers/retailers`.
+
+The API-backed company UI now renders annual analytical cards, annual trend rows, deterministic signals, peer P/E context, and the explicit historical-valuation unavailable state. No financial table, valuation formula, D1 value, mock market value, TTM, or scoring methodology was changed.
+
+Phase 10 production verification: Worker `3256eb74-0a79-4b7b-8ce9-ace7636bc918` is deployed. Pages preview `95426541.israel-stocks.pages.dev` and production `israel-stocks.pages.dev` were verified after React hydration. Chrome CDP verified all five company routes and `/companies` with zero console/runtime errors; API analytics/peer/valuation-history routes returned the expected deterministic states. `npm test`, `npm run worker:test`, `npm run worker:check`, and `npm run build` passed. Final Git commit and push evidence follows after closeout.
+
+Final API market regression values: Sano `-0.70`, Shufersal `+0.25`, Rami Levy `+5.50`, Yochananof `+0.90`, and Neto Malinda `+4.70` ILS. Chrome CDP rendered all five company routes with `market=true`, four annual/interim period markers, `ttmUnavailable=true`, `mock=false`, and `errors=0`; `/companies` rendered with `errors=0`. No production data or scoring behavior changed.
+
 Phase 9B source inspection is in progress. Selected official FY2025 MAYA XBRL reports are Sano `1728715`, Shufersal `1734231`, Rami Levy `1731570`, Yochananof `1732159`, and Neto Malinda `1732821`. Documentation is being updated after each major extraction, validation, persistence, and verification task.
 
 Phase 9B extraction completed: all five selected XBRL files were directly retrieved and parsed. Every file contains annual EBIT and CFO; no file contains explicit cash, financial debt, Capex/PPE purchases, D&A, EBITDA, lease liabilities, or lease cash-payment concepts. Sano CFO `270.320` ILS millions was the only newly validated D1 field and was persisted by idempotent migration `0016_phase9b_sano_cfo.sql` with source `maya-1728715-xbrl`. A second run preserved one source, one period, one statement, stable IDs, and the same value. No other valuation metric unlocked; P/E, TTM-unavailable, and /15-inactive states are preserved. The full concept evidence and report URLs are in `docs/phase9b-fy2025-xbrl-deep-extraction.md`.

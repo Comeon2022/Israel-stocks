@@ -101,3 +101,6 @@ Phase 9D adds official PDF provenance and validated FY2025 normalized inputs for
 Phase 9E adds Neto FY2025 provenance and validated statement inputs through migration 0018. Globes raw `last`, `change`, and `prevClose` are agorot; the shared parser converts price, absolute change, and previous close to ILS once, while `percentageChange` remains percent and market cap remains ILS millions.
 
 Financial API routing now distinguishes full collection, `periodType=ANNUAL`, `periodType=QUARTERLY`, one-row latest, and field-level TTM. TTM calculation requires FY2025 plus current and prior comparable YTD rows; direct XBRL evidence for the selected peer interim reports is April–June quarter-only, so TTM values remain unavailable. Latest annual valuation remains restricted to `period_type=ANNUAL` and FY2025.
+## Phase 10 analytics
+
+Annual analytics are derived only from `period_type=ANNUAL` rows. They expose margins, growth, FCF/cash conversion, deterministic signals, and peer median comparisons. Historical valuation requires point-in-time market snapshots; because the current schema contains only the latest delayed Globes snapshot, `/valuation/history` returns `HISTORICAL_MARKET_UNAVAILABLE` rather than applying current market data to historical financials. ROIC is explicitly unavailable as `ROIC_FORMULA_NOT_APPROVED`; TTM and valuation score /15 remain inactive.
