@@ -496,6 +496,8 @@ Tasks 4–7: static Pages checks returned HTTP 200 for all six routes. API consi
 
 Task 8 passed: `npm test` 7 files/15 tests, `npm run worker:test` 5 files/8 tests, `npm run worker:check`, and `npm run build`. Task 9 preparation confirms only Phase 8F documentation is relevant; `.gitignore` and `buildorder/` remain excluded.
 
+Phase 8F closeout commit `615828593e3b34d7e4055be9011d9fa8a83fd242` was pushed successfully to `origin/main`; HEAD matched origin/main. Worker remains `9ea03bff-d060-43e7-b62e-4c04f3ea4a3e`. Active Pages deployment observed was `51b649d3-1207-4646-b599-b1ee673d22af` from source `94a63b5`; the documentation-only closeout may trigger a newer Pages build. Unrelated `.gitignore` and `buildorder/` remain uncommitted.
+
 Phase 8E implementation is in progress. The known issues are being fixed in the existing Worker: route ordering/period filtering, one-row latest response, distinct field-level TTM response, `/api/health`, direct XBRL context evidence, production verification, and deployment. The initial known Worker deployment is `87078b02-1ba8-4e03-8459-f8e61acf69f2`; unrelated `.gitignore` and `buildorder/` changes remain excluded.
 
 Task 1 completed: the routing root cause was the generic `financials` branch swallowing `latest`/`ttm` suffixes and ignoring `periodType`. The Worker now has explicit specialized routing, ANNUAL/QUARTERLY filtering, structured 400 invalid-period errors, one-row latest output, and a distinct field-level TTM response contract. `npm run worker:check` passes.
