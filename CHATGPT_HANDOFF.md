@@ -586,6 +586,14 @@ Phase 8G closeout: commit `564c56cd62d820731838a1f41e2b6ab627148cd6` is pushed a
 
 ## Phase 9 financial statement completeness and valuation unlock
 
+## Phase 9B FY2025 XBRL deep extraction
+
+Phase 9B source inspection is in progress. Selected official FY2025 MAYA XBRL reports are Sano `1728715`, Shufersal `1734231`, Rami Levy `1731570`, Yochananof `1732159`, and Neto Malinda `1732821`. Documentation is being updated after each major extraction, validation, persistence, and verification task.
+
+Phase 9B extraction completed: all five selected XBRL files were directly retrieved and parsed. Every file contains annual EBIT and CFO; no file contains explicit cash, financial debt, Capex/PPE purchases, D&A, EBITDA, lease liabilities, or lease cash-payment concepts. Sano CFO `270.320` ILS millions was the only newly validated D1 field and was persisted by idempotent migration `0016_phase9b_sano_cfo.sql` with source `maya-1728715-xbrl`. A second run preserved one source, one period, one statement, stable IDs, and the same value. No other valuation metric unlocked; P/E, TTM-unavailable, and /15-inactive states are preserved. The full concept evidence and report URLs are in `docs/phase9b-fy2025-xbrl-deep-extraction.md`.
+
+Phase 9B final verification: production API exposes Sano FY2025 CFO 270.32 with preserved original plus MAYA source IDs; P/E remains 14.9562, EV remains NULL, basis remains LATEST_ANNUAL, and TTM remains unavailable. All five API-backed pages and `/companies` remain covered by Chrome CDP verification; no frontend code changed and no Pages deployment was needed. Tests passed: `npm test` 8 files/17 tests, `npm run worker:test` 5 files/8 tests, Worker check, and build. Worker remains `9ea03bff-d060-43e7-b62e-4c04f3ea4a3e`.
+
 Baseline recorded: all five companies are source-backed with live delayed Globes market data; P/E is available on FY2025 latest-annual basis; peer interim rows remain QUARTER_ONLY; TTM and valuation score /15 remain inactive. Phase 9 will use only explicit validated XBRL inputs, preserve nulls and period semantics, and leave unsupported valuation metrics unavailable.
 
 Task 1-2 audit completed: the existing nullable schema already supports cash, debt, lease, CFO, Capex, D&A, and EBITDA fields, so no migration is required. Read-only remote FY2025 D1 inspection found cash, debt, Capex, D&A, EBITDA, lease liabilities, and lease cash payments NULL for all five. CFO is present for Shufersal, Rami Levy, Yochananof, and Neto Malinda, but Capex is absent, so FCF remains unavailable. Sano's seeded FY2025 row has no CFO. No safe writes or fabricated values are justified. Existing formulas and TTM/score inactivity are preserved; detailed matrix is in `docs/phase9-financial-completeness-valuation.md`.

@@ -163,6 +163,10 @@ Remote D1 counts and idempotency were verified for all four peers, along with FY
 
 ## Phase 9 financial completeness audit
 
+## Phase 9B FY2025 XBRL deep extraction
+
+The selected FY2025 MAYA XBRL files were inspected directly. They provide annual EBIT and CFO; explicit cash, debt, Capex, D&A, EBITDA, and lease-payment concepts were not present. Sano CFO was safely persisted with XBRL provenance through idempotent migration 0016. No additional valuation metric was unlocked; see `docs/phase9b-fy2025-xbrl-deep-extraction.md`.
+
 FY2025 remote D1 inspection confirms optional cash/debt, Capex, D&A, EBITDA, and explicit IFRS16 lease-payment inputs are currently NULL across the five source-backed companies. CFO is present for four peers but Capex is absent, so FCF-dependent valuation remains unavailable. P/E remains available on FY2025 latest-annual basis; TTM and valuation score /15 remain inactive. See `docs/phase9-financial-completeness-valuation.md`.
 
 The Worker now applies `periodType=ANNUAL|QUARTERLY`, rejects invalid values with structured HTTP 400, returns one row from `/financials/latest`, returns a distinct field-level `/financials/ttm` contract, and exposes `/api/health`. TTM remains unavailable because direct XBRL contexts prove the selected interim reports are quarter-only; no quarter was relabeled YTD.
