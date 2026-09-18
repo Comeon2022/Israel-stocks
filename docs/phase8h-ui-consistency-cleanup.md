@@ -10,6 +10,19 @@ This phase is limited to frontend presentation. Financial calculations, valuatio
 
 `npm test` passed 7 files/15 tests; `npm run worker:test` passed 5 files/8 tests; `npm run worker:check` passed; and `npm run build` passed. No Worker code or production financial data changed.
 
+## Browser and Pages verification
+
+Pages deployment `77d5576a-98be-47e8-b1ff-c1f0a932ab91` is Active for source commit `bbbe3f9` at `https://77d5576a.israel-stocks.pages.dev`. Using Chrome 153 CDP with a cache-busting query after React hydration:
+
+- `/company/sano`: סנו, SANO, Globes/~15-minute source metadata, FY2025 annual basis, four distinct periods, non-retailer IFRS16 shown as לא רלוונטי.
+- `/company/shufersal`: שופרסל, SAE, Globes/~15-minute source metadata, five distinct periods, retailer IFRS16 card visible with missing-input state.
+- `/company/rami-levy`: רמי לוי, RMLI, Globes/~15-minute source metadata, five distinct periods, retailer IFRS16 card visible with missing-input state.
+- `/company/yochananof`: יוחננוף, YHNF, Globes/~15-minute source metadata, five distinct periods, retailer IFRS16 card visible with missing-input state.
+- `/company/neto-malinda`: נטו מלינדה, NTML, Globes/~15-minute source metadata, five distinct periods, non-retailer IFRS16 shown as לא רלוונטי.
+- `/companies`: all five Hebrew names, canonical tickers, correct links, and `SOURCE_BACKED` labels.
+
+All routes rendered React DOM successfully with no browser console/runtime errors. Existing valid market/P/E values and annual/quarter-only semantics remained unchanged. The stale prototype/demo shell copy is absent from the rendered DOM.
+
 ## Task 1-5 implementation
 
 The shared API-backed page now uses the exact Hebrew display names: סנו, שופרסל, רמי לוי, יוחננוף, and נטו מלינדה. Canonical IDs, tickers, routes, and API identity fields are unchanged.
