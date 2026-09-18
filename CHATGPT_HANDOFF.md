@@ -584,7 +584,15 @@ Phase 8G closeout: commit `564c56cd62d820731838a1f41e2b6ab627148cd6` is pushed a
 
 ## Phase 8H five-company UI consistency cleanup
 
+## Phase 9 financial statement completeness and valuation unlock
+
+Baseline recorded: all five companies are source-backed with live delayed Globes market data; P/E is available on FY2025 latest-annual basis; peer interim rows remain QUARTER_ONLY; TTM and valuation score /15 remain inactive. Phase 9 will use only explicit validated XBRL inputs, preserve nulls and period semantics, and leave unsupported valuation metrics unavailable.
+
+Task 1-2 audit completed: the existing nullable schema already supports cash, debt, lease, CFO, Capex, D&A, and EBITDA fields, so no migration is required. Read-only remote FY2025 D1 inspection found cash, debt, Capex, D&A, EBITDA, lease liabilities, and lease cash payments NULL for all five. CFO is present for Shufersal, Rami Levy, Yochananof, and Neto Malinda, but Capex is absent, so FCF remains unavailable. Sano's seeded FY2025 row has no CFO. No safe writes or fabricated values are justified. Existing formulas and TTM/score inactivity are preserved; detailed matrix is in `docs/phase9-financial-completeness-valuation.md`.
+
 Task 2 checks: `npm test` passed 7 files/15 tests; `npm run worker:test` passed 5 files/8 tests; `npm run worker:check` passed; and `npm run build` passed. No Worker code or production financial data changed.
+
+Phase 9 audit result: remote FY2025 D1 inspection found no explicit cash, debt, Capex, D&A, EBITDA, lease liabilities, or lease cash-payment values for any company. CFO exists for the four peers but Capex is NULL, so FCF remains unavailable; Sano CFO is also NULL. No migration or D1 write was performed. All five retain valid FY2025 P/E only: Sano 14.9562, Shufersal 13.2940, Rami Levy 21.2823, Yochananof 26.1565, Neto Malinda 10.8971. EV and all dependent metrics remain unavailable with existing net-debt/input blockers; TTM and /15 score remain inactive. `/api/health` is healthy. Details and matrix are in `docs/phase9-financial-completeness-valuation.md`.
 
 Focused frontend tests were added for all five Hebrew display names and the missing-input/incompatible-period reason mappings; the final suite passed 8 files/17 tests.
 

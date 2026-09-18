@@ -86,4 +86,8 @@ Stable canonical period/source/lifecycle identities were confirmed after reruns.
 
 ## Phase 8E API semantics and TTM closeout
 
+## Phase 9 financial completeness audit
+
+The existing nullable `financial_statements` schema already supports cash, explicit debt components, lease liabilities, CFO, Capex, D&A, reported EBITDA, EBITDA ex IFRS16, and total lease cash payments; no migration was required. Phase 9 found these optional FY2025 fields NULL in remote D1 for all five companies. FCF requires `CFO - positive Capex`; adjusted retailer FCF additionally requires explicit lease cash payments. Operating liabilities are never debt. P/E remains FY2025 latest annual; unsupported EV/FCF/IFRS16 metrics remain NULL.
+
 Financial API routing now distinguishes full collection, `periodType=ANNUAL`, `periodType=QUARTERLY`, one-row latest, and field-level TTM. TTM calculation requires FY2025 plus current and prior comparable YTD rows; direct XBRL evidence for the selected peer interim reports is April–June quarter-only, so TTM values remain unavailable. Latest annual valuation remains restricted to `period_type=ANNUAL` and FY2025.
