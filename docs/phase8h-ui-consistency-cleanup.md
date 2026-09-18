@@ -14,7 +14,7 @@ Focused frontend tests were added for all five Hebrew display names and the miss
 
 ## Browser and Pages verification
 
-Pages deployment `77d5576a-98be-47e8-b1ff-c1f0a932ab91` is Active for source commit `bbbe3f9` at `https://77d5576a.israel-stocks.pages.dev`. Using Chrome 153 CDP with a cache-busting query after React hydration:
+Pages deployment `485b43bd-f708-4781-9d2c-cf85dc1cb50b` is Active for source commit `bfedc7a` at `https://485b43bd.israel-stocks.pages.dev`. Using Chrome 153 CDP with a cache-busting query after React hydration:
 
 - `/company/sano`: סנו, SANO, Globes/~15-minute source metadata, FY2025 annual basis, four distinct periods, non-retailer IFRS16 shown as לא רלוונטי.
 - `/company/shufersal`: שופרסל, SAE, Globes/~15-minute source metadata, five distinct periods, retailer IFRS16 card visible with missing-input state.
@@ -24,6 +24,8 @@ Pages deployment `77d5576a-98be-47e8-b1ff-c1f0a932ab91` is Active for source com
 - `/companies`: all five Hebrew names, canonical tickers, correct links, and `SOURCE_BACKED` labels.
 
 All routes rendered React DOM successfully with no browser console/runtime errors. Existing valid market/P/E values and annual/quarter-only semantics remained unchanged. The stale prototype/demo shell copy is absent from the rendered DOM.
+
+Final Git closeout: commit `bfedc7af05850747d57c76e7cc199399dfe21394` contains the focused frontend tests and is pushed to `origin/main`; local HEAD equals origin/main. The final documentation commit follows this verification update.
 
 ## Task 1-5 implementation
 
