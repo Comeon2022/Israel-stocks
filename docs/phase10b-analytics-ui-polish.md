@@ -27,3 +27,7 @@ Added Hebrew KPI labels, annual source-fact summary, calculated-metric explanati
 ## Automated verification
 
 Frontend tests pass: 10 files / 28 tests. Worker tests pass: 6 files / 11 tests. `npm run worker:check` and `npm run build` pass. No Worker/API code or financial data changed, so Worker redeployment is not required.
+
+## Production closeout
+
+Pages was deployed from source commit `eed4e19f1f528b8e1f491ace523312bdf44570e5` at `https://5f593f93.israel-stocks.pages.dev`; the production domain was verified after React hydration. Chrome CDP passed `/company/sano`, `/company/shufersal`, `/company/rami-levy`, `/company/yochananof`, `/company/neto-malinda`, and `/companies` with zero console/runtime errors. Company pages showed real market data, annual analytical content, no mock fallback, and preserved quarter-only rows outside annual charts. Worker was not redeployed because no Worker/API code changed.
