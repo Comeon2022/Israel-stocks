@@ -580,6 +580,8 @@ Verified routes: `/company/shufersal`, `/company/rami-levy`, `/company/yochanano
 
 The `/companies` DOM showed all five canonical company links, each labeled `SOURCE_BACKED`. Browser-visible market/source and period data matched the live API matrix: peers five rows, Sano four rows, FY2025 annual basis, and 2026 interim data. All six routes produced zero console/runtime errors. A broad mock-text match was traced to the global legacy prototype/demo footer label, not to market or valuation fallback; no activated company route used mock market data. No backend or financial logic was changed for Phase 8G. Full evidence is in `docs/phase8g-browser-ui-verification.md`.
 
+Phase 8G closeout: commit `564c56cd62d820731838a1f41e2b6ab627148cd6` is pushed and local `HEAD` equals `origin/main`. Cloudflare Pages deployment `b67b8fc6-aae8-4f9d-8c87-17fa0f72aa24` is Active for source commit `564c56c` at `https://b67b8fc6.israel-stocks.pages.dev`. The existing Worker remains deployed as `9ea03bff-d060-43e7-b62e-4c04f3ea4a3e`; no Worker code changed. `npm test` passed 7 files/15 tests, `npm run worker:test` passed 5 files/8 tests, `npm run worker:check` passed, and `npm run build` passed. Unrelated `.gitignore` and untracked `buildorder/` were preserved outside the commit.
+
 The API-backed company view now presents live market/valuation status, basis and unavailable reasons without falling back to mock valuation values. All five API routes, `/companies`, and Pages routes were verified HTTP 200. Tests, Worker tests/check, type-check, and build pass. Worker deployment: `8bd274c8-e596-4803-b584-dc784e1f2926`. Follow-up: review and approve a reproducible scoring framework before activating valuation points.
 
 ### Production activation completed

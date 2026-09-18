@@ -37,4 +37,8 @@ The global shell still contains a legacy `Prototype`/demo-environment footer lab
 
 ## Completion
 
-Phase 8G browser verification is complete. The browser method, route results, rendered data checks, API/UI comparison, duplicate-period check, TTM/IFRS16 status, market/valuation status, and Sano regression are recorded above. Final test, build, Git, and Pages deployment evidence will be appended after closeout.
+## Final closeout
+
+The pushed commit is `564c56cd62d820731838a1f41e2b6ab627148cd6`; local `HEAD` equals `origin/main`. Cloudflare Pages deployment `b67b8fc6-aae8-4f9d-8c87-17fa0f72aa24` is Active for source commit `564c56c` at `https://b67b8fc6.israel-stocks.pages.dev` and serves the production site. The existing Worker deployment remains `9ea03bff-d060-43e7-b62e-4c04f3ea4a3e`; no Worker code changed in Phase 8G.
+
+Final checks: `npm test` passed (7 files, 15 tests); `npm run worker:test` passed (5 files, 8 tests); `npm run worker:check` passed; `npm run build` passed. The scoped Phase 8G changes were pushed to `origin/main`. Pre-existing unrelated `.gitignore` changes and the untracked `buildorder/` directory were not staged.
