@@ -50,7 +50,7 @@ Local unit tests cover margins, FCF, growth, sign-changing CAGR rejection, ROIC 
 - Historical market audit: only the latest delayed Globes snapshot is persisted per company. No deterministic point-in-time historical market source is available, so historical valuation remains unavailable with `HISTORICAL_MARKET_UNAVAILABLE`.
 - Analytics API: all five company analytics responses returned three annual rows; `/api/peers` returned five companies and `/api/peers/retailers` returned the three retailer peers. The historical valuation endpoint returned the explicit unavailable state for all five.
 - Worker deployment: `3256eb74-0a79-4b7b-8ce9-ace7636bc918`.
-- Pages deployment: final Phase 10 preview was `https://95426541.israel-stocks.pages.dev`; production `https://israel-stocks.pages.dev` was verified after React hydration.
+- Pages deployment: the committed final build was redeployed as `https://2949cacd.israel-stocks.pages.dev`; production `https://israel-stocks.pages.dev` was verified after React hydration. Source commit: `12b8791f563e5a86545237e1d93fdfbd3d8f5869`.
 - Browser verification: Chrome CDP rendered all five company routes with market data, annual analytics, historical valuation unavailable state, and zero console/runtime errors. `/companies` was separately verified after the final deployment.
 - Checks: `npm test`, `npm run worker:test`, `npm run worker:check`, and `npm run build` passed. No D1 migration was required and no production financial data was changed.
 - The valuation /15 score remains intentionally inactive, and ROIC/TTM remain unavailable pending an approved methodology and compatible point-in-time inputs.
