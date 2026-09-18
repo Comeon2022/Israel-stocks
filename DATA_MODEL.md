@@ -98,4 +98,6 @@ Phase 9C inspected the official FY2025 report attachments beyond XBRL. Candidate
 
 Phase 9D adds official PDF provenance and validated FY2025 normalized inputs for four companies through idempotent migration 0017. Canonical Capex is explicit PP&E purchases, FCF is CFO minus positive Capex, non-lease debt excludes operating liabilities, and lease liabilities remain separate. Neto's ambiguous extracted cash-flow labels remain NULL. Valuation remains latest annual; TTM and score /15 remain inactive.
 
+Phase 9E adds Neto FY2025 provenance and validated statement inputs through migration 0018. Globes raw `last`, `change`, and `prevClose` are agorot; the shared parser converts price, absolute change, and previous close to ILS once, while `percentageChange` remains percent and market cap remains ILS millions.
+
 Financial API routing now distinguishes full collection, `periodType=ANNUAL`, `periodType=QUARTERLY`, one-row latest, and field-level TTM. TTM calculation requires FY2025 plus current and prior comparable YTD rows; direct XBRL evidence for the selected peer interim reports is April–June quarter-only, so TTM values remain unavailable. Latest annual valuation remains restricted to `period_type=ANNUAL` and FY2025.

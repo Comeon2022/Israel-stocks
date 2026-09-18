@@ -1,0 +1,5 @@
+-- Phase 9E: validated Neto FY2025 consolidated statement inputs.
+INSERT OR REPLACE INTO financial_sources (id, company_id, title, source_type, url, publication_date, report_period_end, retrieved_at, notes, created_at) VALUES
+('maya-1732821-pdf-fy2025','neto-malinda','Official MAYA FY2025 Neto consolidated statements','ANNUAL_REPORT','https://mayafiles.tase.co.il/rpdf/1732001-1733000/P1732821-00.pdf','2026-03-31','2025-12-31',datetime('now'),'Coordinate-aware PDF extraction: balance pp69-70, income p71, cash flow p73. ILS thousands normalized to ILS millions. PP&E Capex is explicit רכישת רכוש קבוע; total investing flow excluded.','2026-09-18');
+UPDATE financial_statements SET cash_and_cash_equivalents=24.483, short_term_debt=234.253, long_term_debt=1.382, cash_flow_from_operations=60.655, capex=42.089, depreciation_and_amortization=51.395 WHERE period_id='neto-malinda-maya-1732821';
+UPDATE financial_periods SET source_ids_json='["neto-malinda-maya-1732821","maya-1732821-pdf-fy2025"]',updated_at=datetime('now') WHERE id='neto-malinda-maya-1732821';
