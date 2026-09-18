@@ -1,0 +1,6 @@
+import { resolveMayaReport } from '../worker/src/maya'
+import { parseXbrl, type XbrlFact } from '../worker/src/xbrl'
+
+const reports:Record<string,string[]>={shufersal:['1688899','1766686'],'rami-levy':['1686628','1764608'],yochananof:['1687009','1764694'],'neto-malinda':['1687465','1764798']}
+const concepts=['Revenue','ProfitLossFromOperatingActivities','ProfitLoss','CashFlowsFromUsedInOperatingActivities','PaymentsToAcquirePropertyPlantAndEquipment']
+for(const [company,ids] of Object.entries(reports))for(const id of ids){const detail=await (await fetch(`https://maya.tase.co.il/api/v1/reports/${id}`,{headers:{'user-agent':'Mozilla/5.0'}})).json();const report=resolveMayaReport(detail,company);if(!report.xbrlUrl){console.log(`${company} ${id} NO_XBRL`);continue}const facts=parseXbrl(await (await fetch(report.xbrlUrl)).text());console.log(`REPORT ${company} ${id} xbrl=${report.xbrlUrl}`);for(const concept of concepts){const fs=facts.filter((f:XbrlFact)=>f.namespace==='ifrs-full'&&f.concept===concept);const unique=[...new Map(fs.map(f=>[`${f.contextId}|${f.periodStart}|${f.periodEnd}|${f.instant}`,f])).values()];for(const f of unique)console.log(JSON.stringify({concept,contextId:f.contextId,start:f.periodStart,end:f.periodEnd,instant:f.instant}));}}

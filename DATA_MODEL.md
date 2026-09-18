@@ -83,3 +83,7 @@ Phase 7G is activated. `GLOBES` snapshots for all five issuers use canonical ILS
 ## Phase 8D verification
 
 Stable canonical period/source/lifecycle identities were confirmed after reruns. Peer interim rows remain `QUARTER_ONLY`; TTM must remain NULL until compatible YTD rows and a dedicated TTM implementation exist. Latest annual valuation is restricted to `period_type=ANNUAL` and resolves to FY2025. Remaining API route gaps are documented in `docs/phase8d-production-closeout.md`.
+
+## Phase 8E API semantics and TTM closeout
+
+Financial API routing now distinguishes full collection, `periodType=ANNUAL`, `periodType=QUARTERLY`, one-row latest, and field-level TTM. TTM calculation requires FY2025 plus current and prior comparable YTD rows; direct XBRL evidence for the selected peer interim reports is April–June quarter-only, so TTM values remain unavailable. Latest annual valuation remains restricted to `period_type=ANNUAL` and FY2025.

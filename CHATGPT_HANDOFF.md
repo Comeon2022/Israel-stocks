@@ -484,6 +484,24 @@ The official `GET /quote?symbol=...&exchange=TASE` probe was attempted at low ra
 
 ## Phase 8D production verification and TTM closeout
 
+## Phase 8E API semantics and TTM route closeout
+
+Phase 8E implementation is in progress. The known issues are being fixed in the existing Worker: route ordering/period filtering, one-row latest response, distinct field-level TTM response, `/api/health`, direct XBRL context evidence, production verification, and deployment. The initial known Worker deployment is `87078b02-1ba8-4e03-8459-f8e61acf69f2`; unrelated `.gitignore` and `buildorder/` changes remain excluded.
+
+Task 1 completed: the routing root cause was the generic `financials` branch swallowing `latest`/`ttm` suffixes and ignoring `periodType`. The Worker now has explicit specialized routing, ANNUAL/QUARTERLY filtering, structured 400 invalid-period errors, one-row latest output, and a distinct field-level TTM response contract. `npm run worker:check` passes.
+
+Tasks 2–3 completed: direct XBRL inspection of all eight selected interim reports found `Current_ForPeriod` contexts with 2025-04-01→2025-06-30 or 2026-04-01→2026-06-30 for Revenue, operating profit, net income, and CFO. Capex had no supported matching concept. All evidence is `QUARTER_ONLY`; no QUARTER_ONLY→YTD repair was made and D1 identities were unchanged.
+
+Task 4 completed: `/api/companies/:id/financials/ttm` is now a distinct field-level response. It computes `FY2025 + current YTD - prior comparable YTD` only with compatible source periods; current peers return unavailable fields with `INCOMPATIBLE_PERIOD_BASIS`, while retailer adjusted FCF is `MISSING_INPUT` and Neto adjusted FCF is `NOT_APPLICABLE`. No values were annualized.
+
+Task 5 completed: added `GET /api/health`, returning HTTP 200 with truthful service status `{status:"ok",service:"israel-stocks-api"}`.
+
+Tasks 6–9 completed: existing Worker deployed as `9ea03bff-d060-43e7-b62e-4c04f3ea4a3e`. Production semantics verified for Sano and all four peers: annual filters return 3 rows, quarterly filters return 2 peer rows/1 Sano row, latest returns exactly one row, TTM returns a distinct object with eight fields and `available=false`, invalid periodType returns HTTP 400, and health returns HTTP 200. FY2025 remains the latest annual valuation basis and no interim row is annualized. Pages routes returned HTTP 200, but browser automation is unavailable, so rendered-content verification remains explicitly unresolved.
+
+Task 10 completed: `npm test` passed (6 files/12 tests), `npm run worker:test` passed (4 files/5 tests), `npm run worker:check` passed, and `npm run build` passed. Remote D1 remains duplicate-free: Sano 4 rows/4 identities; each peer 5 rows/5 identities. Unrelated `.gitignore` and `buildorder/` changes remain excluded from the final commit.
+
+Added focused route tests for health, period filters, invalid filter errors, latest, and distinct TTM behavior. Updated `npm run worker:test` passes 5 files/8 tests; worker check passes.
+
 Phase 8D verification is in progress. The required production audit is being executed in ordered steps: remote D1 baseline counts, idempotency reruns for all four peers, field-level TTM and valuation verification, IFRS16/API/Pages checks, Worker deployment resolution, tests, and Git closeout. Exact evidence will be appended after each completed task.
 
 Task 2 baseline remote D1 counts: Shufersal `financial_periods=5`, `financial_statements=5`, `financial_sources=6`, `discovered_reports=5`, `validation_results=5`; Rami Levy `5,5,6,5,5`; Yochananof `5,5,5,5,4`; Neto Malinda `5,5,5,5,5`. Every peer has period ends `2023-12-31`, `2024-12-31`, `2025-06-30`, `2025-12-31`, `2026-06-30`; all 20 selected lifecycle rows are `PROCESSED`. The six source rows for Shufersal/Rami are pre-existing source identities and do not create duplicate financial periods.

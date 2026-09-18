@@ -158,3 +158,7 @@ Phase 7G is active: validated delayed Globes snapshots for all five companies ar
 ## Phase 8D production verification
 
 Remote D1 counts and idempotency were verified for all four peers, along with FY2025 valuation basis, API payloads, Pages route shells, and required tests/build. TTM remains NULL because peer interim rows are quarter-only rather than compatible YTD periods. Specialized financial routes currently alias the full collection and `/api/health` is not implemented; see `docs/phase8d-production-closeout.md`.
+
+## Phase 8E API semantics and TTM closeout
+
+The Worker now applies `periodType=ANNUAL|QUARTERLY`, rejects invalid values with structured HTTP 400, returns one row from `/financials/latest`, returns a distinct field-level `/financials/ttm` contract, and exposes `/api/health`. TTM remains unavailable because direct XBRL contexts prove the selected interim reports are quarter-only; no quarter was relabeled YTD.
