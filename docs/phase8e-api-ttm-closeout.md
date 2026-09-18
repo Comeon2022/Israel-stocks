@@ -49,6 +49,10 @@ Pages routes returned HTTP 200 for all six required paths. No browser automation
 
 Remote D1 duplicate check after deployment: Sano has 4 period rows/4 identities; each peer has 5 rows/5 identities. No duplicate period identities were introduced.
 
+## Final commit and push
+
+Implementation commit `dc30df98c88dbc6d7ee820db9c7c1d3392a5fd27` was pushed successfully to `origin/main`, with local HEAD matching origin/main at that point. The existing Worker deployment is `9ea03bff-d060-43e7-b62e-4c04f3ea4a3e`. A final documentation-only commit follows this record; unrelated `.gitignore` and `buildorder/` remain uncommitted.
+
 ## Task 10 — Tests and Git
 
 `npm test` passed: 6 files, 12 tests. `npm run worker:test` passed: 4 files, 5 tests. `npm run worker:check` passed. `npm run build` passed. TypeScript compilation passed through the worker check and build. The build emitted only the existing bundle-size advisory.

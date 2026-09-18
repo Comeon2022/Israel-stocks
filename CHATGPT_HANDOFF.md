@@ -500,6 +500,8 @@ Tasks 6–9 completed: existing Worker deployed as `9ea03bff-d060-43e7-b62e-4c04
 
 Task 10 completed: `npm test` passed (6 files/12 tests), `npm run worker:test` passed (4 files/5 tests), `npm run worker:check` passed, and `npm run build` passed. Remote D1 remains duplicate-free: Sano 4 rows/4 identities; each peer 5 rows/5 identities. Unrelated `.gitignore` and `buildorder/` changes remain excluded from the final commit.
 
+Implementation commit `dc30df98c88dbc6d7ee820db9c7c1d3392a5fd27` was pushed successfully to `origin/main`; local HEAD matched origin/main. Worker deployment is `9ea03bff-d060-43e7-b62e-4c04f3ea4a3e`. A final documentation-only commit follows; unrelated `.gitignore` and `buildorder/` remain uncommitted.
+
 Added focused route tests for health, period filters, invalid filter errors, latest, and distinct TTM behavior. Updated `npm run worker:test` passes 5 files/8 tests; worker check passes.
 
 Phase 8D verification is in progress. The required production audit is being executed in ordered steps: remote D1 baseline counts, idempotency reruns for all four peers, field-level TTM and valuation verification, IFRS16/API/Pages checks, Worker deployment resolution, tests, and Git closeout. Exact evidence will be appended after each completed task.
