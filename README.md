@@ -174,3 +174,5 @@ The Worker now applies `periodType=ANNUAL|QUARTERLY`, rejects invalid values wit
 ## Phase 9C FY2025 notes/PDF extraction
 
 Official MAYA HTML/PDF/XBRL attachments for all five selected FY2025 reports were inspected with deterministic `pypdf` text extraction. Auditable candidate evidence is recorded with page provenance in `docs/phase9c-notes-pdf-financial-input-extraction.md`. No ambiguous PDF-derived values were activated: Capex is not replaced by total investing cash flow, lease payments are not inferred from liability movements, TTM remains unavailable, and valuation score /15 remains inactive.
+
+Phase 9D reconstructed and validated FY2025 consolidated statement inputs for Sano, Shufersal, Rami Levy, and Yochananof from official MAYA PDF statements, with page provenance and Neto fallback limitations documented in `docs/phase9d-fy2025-financial-statements-reconstruction.md`. Migration 0017 is idempotent. The existing Worker now calculates source-backed FCF and derived EBITDA; TTM and valuation score /15 remain inactive.

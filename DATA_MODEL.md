@@ -96,4 +96,6 @@ The existing nullable `financial_statements` schema already supports cash, expli
 
 Phase 9C inspected the official FY2025 report attachments beyond XBRL. Candidate PDF values are retained only as documented evidence until exact statement/note rows and units pass the persistence validation gate. No PDF-derived values were written in this pass. See `docs/phase9c-notes-pdf-financial-input-extraction.md` for attachment IDs, page evidence, rejected inferences, and the per-company availability matrix.
 
+Phase 9D adds official PDF provenance and validated FY2025 normalized inputs for four companies through idempotent migration 0017. Canonical Capex is explicit PP&E purchases, FCF is CFO minus positive Capex, non-lease debt excludes operating liabilities, and lease liabilities remain separate. Neto's ambiguous extracted cash-flow labels remain NULL. Valuation remains latest annual; TTM and score /15 remain inactive.
+
 Financial API routing now distinguishes full collection, `periodType=ANNUAL`, `periodType=QUARTERLY`, one-row latest, and field-level TTM. TTM calculation requires FY2025 plus current and prior comparable YTD rows; direct XBRL evidence for the selected peer interim reports is April–June quarter-only, so TTM values remain unavailable. Latest annual valuation remains restricted to `period_type=ANNUAL` and FY2025.
