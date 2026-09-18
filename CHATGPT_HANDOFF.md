@@ -622,6 +622,12 @@ The API-backed company UI now renders annual analytical cards, annual trend rows
 
 Phase 10 production verification: Worker `3256eb74-0a79-4b7b-8ce9-ace7636bc918` is deployed. The committed final Pages build was deployed at `2949cacd.israel-stocks.pages.dev` from source commit `12b8791f563e5a86545237e1d93fdfbd3d8f5869`; production `israel-stocks.pages.dev` was verified after React hydration. Chrome CDP verified all five company routes and `/companies` with zero console/runtime errors; API analytics/peer/valuation-history routes returned the expected deterministic states. `npm test`, `npm run worker:test`, `npm run worker:check`, and `npm run build` passed.
 
+## Phase 10B analytics UI polish
+
+Baseline audit started. The existing API and formulas are retained. The company analytical view currently lacks annual charts, uses English developer-style analytics labels, has an unstructured annual summary, exposes canonical peer IDs, and has a fixed P/E-only peer panel. Historical valuation remains correctly unavailable; this phase will improve only its presentation and will not activate TTM, ROIC, or valuation score /15.
+
+Phase 10B UI implementation completed locally: six null-safe annual-only Recharts trend panels were added for Revenue, EBIT margin, Net margin, CFO, FCF, and FCF margin. Analytics now separate Hebrew source facts, calculated metrics, and deterministic signals. Peer comparison has Hebrew company names, a metric selector, and all-companies/retailers toggle using the existing APIs. Historical valuation remains explicitly unavailable and no TTM, ROIC, score /15, financial formula, or Worker behavior changed. Tests and deployment verification are pending.
+
 Final API market regression values: Sano `-0.70`, Shufersal `+0.25`, Rami Levy `+5.50`, Yochananof `+0.90`, and Neto Malinda `+4.70` ILS. Chrome CDP rendered all five company routes with `market=true`, four annual/interim period markers, `ttmUnavailable=true`, `mock=false`, and `errors=0`; `/companies` rendered with `errors=0`. No production data or scoring behavior changed.
 
 Phase 9B source inspection is in progress. Selected official FY2025 MAYA XBRL reports are Sano `1728715`, Shufersal `1734231`, Rami Levy `1731570`, Yochananof `1732159`, and Neto Malinda `1732821`. Documentation is being updated after each major extraction, validation, persistence, and verification task.

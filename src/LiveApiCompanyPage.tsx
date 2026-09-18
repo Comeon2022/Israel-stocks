@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { apiFinancialRepository } from './data/apiRepository'
 import { apiGet } from './api/client'
+import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 import './LiveApiCompanyPage.css'
 
 const displayNames: Record<string, string> = { sano: 'סנו', shufersal: 'שופרסל', 'rami-levy': 'רמי לוי', yochananof: 'יוחננוף', 'neto-malinda': 'נטו מלינדה' }
@@ -42,14 +43,32 @@ function MarketValuation({ market, companyId }: { market: any; companyId: string
   </>
 }
 
+const metricLabels: Record<string, string> = { pe: 'P/E', evEbit: 'EV / EBIT', evEbitda: 'EV / EBITDA', priceToFcf: 'P / FCF', fcfYield: 'תשואת FCF', ebitMargin: 'מרווח EBIT', netMargin: 'מרווח נקי', fcfMargin: 'מרווח FCF', cashConversion: 'המרת רווח למזומן' }
+const peerNames: Record<string, string> = displayNames
+const signalLabels: Record<string, string> = { MARGIN: 'תפעולי', FCF: 'תזרים', BALANCE: 'מאזן', VALUATION: 'תמחור' }
+const unavailable = 'לא זמין'
+export const annualChartData = (annual: any[], key: string, percent = false) => annual.filter(row => row.periodType === 'ANNUAL').map(row => ({ year: String(row.fiscalYear ?? row.periodEnd?.slice(0, 4)), value: row[key]?.available ? (percent ? row[key].value * 100 : row[key].value) : null })).filter(row => row.value != null)
+
+function TrendChart({ title, data, percent = false, color = '#1a73e8' }: { title: string; data: any[]; percent?: boolean; color?: string }) {
+  return <article className="trend-card"><div className="trend-heading"><h3>{title}</h3><span>שנים מלאות · מקור שנתי</span></div>{data.length ? <ResponsiveContainer width="100%" height={220}><LineChart data={data}><CartesianGrid stroke="#e0e3e7" strokeDasharray="3 3" /><XAxis dataKey="year" /><YAxis tickFormatter={v => percent ? `${v}%` : v} /><Tooltip formatter={(v: unknown) => { const n = typeof v === 'number' ? v : Number(v); return [percent ? `${n.toFixed(1)}%` : `${n.toFixed(1)} מיליון ₪`, title] }} /><Line type="monotone" dataKey="value" stroke={color} strokeWidth={3} dot={{ r: 4 }} connectNulls={false} /></LineChart></ResponsiveContainer> : <div className="trend-empty">{unavailable}: אין מספיק נתונים שנתיים ממקור מאומת</div>}</article>
+}
+
 function AnalyticsSection({ analytics }: { analytics: any }) {
   const annual = analytics?.annual ?? []
   const latest = annual.at(-1)
-  const pct = (key: string) => latest?.[key]?.available ? `${(latest[key].value * 100).toFixed(1)}%` : 'Unavailable'
-  return <section className="panel analytics-panel"><div className="section-heading"><h2>Analytics</h2><span className="live-status">Source-backed annual analysis</span></div><div className="analytics-grid"><div><b>EBIT margin</b><strong>{pct('ebitMargin')}</strong></div><div><b>Net margin</b><strong>{pct('netMargin')}</strong></div><div><b>FCF margin</b><strong>{pct('fcfMargin')}</strong></div><div><b>Cash conversion</b><strong>{latest?.cashConversion?.available ? `${(latest.cashConversion.value * 100).toFixed(1)}%` : 'Unavailable'}</strong></div></div><div className="analytics-periods">{annual.map((row: any) => <div key={row.periodEnd} className="analytics-row"><span dir="ltr">{row.periodEnd}</span><span>Revenue {row.revenue.available ? ltr(row.revenue.value) : 'Unavailable'}</span><span>EBIT margin {row.ebitMargin.available ? `${(row.ebitMargin.value * 100).toFixed(1)}%` : 'Unavailable'}</span><span>FCF {row.fcf.available ? ltr(row.fcf.value) : 'Unavailable'}</span></div>)}</div><div className="analytics-signals"><b>Deterministic signals</b>{analytics?.signals?.length ? analytics.signals.map((s: any) => <span key={s.code}>{s.explanation}</span>) : <span>No threshold signal available</span>}</div><div className="analytics-note">Historical valuation: unavailable because no point-in-time historical market snapshots are persisted.</div></section>
+  const pct = (key: string) => latest?.[key]?.available ? `${(latest[key].value * 100).toFixed(1)}%` : unavailable
+  const chart = (key: string, percent = false) => annualChartData(annual, key, percent)
+  return <section className="panel analytics-panel"><div className="section-heading"><h2>ניתוח שנתי</h2><span className="live-status">נתונים שנתיים ממקור מאומת · FY2025</span></div><div className="analytics-kicker">מגמות שנתיות מחושבות רק מתקופות ANNUAL. תקופות רבעוניות אינן נכללות ואינן מומרות לשנה.</div><div className="analytics-grid"><div><b>מרווח EBIT</b><strong>{pct('ebitMargin')}</strong></div><div><b>מרווח נקי</b><strong>{pct('netMargin')}</strong></div><div><b>מרווח FCF</b><strong>{pct('fcfMargin')}</strong></div><div><b>המרת רווח למזומן</b><strong>{pct('cashConversion')}</strong></div></div><div className="trend-grid"><TrendChart title="הכנסות" data={chart('revenue')} /><TrendChart title="מרווח EBIT" data={chart('ebitMargin', true)} percent color="#188038" /><TrendChart title="מרווח נקי" data={chart('netMargin', true)} percent color="#9334e6" /><TrendChart title="תזרים מפעילות (CFO)" data={chart('cfo')} color="#f9ab00" /><TrendChart title="תזרים חופשי (FCF)" data={chart('fcf')} color="#1a73e8" /><TrendChart title="מרווח FCF" data={chart('fcfMargin', true)} percent color="#188038" /></div><div className="analytics-facts"><h3>נתוני מקור שנתיים</h3><table><thead><tr><th>שנה</th><th>הכנסות</th><th>EBIT</th><th>רווח נקי</th><th>CFO</th><th>FCF</th></tr></thead><tbody>{annual.map((row: any) => <tr key={row.periodEnd}><td dir="ltr">{row.fiscalYear}</td><td>{row.revenue.available ? ltr(row.revenue.value) : unavailable}</td><td>{row.ebit.available ? ltr(row.ebit.value) : unavailable}</td><td>{row.netIncome.available ? ltr(row.netIncome.value) : unavailable}</td><td>{row.cfo.available ? ltr(row.cfo.value) : unavailable}</td><td>{row.fcf.available ? ltr(row.fcf.value) : unavailable}</td></tr>)}</tbody></table></div><div className="analytics-calculated"><h3>מדדים מחושבים</h3><p>מרווחים, צמיחה והמרת רווח למזומן מחושבים מהנתונים השנתיים הזמינים. ערכים חסרים נשארים לא זמינים.</p></div><div className="analytics-signals"><h3>אותות דטרמיניסטיים</h3>{analytics?.signals?.length ? analytics.signals.map((s: any) => <div className="signal-item" key={s.code}><span>{signalLabels[s.category] ?? s.category}</span><b>{s.explanation}</b></div>) : <span>{unavailable}: אין אות שעבר את סף הכלל</span>}</div><div className="analytics-note"><b>הערכת שווי היסטורית אינה זמינה עדיין.</b> אין במערכת סדרת נתוני שוק לפי נקודות זמן, ולכן לא מוחל שווי השוק הנוכחי על דוחות עבר. TTM ו-ROIC נשארים לא זמינים.</div></section>
 }
 
-function PeerComparison() { const [data, setData] = useState<any>(); useEffect(() => { apiGet<any>('/api/peers').then(setData).catch(() => setData(null)) }, []); const rows = data?.items?.pe ?? []; return <div className="peer-compare"><b>Peer comparison (P/E)</b>{rows.map((row: any) => <div key={row.companyId}><span>{row.companyId}</span><span>{row.value == null ? 'Unavailable' : row.value.toFixed(2)}</span><span>median {row.peerMedian == null ? 'Unavailable' : row.peerMedian.toFixed(2)}</span></div>)}</div> }
+function PeerComparison() {
+  const [retailersOnly, setRetailersOnly] = useState(false)
+  const [metric, setMetric] = useState('pe')
+  const [data, setData] = useState<any>()
+  useEffect(() => { apiGet<any>(retailersOnly ? '/api/peers/retailers' : '/api/peers').then(setData).catch(() => setData(null)) }, [retailersOnly])
+  const rows = data?.items?.[metric] ?? []
+  return <section className="panel peer-compare"><div className="section-heading"><h2>השוואת חברות</h2><span>ערכים עובדתיים · ללא דירוג</span></div><div className="peer-controls"><label>מדד<select value={metric} onChange={e => setMetric(e.target.value)}>{Object.entries(metricLabels).map(([key, label]) => <option key={key} value={key}>{label}</option>)}</select></label><div className="peer-toggle" role="group" aria-label="קבוצת השוואה"><button className={!retailersOnly ? 'active' : ''} onClick={() => setRetailersOnly(false)}>כל החברות</button><button className={retailersOnly ? 'active' : ''} onClick={() => setRetailersOnly(true)}>קמעונאיות</button></div></div><table className="peer-table"><thead><tr><th>חברה</th><th>מדד</th><th>ערך חברה</th><th>חציון קבוצה</th><th>פער מהחציון</th></tr></thead><tbody>{rows.map((row: any) => <tr key={row.companyId}><th>{peerNames[row.companyId] ?? row.companyId}</th><td>{metricLabels[metric]}</td><td dir="ltr">{row.value == null ? unavailable : row.value.toFixed(2)}</td><td dir="ltr">{row.peerMedian == null ? unavailable : row.peerMedian.toFixed(2)}</td><td dir="ltr">{row.deltaVsMedian == null ? unavailable : row.deltaVsMedian.toFixed(2)}</td></tr>)}</tbody></table></section>
+}
 
 export function LiveApiCompanyPage({ id }: { id: string }) {
   const [state, setState] = useState<any>(); const [error, setError] = useState(false)
@@ -61,4 +80,4 @@ export function LiveApiCompanyPage({ id }: { id: string }) {
   return <><div className="back-link"><Link to="/companies">חזרה לכל החברות</Link></div><div className="page-title"><div><div className="eyebrow">{state.company.ticker} / API DATA</div><h1>{name}</h1><p>נתונים פיננסיים ממקור API רשמי</p></div></div><MarketValuation market={state.market} companyId={id} /><div className="panel financial-table"><table><thead><tr><th>תקופה</th><th>הכנסות</th><th>רווח תפעולי</th><th>רווח נקי</th><th>בסיס</th></tr></thead><tbody>{periods.map((p: any) => <tr key={p.id}><td>{p.periodEnd ?? '—'}</td><td>{p.revenue ?? '—'}</td><td>{p.operatingIncome ?? p.operating_income ?? '—'}</td><td>{p.netIncome ?? p.net_income ?? '—'}</td><td>{p.flowBasis ?? p.flow_basis ?? p.periodType ?? '—'}</td></tr>)}</tbody></table></div></>
 }
 
-export { displayNames, reasons }
+export { displayNames, reasons, metricLabels }

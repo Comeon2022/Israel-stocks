@@ -181,3 +181,6 @@ Phase 9E completed Neto's deterministic coordinate-aware PDF fallback and centra
 ## Phase 10 analytics
 
 The Worker exposes deterministic annual analytics at `/api/companies/:id/analytics`, explicit historical-valuation availability at `/api/companies/:id/valuation/history`, and all-company/retailer peer comparisons at `/api/peers` and `/api/peers/retailers`. Analytics use annual source-backed financial rows only; quarter-only rows are not annualized. Historical market valuation remains explicitly unavailable because only current Globes snapshots are persisted. See `docs/phase10-analytics-and-historical-valuation.md`.
+# Phase 10B analytics UI
+
+API-backed company pages include six annual-only trend charts, Hebrew analytical labels, structured annual facts, deterministic signal categories, and peer comparison with metric selection plus all-company/retailer toggles. Missing values remain unavailable rather than zero; historical valuation, TTM, ROIC, and valuation score `/15` remain explicitly inactive. See `docs/phase10b-analytics-ui-polish.md`.
