@@ -170,3 +170,7 @@ The selected FY2025 MAYA XBRL files were inspected directly. They provide annual
 FY2025 remote D1 inspection confirms optional cash/debt, Capex, D&A, EBITDA, and explicit IFRS16 lease-payment inputs are currently NULL across the five source-backed companies. CFO is present for four peers but Capex is absent, so FCF-dependent valuation remains unavailable. P/E remains available on FY2025 latest-annual basis; TTM and valuation score /15 remain inactive. See `docs/phase9-financial-completeness-valuation.md`.
 
 The Worker now applies `periodType=ANNUAL|QUARTERLY`, rejects invalid values with structured HTTP 400, returns one row from `/financials/latest`, returns a distinct field-level `/financials/ttm` contract, and exposes `/api/health`. TTM remains unavailable because direct XBRL contexts prove the selected interim reports are quarter-only; no quarter was relabeled YTD.
+
+## Phase 9C FY2025 notes/PDF extraction
+
+Official MAYA HTML/PDF/XBRL attachments for all five selected FY2025 reports were inspected with deterministic `pypdf` text extraction. Auditable candidate evidence is recorded with page provenance in `docs/phase9c-notes-pdf-financial-input-extraction.md`. No ambiguous PDF-derived values were activated: Capex is not replaced by total investing cash flow, lease payments are not inferred from liability movements, TTM remains unavailable, and valuation score /15 remains inactive.

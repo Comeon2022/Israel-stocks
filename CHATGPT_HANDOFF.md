@@ -588,6 +588,10 @@ Phase 8G closeout: commit `564c56cd62d820731838a1f41e2b6ab627148cd6` is pushed a
 
 ## Phase 9B FY2025 XBRL deep extraction
 
+## Phase 9C FY2025 notes/PDF financial input extraction
+
+Official MAYA HTML/PDF/XBRL attachments were resolved for reports 1728715 (Sano), 1734231 (Shufersal), 1731570 (Rami Levy), 1732159 (Yochananof), and 1732821 (Neto Malinda). Deterministic `pypdf` inspection found auditable candidate evidence for Sano, Shufersal, Rami Levy, and Yochananof; Neto's PDF text layer did not expose reliable target tables. Evidence and conservative decisions are recorded in `docs/phase9c-notes-pdf-financial-input-extraction.md`. No new PDF-derived values have been written. Total investing cash flow is not used as Capex, lease-liability movements are not used as lease cash payments, no quarter is annualized, TTM remains unavailable, and valuation score /15 remains inactive.
+
 Phase 9B source inspection is in progress. Selected official FY2025 MAYA XBRL reports are Sano `1728715`, Shufersal `1734231`, Rami Levy `1731570`, Yochananof `1732159`, and Neto Malinda `1732821`. Documentation is being updated after each major extraction, validation, persistence, and verification task.
 
 Phase 9B extraction completed: all five selected XBRL files were directly retrieved and parsed. Every file contains annual EBIT and CFO; no file contains explicit cash, financial debt, Capex/PPE purchases, D&A, EBITDA, lease liabilities, or lease cash-payment concepts. Sano CFO `270.320` ILS millions was the only newly validated D1 field and was persisted by idempotent migration `0016_phase9b_sano_cfo.sql` with source `maya-1728715-xbrl`. A second run preserved one source, one period, one statement, stable IDs, and the same value. No other valuation metric unlocked; P/E, TTM-unavailable, and /15-inactive states are preserved. The full concept evidence and report URLs are in `docs/phase9b-fy2025-xbrl-deep-extraction.md`.
