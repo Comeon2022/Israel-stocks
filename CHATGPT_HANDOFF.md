@@ -478,6 +478,10 @@ The official `GET /quote?symbol=...&exchange=TASE` probe was attempted at low ra
 
 ## Phase 8B historical filing discovery and fallback-source evaluation
 
+## Phase 8C historical XBRL backfill activation
+
+Added sequential MAYA throttling (1.5 seconds between detail requests) and bounded exponential backoff for 403/429/5xx responses, with five retries. Shufersal’s 15 historical reports completed the shared XBRL dry-run with `Database writes: 0`; Rami Levy used the same throttled path. No historical D1 activation was claimed because conservative annual/H1 target selection and expanded IFRS16 persistence require further safe implementation. TTM remains unavailable until FY2025 + H1 2026 − H1 2025 rows are activated.
+
 ## Phase 8B-Fix MAYA historical filter reproduction
 
 Worker deployment after discovery-runtime change: existing `israel-stocks-api` redeployed as version `631ecc1f-998a-45a2-b5b8-39ec2005763d`. No D1 writes or historical activations were performed. The corrected filter successfully enumerated Shufersal and Rami Levy; MAYA rate protection interrupted the remaining peer probes and requires a later retry.

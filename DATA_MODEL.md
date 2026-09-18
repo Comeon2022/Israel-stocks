@@ -40,6 +40,10 @@ Yochananof (canonical ID `yochananof`, MAYA 1786) and Neto Malinda (canonical ID
 
 Production closeout marks Sano, Shufersal, Rami Levy, Yochananof, and Neto Malinda as `AUTO_INGEST`/`SOURCE_BACKED`. This status does not imply market-data availability; valuation remains incomplete.
 
+## Phase 8C historical XBRL backfill activation
+
+No schema changes were made. Historical activation remains limited to validated target periods with complete provenance.
+
 ## Phase 8B historical filing discovery and fallback-source evaluation
 
 Historical MAYA discovery uses the UI-equivalent date/event-filtered request and preserves report provenance. Discovery does not change D1; XBRL activation remains gated by issuer, period, mapping, validation, and duplicate checks.

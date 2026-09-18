@@ -115,6 +115,10 @@ Yochananof (MAYA 1786) and Neto Malinda (MAYA 1463) now use the generic MAYA/XBR
 
 All five tracked companies are now marked AUTO_INGEST/SOURCE_BACKED in production; market data and valuation remain unavailable/incomplete.
 
+## Phase 8C historical XBRL backfill activation
+
+MAYA discovery now uses sequential throttling and bounded 403/429/5xx backoff. Shufersal historical XBRL dry-run completed with zero writes; activation remains target-selection and validation gated.
+
 ## Phase 8B historical filing discovery and fallback-source evaluation
 
 The historical discovery CLI now reproduces MAYA’s filtered finance search using `fromYear`, `toYear`, `period=5`, `by=company`, and financial event IDs `101,103,104,105,106,102`, with bounded pagination and zero-write output. Verified Shufersal and Rami Levy historical report sets include XBRL candidates; see the discovery and backfill documents.

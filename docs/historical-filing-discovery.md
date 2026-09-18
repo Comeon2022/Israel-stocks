@@ -1,3 +1,7 @@
+# Phase 8C historical XBRL backfill activation audit
+
+MAYA transport now uses sequential 1.5-second detail throttling and bounded exponential backoff for 403, 429, and 5xx responses. Shufersal’s 15 discovered reports completed the shared XBRL dry-run with zero writes. Activation remains gated until target-period selection and expanded field persistence are safe.
+
 # Phase 8B historical filing discovery
 
 ## Phase 8B-Fix filtered MAYA discovery
