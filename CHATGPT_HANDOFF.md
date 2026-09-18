@@ -500,6 +500,8 @@ Task 10 checks: `npm test` passed (6 files/12 tests), `npm run worker:test` pass
 
 Phase 8D final blocker status: TTM/filter-specific API routes and `/api/health` are not implemented, and static Pages checks cannot prove browser-rendered financial rows. Historical D1 activation, all-four-peer idempotency, FY2025 annual-basis valuation, API payload checks, and route HTTP checks are complete. Phase 8D is not fully complete until the route gaps and browser-level verification are addressed or explicitly accepted.
 
+Final documentation commit `2eaad1de575717603f2810076b9309f63f7fbbf8` was pushed successfully to `origin/main`; local `HEAD` matches `origin/main`. Worker deployment remains `87078b02-1ba8-4e03-8459-f8e61acf69f2`. Unrelated `.gitignore` and `buildorder/` changes remain uncommitted.
+
 Completed final deterministic selection and activation through the existing MAYA → XBRL → parse → map → validate → remote D1 runtime. The selector is `npm run maya:select-activate -- --dry-run [company...]`; real mode uses the existing D1, with no new Worker/database and no LLM extraction.
 
 Selected reports (FY2023, FY2024, FY2025, 2025 comparable Q2, 2026 current Q2): Shufersal `1582311, 1653761, 1734231, 1688899, 1766686`; Rami Levy `1584746, 1654478, 1731570, 1686628, 1764608`; Yochananof `1587708, 1654778, 1732159, 1687009, 1764694`; Neto Malinda `1583630, 1654861, 1732821, 1687465, 1764798`. The selector requires XBRL and selects one deterministic report per target period.
