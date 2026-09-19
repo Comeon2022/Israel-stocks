@@ -111,6 +111,22 @@ function PeerComparisonSemantic() {
 void PeerComparisonSemantic
 
 function PeerEducation({ metric, shown }: { metric: string; shown: string }) {
+  if (metric === 'fcfYield') return <>
+    <h3>תשואת FCF</h3>
+    <p dir="ltr">FCF Yield = Free Cash Flow Yield — תשואת תזרים המזומנים החופשי</p>
+    <h4>מה זה?</h4>
+    <p>תשואת FCF משווה בין תזרים המזומנים החופשי השנתי של החברה (FCF) לבין שווי השוק שלה.</p>
+    <p>FCF — Free Cash Flow הוא תזרים המזומנים החופשי של החברה: המזומן שנשאר לאחר הפעילות השוטפת ולאחר ההשקעות ההוניות (Capex) הנדרשות לעסק.</p>
+    <p>במילים פשוטות, המדד מראה כמה תזרים מזומנים חופשי החברה מייצרת בכל שנה ביחס למחיר שהשוק נותן לכל החברה.</p>
+    <h4>איך קוראים את המספר?</h4>
+    <p>אם תשואת ה־FCF היא {shown}%, זה אומר שתזרים המזומנים החופשי השנתי של החברה שווה לכ־{shown}% משווי השוק שלה.</p>
+    <p>במילים פשוטות: על כל 100 ₪ של שווי שוק, החברה מייצרת כיום כ־{shown} ₪ של תזרים מזומנים חופשי שנתי.</p>
+    <h4>איך מפרשים את זה?</h4>
+    <p>תשואת FCF גבוהה יותר יכולה לפעמים להעיד שהחברה מייצרת יותר מזומן ביחס לשווי שבו היא נסחרת, בעוד שתשואה נמוכה יותר יכולה להעיד שהשוק מתמחר את החברה בשווי גבוה יותר ביחס לתזרים החופשי שלה.</p>
+    <p>בניגוד למכפיל P / FCF, שבו מספר נמוך יותר בדרך כלל מייצג תמחור נמוך יותר ביחס לתזרים, בתשואת FCF הכיוון הפוך: ככל שהתשואה גבוהה יותר, החברה מייצרת יותר תזרים חופשי ביחס לשווי השוק שלה.</p>
+    <p>עם זאת, תשואת FCF גבוהה אינה בהכרח סימן לכך שהמניה זולה. לעיתים התזרים החופשי גבוה באופן זמני, או שהשוק מצפה לירידה ברווחים או בתזרים בעתיד.</p>
+    <p>לכן צריך לבדוק גם אם ה־FCF יציב לאורך זמן, מה רמת החוב של החברה, כמה היא משקיעה בעסק ומה קצב הצמיחה שלה.</p>
+  </>
   if (metric === 'priceToFcf') return <>
     <h3>מכפיל P / FCF</h3>
     <p dir="ltr">P / FCF = Price to Free Cash Flow — שווי שוק ביחס לתזרים המזומנים החופשי</p>
@@ -167,7 +183,7 @@ function PeerEducation({ metric, shown }: { metric: string; shown: string }) {
 function PeerComparisonDynamic({ companyId }: { companyId: string }) {
   const [retailersOnly, setRetailersOnly] = useState(false); const [metric, setMetric] = useState('pe'); const [data, setData] = useState<any>()
   useEffect(() => { apiGet<any>(retailersOnly ? '/api/peers/retailers' : '/api/peers').then(setData).catch(() => setData(null)) }, [retailersOnly])
-  const rows = data?.items?.[metric] ?? []; const selected = rows.find((row: any) => row.companyId === companyId) ?? rows.find((row: any) => row.value != null); const shown = selected?.value == null ? '—' : Number(selected.value).toFixed(2)
+  const rows = data?.items?.[metric] ?? []; const selected = rows.find((row: any) => row.companyId === companyId) ?? rows.find((row: any) => row.value != null); const shown = selected?.value == null ? '—' : metric === 'fcfYield' ? (Number(selected.value) * 100).toFixed(2) : Number(selected.value).toFixed(2)
   return <section className="panel peer-compare"><div className="section-heading"><h2>השוואת חברות</h2><span>ערכים עובדתיים · ללא דירוג</span></div><div className="peer-comparison-content"><aside className="peer-explanation" dir="rtl"><PeerEducation metric={metric} shown={shown} /></aside><div className="peer-data"><div className="peer-controls"><label>מדד<select value={metric} onChange={e => setMetric(e.target.value)}>{Object.entries(metricLabels).map(([key, label]) => <option key={key} value={key}>{label}</option>)}</select></label><div className="peer-toggle" role="group" aria-label="קבוצת השוואה"><button className={!retailersOnly ? 'active' : ''} onClick={() => setRetailersOnly(false)}>כל החברות</button><button className={retailersOnly ? 'active' : ''} onClick={() => setRetailersOnly(true)}>קמעונאיות</button></div></div><div className="peer-column-help">חברה = החברה הנבדקת · ערך המדד = הערך של החברה · חציון קבוצה = נקודת האמצע · פער מהחציון = הערך פחות החציון, באותה יחידה.</div><table className="peer-table"><thead><tr><th>חברה</th><th>ערך המדד</th><th>חציון קבוצה</th><th>פער מהחציון</th></tr></thead><tbody>{rows.map((row: any) => <tr key={row.companyId}><th>{peerNames[row.companyId] ?? row.companyId}</th><td dir="ltr">{row.value == null ? `לא זמין — ${peerUnavailableReason(metric)}` : formatMetricValue(metric, row.value)}</td><td dir="ltr">{row.peerMedian == null ? 'לא זמין' : formatMetricValue(metric, row.peerMedian)}</td><td dir="ltr">{row.deltaVsMedian == null ? 'לא זמין' : formatMetricValue(metric, row.deltaVsMedian)}</td></tr>)}</tbody></table></div></div></section>
 }
 
