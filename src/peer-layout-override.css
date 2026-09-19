@@ -1,5 +1,55 @@
-/* The legacy rule hid the former metric column; the active table now starts with the metric value. */
+/* Final peer layout: explicit physical left/right placement, independent of RTL auto-flow. */
+.peer-comparison-content {
+  display: grid;
+  grid-template-columns: minmax(360px, 2fr) minmax(0, 3fr);
+  grid-template-areas: "explanation data";
+  gap: 32px;
+  direction: ltr;
+  align-items: start;
+  width: 100%;
+}
+.peer-explanation { grid-area: explanation; min-width: 0; width: 100%; }
+.peer-data {
+  grid-area: data;
+  direction: rtl;
+  min-width: 0;
+  width: 100%;
+  max-width: none;
+}
+.peer-data .peer-controls {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+  gap: 12px;
+  width: 100%;
+  margin: 0 0 16px;
+}
+.peer-table-wrap { width: 100%; min-width: 0; overflow-x: auto; }
+.peer-data .peer-table {
+  display: table;
+  width: 100%;
+  min-width: 650px;
+  table-layout: fixed;
+  white-space: normal;
+}
+.peer-data .peer-table th,
+.peer-data .peer-table td {
+  white-space: nowrap;
+  writing-mode: horizontal-tb;
+  word-break: normal;
+  overflow-wrap: normal;
+}
+.peer-data .peer-table th:nth-child(1) { width: 25%; }
 .peer-data .peer-table th:nth-child(2),
-.peer-data .peer-table td:nth-child(2) {
-  display: table-cell;
+.peer-data .peer-table th:nth-child(3),
+.peer-data .peer-table th:nth-child(4) { width: 25%; }
+
+@media (max-width: 1099px) {
+  .peer-comparison-content {
+    grid-template-columns: 1fr;
+    grid-template-areas: "data" "explanation";
+    gap: 16px;
+  }
+  .peer-data .peer-controls { flex-wrap: wrap; }
+  .peer-data .peer-table { min-width: 650px; }
 }
