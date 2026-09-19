@@ -44,7 +44,7 @@ function MarketValuation({ market, companyId }: { market: any; companyId: string
   const v = market.valuation
   const unavailable = (key: string) => v?.[key] == null ? (v?.unavailableReasons ?? []).map((x: string) => reasons[x]).find(Boolean) : undefined
   const retailer = retailers.has(companyId)
-  return <><AnalyticsSection analytics={analytics} /><PeerComparisonLocked companyId={companyId} />
+  return <><AnalyticsSection analytics={analytics} /><PeerComparisonDynamic companyId={companyId} />
     <section className="panel live-market"><div className="section-heading"><h2>נתוני שוק</h2><span className="live-status">נתוני תמחור זמינים</span></div><div className="market-cards"><Metric label="מחיר אחרון" value={price(market.share_price)} /><Metric label="שווי שוק" value={marketCap(market.market_cap)} /><Metric label="שינוי יומי" value={<span dir="ltr" className={market.day_change >= 0 ? 'positive financial-number' : 'negative financial-number'}>{market.day_change == null ? 'לא זמין' : `${market.day_change < 0 ? '-' : ''}₪${Math.abs(market.day_change).toFixed(2)} (${market.day_change_pct == null ? '—' : `${market.day_change_pct.toFixed(2)}%`})`}</span>} /></div><div className="market-meta">מקור: <b>{market.provider === 'GLOBES' ? 'Globes' : market.provider}</b> · השהיה: ~15 דקות · עדכון: <span dir="ltr">{market.as_of ?? '—'}</span></div></section>
     <section className="panel valuation-panel"><div className="section-heading"><h2>מכפילי תמחור</h2><span className="score-status">נתוני תמחור זמינים · ציון התמחור /15 עדיין לא הופעל</span></div><div className="valuation-grid"><Metric label="P/E" value={v?.pe == null ? 'לא זמין' : <>{ltr(v.pe)}×</>} reason={unavailable('pe')} /><Metric label="EV" value={marketCap(v?.enterpriseValueIlsMillions)} /><Metric label="EV / EBIT" value={v?.evEbit == null ? 'לא זמין' : <>{ltr(v.evEbit)}×</>} reason={unavailable('evEbit')} /><Metric label="EV / EBITDA" value={v?.evEbitda == null ? 'לא זמין' : <>{ltr(v.evEbitda)}×</>} reason={unavailable('evEbitda')} /><Metric label="EV / EBITDA ex IFRS 16" value={retailer ? 'לא זמין' : 'לא רלוונטי'} reason={retailer ? unavailable('evEbitdaExIfrs16') ?? reasons.MISSING_LEASE_CASH_PAYMENTS : undefined} /><Metric label="P / FCF" value={v?.priceToFcf == null ? 'לא זמין' : <>{ltr(v.priceToFcf)}×</>} reason={unavailable('priceToFcf')} /><Metric label="FCF Yield" value={v?.fcfYield == null ? 'לא זמין' : <>{ltr(v.fcfYield * 100)}%</>} reason={unavailable('fcfYield')} /><Metric label="Net Debt / Market Cap" value={v?.netDebtToMarketCap == null ? 'לא זמין' : <>{ltr(v.netDebtToMarketCap * 100)}%</>} reason={unavailable('netDebtToMarketCap')} /><Metric label="Net Cash / Market Cap" value={v?.netCashToMarketCap == null ? 'לא זמין' : <>{ltr(v.netCashToMarketCap * 100)}%</>} reason={unavailable('netCashToMarketCap')} /></div><div className="basis-note">בסיס רווח: {basis(v?.basis?.earnings)} · תקופה: <span dir="ltr">{v?.periodEnd ?? 'לא זמין'}</span></div></section>
   </>
@@ -110,6 +110,34 @@ function PeerComparisonSemantic() {
 
 void PeerComparisonSemantic
 
+function PeerEducation({ metric, shown }: { metric: string; shown: string }) {
+  if (metric === 'evEbit') return <>
+    <h3>מכפיל EV / EBIT</h3>
+    <p dir="ltr">EV / EBIT = Enterprise Value to Earnings Before Interest and Taxes — שווי פעילות ביחס לרווח התפעולי</p>
+    <h4>מה זה?</h4>
+    <p>המכפיל משווה בין שווי הפעילות של החברה (EV) לבין הרווח התפעולי השנתי שלה (EBIT).</p>
+    <p>EV — Enterprise Value הוא שווי הפעילות של העסק. בפשטות, הוא מתחיל משווי השוק של החברה, מוסיף חוב פיננסי ומפחית מזומן.</p>
+    <p>EBIT — Earnings Before Interest and Taxes הוא הרווח שהחברה מייצרת מהפעילות העסקית שלה לפני הוצאות מימון ומסים.</p>
+    <h4>איך קוראים את המספר?</h4>
+    <p>אם מכפיל EV / EBIT הוא {shown}×, זה אומר ששווי הפעילות של החברה הוא בערך פי {shown} מהרווח התפעולי השנתי שלה.</p>
+    <p>במילים פשוטות: על כל 1 ₪ של רווח תפעולי שנתי שהחברה מייצרת, שווי הפעילות שלה הוא כיום כ־{shown} ₪.</p>
+    <h4>איך מפרשים את זה?</h4>
+    <p>מכפיל נמוך יותר יכול לפעמים להעיד על תמחור נמוך יותר ביחס לרווח התפעולי, בעוד שמכפיל גבוה יותר יכול לשקף ציפיות לצמיחה גבוהה יותר או איכות עסקית גבוהה יותר.</p>
+    <p>היתרון של EV / EBIT לעומת P/E הוא שהוא מסתכל על הפעילות העסקית עצמה ופחות מושפע מהדרך שבה החברה ממומנת — למשל כמה חוב יש לה וכמה ריבית היא משלמת.</p>
+    <p>עם זאת, אי אפשר לקבוע אם חברה זולה או יקרה לפי המכפיל לבדו. צריך להשוות לחברות דומות ולבדוק גם צמיחה, מרווחים, חוב, תזרים מזומנים ואיכות הרווח.</p>
+  </>
+  return <>
+    <h3>מכפיל רווח — P/E</h3><p dir="ltr">P/E = Price to Earnings — מכפיל רווח</p><h4>מה זה?</h4><p>מכפיל הרווח משווה בין שווי השוק של החברה לבין הרווח הנקי השנתי שלה.</p><h4>איך קוראים את המספר?</h4><p>אם מכפיל הרווח הוא {shown}×, זה אומר שהשוק מתמחר את החברה בשווי שהוא בערך פי {shown} מהרווח הנקי השנתי שלה.</p><p>במילים פשוטות: על כל 1 ₪ של רווח שנתי שהחברה מייצרת, השוק נותן לה כרגע שווי של כ־{shown} ₪.</p><h4>איך מפרשים את זה?</h4><p>מכפיל נמוך יותר יכול לפעמים להעיד על תמחור נמוך יותר ביחס לרווח, ומכפיל גבוה יותר יכול לשקף ציפיות לצמיחה גבוהה יותר — אבל אי אפשר לקבוע אם מניה זולה או יקרה לפי המכפיל לבדו. צריך להשוות לחברות דומות ולבדוק גם צמיחה, חוב, איכות הרווח ותזרים המזומנים.</p>
+  </>
+}
+
+function PeerComparisonDynamic({ companyId }: { companyId: string }) {
+  const [retailersOnly, setRetailersOnly] = useState(false); const [metric, setMetric] = useState('pe'); const [data, setData] = useState<any>()
+  useEffect(() => { apiGet<any>(retailersOnly ? '/api/peers/retailers' : '/api/peers').then(setData).catch(() => setData(null)) }, [retailersOnly])
+  const rows = data?.items?.[metric] ?? []; const selected = rows.find((row: any) => row.companyId === companyId) ?? rows.find((row: any) => row.value != null); const shown = selected?.value == null ? '—' : Number(selected.value).toFixed(2)
+  return <section className="panel peer-compare"><div className="section-heading"><h2>השוואת חברות</h2><span>ערכים עובדתיים · ללא דירוג</span></div><div className="peer-comparison-content"><aside className="peer-explanation" dir="rtl"><PeerEducation metric={metric} shown={shown} /></aside><div className="peer-data"><div className="peer-controls"><label>מדד<select value={metric} onChange={e => setMetric(e.target.value)}>{Object.entries(metricLabels).map(([key, label]) => <option key={key} value={key}>{label}</option>)}</select></label><div className="peer-toggle" role="group" aria-label="קבוצת השוואה"><button className={!retailersOnly ? 'active' : ''} onClick={() => setRetailersOnly(false)}>כל החברות</button><button className={retailersOnly ? 'active' : ''} onClick={() => setRetailersOnly(true)}>קמעונאיות</button></div></div><div className="peer-column-help">חברה = החברה הנבדקת · ערך המדד = הערך של החברה · חציון קבוצה = נקודת האמצע · פער מהחציון = הערך פחות החציון, באותה יחידה.</div><table className="peer-table"><thead><tr><th>חברה</th><th>ערך המדד</th><th>חציון קבוצה</th><th>פער מהחציון</th></tr></thead><tbody>{rows.map((row: any) => <tr key={row.companyId}><th>{peerNames[row.companyId] ?? row.companyId}</th><td dir="ltr">{row.value == null ? `לא זמין — ${peerUnavailableReason(metric)}` : formatMetricValue(metric, row.value)}</td><td dir="ltr">{row.peerMedian == null ? 'לא זמין' : formatMetricValue(metric, row.peerMedian)}</td><td dir="ltr">{row.deltaVsMedian == null ? 'לא זמין' : formatMetricValue(metric, row.deltaVsMedian)}</td></tr>)}</tbody></table></div></div></section>
+}
+
 function PeerComparisonLocked({ companyId }: { companyId: string }) {
   const [retailersOnly, setRetailersOnly] = useState(false)
   const [metric, setMetric] = useState('pe')
@@ -122,6 +150,8 @@ function PeerComparisonLocked({ companyId }: { companyId: string }) {
   const info = glossaryFor(metric)
   return <section className="panel peer-compare"><div className="section-heading"><h2>השוואת חברות</h2><span>ערכים עובדתיים · ללא דירוג</span></div><div className="peer-comparison-content"><aside className="peer-explanation" dir="rtl"><h3>מכפיל רווח — P/E</h3><p dir="ltr">P/E = Price to Earnings — מכפיל רווח</p><h4>מה זה?</h4><p>מכפיל הרווח משווה בין שווי השוק של החברה לבין הרווח הנקי השנתי שלה.</p><h4>איך קוראים את המספר?</h4><p>אם מכפיל הרווח הוא {shown}×, זה אומר שהשוק מתמחר את החברה בשווי שהוא בערך פי {shown} מהרווח הנקי השנתי שלה.</p><p>במילים פשוטות: על כל 1 ₪ של רווח שנתי שהחברה מייצרת, השוק נותן לה כרגע שווי של כ־{shown} ₪.</p><h4>איך מפרשים את זה?</h4><p>מכפיל נמוך יותר יכול לפעמים להעיד על תמחור נמוך יותר ביחס לרווח, ומכפיל גבוה יותר יכול לשקף ציפיות לצמיחה גבוהה יותר — אבל אי אפשר לקבוע אם מניה זולה או יקרה לפי המכפיל לבדו. צריך להשוות לחברות דומות ולבדוק גם צמיחה, חוב, איכות הרווח ותזרים המזומנים.</p>{metric !== 'pe' && <small>המדד שנבחר: {info.label}. ההסבר המלא של מכפיל הרווח מוצג כבסיס ההשוואה.</small>}</aside><div className="peer-data"><div className="peer-controls"><label>מדד<select value={metric} onChange={e => setMetric(e.target.value)}>{Object.entries(metricLabels).map(([key, label]) => <option key={key} value={key}>{label}</option>)}</select></label><div className="peer-toggle" role="group" aria-label="קבוצת השוואה"><button className={!retailersOnly ? 'active' : ''} onClick={() => setRetailersOnly(false)}>כל החברות</button><button className={retailersOnly ? 'active' : ''} onClick={() => setRetailersOnly(true)}>קמעונאיות</button></div></div><div className="peer-column-help">חברה = החברה הנבדקת · ערך המדד = הערך של החברה · חציון קבוצה = נקודת האמצע · פער מהחציון = הערך פחות החציון, באותה יחידה.</div><table className="peer-table"><thead><tr><th>חברה</th><th>ערך המדד</th><th>חציון קבוצה</th><th>פער מהחציון</th></tr></thead><tbody>{rows.map((row: any) => <tr key={row.companyId}><th>{peerNames[row.companyId] ?? row.companyId}</th><td dir="ltr">{row.value == null ? `לא זמין — ${peerUnavailableReason(metric)}` : formatMetricValue(metric, row.value)}</td><td dir="ltr">{row.peerMedian == null ? 'לא זמין' : formatMetricValue(metric, row.peerMedian)}</td><td dir="ltr">{row.deltaVsMedian == null ? 'לא זמין' : formatMetricValue(metric, row.deltaVsMedian)}</td></tr>)}</tbody></table></div></div></section>
 }
+
+void PeerComparisonLocked
 
 export function LiveApiCompanyPage({ id }: { id: string }) {
   const [state, setState] = useState<any>(); const [error, setError] = useState(false)
