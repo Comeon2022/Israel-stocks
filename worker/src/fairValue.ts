@@ -60,8 +60,9 @@ export function buildFairValue(companyId: string, rows: any[], market: any, reta
   const netIncome = normalizeAnnual(rows, 'net_income')
   const cfo = normalizeAnnual(rows, 'cash_flow_from_operations')
   const capex = normalizeAnnual(rows, 'capex')
-  const fcfRows = rows.map(r => ({ ...r, fcf: n(r.cash_flow_from_operations) != null && n(r.capex) != null ? n(r.cash_flow_from_operations)! - n(r.capex)! : null }))
-  const fcf = retailer ? { value: null, method: 'DETERMINISTIC_3Y_MEDIAN' as const, periods: ['2023', '2024', '2025'], latest: null, average: null, median: null, available: false, reason: 'MISSING_RETAIL_LEASE_CASH_PAYMENTS' } : normalizeAnnual(fcfRows, 'fcf')
+  const leaseCash = normalizeAnnual(rows, 'total_lease_cash_payments')
+  const fcfRows = rows.map(r => ({ ...r, fcf: n(r.cash_flow_from_operations) != null && n(r.capex) != null && (!retailer || n(r.total_lease_cash_payments) != null) ? n(r.cash_flow_from_operations)! - n(r.capex)! - (retailer ? n(r.total_lease_cash_payments)! : 0) : null }))
+  const fcf = retailer ? (leaseCash.available ? normalizeAnnual(fcfRows, 'fcf', false) : { value: null, method: 'DETERMINISTIC_3Y_MEDIAN' as const, periods: ['2023', '2024', '2025'], latest: null, average: null, median: null, available: false, reason: 'MISSING_RETAIL_LEASE_CASH_PAYMENTS' }) : normalizeAnnual(fcfRows, 'fcf', false)
   const debtRow = rows.filter(r => r.period_type === 'ANNUAL' && String(r.fiscal_year) === '2025').at(-1)
   const cash = n(debtRow?.cash_and_cash_equivalents), debt = n(debtRow?.short_term_debt) != null && n(debtRow?.long_term_debt) != null ? n(debtRow.short_term_debt)! + n(debtRow.long_term_debt)! : null
   const netDebt = debt != null && cash != null ? debt - cash : null
