@@ -28,11 +28,12 @@ const price = (v: unknown) => <span dir="ltr" className="financial-number">{type
 const marketCap = (v: unknown) => <span dir="ltr" data-value={typeof v === 'number' ? v : undefined} className="financial-number">{typeof v === 'number' ? (v >= 1000 ? `₪${(v / 1000).toFixed(2)} מיליארד` : `₪${v.toFixed(1)} מיליון`) : 'לא זמין'}</span>
 const basis = (v?: string) => v === 'LATEST_ANNUAL' ? 'שנה מלאה אחרונה' : v === 'TTM' ? '12 החודשים האחרונים' : v === 'QUARTER_ONLY' ? 'רבעון בלבד' : 'לא זמין'
 
-function Metric({ label, metric, value, reason }: { label: string; metric?: string; value: React.ReactNode; reason?: { primary: string; secondary?: string } }) {
+function Metric({ label, metric, showHelp = true, value, reason }: { label: string; metric?: string; showHelp?: boolean; value: React.ReactNode; reason?: { primary: string; secondary?: string } }) {
   const metricKey = metric ?? ({ 'P/E': 'pe', EV: 'enterpriseValueIlsMillions', 'EV / EBIT': 'evEbit', 'EV / EBITDA': 'evEbitda', 'EV / EBITDA ex IFRS 16': 'evEbitdaExIfrs16', 'P / FCF': 'priceToFcf', 'FCF Yield': 'fcfYield', 'Net Debt / Market Cap': 'netDebtToMarketCap', 'Net Cash / Market Cap': 'netCashToMarketCap' } as Record<string, string>)[label] ?? 'unavailable'
   const textValue = (node: any): string => { if (node == null) return ''; if (typeof node === 'string' || typeof node === 'number') return String(node); if (Array.isArray(node)) return node.map(textValue).join(''); return node.props?.['data-value'] ?? textValue(node.props?.children) }
   const numericValue = Number(String(textValue(value)).replace(/[^\d.-]/g, ''))
-  return <div className="valuation-metric"><span className="metric-label">{label}<MetricHelp metric={metricKey} value={Number.isFinite(numericValue) ? numericValue : undefined} /></span><strong>{value}</strong>{reason && <small>{reason.primary}{reason.secondary && <><br />{reason.secondary}</>}</small>}</div>
+  const marketMetric = ['מחיר אחרון', 'שווי שוק', 'שינוי יומי'].includes(label)
+  return <div className="valuation-metric"><span className="metric-label">{label}{showHelp && !marketMetric && <MetricHelp metric={metricKey} value={Number.isFinite(numericValue) ? numericValue : undefined} />}</span><strong>{value}</strong>{reason && <small>{reason.primary}{reason.secondary && <><br />{reason.secondary}</>}</small>}</div>
 }
 
 function MarketValuation({ market, companyId }: { market: any; companyId: string }) {
