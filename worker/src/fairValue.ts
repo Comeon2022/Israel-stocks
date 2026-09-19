@@ -8,6 +8,8 @@ export const FAIR_VALUE_ASSUMPTIONS = {
   weights: { evEbit: 0.4, pe: 0.35, fcf: 0.25 },
 } as const
 
+export const FAIR_VALUE_CONFIDENCE_THRESHOLDS = { low: 0.10, moderate: 0.20, high: 0.35 } as const
+
 type Scenario = 'conservative' | 'base' | 'optimistic'
 type Normalized = { value: number | null; method: 'DETERMINISTIC_3Y_MEDIAN'; periods: string[]; latest: number | null; average: number | null; median: number | null; available: boolean; reason?: string }
 
@@ -27,6 +29,31 @@ export function normalizeAnnual(rows: any[], field: string, requirePositive = tr
 
 const unavailable = (reason: string, inputs: any = {}, assumptions: any = {}) => ({ available: false, value: null, reason, inputs, assumptions })
 const method = (values: Record<Scenario, number>, inputs: any, assumptions: any) => ({ available: true, value: values.base, conservative: values.conservative, base: values.base, optimistic: values.optimistic, inputs, assumptions })
+
+function confidence(methods: Record<string, any>, normalization: { ebit: Normalized; netIncome: Normalized; fcf: Normalized }, netDebt: number | null, shares: number | null, currentPrice: number | null, marketCap: number | null, retailer: boolean) {
+  const names = { evEbit: 'EV_EBIT', pe: 'PE', fcf: 'FCF' } as const
+  const available = (Object.keys(names) as Array<keyof typeof names>).filter(key => methods[key]?.available)
+  const unavailableMethods = (Object.keys(names) as Array<keyof typeof names>).filter(key => !methods[key]?.available).map(key => ({ method: names[key], reason: methods[key]?.reason ?? 'UNAVAILABLE' }))
+  const availableBaseValues = Object.fromEntries(available.map(key => [names[key], methods[key].base]))
+  const values = available.map(key => methods[key].base as number).filter(Number.isFinite)
+  const max = values.length ? Math.max(...values) : null
+  const min = values.length ? Math.min(...values) : null
+  const average = values.length ? values.reduce((sum, value) => sum + value, 0) / values.length : null
+  const pct = max != null && min != null && average ? (max - min) / average : null
+  const classification = pct == null ? null : pct <= FAIR_VALUE_CONFIDENCE_THRESHOLDS.low ? 'LOW' : pct <= FAIR_VALUE_CONFIDENCE_THRESHOLDS.moderate ? 'MODERATE' : pct <= FAIR_VALUE_CONFIDENCE_THRESHOLDS.high ? 'HIGH' : 'VERY_HIGH'
+  const valuationBasis = available.includes('fcf') ? (available.some(key => key === 'evEbit' || key === 'pe') ? 'EARNINGS_AND_CASH_FLOW' : 'CASH_FLOW_ONLY') : (available.some(key => key === 'evEbit' || key === 'pe') ? 'EARNINGS_ONLY' : 'INSUFFICIENT_METHODS')
+  const dataCompleteness = { normalization: { ebit: normalization.ebit.available, netIncome: normalization.netIncome.available, fcf: normalization.fcf.available }, balanceSheetInputs: { netDebt: netDebt != null, sharesOutstanding: shares != null && shares > 0 }, marketInputs: { currentPrice: currentPrice != null && currentPrice > 0, marketCap: marketCap != null && marketCap > 0 } }
+  const reasons: string[] = []
+  if (available.includes('fcf')) reasons.push('THREE_METHODS_AVAILABLE')
+  else reasons.push('TWO_INDEPENDENT_EARNINGS_METHODS', retailer ? 'RETAILER_LEASE_HISTORY_MISSING' : 'INSUFFICIENT_FCF_HISTORY', 'FCF_METHOD_UNAVAILABLE')
+  if (classification === 'LOW') reasons.push('LOW_METHOD_DISPERSION')
+  if (classification === 'MODERATE') reasons.push('MODERATE_METHOD_DISPERSION')
+  if (classification === 'HIGH' || classification === 'VERY_HIGH') reasons.push('HIGH_METHOD_DISPERSION')
+  if (dataCompleteness.balanceSheetInputs.netDebt && dataCompleteness.balanceSheetInputs.sharesOutstanding && dataCompleteness.marketInputs.currentPrice && dataCompleteness.marketInputs.marketCap) reasons.push('COMPLETE_MARKET_INPUTS')
+  else { if (!dataCompleteness.balanceSheetInputs.netDebt) reasons.push('MISSING_NET_DEBT'); if (!dataCompleteness.balanceSheetInputs.sharesOutstanding) reasons.push('MISSING_SHARES_OUTSTANDING'); if (!dataCompleteness.marketInputs.currentPrice) reasons.push('MISSING_CURRENT_PRICE') }
+  const level = available.length < 2 || !dataCompleteness.balanceSheetInputs.sharesOutstanding || !dataCompleteness.marketInputs.currentPrice ? 'INSUFFICIENT' : available.length === 3 && pct != null && pct <= FAIR_VALUE_CONFIDENCE_THRESHOLDS.moderate && dataCompleteness.balanceSheetInputs.netDebt ? 'HIGH' : pct != null && pct > FAIR_VALUE_CONFIDENCE_THRESHOLDS.high ? 'LOW' : 'MEDIUM'
+  return { level, valuationBasis, methodCoverage: { availableCount: available.length, totalCount: 3, availableMethods: available.map(key => names[key]), unavailableMethods }, dispersion: { pct, classification, availableBaseValues }, dataCompleteness, reasons }
+}
 
 export function buildFairValue(companyId: string, rows: any[], market: any, retailer = false) {
   const ebit = normalizeAnnual(rows, 'operating_income')
@@ -54,5 +81,5 @@ export function buildFairValue(companyId: string, rows: any[], market: any, reta
   const perShare = (value: number | null) => value != null && shares != null && shares > 0 ? value * 1_000_000 / shares : null
   const perShareValues = { conservative: perShare(blended.conservativeFairValue), base: perShare(blended.baseFairValue), optimistic: perShare(blended.optimisticFairValue) }
   const upside = (value: number | null) => value != null && currentPrice != null && currentPrice > 0 ? value / currentPrice - 1 : null
-  return { companyId, market: { currentPrice, marketCap, asOf: market?.as_of ?? null, provider: market?.provider ?? null, delayMinutes: market?.delay_minutes ?? null }, normalization: { ebit, netIncome, fcf }, methods, blended, perShare: perShareValues, upside: { conservativePct: upside(perShareValues.conservative), basePct: upside(perShareValues.base), optimisticPct: upside(perShareValues.optimistic) }, marginOfSafety: { fairPrice: perShareValues.base, mos10: perShareValues.base != null ? perShareValues.base * .9 : null, mos20: perShareValues.base != null ? perShareValues.base * .8 : null, mos30: perShareValues.base != null ? perShareValues.base * .7 : null }, basis: { annualYears: ['2023', '2024', '2025'], normalizationMethod: 'DETERMINISTIC_3Y_MEDIAN', assumptionVersion: FAIR_VALUE_ASSUMPTIONS.version, retailer, netDebt, sharesOutstanding: shares, currentPrice, currentMarketCap: marketCap } }
+  return { companyId, market: { currentPrice, marketCap, asOf: market?.as_of ?? null, provider: market?.provider ?? null, delayMinutes: market?.delay_minutes ?? null }, normalization: { ebit, netIncome, fcf }, methods, blended, confidence: confidence(methods, { ebit, netIncome, fcf }, netDebt, shares, currentPrice, marketCap, retailer), perShare: perShareValues, upside: { conservativePct: upside(perShareValues.conservative), basePct: upside(perShareValues.base), optimisticPct: upside(perShareValues.optimistic) }, marginOfSafety: { fairPrice: perShareValues.base, mos10: perShareValues.base != null ? perShareValues.base * .9 : null, mos20: perShareValues.base != null ? perShareValues.base * .8 : null, mos30: perShareValues.base != null ? perShareValues.base * .7 : null }, basis: { annualYears: ['2023', '2024', '2025'], normalizationMethod: 'DETERMINISTIC_3Y_MEDIAN', assumptionVersion: FAIR_VALUE_ASSUMPTIONS.version, retailer, netDebt, sharesOutstanding: shares, currentPrice, currentMarketCap: marketCap } }
 }
