@@ -111,6 +111,24 @@ function PeerComparisonSemantic() {
 void PeerComparisonSemantic
 
 function PeerEducation({ metric, shown }: { metric: string; shown: string }) {
+  if (metric === 'cashConversion') return <>
+    <h3>המרת רווח למזומן</h3>
+    <p dir="ltr">Cash Conversion = Cash Flow Conversion — כמה מהרווח החשבונאי הופך בפועל למזומן</p>
+    <h4>מה זה?</h4>
+    <p>המרת רווח למזומן מודדת עד כמה הרווח שהחברה מדווחת עליו מתורגם בפועל לתזרים מזומנים.</p>
+    <p>חברה יכולה להציג רווח חשבונאי גבוה, אבל אם המזומן עדיין לא התקבל בפועל, לדוגמה בגלל גידול בלקוחות חייבים, מלאי או שינויים אחרים בהון החוזר, תזרים המזומנים שלה יכול להיות נמוך יותר.</p>
+    <p>במילים פשוטות, המדד עוזר לבדוק אם הרווח שמופיע בדוחות מגובה גם במזומן שנכנס לעסק.</p>
+    <h4>איך קוראים את המספר?</h4>
+    <p>אם יחס המרת הרווח למזומן הוא {shown}%, זה אומר שהחברה מייצרת תזרים מזומנים בגובה של בערך {shown}% מהרווח הנקי שלה.</p>
+    <p>במילים פשוטות: על כל 1 ₪ של רווח נקי, החברה מייצרת בערך {(Number(shown) / 100).toFixed(2)} ₪ של מזומן מהפעילות.</p>
+    <h4>איך מפרשים את זה?</h4>
+    <p>יחס קרוב ל־100% יכול להעיד שהרווח החשבונאי מתורגם בצורה טובה יחסית למזומן בפועל.</p>
+    <p>יחס גבוה מ־100% יכול לקרות כאשר החברה מייצרת יותר מזומן מהרווח הנקי המדווח, למשל בגלל שיפור בהון החוזר, גביית לקוחות או השפעות חשבונאיות שאינן דורשות יציאת מזומן.</p>
+    <p>יחס נמוך משמעותית מ־100% לאורך זמן יכול להיות סימן לכך שחלק גדול מהרווח עדיין לא הופך למזומן בפועל.</p>
+    <p>עם זאת, יחס נמוך בתקופה מסוימת אינו בהכרח בעיה. הוא יכול לנבוע מגידול במלאי, השקעה בהון חוזר, עונתיות או אירוע חד־פעמי.</p>
+    <p>לכן חשוב לבדוק את המרת הרווח למזומן לאורך כמה שנים, יחד עם תזרים המזומנים, הרווח הנקי, ההון החוזר ורמת החוב של החברה.</p>
+  </>
+  
   if (metric === 'fcfMargin') return <>
     <h3>מרווח FCF</h3>
     <p dir="ltr">FCF Margin = Free Cash Flow Margin — שיעור תזרים המזומנים החופשי מתוך ההכנסות</p>
@@ -234,7 +252,7 @@ function PeerEducation({ metric, shown }: { metric: string; shown: string }) {
 function PeerComparisonDynamic({ companyId }: { companyId: string }) {
   const [retailersOnly, setRetailersOnly] = useState(false); const [metric, setMetric] = useState('pe'); const [data, setData] = useState<any>()
   useEffect(() => { apiGet<any>(retailersOnly ? '/api/peers/retailers' : '/api/peers').then(setData).catch(() => setData(null)) }, [retailersOnly])
-  const rows = data?.items?.[metric] ?? []; const selected = rows.find((row: any) => row.companyId === companyId) ?? rows.find((row: any) => row.value != null); const shown = selected?.value == null ? '—' : (metric === 'fcfYield' || metric === 'ebitMargin' || metric === 'netMargin' || metric === 'fcfMargin') ? (Number(selected.value) * 100).toFixed(2) : Number(selected.value).toFixed(2)
+  const rows = data?.items?.[metric] ?? []; const selected = rows.find((row: any) => row.companyId === companyId) ?? rows.find((row: any) => row.value != null); const shown = selected?.value == null ? '—' : (metric === 'fcfYield' || metric === 'ebitMargin' || metric === 'netMargin' || metric === 'fcfMargin' || metric === 'cashConversion') ? (Number(selected.value) * 100).toFixed(2) : Number(selected.value).toFixed(2)
   return <section className="panel peer-compare"><div className="section-heading"><h2>השוואת חברות</h2><span>ערכים עובדתיים · ללא דירוג</span></div><div className="peer-comparison-content"><aside className="peer-explanation" dir="rtl"><PeerEducation metric={metric} shown={shown} /></aside><div className="peer-data"><div className="peer-controls"><label>מדד<select value={metric} onChange={e => setMetric(e.target.value)}>{Object.entries(metricLabels).map(([key, label]) => <option key={key} value={key}>{label}</option>)}</select></label><div className="peer-toggle" role="group" aria-label="קבוצת השוואה"><button className={!retailersOnly ? 'active' : ''} onClick={() => setRetailersOnly(false)}>כל החברות</button><button className={retailersOnly ? 'active' : ''} onClick={() => setRetailersOnly(true)}>קמעונאיות</button></div></div><div className="peer-column-help">חברה = החברה הנבדקת · ערך המדד = הערך של החברה · חציון קבוצה = נקודת האמצע · פער מהחציון = הערך פחות החציון, באותה יחידה.</div><table className="peer-table"><thead><tr><th>חברה</th><th>ערך המדד</th><th>חציון קבוצה</th><th>פער מהחציון</th></tr></thead><tbody>{rows.map((row: any) => <tr key={row.companyId}><th>{peerNames[row.companyId] ?? row.companyId}</th><td dir="ltr">{row.value == null ? `לא זמין — ${peerUnavailableReason(metric)}` : formatMetricValue(metric, row.value)}</td><td dir="ltr">{row.peerMedian == null ? 'לא זמין' : formatMetricValue(metric, row.peerMedian)}</td><td dir="ltr">{row.deltaVsMedian == null ? 'לא זמין' : formatMetricValue(metric, row.deltaVsMedian)}</td></tr>)}</tbody></table></div></div></section>
 }
 
