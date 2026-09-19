@@ -19,3 +19,7 @@ Added `src/lib/metricGlossary.ts` as the centralized deterministic glossary and 
 ## Verification milestone
 
 The frontend test suite, Worker tests/check, and production build pass. The existing Worker remains unchanged. The final Pages deployment and browser verification will be recorded after the committed frontend build is deployed.
+
+## Final implementation
+
+The peer selector now uses a dedicated explanation panel on the left in the desktop RTL layout; changing the metric immediately changes its Hebrew label, definition, and interpretation hint. On narrow screens the panel stacks below the selector. Metric cards use the reusable `MetricHelp` affordance, unavailable values retain deterministic reasons, and the former chart area is replaced by the compact annual facts/calculated-metrics/signals presentation.

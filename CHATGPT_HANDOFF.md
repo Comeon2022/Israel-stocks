@@ -636,6 +636,8 @@ Baseline audit started. This is a frontend-only phase: formulas, API contracts, 
 
 Phase 10C implementation milestone: added the centralized Hebrew `metricGlossary` and reusable `MetricHelp` control. Metric cards now have keyboard-accessible help affordances; the Phase 10B trend-chart block is no longer rendered and the annual summary remains. No backend, formulas, API contract, market values, TTM, ROIC, or score `/15` changed. Full selector-panel and verification work remains in progress.
 
+Phase 10C final implementation completed locally: the peer selector now has a dynamic left-side Hebrew explanation panel and responsive stacking. Metric cards use reusable help controls, unavailable states retain reason context, and the low-value charts are replaced by compact annual facts, calculated metrics, and deterministic signals. All five Hebrew company names remain unchanged. Tests/build pass; Pages deployment and browser evidence follow.
+
 Final API market regression values: Sano `-0.70`, Shufersal `+0.25`, Rami Levy `+5.50`, Yochananof `+0.90`, and Neto Malinda `+4.70` ILS. Chrome CDP rendered all five company routes with `market=true`, four annual/interim period markers, `ttmUnavailable=true`, `mock=false`, and `errors=0`; `/companies` rendered with `errors=0`. No production data or scoring behavior changed.
 
 Phase 9B source inspection is in progress. Selected official FY2025 MAYA XBRL reports are Sano `1728715`, Shufersal `1734231`, Rami Levy `1731570`, Yochananof `1732159`, and Neto Malinda `1732821`. Documentation is being updated after each major extraction, validation, persistence, and verification task.
