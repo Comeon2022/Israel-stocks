@@ -27,3 +27,9 @@ Missing methods return null values and explicit reason codes such as `INSUFFICIE
 ## Verification
 
 Focused fair-value tests cover normalization, missing history, scenarios, blending, per-share values, MOS, non-positive FCF, and retailer lease-payment protection. Existing frontend and Worker suites plus type-check/build are required before deployment.
+
+## Production verification
+
+The existing Worker is deployed at `https://israel-stocks-api.karu-lior.workers.dev`; the Phase 11 deployment version is `9b4c3279-eb0c-4ab2-83a4-6c7a66f40a06`. All five live fair-value endpoints returned successful deterministic responses. Base per-share values were Sano 329.37 ILS, Shufersal 38.76 ILS, Rami Levy 311.40 ILS, Yochananof 237.85 ILS, and Neto Malinda 144.22 ILS. Available methods were EV/EBIT and P/E for each company; retailer FCF correctly remained unavailable because explicit lease cash payments are absent, while the non-retailer FCF cases remained unavailable for insufficient validated annual history.
+
+The existing Pages project was deployed at `https://07525d41.israel-stocks.pages.dev` from source commit `d0ca5ae`. Chrome CDP verified the five production company routes as React-rendered, market-backed, mock-free, TTM-unavailable, and free of console/runtime errors. The Fair Value section is placed after the current market/valuation content and before the unchanged financial history table. Valuation Score /15 remains inactive.
