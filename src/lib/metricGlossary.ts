@@ -41,3 +41,24 @@ export const metricGlossary: Record<string, MetricGlossaryEntry> = {
 }
 
 export const glossaryFor = (key: string) => { const item = metricGlossary[key] ?? metricGlossary.unavailable; return { ...item, explanation: `${item.explanation} ${item.meaning}` } }
+
+export const formatMetricValue = (key: string, value: number | null | undefined) => {
+  if (value == null || !Number.isFinite(value)) return 'לא זמין'
+  if (['fcfYield', 'ebitMargin', 'netMargin', 'fcfMargin', 'cashConversion', 'netDebtToMarketCap', 'netCashToMarketCap'].includes(key)) return `${(value * 100).toFixed(2)}%`
+  if (key === 'enterpriseValueIlsMillions') return value >= 1000 ? `₪${(value / 1000).toFixed(2)} מיליארד` : `₪${value.toFixed(2)} מיליון`
+  return `${value.toFixed(2)}×`
+}
+
+export const describeMetricValue = (key: string, value: number | null | undefined, company = 'החברה') => {
+  const shown = formatMetricValue(key, value)
+  if (value == null || !Number.isFinite(value)) return 'הערך לא זמין כי חסר נתון מקור מאומת הנדרש לחישוב.'
+  if (key === 'pe') return `${company}: ${shown} פירושו ששווי השוק הוא בערך פי ${value.toFixed(2)} מהרווח הנקי השנתי, כלומר כ-${value.toFixed(2)} ₪ של שווי שוק לכל 1 ₪ של רווח שנתי.`
+  if (key === 'enterpriseValueIlsMillions') return `${company}: ${shown} הוא סכום שווי הפעילות, בקירוב שווי השוק בתוספת חוב נטו או בניכוי מזומן נטו. זהו סכום ולא מכפיל.`
+  if (key === 'evEbit') return `${company}: ${shown} פירושו ששווי הפעילות הוא בערך פי ${value.toFixed(2)} מהרווח התפעולי השנתי (EBIT).`
+  if (key === 'evEbitda') return `${company}: ${shown} פירושו ששווי הפעילות הוא בערך פי ${value.toFixed(2)} מ-EBITDA השנתי — רווח לפני ריבית, מסים, פחת והפחתות.`
+  if (key === 'priceToFcf') return `${company}: ${shown} פירושו ששווי השוק הוא בערך פי ${value.toFixed(2)} מתזרים המזומנים החופשי השנתי (FCF).`
+  if (key === 'fcfYield') return `${company}: תשואת FCF של ${shown} פירושה שהתזרים החופשי השנתי שווה לכ-${shown} משווי השוק.`
+  if (key === 'netDebtToMarketCap') return `${company}: ערך של ${shown} פירושו שאין כאן חוב נטו חיובי; הסימן השלילי מצביע על מזומן נטו בשיעור של כ-${Math.abs(value * 100).toFixed(2)}% משווי השוק.`
+  if (key === 'netCashToMarketCap') return `${company}: מזומן נטו בשיעור ${shown} משמעו שלאחר הפחתת החוב הפיננסי נותר מזומן נטו בשיעור זה משווי השוק.`
+  return `${company}: הערך המוצג הוא ${shown}.`
+}

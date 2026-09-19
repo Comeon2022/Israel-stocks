@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { annualChartData, displayNames, metricLabels, reasons } from './LiveApiCompanyPage'
-import { glossaryFor, metricGlossary } from './lib/metricGlossary'
+import { describeMetricValue, formatMetricValue, glossaryFor, metricGlossary } from './lib/metricGlossary'
 
 describe('five-company UI consistency', () => {
   it('uses Hebrew names for every API-backed company', () => {
@@ -37,5 +37,14 @@ describe('five-company UI consistency', () => {
     expect(glossaryFor('enterpriseValueIlsMillions').fullNameEn).toBe('Enterprise Value')
     expect(glossaryFor('pe').fullNameEn).toBe('Price to Earnings')
     expect(glossaryFor('ifrs16').caution).toContain('השוואה')
+  })
+
+  it('formats valuation values with semantic units and actual-number explanations', () => {
+    expect(formatMetricValue('pe', 14.96)).toBe('14.96×')
+    expect(formatMetricValue('fcfYield', 0.0185)).toBe('1.85%')
+    expect(formatMetricValue('netDebtToMarketCap', -0.0691)).toBe('-6.91%')
+    expect(formatMetricValue('enterpriseValueIlsMillions', 3970)).toContain('3.97')
+    expect(describeMetricValue('pe', 14.96, 'סנו')).toContain('14.96')
+    expect(describeMetricValue('netDebtToMarketCap', -0.0691, 'סנו')).toContain('מזומן נטו')
   })
 })

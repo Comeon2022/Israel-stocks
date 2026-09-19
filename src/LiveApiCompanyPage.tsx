@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { apiFinancialRepository } from './data/apiRepository'
 import { apiGet } from './api/client'
 import { MetricHelp } from './components/MetricHelp'
-import { glossaryFor } from './lib/metricGlossary'
+import { describeMetricValue, formatMetricValue, glossaryFor } from './lib/metricGlossary'
 import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 import './LiveApiCompanyPage.css'
 
@@ -25,11 +25,14 @@ const reasons: Record<string, { primary: string; secondary?: string }> = {
 const num = (v: unknown, d = 2) => typeof v === 'number' && Number.isFinite(v) ? v.toFixed(d) : 'לא זמין'
 const ltr = (v: unknown, d = 2) => <span dir="ltr" className="financial-number">{num(v, d)}</span>
 const price = (v: unknown) => <span dir="ltr" className="financial-number">{typeof v === 'number' ? `₪${v.toFixed(2)}` : 'לא זמין'}</span>
-const marketCap = (v: unknown) => <span dir="ltr" className="financial-number">{typeof v === 'number' ? (v >= 1000 ? `₪${(v / 1000).toFixed(2)} מיליארד` : `₪${v.toFixed(1)} מיליון`) : 'לא זמין'}</span>
+const marketCap = (v: unknown) => <span dir="ltr" data-value={typeof v === 'number' ? v : undefined} className="financial-number">{typeof v === 'number' ? (v >= 1000 ? `₪${(v / 1000).toFixed(2)} מיליארד` : `₪${v.toFixed(1)} מיליון`) : 'לא זמין'}</span>
 const basis = (v?: string) => v === 'LATEST_ANNUAL' ? 'שנה מלאה אחרונה' : v === 'TTM' ? '12 החודשים האחרונים' : v === 'QUARTER_ONLY' ? 'רבעון בלבד' : 'לא זמין'
 
 function Metric({ label, metric, value, reason }: { label: string; metric?: string; value: React.ReactNode; reason?: { primary: string; secondary?: string } }) {
-  return <div className="valuation-metric"><span className="metric-label">{label}<MetricHelp metric={metric ?? 'unavailable'} /></span><strong>{value}</strong>{reason && <small>{reason.primary}{reason.secondary && <><br />{reason.secondary}</>}</small>}</div>
+  const metricKey = metric ?? ({ 'P/E': 'pe', EV: 'enterpriseValueIlsMillions', 'EV / EBIT': 'evEbit', 'EV / EBITDA': 'evEbitda', 'EV / EBITDA ex IFRS 16': 'evEbitdaExIfrs16', 'P / FCF': 'priceToFcf', 'FCF Yield': 'fcfYield', 'Net Debt / Market Cap': 'netDebtToMarketCap', 'Net Cash / Market Cap': 'netCashToMarketCap' } as Record<string, string>)[label] ?? 'unavailable'
+  const textValue = (node: any): string => { if (node == null) return ''; if (typeof node === 'string' || typeof node === 'number') return String(node); if (Array.isArray(node)) return node.map(textValue).join(''); return node.props?.['data-value'] ?? textValue(node.props?.children) }
+  const numericValue = Number(textValue(value).replace(/[^d.-]/g, ''))
+  return <div className="valuation-metric"><span className="metric-label">{label}<MetricHelp metric={metricKey} value={Number.isFinite(numericValue) ? numericValue : undefined} /></span><strong>{value}</strong>{reason && <small>{reason.primary}{reason.secondary && <><br />{reason.secondary}</>}</small>}</div>
 }
 
 function MarketValuation({ market, companyId }: { market: any; companyId: string }) {
@@ -39,7 +42,7 @@ function MarketValuation({ market, companyId }: { market: any; companyId: string
   const v = market.valuation
   const unavailable = (key: string) => v?.[key] == null ? (v?.unavailableReasons ?? []).map((x: string) => reasons[x]).find(Boolean) : undefined
   const retailer = retailers.has(companyId)
-  return <><AnalyticsSection analytics={analytics} /><PeerComparisonExplained />
+  return <><AnalyticsSection analytics={analytics} /><PeerComparisonSemantic />
     <section className="panel live-market"><div className="section-heading"><h2>נתוני שוק</h2><span className="live-status">נתוני תמחור זמינים</span></div><div className="market-cards"><Metric label="מחיר אחרון" value={price(market.share_price)} /><Metric label="שווי שוק" value={marketCap(market.market_cap)} /><Metric label="שינוי יומי" value={<span dir="ltr" className={market.day_change >= 0 ? 'positive financial-number' : 'negative financial-number'}>{market.day_change == null ? 'לא זמין' : `${market.day_change < 0 ? '-' : ''}₪${Math.abs(market.day_change).toFixed(2)} (${market.day_change_pct == null ? '—' : `${market.day_change_pct.toFixed(2)}%`})`}</span>} /></div><div className="market-meta">מקור: <b>{market.provider === 'GLOBES' ? 'Globes' : market.provider}</b> · השהיה: ~15 דקות · עדכון: <span dir="ltr">{market.as_of ?? '—'}</span></div></section>
     <section className="panel valuation-panel"><div className="section-heading"><h2>מכפילי תמחור</h2><span className="score-status">נתוני תמחור זמינים · ציון התמחור /15 עדיין לא הופעל</span></div><div className="valuation-grid"><Metric label="P/E" value={v?.pe == null ? 'לא זמין' : <>{ltr(v.pe)}×</>} reason={unavailable('pe')} /><Metric label="EV" value={marketCap(v?.enterpriseValueIlsMillions)} /><Metric label="EV / EBIT" value={v?.evEbit == null ? 'לא זמין' : <>{ltr(v.evEbit)}×</>} reason={unavailable('evEbit')} /><Metric label="EV / EBITDA" value={v?.evEbitda == null ? 'לא זמין' : <>{ltr(v.evEbitda)}×</>} reason={unavailable('evEbitda')} /><Metric label="EV / EBITDA ex IFRS 16" value={retailer ? 'לא זמין' : 'לא רלוונטי'} reason={retailer ? unavailable('evEbitdaExIfrs16') ?? reasons.MISSING_LEASE_CASH_PAYMENTS : undefined} /><Metric label="P / FCF" value={v?.priceToFcf == null ? 'לא זמין' : <>{ltr(v.priceToFcf)}×</>} reason={unavailable('priceToFcf')} /><Metric label="FCF Yield" value={v?.fcfYield == null ? 'לא זמין' : <>{ltr(v.fcfYield * 100)}%</>} reason={unavailable('fcfYield')} /><Metric label="Net Debt / Market Cap" value={v?.netDebtToMarketCap == null ? 'לא זמין' : <>{ltr(v.netDebtToMarketCap * 100)}%</>} reason={unavailable('netDebtToMarketCap')} /><Metric label="Net Cash / Market Cap" value={v?.netCashToMarketCap == null ? 'לא זמין' : <>{ltr(v.netCashToMarketCap * 100)}%</>} reason={unavailable('netCashToMarketCap')} /></div><div className="basis-note">בסיס רווח: {basis(v?.basis?.earnings)} · תקופה: <span dir="ltr">{v?.periodEnd ?? 'לא זמין'}</span></div></section>
   </>
@@ -87,6 +90,20 @@ function PeerComparisonExplained() {
   const rows = data?.items?.[metric] ?? []
   const info = glossaryFor(metric)
   return <section className="panel peer-compare"><div className="section-heading"><h2>השוואת חברות</h2><span>ערכים עובדתיים · ללא דירוג</span></div><div className="peer-selection"><aside className="metric-explanation-panel"><b>{info.label}</b><span>{info.explanation}</span>{info.hint && <small>{info.hint}</small>}</aside><div className="peer-controls"><label>מדד<MetricHelp metric={metric} /><select value={metric} onChange={e => setMetric(e.target.value)}>{Object.entries(metricLabels).map(([key, label]) => <option key={key} value={key}>{label}</option>)}</select></label><div className="peer-toggle" role="group" aria-label="קבוצת השוואה"><button className={!retailersOnly ? 'active' : ''} onClick={() => setRetailersOnly(false)}>כל החברות</button><button className={retailersOnly ? 'active' : ''} onClick={() => setRetailersOnly(true)}>קמעונאיות</button></div></div></div><table className="peer-table"><thead><tr><th>חברה</th><th>מדד</th><th>ערך חברה</th><th>חציון קבוצה</th><th>פער מהחציון</th></tr></thead><tbody>{rows.map((row: any) => <tr key={row.companyId}><th>{peerNames[row.companyId] ?? row.companyId}</th><td>{info.label}</td><td dir="ltr">{row.value == null ? unavailable : row.value.toFixed(2)}</td><td dir="ltr">{row.peerMedian == null ? unavailable : row.peerMedian.toFixed(2)}</td><td dir="ltr">{row.deltaVsMedian == null ? unavailable : row.deltaVsMedian.toFixed(2)}</td></tr>)}</tbody></table></section>
+}
+
+void PeerComparisonExplained
+const peerUnavailableReason = (metric: string) => metric === 'fcfYield' || metric === 'priceToFcf' ? 'חסר תזרים חופשי (FCF) מאומת לתקופה הנדרשת.' : metric === 'evEbitda' || metric === 'evEbit' ? 'חסר EBITDA/EBIT או חוב נטו מאומת הנדרש לחישוב.' : 'חסר נתון מקור מאומת הנדרש לחישוב המדד.'
+
+function PeerComparisonSemantic() {
+  const [retailersOnly, setRetailersOnly] = useState(false)
+  const [metric, setMetric] = useState('pe')
+  const [data, setData] = useState<any>()
+  useEffect(() => { apiGet<any>(retailersOnly ? '/api/peers/retailers' : '/api/peers').then(setData).catch(() => setData(null)) }, [retailersOnly])
+  const rows = data?.items?.[metric] ?? []
+  const info = glossaryFor(metric)
+  const first = rows.find((row: any) => row.value != null)
+  return <section className="panel peer-compare"><div className="section-heading"><h2>השוואת חברות</h2><span>ערכים עובדתיים · ללא דירוג</span></div><div className="peer-selection"><aside className="metric-explanation-panel"><b>{info.label}</b>{info.fullNameEn && <span dir="ltr">{info.fullNameEn}</span>}<span><strong>מה זה?</strong> {info.explanation}</span><span><strong>איך קוראים את המספר?</strong> {first ? describeMetricValue(metric, first.value, peerNames[first.companyId] ?? 'החברה') : 'אין כרגע ערך זמין בקבוצה זו.'}</span><span><strong>חציון הקבוצה:</strong> הערך שנמצא באמצע בין החברות עם נתון זמין; מחצית מעליו ומחצית מתחתיו.</span>{info.hint && <small>{info.hint}</small>}{info.caution && <small>{info.caution}</small>}</aside><div className="peer-controls"><label>מדד<MetricHelp metric={metric} value={first?.value} company={first ? peerNames[first.companyId] : undefined} /><select value={metric} onChange={e => setMetric(e.target.value)}>{Object.entries(metricLabels).map(([key, label]) => <option key={key} value={key}>{label}</option>)}</select></label><div className="peer-toggle" role="group" aria-label="קבוצת השוואה"><button className={!retailersOnly ? 'active' : ''} onClick={() => setRetailersOnly(false)}>כל החברות</button><button className={retailersOnly ? 'active' : ''} onClick={() => setRetailersOnly(true)}>קמעונאיות</button></div></div></div><div className="peer-column-help">חברה = החברה הנבדקת · מדד = המדד שנבחר · ערך המדד = הערך של החברה · חציון קבוצה = נקודת האמצע · פער מהחציון = הערך פחות החציון, באותה יחידה.</div><table className="peer-table"><thead><tr><th>חברה</th><th>מדד</th><th>ערך המדד</th><th>חציון קבוצה</th><th>פער מהחציון</th></tr></thead><tbody>{rows.map((row: any) => <tr key={row.companyId}><th>{peerNames[row.companyId] ?? row.companyId}</th><td>{info.label}</td><td dir="ltr">{row.value == null ? `לא זמין — ${peerUnavailableReason(metric)}` : formatMetricValue(metric, row.value)}</td><td dir="ltr">{row.peerMedian == null ? 'לא זמין' : formatMetricValue(metric, row.peerMedian)}</td><td dir="ltr">{row.deltaVsMedian == null ? 'לא זמין' : formatMetricValue(metric, row.deltaVsMedian)}</td></tr>)}</tbody></table></section>
 }
 
 export function LiveApiCompanyPage({ id }: { id: string }) {

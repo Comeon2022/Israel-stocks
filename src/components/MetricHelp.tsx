@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
-import { glossaryFor } from '../lib/metricGlossary'
+import { describeMetricValue, glossaryFor } from '../lib/metricGlossary'
 
-export function MetricHelp({ metric, compact = false }: { metric: string; compact?: boolean }) {
+export function MetricHelp({ metric, value, company, compact = false }: { metric: string; value?: number | null; company?: string; compact?: boolean }) {
   const [open, setOpen] = useState(false)
   const ref = useRef<HTMLSpanElement>(null)
   const item = glossaryFor(metric)
@@ -15,5 +15,5 @@ export function MetricHelp({ metric, compact = false }: { metric: string; compac
     return () => { document.removeEventListener('pointerdown', closeOnOutside); document.removeEventListener('keydown', closeOnEscape); document.removeEventListener('metric-help-open', closeOthers) }
   }, [open])
   const toggle = () => { const next = !open; if (next) document.dispatchEvent(new CustomEvent('metric-help-open', { detail: ref.current })); setOpen(next) }
-  return <span ref={ref} className={`metric-help ${open ? 'is-open' : ''}`}><button type="button" aria-label={`הסבר: ${item.label}`} aria-expanded={open} aria-controls={`metric-help-${item.key}`} title={item.explanation} onClick={toggle}>?</button>{open && <span id={`metric-help-${item.key}`} role="tooltip" className={`metric-tooltip ${compact ? 'compact' : ''}`}><b>{item.label}</b>{item.fullNameEn && <span dir="ltr">{item.fullNameEn}</span>}<span>{item.explanation}</span><span>{item.meaning}</span>{item.hint && <small>{item.hint}</small>}{item.caution && <small>{item.caution}</small>}</span>}</span>
+  return <span ref={ref} className={`metric-help ${open ? 'is-open' : ''}`}><button type="button" aria-label={`הסבר: ${item.label}`} aria-expanded={open} aria-controls={`metric-help-${item.key}`} title={item.explanation} onClick={toggle}>?</button>{open && <span id={`metric-help-${item.key}`} role="tooltip" className={`metric-tooltip ${compact ? 'compact' : ''}`}><b>{item.label}</b>{item.fullNameEn && <span dir="ltr">{item.fullNameEn}</span>}<span>{item.explanation}</span><span>{item.meaning}</span>{value !== undefined && <span>{describeMetricValue(metric, value, company)}</span>}{item.hint && <small>{item.hint}</small>}{item.caution && <small>{item.caution}</small>}</span>}</span>
 }
