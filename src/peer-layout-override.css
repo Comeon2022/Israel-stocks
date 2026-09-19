@@ -8,12 +8,27 @@
   align-items: start;
   width: 100%;
 }
+.peer-compare .peer-comparison-content {
+  display: grid;
+  grid-template-columns: minmax(360px, 2fr) minmax(0, 3fr);
+  grid-template-areas: "explanation data";
+  gap: 32px;
+  direction: ltr;
+  align-items: start;
+  width: 100%;
+}
 .peer-explanation { grid-area: explanation; min-width: 0; width: 100%; }
 .peer-data {
   grid-area: data;
   direction: rtl;
   min-width: 0;
   width: 100%;
+  max-width: none;
+}
+.peer-compare .peer-data {
+  display: block;
+  width: 100%;
+  min-width: 0;
   max-width: none;
 }
 .peer-data .peer-controls {
@@ -28,9 +43,15 @@
 .peer-data .peer-table {
   display: table;
   width: 100%;
-  min-width: 650px;
+  min-width: 0;
   table-layout: fixed;
   white-space: normal;
+}
+.peer-compare .peer-data .peer-table {
+  display: table;
+  width: 100%;
+  min-width: 650px;
+  table-layout: fixed;
 }
 .peer-data .peer-table th,
 .peer-data .peer-table td {
@@ -49,6 +70,10 @@
     grid-template-columns: 1fr;
     grid-template-areas: "data" "explanation";
     gap: 16px;
+  }
+  .peer-compare .peer-comparison-content {
+    grid-template-columns: 1fr;
+    grid-template-areas: "data" "explanation";
   }
   .peer-data .peer-controls { flex-wrap: wrap; }
   .peer-data .peer-table { min-width: 650px; }
