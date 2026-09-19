@@ -111,6 +111,23 @@ function PeerComparisonSemantic() {
 void PeerComparisonSemantic
 
 function PeerEducation({ metric, shown }: { metric: string; shown: string }) {
+  if (metric === 'netMargin') return <>
+    <h3>מרווח נקי</h3>
+    <p dir="ltr">Net Margin = Net Profit Margin — שיעור הרווח הנקי מתוך ההכנסות</p>
+    <h4>מה זה?</h4>
+    <p>מרווח נקי מודד איזה חלק מההכנסות של החברה נשאר בסופו של דבר כרווח נקי, לאחר כל ההוצאות.</p>
+    <p>הרווח הנקי הוא הרווח שנשאר לחברה לאחר הוצאות תפעול, הוצאות מימון, מסים והוצאות נוספות.</p>
+    <p>במילים פשוטות, המרווח הנקי מראה כמה אגורות של רווח סופי נשארות לחברה מכל 1 ₪ של הכנסות.</p>
+    <h4>איך קוראים את המספר?</h4>
+    <p>אם המרווח הנקי הוא {shown}%, זה אומר שמתוך כל 100 ₪ של הכנסות, החברה משאירה בערך {shown} ₪ כרווח נקי.</p>
+    <p>במילים פשוטות: על כל 1 ₪ של הכנסות, נשארים לחברה בערך {(Number(shown) / 100).toFixed(2)} ₪ כרווח נקי.</p>
+    <h4>איך מפרשים את זה?</h4>
+    <p>מרווח נקי גבוה יותר בדרך כלל אומר שהחברה מצליחה להשאיר חלק גדול יותר מההכנסות כרווח לבעלי המניות לאחר כל ההוצאות.</p>
+    <p>שיפור במרווח הנקי לאורך זמן יכול לנבוע משיפור ברווחיות התפעולית, ירידה בהוצאות מימון, מסים נמוכים יותר או שילוב של כמה גורמים.</p>
+    <p>ירידה במרווח הנקי יכולה לנבוע מעלייה בעלויות, הוצאות מימון גבוהות יותר, מסים, הוצאות חד־פעמיות או חולשה בפעילות העסקית.</p>
+    <p>חשוב לזכור שהמרווח הנקי מושפע גם ממבנה החוב, מהריבית ומהמסים, ולכן בהשוואה בין חברות כדאי לבדוק אותו יחד עם מרווח EBIT, תזרים המזומנים ורמת החוב.</p>
+    <p>גם כאן, אי אפשר להסיק על איכות החברה ממספר אחד בלבד. צריך להשוות את המרווח לאורך זמן ולחברות דומות ולבדוק אם הרווח הנקי מגובה גם בתזרים מזומנים.</p>
+  </>
   if (metric === 'ebitMargin') return <>
     <h3>מרווח EBIT</h3>
     <p dir="ltr">EBIT Margin = Earnings Before Interest and Taxes Margin — שיעור הרווח התפעולי מתוך ההכנסות</p>
@@ -199,7 +216,7 @@ function PeerEducation({ metric, shown }: { metric: string; shown: string }) {
 function PeerComparisonDynamic({ companyId }: { companyId: string }) {
   const [retailersOnly, setRetailersOnly] = useState(false); const [metric, setMetric] = useState('pe'); const [data, setData] = useState<any>()
   useEffect(() => { apiGet<any>(retailersOnly ? '/api/peers/retailers' : '/api/peers').then(setData).catch(() => setData(null)) }, [retailersOnly])
-  const rows = data?.items?.[metric] ?? []; const selected = rows.find((row: any) => row.companyId === companyId) ?? rows.find((row: any) => row.value != null); const shown = selected?.value == null ? '—' : (metric === 'fcfYield' || metric === 'ebitMargin') ? (Number(selected.value) * 100).toFixed(2) : Number(selected.value).toFixed(2)
+  const rows = data?.items?.[metric] ?? []; const selected = rows.find((row: any) => row.companyId === companyId) ?? rows.find((row: any) => row.value != null); const shown = selected?.value == null ? '—' : (metric === 'fcfYield' || metric === 'ebitMargin' || metric === 'netMargin') ? (Number(selected.value) * 100).toFixed(2) : Number(selected.value).toFixed(2)
   return <section className="panel peer-compare"><div className="section-heading"><h2>השוואת חברות</h2><span>ערכים עובדתיים · ללא דירוג</span></div><div className="peer-comparison-content"><aside className="peer-explanation" dir="rtl"><PeerEducation metric={metric} shown={shown} /></aside><div className="peer-data"><div className="peer-controls"><label>מדד<select value={metric} onChange={e => setMetric(e.target.value)}>{Object.entries(metricLabels).map(([key, label]) => <option key={key} value={key}>{label}</option>)}</select></label><div className="peer-toggle" role="group" aria-label="קבוצת השוואה"><button className={!retailersOnly ? 'active' : ''} onClick={() => setRetailersOnly(false)}>כל החברות</button><button className={retailersOnly ? 'active' : ''} onClick={() => setRetailersOnly(true)}>קמעונאיות</button></div></div><div className="peer-column-help">חברה = החברה הנבדקת · ערך המדד = הערך של החברה · חציון קבוצה = נקודת האמצע · פער מהחציון = הערך פחות החציון, באותה יחידה.</div><table className="peer-table"><thead><tr><th>חברה</th><th>ערך המדד</th><th>חציון קבוצה</th><th>פער מהחציון</th></tr></thead><tbody>{rows.map((row: any) => <tr key={row.companyId}><th>{peerNames[row.companyId] ?? row.companyId}</th><td dir="ltr">{row.value == null ? `לא זמין — ${peerUnavailableReason(metric)}` : formatMetricValue(metric, row.value)}</td><td dir="ltr">{row.peerMedian == null ? 'לא זמין' : formatMetricValue(metric, row.peerMedian)}</td><td dir="ltr">{row.deltaVsMedian == null ? 'לא זמין' : formatMetricValue(metric, row.deltaVsMedian)}</td></tr>)}</tbody></table></div></div></section>
 }
 
