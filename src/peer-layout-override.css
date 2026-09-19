@@ -53,6 +53,10 @@
   min-width: 650px;
   table-layout: fixed;
 }
+.peer-compare .peer-data .peer-table th:nth-child(2),
+.peer-compare .peer-data .peer-table td:nth-child(2) {
+  display: table-cell !important;
+}
 .peer-data .peer-table th,
 .peer-data .peer-table td {
   white-space: nowrap;
