@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { annualChartData, displayNames, metricLabels, reasons } from './LiveApiCompanyPage'
-import { metricGlossary } from './lib/metricGlossary'
+import { glossaryFor, metricGlossary } from './lib/metricGlossary'
 
 describe('five-company UI consistency', () => {
   it('uses Hebrew names for every API-backed company', () => {
@@ -28,5 +28,14 @@ describe('five-company UI consistency', () => {
     expect(metricGlossary.revenue.explanation).toContain('הכנסות')
     expect(metricGlossary.pe.explanation).toContain('שוק')
     expect(metricGlossary.unavailable.explanation).toContain('נתונים')
+  })
+
+  it('expands beginner financial definitions', () => {
+    expect(glossaryFor('ebitda').fullNameEn).toContain('Earnings Before Interest')
+    expect(glossaryFor('fcf').fullNameEn).toBe('Free Cash Flow')
+    expect(glossaryFor('cfo').fullNameEn).toBe('Cash Flow from Operations')
+    expect(glossaryFor('enterpriseValueIlsMillions').fullNameEn).toBe('Enterprise Value')
+    expect(glossaryFor('pe').fullNameEn).toBe('Price to Earnings')
+    expect(glossaryFor('ifrs16').caution).toContain('השוואה')
   })
 })

@@ -640,6 +640,10 @@ Phase 10C final implementation completed locally: the peer selector now has a dy
 
 Phase 10C production closeout: Pages deployment `1ce9504d.israel-stocks.pages.dev` was built from source commit `1c5ece41f60a7f10edf9789da55002816d004633`; production was verified with Chrome CDP on all five company routes and `/companies`, with zero console/runtime errors. The old charts are absent, the peer explanation panel and glossary help are live, unavailable states remain explicit, and no Worker redeployment was needed. `npm test` passed 10 files/29 tests; Worker tests passed 6 files/11 tests; Worker check and build passed.
 
+## Phase 10D financial knowledge accessibility
+
+Baseline audit started. Phase 10C help popovers were locally controlled and lacked outside-click/Escape/single-open behavior; glossary entries needed deeper beginner-friendly acronym explanations. This frontend-only phase will improve popover behavior and educational content without changing financial formulas, API contracts, market data, valuation methodology, TTM, ROIC, or score `/15`.
+
 Final API market regression values: Sano `-0.70`, Shufersal `+0.25`, Rami Levy `+5.50`, Yochananof `+0.90`, and Neto Malinda `+4.70` ILS. Chrome CDP rendered all five company routes with `market=true`, four annual/interim period markers, `ttmUnavailable=true`, `mock=false`, and `errors=0`; `/companies` rendered with `errors=0`. No production data or scoring behavior changed.
 
 Phase 9B source inspection is in progress. Selected official FY2025 MAYA XBRL reports are Sano `1728715`, Shufersal `1734231`, Rami Levy `1731570`, Yochananof `1732159`, and Neto Malinda `1732821`. Documentation is being updated after each major extraction, validation, persistence, and verification task.
@@ -675,3 +679,4 @@ Remote D1 was verified and compatibility migrations 0014/0015 added the missing 
 - Current blocker: `npx wrangler d1 migrations apply israel-stocks-db --remote` failed with Cloudflare API code `7403` (“account is not valid or is not authorized to access this service”). Therefore migration was not applied remotely, no real snapshots were persisted, no Worker deployment was performed, and `/market/latest` was not claimed active.
 - Local Globes dry-run previously validated all five identities/units with `Database writes: 0`. Production D1/API/Pages verification and valuation activation remain pending restoration of Cloudflare authorization.
 - No market values, valuation scores, secrets, cookies, or LLM functionality were fabricated or committed.
+Phase 10D implementation milestone: expanded `metricGlossary` with full English names, Hebrew beginner definitions, interpretation guidance, and cautions for EBITDA, EBIT, FCF, CFO, EV, P/E, Capex, D&A, IFRS 16, TTM, annual basis, peer median, and related metrics. `MetricHelp` now closes on outside pointer/touch, Escape, and another help opening, with keyboard-accessible ARIA state. Frontend tests/build pass; deployment verification remains.
