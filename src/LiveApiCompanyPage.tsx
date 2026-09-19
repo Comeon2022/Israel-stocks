@@ -111,6 +111,24 @@ function PeerComparisonSemantic() {
 void PeerComparisonSemantic
 
 function PeerEducation({ metric, shown }: { metric: string; shown: string }) {
+  if (metric === 'fcfMargin') return <>
+    <h3>מרווח FCF</h3>
+    <p dir="ltr">FCF Margin = Free Cash Flow Margin — שיעור תזרים המזומנים החופשי מתוך ההכנסות</p>
+    <h4>מה זה?</h4>
+    <p>מרווח FCF מודד איזה חלק מההכנסות של החברה הופך בסופו של דבר לתזרים מזומנים חופשי.</p>
+    <p>FCF — Free Cash Flow הוא תזרים המזומנים החופשי של החברה: המזומן שנשאר לאחר הפעילות השוטפת ולאחר ההשקעות ההוניות (Capex) הנדרשות לעסק.</p>
+    <p>במילים פשוטות, מרווח FCF מראה כמה מזומן חופשי נשאר לחברה מכל 1 ₪ של הכנסות.</p>
+    <h4>איך קוראים את המספר?</h4>
+    <p>אם מרווח ה־FCF הוא {shown}%, זה אומר שמתוך כל 100 ₪ של הכנסות, החברה מייצרת בערך {shown} ₪ של תזרים מזומנים חופשי.</p>
+    <p>במילים פשוטות: על כל 1 ₪ של הכנסות, נשארים לחברה בערך {(Number(shown) / 100).toFixed(2)} ₪ כתזרים מזומנים חופשי.</p>
+    <h4>איך מפרשים את זה?</h4>
+    <p>מרווח FCF גבוה יותר בדרך כלל אומר שהחברה מצליחה להפוך חלק גדול יותר מההכנסות שלה למזומן חופשי שנשאר לאחר ההוצאות וההשקעות הנדרשות בעסק.</p>
+    <p>שיפור במרווח FCF לאורך זמן יכול להעיד על שיפור ברווחיות, ניהול טוב יותר של ההון החוזר, ירידה בהשקעות הוניות או שילוב של כמה גורמים.</p>
+    <p>ירידה במרווח FCF יכולה לנבוע מעלייה בהשקעות, לחץ על הרווחיות, גידול במלאי או בחייבים, או שינויים אחרים בהון החוזר.</p>
+    <p>היתרון של מרווח FCF הוא שהוא מתמקד במזומן שנשאר בפועל ולא רק ברווח חשבונאי.</p>
+    <p>עם זאת, מרווח FCF יכול להיות תנודתי משנה לשנה, במיוחד בחברות שמשקיעות סכומים גדולים בציוד, נכסים או התרחבות. לכן חשוב לבדוק אותו לאורך כמה שנים ולא רק בתקופה אחת.</p>
+    <p>כדאי להשוות את מרווח ה־FCF גם לחברות דומות ולבדוק אותו יחד עם מרווח EBIT, המרווח הנקי, החוב וקצב הצמיחה.</p>
+  </>
   if (metric === 'netMargin') return <>
     <h3>מרווח נקי</h3>
     <p dir="ltr">Net Margin = Net Profit Margin — שיעור הרווח הנקי מתוך ההכנסות</p>
@@ -216,7 +234,7 @@ function PeerEducation({ metric, shown }: { metric: string; shown: string }) {
 function PeerComparisonDynamic({ companyId }: { companyId: string }) {
   const [retailersOnly, setRetailersOnly] = useState(false); const [metric, setMetric] = useState('pe'); const [data, setData] = useState<any>()
   useEffect(() => { apiGet<any>(retailersOnly ? '/api/peers/retailers' : '/api/peers').then(setData).catch(() => setData(null)) }, [retailersOnly])
-  const rows = data?.items?.[metric] ?? []; const selected = rows.find((row: any) => row.companyId === companyId) ?? rows.find((row: any) => row.value != null); const shown = selected?.value == null ? '—' : (metric === 'fcfYield' || metric === 'ebitMargin' || metric === 'netMargin') ? (Number(selected.value) * 100).toFixed(2) : Number(selected.value).toFixed(2)
+  const rows = data?.items?.[metric] ?? []; const selected = rows.find((row: any) => row.companyId === companyId) ?? rows.find((row: any) => row.value != null); const shown = selected?.value == null ? '—' : (metric === 'fcfYield' || metric === 'ebitMargin' || metric === 'netMargin' || metric === 'fcfMargin') ? (Number(selected.value) * 100).toFixed(2) : Number(selected.value).toFixed(2)
   return <section className="panel peer-compare"><div className="section-heading"><h2>השוואת חברות</h2><span>ערכים עובדתיים · ללא דירוג</span></div><div className="peer-comparison-content"><aside className="peer-explanation" dir="rtl"><PeerEducation metric={metric} shown={shown} /></aside><div className="peer-data"><div className="peer-controls"><label>מדד<select value={metric} onChange={e => setMetric(e.target.value)}>{Object.entries(metricLabels).map(([key, label]) => <option key={key} value={key}>{label}</option>)}</select></label><div className="peer-toggle" role="group" aria-label="קבוצת השוואה"><button className={!retailersOnly ? 'active' : ''} onClick={() => setRetailersOnly(false)}>כל החברות</button><button className={retailersOnly ? 'active' : ''} onClick={() => setRetailersOnly(true)}>קמעונאיות</button></div></div><div className="peer-column-help">חברה = החברה הנבדקת · ערך המדד = הערך של החברה · חציון קבוצה = נקודת האמצע · פער מהחציון = הערך פחות החציון, באותה יחידה.</div><table className="peer-table"><thead><tr><th>חברה</th><th>ערך המדד</th><th>חציון קבוצה</th><th>פער מהחציון</th></tr></thead><tbody>{rows.map((row: any) => <tr key={row.companyId}><th>{peerNames[row.companyId] ?? row.companyId}</th><td dir="ltr">{row.value == null ? `לא זמין — ${peerUnavailableReason(metric)}` : formatMetricValue(metric, row.value)}</td><td dir="ltr">{row.peerMedian == null ? 'לא זמין' : formatMetricValue(metric, row.peerMedian)}</td><td dir="ltr">{row.deltaVsMedian == null ? 'לא זמין' : formatMetricValue(metric, row.deltaVsMedian)}</td></tr>)}</tbody></table></div></div></section>
 }
 
