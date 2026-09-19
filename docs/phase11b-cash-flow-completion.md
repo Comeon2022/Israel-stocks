@@ -10,6 +10,8 @@ The official HTML attachments were inspected for every selected report: `H158231
 
 The official PDF attachments `P1582311-00.pdf`, `P1653761-00.pdf`, `P1734231-00.pdf`, `P1584746-00.pdf`, `P1654478-00.pdf`, `P1731570-00.pdf`, `P1587708-00.pdf`, `P1654778-00.pdf`, `P1732159-00.pdf`, `P1583630-00.pdf`, `P1654861-00.pdf`, and `P1732821-00.pdf` were downloaded from MAYA and inspected with page-aware text extraction. The extracted PDF pages did not provide a stable, unambiguous row/column representation for the missing Capex or lease-cash values; Hebrew table text was not reliably recoverable as a deterministic table from this extraction path. No PDF-derived value was accepted. No exact page/table supplied an accepted FY2023/FY2024 Capex or retailer lease-payment value.
 
+A layout-aware extraction pass was also run on the official Shufersal FY2024 PDF (`P1653761-00.pdf`, 246 pages) and compared with the linear extraction. The tool reported rotated/incomplete text on report pages and did not produce a stable cash-flow/PPE/lease table with identifiable year columns. This confirmed that the available local extraction path cannot safely support targeted manual normalization without OCR or a different table parser; OCR was not used to avoid introducing unverifiable values.
+
 Comparative columns were not used: no fallback table passed the same-statement, same-line-item, unambiguous-year, and unit checks. Existing validated FY2025 values were not overwritten.
 
 | Company | FY2023 CFO | FY2023 Capex | FY2024 CFO | FY2024 Capex | FY2025 CFO | FY2025 Capex | Lease cash payments | Result |
