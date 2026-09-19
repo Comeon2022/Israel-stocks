@@ -7,6 +7,7 @@ import { describeMetricValue, formatMetricValue, glossaryFor } from './lib/metri
 import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 import './LiveApiCompanyPage.css'
 import './peer-layout-override.css'
+import './fair-value.css'
 
 const displayNames: Record<string, string> = { sano: 'סנו', shufersal: 'שופרסל', 'rami-levy': 'רמי לוי', yochananof: 'יוחננוף', 'neto-malinda': 'נטו מלינדה' }
 const retailers = new Set(['shufersal', 'rami-levy', 'yochananof'])
@@ -37,6 +38,16 @@ function Metric({ label, metric, showHelp = false, value, reason }: { label: str
   return <div className="valuation-metric"><span className="metric-label">{label}{showHelp && !marketMetric && <MetricHelp metric={metricKey} value={Number.isFinite(numericValue) ? numericValue : undefined} />}</span><strong>{value}</strong>{reason && <small>{reason.primary}{reason.secondary && <><br />{reason.secondary}</>}</small>}</div>
 }
 
+function FairValueSection({ companyId }: { companyId: string }) {
+  const [data, setData] = useState<any>()
+  useEffect(() => { apiGet<any>(`/api/companies/${companyId}/fair-value`).then(setData).catch(() => setData(null)) }, [companyId])
+  if (!data) return null
+  const moneyValue = (v: number | null) => v == null ? 'לא זמין' : `₪${v.toFixed(2)}`
+  const pctValue = (v: number | null) => v == null ? 'לא זמין' : `${(v * 100).toFixed(1)}%`
+  const method = (label: string, key: string) => { const x = data.methods?.[key]; return <div className="fair-method"><h3>{label}</h3><p>סטטוס: {x?.available ? 'זמין' : 'לא זמין'}</p><p>{x?.available ? `שווי הון בסיסי: ${moneyValue(x.base)}` : x?.reason}</p><p>{x?.available ? `למניה: ${moneyValue(data.perShare?.base)}` : ''}</p></div> }
+  return <section className="panel fair-value-panel"><div className="section-heading"><h2>שווי הוגן ומרווח ביטחון</h2><span>מודל FV1 · מקור שנתי 2023–2025</span></div><div className="fair-value-cards"><div><b>מחיר נוכחי</b><strong>{moneyValue(data.market?.currentPrice)}</strong></div><div><b>שווי הוגן בסיסי</b><strong>{moneyValue(data.perShare?.base)}</strong></div><div><b>אפסייד / דאונסייד</b><strong>{pctValue(data.upside?.basePct)}</strong></div><div><b>מחיר ב־20% מרווח ביטחון</b><strong>{moneyValue(data.marginOfSafety?.mos20)}</strong></div></div><div className="fair-scenarios"><span>שמרני: {moneyValue(data.perShare?.conservative)}</span><span>בסיס: {moneyValue(data.perShare?.base)}</span><span>אופטימי: {moneyValue(data.perShare?.optimistic)}</span></div><div className="fair-methods">{method('EV / EBIT', 'evEbit')}{method('P / E', 'pe')}{method('FCF', 'fcf')}</div><div className="fair-assumptions"><b>הנחות המודל</b><span>נרמול: חציון דטרמיניסטי של 2023–2025 · EV/EBIT: 10× / 12× / 14× · P/E: 12× / 15× / 18× · FCF Yield: 7.0% / 5.5% / 4.5% · משקלים: 40% / 35% / 25%</span></div></section>
+}
+
 function MarketValuation({ market, companyId }: { market: any; companyId: string }) {
   const [analytics, setAnalytics] = useState<any>()
   useEffect(() => { apiGet<{ analytics: any }>(`/api/companies/${companyId}/analytics`).then(x => setAnalytics(x.analytics)).catch(() => setAnalytics(null)) }, [companyId])
@@ -44,7 +55,7 @@ function MarketValuation({ market, companyId }: { market: any; companyId: string
   const v = market.valuation
   const unavailable = (key: string) => v?.[key] == null ? (v?.unavailableReasons ?? []).map((x: string) => reasons[x]).find(Boolean) : undefined
   const retailer = retailers.has(companyId)
-  return <><AnalyticsSection analytics={analytics} /><PeerComparisonDynamic companyId={companyId} />
+  return <><AnalyticsSection analytics={analytics} /><PeerComparisonDynamic companyId={companyId} /><FairValueSection companyId={companyId} />
     <section className="panel live-market"><div className="section-heading"><h2>נתוני שוק</h2><span className="live-status">נתוני תמחור זמינים</span></div><div className="market-cards"><Metric label="מחיר אחרון" value={price(market.share_price)} /><Metric label="שווי שוק" value={marketCap(market.market_cap)} /><Metric label="שינוי יומי" value={<span dir="ltr" className={market.day_change >= 0 ? 'positive financial-number' : 'negative financial-number'}>{market.day_change == null ? 'לא זמין' : `${market.day_change < 0 ? '-' : ''}₪${Math.abs(market.day_change).toFixed(2)} (${market.day_change_pct == null ? '—' : `${market.day_change_pct.toFixed(2)}%`})`}</span>} /></div><div className="market-meta">מקור: <b>{market.provider === 'GLOBES' ? 'Globes' : market.provider}</b> · השהיה: ~15 דקות · עדכון: <span dir="ltr">{market.as_of ?? '—'}</span></div></section>
     <section className="panel valuation-panel"><div className="section-heading"><h2>מכפילי תמחור</h2><span className="score-status">נתוני תמחור זמינים · ציון התמחור /15 עדיין לא הופעל</span></div><div className="valuation-grid"><Metric label="P/E" value={v?.pe == null ? 'לא זמין' : <>{ltr(v.pe)}×</>} reason={unavailable('pe')} /><Metric label="EV" value={marketCap(v?.enterpriseValueIlsMillions)} /><Metric label="EV / EBIT" value={v?.evEbit == null ? 'לא זמין' : <>{ltr(v.evEbit)}×</>} reason={unavailable('evEbit')} /><Metric label="EV / EBITDA" value={v?.evEbitda == null ? 'לא זמין' : <>{ltr(v.evEbitda)}×</>} reason={unavailable('evEbitda')} /><Metric label="EV / EBITDA ex IFRS 16" value={retailer ? 'לא זמין' : 'לא רלוונטי'} reason={retailer ? unavailable('evEbitdaExIfrs16') ?? reasons.MISSING_LEASE_CASH_PAYMENTS : undefined} /><Metric label="P / FCF" value={v?.priceToFcf == null ? 'לא זמין' : <>{ltr(v.priceToFcf)}×</>} reason={unavailable('priceToFcf')} /><Metric label="FCF Yield" value={v?.fcfYield == null ? 'לא זמין' : <>{ltr(v.fcfYield * 100)}%</>} reason={unavailable('fcfYield')} /><Metric label="Net Debt / Market Cap" value={v?.netDebtToMarketCap == null ? 'לא זמין' : <>{ltr(v.netDebtToMarketCap * 100)}%</>} reason={unavailable('netDebtToMarketCap')} /><Metric label="Net Cash / Market Cap" value={v?.netCashToMarketCap == null ? 'לא זמין' : <>{ltr(v.netCashToMarketCap * 100)}%</>} reason={unavailable('netCashToMarketCap')} /></div><div className="basis-note">בסיס רווח: {basis(v?.basis?.earnings)} · תקופה: <span dir="ltr">{v?.periodEnd ?? 'לא זמין'}</span></div></section>
   </>

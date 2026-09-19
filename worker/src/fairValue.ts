@@ -1,0 +1,58 @@
+export const FAIR_VALUE_ASSUMPTIONS = {
+  version: 'FV1',
+  methods: {
+    evEbit: { conservative: 10, base: 12, optimistic: 14 },
+    pe: { conservative: 12, base: 15, optimistic: 18 },
+    fcf: { conservative: 0.07, base: 0.055, optimistic: 0.045 },
+  },
+  weights: { evEbit: 0.4, pe: 0.35, fcf: 0.25 },
+} as const
+
+type Scenario = 'conservative' | 'base' | 'optimistic'
+type Normalized = { value: number | null; method: 'DETERMINISTIC_3Y_MEDIAN'; periods: string[]; latest: number | null; average: number | null; median: number | null; available: boolean; reason?: string }
+
+const n = (value: unknown) => typeof value === 'number' && Number.isFinite(value) ? value : null
+const median = (values: number[]) => { const a = [...values].sort((x, y) => x - y); return a.length ? a[Math.floor(a.length / 2)] : null }
+
+export function normalizeAnnual(rows: any[], field: string, requirePositive = true): Normalized {
+  const byYear = new Map(rows.filter(r => r.period_type === 'ANNUAL' && ['2023', '2024', '2025'].includes(String(r.fiscal_year))).map(r => [String(r.fiscal_year), n(r[field])]))
+  const values = ['2023', '2024', '2025'].map(y => byYear.get(y) ?? null)
+  const valid = values.every(v => v != null && (!requirePositive || v > 0))
+  const availableValues = values.filter((v): v is number => v != null)
+  const average = availableValues.length === 3 ? availableValues.reduce((a, v) => a + v, 0) / 3 : null
+  const med = availableValues.length === 3 ? median(availableValues) : null
+  const latest = byYear.get('2025') ?? null
+  return { value: valid ? med : null, method: 'DETERMINISTIC_3Y_MEDIAN', periods: ['2023', '2024', '2025'], latest, average, median: med, available: valid, ...(valid ? {} : { reason: availableValues.length < 3 ? 'INSUFFICIENT_ANNUAL_HISTORY' : 'NON_POSITIVE_NORMALIZED_VALUE' }) }
+}
+
+const unavailable = (reason: string, inputs: any = {}, assumptions: any = {}) => ({ available: false, value: null, reason, inputs, assumptions })
+const method = (values: Record<Scenario, number>, inputs: any, assumptions: any) => ({ available: true, value: values.base, conservative: values.conservative, base: values.base, optimistic: values.optimistic, inputs, assumptions })
+
+export function buildFairValue(companyId: string, rows: any[], market: any, retailer = false) {
+  const ebit = normalizeAnnual(rows, 'operating_income')
+  const netIncome = normalizeAnnual(rows, 'net_income')
+  const cfo = normalizeAnnual(rows, 'cash_flow_from_operations')
+  const capex = normalizeAnnual(rows, 'capex')
+  const fcfRows = rows.map(r => ({ ...r, fcf: n(r.cash_flow_from_operations) != null && n(r.capex) != null ? n(r.cash_flow_from_operations)! - n(r.capex)! : null }))
+  const fcf = retailer ? { value: null, method: 'DETERMINISTIC_3Y_MEDIAN' as const, periods: ['2023', '2024', '2025'], latest: null, average: null, median: null, available: false, reason: 'MISSING_RETAIL_LEASE_CASH_PAYMENTS' } : normalizeAnnual(fcfRows, 'fcf')
+  const debtRow = rows.filter(r => r.period_type === 'ANNUAL' && String(r.fiscal_year) === '2025').at(-1)
+  const cash = n(debtRow?.cash_and_cash_equivalents), debt = n(debtRow?.short_term_debt) != null && n(debtRow?.long_term_debt) != null ? n(debtRow.short_term_debt)! + n(debtRow.long_term_debt)! : null
+  const netDebt = debt != null && cash != null ? debt - cash : null
+  const shares = n(market?.shares_outstanding), currentPrice = n(market?.share_price), marketCap = n(market?.market_cap)
+  const evInputs = { normalizedEbit: ebit.value, netDebt }
+  const peInputs = { normalizedNetIncome: netIncome.value }
+  const fcfInputs = { normalizedFcf: fcf.value }
+  const ev = ebit.available && netDebt != null ? method({ conservative: ebit.value! * 10 - netDebt, base: ebit.value! * 12 - netDebt, optimistic: ebit.value! * 14 - netDebt }, evInputs, FAIR_VALUE_ASSUMPTIONS.methods.evEbit) : unavailable(!ebit.available ? ebit.reason! : 'MISSING_NET_DEBT', evInputs, FAIR_VALUE_ASSUMPTIONS.methods.evEbit)
+  const pe = netIncome.available ? method({ conservative: netIncome.value! * 12, base: netIncome.value! * 15, optimistic: netIncome.value! * 18 }, peInputs, FAIR_VALUE_ASSUMPTIONS.methods.pe) : unavailable(netIncome.reason!, peInputs, FAIR_VALUE_ASSUMPTIONS.methods.pe)
+  const fcfMethod = fcf.available && fcf.value! > 0 ? method({ conservative: fcf.value! / .07, base: fcf.value! / .055, optimistic: fcf.value! / .045 }, fcfInputs, FAIR_VALUE_ASSUMPTIONS.methods.fcf) : unavailable(fcf.available ? 'NON_POSITIVE_NORMALIZED_FCF' : fcf.reason!, fcfInputs, FAIR_VALUE_ASSUMPTIONS.methods.fcf)
+  const methods = { evEbit: ev, pe, fcf: fcfMethod }
+  const available = Object.entries(methods).filter(([, x]) => x.available)
+  const totalWeight = available.reduce((sum, [key]) => sum + FAIR_VALUE_ASSUMPTIONS.weights[key as keyof typeof FAIR_VALUE_ASSUMPTIONS.weights], 0)
+  const effectiveWeights = Object.fromEntries(Object.keys(methods).map(key => [key, methods[key as keyof typeof methods].available ? FAIR_VALUE_ASSUMPTIONS.weights[key as keyof typeof FAIR_VALUE_ASSUMPTIONS.weights] / totalWeight : 0]))
+  const blend = (scenario: Scenario) => available.reduce((sum, [key, value]) => sum + ((value as any)[scenario] as number) * effectiveWeights[key], 0)
+  const blended = { conservativeFairValue: available.length ? blend('conservative') : null, baseFairValue: available.length ? blend('base') : null, optimisticFairValue: available.length ? blend('optimistic') : null, originalWeights: FAIR_VALUE_ASSUMPTIONS.weights, effectiveWeights, availableMethods: available.map(([key]) => key) }
+  const perShare = (value: number | null) => value != null && shares != null && shares > 0 ? value * 1_000_000 / shares : null
+  const perShareValues = { conservative: perShare(blended.conservativeFairValue), base: perShare(blended.baseFairValue), optimistic: perShare(blended.optimisticFairValue) }
+  const upside = (value: number | null) => value != null && currentPrice != null && currentPrice > 0 ? value / currentPrice - 1 : null
+  return { companyId, market: { currentPrice, marketCap, asOf: market?.as_of ?? null, provider: market?.provider ?? null, delayMinutes: market?.delay_minutes ?? null }, normalization: { ebit, netIncome, fcf }, methods, blended, perShare: perShareValues, upside: { conservativePct: upside(perShareValues.conservative), basePct: upside(perShareValues.base), optimisticPct: upside(perShareValues.optimistic) }, marginOfSafety: { fairPrice: perShareValues.base, mos10: perShareValues.base != null ? perShareValues.base * .9 : null, mos20: perShareValues.base != null ? perShareValues.base * .8 : null, mos30: perShareValues.base != null ? perShareValues.base * .7 : null }, basis: { annualYears: ['2023', '2024', '2025'], normalizationMethod: 'DETERMINISTIC_3Y_MEDIAN', assumptionVersion: FAIR_VALUE_ASSUMPTIONS.version, retailer, netDebt, sharesOutstanding: shares, currentPrice, currentMarketCap: marketCap } }
+}
