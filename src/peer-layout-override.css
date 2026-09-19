@@ -81,4 +81,9 @@
   }
   .peer-data .peer-controls { flex-wrap: wrap; }
   .peer-data .peer-table { min-width: 650px; }
+  .peer-data .peer-table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+  }
 }
