@@ -6,6 +6,7 @@ import { MetricHelp } from './components/MetricHelp'
 import { describeMetricValue, formatMetricValue, glossaryFor } from './lib/metricGlossary'
 import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 import './LiveApiCompanyPage.css'
+import './peer-layout-override.css'
 
 const displayNames: Record<string, string> = { sano: 'סנו', shufersal: 'שופרסל', 'rami-levy': 'רמי לוי', yochananof: 'יוחננוף', 'neto-malinda': 'נטו מלינדה' }
 const retailers = new Set(['shufersal', 'rami-levy', 'yochananof'])

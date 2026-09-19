@@ -1,0 +1,5 @@
+/* The legacy rule hid the former metric column; the active table now starts with the metric value. */
+.peer-data .peer-table th:nth-child(2),
+.peer-data .peer-table td:nth-child(2) {
+  display: table-cell;
+}
