@@ -10,6 +10,10 @@ Added value-aware glossary helpers that preserve the static concept definition w
 
 No formulas, backend values, API contracts, market data, valuation methodology, TTM, ROIC, or score `/15` were changed.
 
+## Regression correction
+
+The first production browser pass exposed a value-extractor type bug for EV: the numeric data attribute was treated as a string before parsing. The extractor now stringifies values safely before numeric parsing. This was a presentation-only fix; the underlying EV value and API response were unchanged.
+
 ## Verification log
 
 Automated checks, Pages deployment, and Chrome CDP evidence will be appended after deployment.

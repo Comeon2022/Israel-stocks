@@ -685,3 +685,5 @@ Phase 10D production closeout: Pages deployment `f78f326e.israel-stocks.pages.de
 ## Phase 10E valuation help semantics
 
 Phase 10E started. The root cause is presentation-only: valuation cards did not pass a metric/value context to the help component, so generic availability text could replace the financial definition. The peer table also used an ambiguous company-value label and raw number formatting. The implementation will separate concept help from availability reasons and preserve all financial/API behavior.
+
+Phase 10E regression correction: the initial browser verification caught a type-handling bug in the new EV value-aware help extractor (`.replace` on a numeric data attribute). It was corrected by safe string conversion; formulas, API values, and valuation methodology were unchanged. Automated checks pass again before redeployment.

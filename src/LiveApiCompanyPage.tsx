@@ -31,7 +31,7 @@ const basis = (v?: string) => v === 'LATEST_ANNUAL' ? 'שנה מלאה אחרו�
 function Metric({ label, metric, value, reason }: { label: string; metric?: string; value: React.ReactNode; reason?: { primary: string; secondary?: string } }) {
   const metricKey = metric ?? ({ 'P/E': 'pe', EV: 'enterpriseValueIlsMillions', 'EV / EBIT': 'evEbit', 'EV / EBITDA': 'evEbitda', 'EV / EBITDA ex IFRS 16': 'evEbitdaExIfrs16', 'P / FCF': 'priceToFcf', 'FCF Yield': 'fcfYield', 'Net Debt / Market Cap': 'netDebtToMarketCap', 'Net Cash / Market Cap': 'netCashToMarketCap' } as Record<string, string>)[label] ?? 'unavailable'
   const textValue = (node: any): string => { if (node == null) return ''; if (typeof node === 'string' || typeof node === 'number') return String(node); if (Array.isArray(node)) return node.map(textValue).join(''); return node.props?.['data-value'] ?? textValue(node.props?.children) }
-  const numericValue = Number(textValue(value).replace(/[^d.-]/g, ''))
+  const numericValue = Number(String(textValue(value)).replace(/[^\d.-]/g, ''))
   return <div className="valuation-metric"><span className="metric-label">{label}<MetricHelp metric={metricKey} value={Number.isFinite(numericValue) ? numericValue : undefined} /></span><strong>{value}</strong>{reason && <small>{reason.primary}{reason.secondary && <><br />{reason.secondary}</>}</small>}</div>
 }
 
