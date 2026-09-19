@@ -638,6 +638,8 @@ Phase 10C implementation milestone: added the centralized Hebrew `metricGlossary
 
 Phase 10C final implementation completed locally: the peer selector now has a dynamic left-side Hebrew explanation panel and responsive stacking. Metric cards use reusable help controls, unavailable states retain reason context, and the low-value charts are replaced by compact annual facts, calculated metrics, and deterministic signals. All five Hebrew company names remain unchanged. Tests/build pass; Pages deployment and browser evidence follow.
 
+Phase 10C production closeout: Pages deployment `1ce9504d.israel-stocks.pages.dev` was built from source commit `1c5ece41f60a7f10edf9789da55002816d004633`; production was verified with Chrome CDP on all five company routes and `/companies`, with zero console/runtime errors. The old charts are absent, the peer explanation panel and glossary help are live, unavailable states remain explicit, and no Worker redeployment was needed. `npm test` passed 10 files/29 tests; Worker tests passed 6 files/11 tests; Worker check and build passed.
+
 Final API market regression values: Sano `-0.70`, Shufersal `+0.25`, Rami Levy `+5.50`, Yochananof `+0.90`, and Neto Malinda `+4.70` ILS. Chrome CDP rendered all five company routes with `market=true`, four annual/interim period markers, `ttmUnavailable=true`, `mock=false`, and `errors=0`; `/companies` rendered with `errors=0`. No production data or scoring behavior changed.
 
 Phase 9B source inspection is in progress. Selected official FY2025 MAYA XBRL reports are Sano `1728715`, Shufersal `1734231`, Rami Levy `1731570`, Yochananof `1732159`, and Neto Malinda `1732821`. Documentation is being updated after each major extraction, validation, persistence, and verification task.

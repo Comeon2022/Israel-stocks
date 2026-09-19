@@ -23,3 +23,7 @@ The frontend test suite, Worker tests/check, and production build pass. The exis
 ## Final implementation
 
 The peer selector now uses a dedicated explanation panel on the left in the desktop RTL layout; changing the metric immediately changes its Hebrew label, definition, and interpretation hint. On narrow screens the panel stacks below the selector. Metric cards use the reusable `MetricHelp` affordance, unavailable values retain deterministic reasons, and the former chart area is replaced by the compact annual facts/calculated-metrics/signals presentation.
+
+## Production closeout
+
+Pages deployment `1ce9504d.israel-stocks.pages.dev` was built from source commit `1c5ece41f60a7f10edf9789da55002816d004633`; the production domain was verified after React hydration. Chrome CDP passed `/company/sano`, `/company/shufersal`, `/company/rami-levy`, `/company/yochananof`, `/company/neto-malinda`, and `/companies` with zero console/runtime errors. Hebrew company names, explicit unavailable explanations, current market/valuation cards, and annual-only facts were preserved. Worker was not redeployed because no backend code changed.
