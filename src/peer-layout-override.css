@@ -86,4 +86,7 @@
     width: 100%;
     overflow-x: auto;
   }
+  .peer-compare .peer-data {
+    overflow-x: auto;
+  }
 }
