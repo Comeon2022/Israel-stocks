@@ -10,4 +10,11 @@
 .method-available { color: #137333; background: #e6f4ea; }
 .method-unavailable { color: #8a4b00; background: #fef7e0; }
 .fair-confidence-note { margin: 14px 0 0; color: #5f6368; line-height: 1.55; }
+.valuation-score-block { margin: 18px 0; padding: 14px 16px; border: 1px solid #e0e3e7; border-radius: 12px; background: #fff; }
+.valuation-score-block h3 { margin: 0; color: #202124; }
+.valuation-score-block h4 { margin: 14px 0 4px; color: #202124; }
+.valuation-score-block p,.valuation-score-block small { color: #5f6368; line-height: 1.5; }
+.valuation-score-breakdown { display: flex; flex-wrap: wrap; gap: 10px 18px; margin-top: 10px; color: #5f6368; }
+.score-status { font-size: 0; }
+.score-status::after { content: '\05e0\05ea\05d5\05e0\05d9 \05ea\05de\05d7\05d5\05e8 \05d6\05de\05d9\05e0\05d9\05dd'; font-size: 12px; }
 @media (max-width: 760px) { .fair-confidence-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }

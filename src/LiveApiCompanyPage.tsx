@@ -324,6 +324,12 @@ function FairValueSection({ companyId }: { companyId: string }) {
         {method("P / E", "pe")}
         {method("FCF", "fcf")}
       </div>
+      <div className="valuation-score-block">
+        <div className="section-heading"><h3>{'\u05ea\u05de\u05d7\u05d5\u05e8'}</h3><strong dir="ltr">{data.valuationScore?.available ? `${data.valuationScore.total} / 15` : '— / 15'}</strong></div>
+        <div className="valuation-score-breakdown"><span>{'\u05de\u05e8\u05d5\u05d5\u05d7 \u05d1\u05d9\u05d8\u05d7\u05d5\u05df'} {data.valuationScore?.breakdown?.marginOfSafety?.score ?? '—'} / 8</span><span>{'\u05d0\u05de\u05d9\u05e0\u05d5\u05ea \u05d4\u05e2\u05e8\u05db\u05ea \u05d4\u05e9\u05d5\u05d5\u05d9'} {data.valuationScore?.breakdown?.confidence?.score ?? '—'} / 4</span><span>{'\u05e4\u05e2\u05e8 \u05d1\u05d9\u05df \u05e9\u05d9\u05d8\u05d5\u05ea'} {data.valuationScore?.breakdown?.dispersion?.score ?? '—'} / 3</span></div>
+        <h4>{'\u05db\u05d9\u05e6\u05d3 \u05de\u05d7\u05d5\u05e9\u05d1 \u05e6\u05d9\u05d5\u05df \u05d4\u05ea\u05de\u05d7\u05d5\u05e8?'}</h4><p>{'\u05e6\u05d9\u05d5\u05df \u05d4\u05ea\u05de\u05d7\u05d5\u05e8 \u05d1\u05d5\u05d7\u05df \u05d0\u05ea \u05de\u05d7\u05d9\u05e8 \u05d4\u05de\u05e0\u05d9\u05d4 \u05d4\u05e0\u05d5\u05db\u05d7\u05d9 \u05d1\u05d9\u05d7\u05e1 \u05dc\u05e9\u05d5\u05d5\u05d9 \u05d4\u05d4\u05d5\u05d2\u05df \u05e9\u05de\u05d7\u05e9\u05d1 \u05d4\u05de\u05d5\u05d3\u05dc, \u05ea\u05d5\u05da \u05d4\u05ea\u05d7\u05e9\u05d1\u05d5\u05ea \u05d1\u05e8\u05de\u05ea \u05d4\u05d0\u05de\u05d9\u05e0\u05d5\u05ea \u05e9\u05dc \u05d4\u05e2\u05e8\u05db\u05ea \u05d4\u05e9\u05d5\u05d5\u05d9 \u05d5\u05d1\u05e4\u05e2\u05e8 \u05d1\u05d9\u05df \u05e9\u05d9\u05d8\u05d5\u05ea \u05d4\u05d7\u05d9\u05e9\u05d5\u05d1 \u05d4\u05e9\u05d5\u05e0\u05d5\u05ea.'}</p>
+        {!data.valuationScore?.available && <small>{data.valuationScore?.reason}</small>}
+      </div>
       <div className="fair-assumptions">
         <b>הנחות המודל</b>
         <span>

@@ -10,6 +10,33 @@ export const FAIR_VALUE_ASSUMPTIONS = {
 
 export const FAIR_VALUE_CONFIDENCE_THRESHOLDS = { low: 0.10, moderate: 0.20, high: 0.35 } as const
 
+export function marginOfSafetyScore(upsidePct: number | null) {
+  if (upsidePct == null || !Number.isFinite(upsidePct)) return null
+  if (upsidePct >= 0.4) return 8
+  if (upsidePct >= 0.3) return 7
+  if (upsidePct >= 0.2) return 6
+  if (upsidePct >= 0.1) return 5
+  if (upsidePct >= 0) return 4
+  if (upsidePct >= -0.1) return 3
+  if (upsidePct >= -0.2) return 2
+  if (upsidePct >= -0.3) return 1
+  return 0
+}
+
+export function buildValuationScore(upsidePct: number | null, perShare: number | null, currentPrice: number | null, confidenceResult: any) {
+  const coverage = confidenceResult?.methodCoverage?.availableCount ?? 0
+  const confidenceScore = ({ HIGH: 4, MEDIUM: 3, LOW: 1, INSUFFICIENT: 0 } as Record<string, number>)[confidenceResult?.level] ?? 0
+  const dispersionScore = coverage < 2 ? 0 : ({ LOW: 3, MODERATE: 2, HIGH: 1, VERY_HIGH: 0 } as Record<string, number>)[confidenceResult?.dispersion?.classification] ?? 0
+  const marginScore = marginOfSafetyScore(upsidePct)
+  let reason: string | null = null
+  if (perShare == null) reason = 'MISSING_BASE_FAIR_VALUE'
+  else if (currentPrice == null || currentPrice <= 0) reason = 'MISSING_CURRENT_PRICE'
+  else if (coverage < 2) reason = 'INSUFFICIENT_METHODS'
+  else if (confidenceResult?.level === 'INSUFFICIENT') reason = 'INSUFFICIENT_CONFIDENCE'
+  if (reason || marginScore == null) return { available: false, total: null, max: 15, breakdown: { marginOfSafety: { score: null, max: 8, upsidePct }, confidence: { score: confidenceScore, max: 4, level: confidenceResult?.level ?? 'INSUFFICIENT' }, dispersion: { score: dispersionScore, max: 3, pct: confidenceResult?.dispersion?.pct ?? null, classification: confidenceResult?.dispersion?.classification ?? null } }, reason: reason ?? 'MISSING_UPSIDE' }
+  return { available: true, total: marginScore + confidenceScore + dispersionScore, max: 15, breakdown: { marginOfSafety: { score: marginScore, max: 8, upsidePct }, confidence: { score: confidenceScore, max: 4, level: confidenceResult.level }, dispersion: { score: dispersionScore, max: 3, pct: confidenceResult.dispersion.pct, classification: confidenceResult.dispersion.classification } }, reason: null }
+}
+
 type Scenario = 'conservative' | 'base' | 'optimistic'
 type Normalized = { value: number | null; method: 'DETERMINISTIC_3Y_MEDIAN'; periods: string[]; latest: number | null; average: number | null; median: number | null; available: boolean; reason?: string }
 
@@ -82,5 +109,7 @@ export function buildFairValue(companyId: string, rows: any[], market: any, reta
   const perShare = (value: number | null) => value != null && shares != null && shares > 0 ? value * 1_000_000 / shares : null
   const perShareValues = { conservative: perShare(blended.conservativeFairValue), base: perShare(blended.baseFairValue), optimistic: perShare(blended.optimisticFairValue) }
   const upside = (value: number | null) => value != null && currentPrice != null && currentPrice > 0 ? value / currentPrice - 1 : null
-  return { companyId, market: { currentPrice, marketCap, asOf: market?.as_of ?? null, provider: market?.provider ?? null, delayMinutes: market?.delay_minutes ?? null }, normalization: { ebit, netIncome, fcf }, methods, blended, confidence: confidence(methods, { ebit, netIncome, fcf }, netDebt, shares, currentPrice, marketCap, retailer), perShare: perShareValues, upside: { conservativePct: upside(perShareValues.conservative), basePct: upside(perShareValues.base), optimisticPct: upside(perShareValues.optimistic) }, marginOfSafety: { fairPrice: perShareValues.base, mos10: perShareValues.base != null ? perShareValues.base * .9 : null, mos20: perShareValues.base != null ? perShareValues.base * .8 : null, mos30: perShareValues.base != null ? perShareValues.base * .7 : null }, basis: { annualYears: ['2023', '2024', '2025'], normalizationMethod: 'DETERMINISTIC_3Y_MEDIAN', assumptionVersion: FAIR_VALUE_ASSUMPTIONS.version, retailer, netDebt, sharesOutstanding: shares, currentPrice, currentMarketCap: marketCap } }
+  const confidenceResult = confidence(methods, { ebit, netIncome, fcf }, netDebt, shares, currentPrice, marketCap, retailer)
+  const upsideValues = { conservativePct: upside(perShareValues.conservative), basePct: upside(perShareValues.base), optimisticPct: upside(perShareValues.optimistic) }
+  return { companyId, market: { currentPrice, marketCap, asOf: market?.as_of ?? null, provider: market?.provider ?? null, delayMinutes: market?.delay_minutes ?? null }, normalization: { ebit, netIncome, fcf }, methods, blended, confidence: confidenceResult, valuationScore: buildValuationScore(upsideValues.basePct, perShareValues.base, currentPrice, confidenceResult), perShare: perShareValues, upside: upsideValues, marginOfSafety: { fairPrice: perShareValues.base, mos10: perShareValues.base != null ? perShareValues.base * .9 : null, mos20: perShareValues.base != null ? perShareValues.base * .8 : null, mos30: perShareValues.base != null ? perShareValues.base * .7 : null }, basis: { annualYears: ['2023', '2024', '2025'], normalizationMethod: 'DETERMINISTIC_3Y_MEDIAN', assumptionVersion: FAIR_VALUE_ASSUMPTIONS.version, retailer, netDebt, sharesOutstanding: shares, currentPrice, currentMarketCap: marketCap } }
 }

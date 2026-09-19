@@ -1,10 +1,12 @@
 import { describe, expect, it } from 'vitest'
-import { buildFairValue, normalizeAnnual } from './fairValue'
+import { buildFairValue, buildValuationScore, marginOfSafetyScore, normalizeAnnual } from './fairValue'
 
 const rows = (extra: any = {}) => [2023, 2024, 2025].map((year, i) => ({ fiscal_year: year, period_type: 'ANNUAL', operating_income: 100 + i * 10, net_income: 80 + i * 5, cash_flow_from_operations: 130 + i * 5, capex: 30, cash_and_cash_equivalents: 100, short_term_debt: 20, long_term_debt: 30, ...extra }))
 const market = { share_price: 10, market_cap: 1000, shares_outstanding: 100000000, as_of: '2026-01-01', provider: 'GLOBES', delay_minutes: 15 }
 
 describe('fair value engine', () => {
+  it('scores every margin-of-safety band with explicit boundaries', () => { expect([.45,.35,.25,.15,.05,-.05,-.15,-.25,-.35].map(marginOfSafetyScore)).toEqual([8,7,6,5,4,3,2,1,0]); expect(marginOfSafetyScore(.4)).toBe(8); expect(marginOfSafetyScore(.3)).toBe(7); expect(marginOfSafetyScore(.2)).toBe(6); expect(marginOfSafetyScore(.1)).toBe(5); expect(marginOfSafetyScore(0)).toBe(4); expect(marginOfSafetyScore(-.1)).toBe(3); expect(marginOfSafetyScore(-.2)).toBe(2); expect(marginOfSafetyScore(-.3)).toBe(1) })
+  it('scores confidence and dispersion without turning unavailable values into zero', () => { const c = { level: 'MEDIUM', methodCoverage: { availableCount: 2 }, dispersion: { classification: 'LOW', pct: .05 } }; expect(buildValuationScore(.25, 125, 100, c).total).toBe(12); expect(buildValuationScore(null, null, 100, c).total).toBeNull(); expect(buildValuationScore(.25, 125, 100, { ...c, level: 'INSUFFICIENT' }).available).toBe(false) })
   it('normalizes three annual periods by median', () => { const x = normalizeAnnual(rows(), 'operating_income'); expect(x.available).toBe(true); expect(x.median).toBe(110); expect(x.value).toBe(110); expect(x.average).toBe(110) })
   it('keeps missing history unavailable', () => { expect(normalizeAnnual(rows().slice(1), 'operating_income').reason).toBe('INSUFFICIENT_ANNUAL_HISTORY') })
   it('uses annual FY2023-FY2025 only and ignores interim rows', () => { const x = normalizeAnnual([...rows(), { fiscal_year: 2026, period_type: 'QUARTER_ONLY', operating_income: 99999 }, { fiscal_year: 2025, period_type: 'YTD', operating_income: 88888 }], 'operating_income'); expect(x.periods).toEqual(['2023', '2024', '2025']); expect(x.value).toBe(110) })
