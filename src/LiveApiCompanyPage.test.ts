@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { annualChartData, displayNames, metricLabels, reasons } from './LiveApiCompanyPage'
+import { metricGlossary } from './lib/metricGlossary'
 
 describe('five-company UI consistency', () => {
   it('uses Hebrew names for every API-backed company', () => {
@@ -21,5 +22,11 @@ describe('five-company UI consistency', () => {
   it('exposes localized peer metric labels without score activation', () => {
     expect(metricLabels.pe).toBe('P/E')
     expect(metricLabels.fcfMargin).toContain('FCF')
+  })
+
+  it('provides concise explanations for core metrics and unavailable values', () => {
+    expect(metricGlossary.revenue.explanation).toContain('הכנסות')
+    expect(metricGlossary.pe.explanation).toContain('שוק')
+    expect(metricGlossary.unavailable.explanation).toContain('נתונים')
   })
 })

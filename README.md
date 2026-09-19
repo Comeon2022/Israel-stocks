@@ -184,3 +184,7 @@ The Worker exposes deterministic annual analytics at `/api/companies/:id/analyti
 # Phase 10B analytics UI
 
 API-backed company pages include six annual-only trend charts, Hebrew analytical labels, structured annual facts, deterministic signal categories, and peer comparison with metric selection plus all-company/retailer toggles. Missing values remain unavailable rather than zero; historical valuation, TTM, ROIC, and valuation score `/15` remain explicitly inactive. See `docs/phase10b-analytics-ui-polish.md`.
+
+## Phase 10C explanatory UX
+
+Company analytics and valuation cards now include concise Hebrew metric explanations through a reusable glossary/help control. Low-value trend charts are removed from the rendered experience in favor of the annual summary, calculated metrics, and deterministic signals. Existing formulas, API behavior, market data, and valuation methodology are unchanged.

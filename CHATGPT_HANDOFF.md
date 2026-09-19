@@ -630,6 +630,12 @@ Phase 10B UI implementation completed locally: six null-safe annual-only Rechart
 
 Phase 10B completed. Pages deployment `5f593f93.israel-stocks.pages.dev` was built from source commit `eed4e19f1f528b8e1f491ace523312bdf44570e5`; production `israel-stocks.pages.dev` was verified after hydration. Chrome CDP passed all five company routes plus `/companies`, with zero console/runtime errors. Annual chart data contains only FY2023-FY2025 annual rows; 2026 `QUARTER_ONLY` remains in the financial table but is not charted. Worker/API was unchanged and not redeployed. Final checks: frontend 10 files/28 tests, Worker 6 files/11 tests, Worker check, and build all pass.
 
+## Phase 10C explanatory UX
+
+Baseline audit started. This is a frontend-only phase: formulas, API contracts, market data, valuation calculations, period semantics, TTM, ROIC, and score `/15` remain unchanged. Planned work is a centralized Hebrew metric glossary/help component, clearer unavailable reasons, removal of the low-value chart block, and a left-side explanation panel for peer metric selection.
+
+Phase 10C implementation milestone: added the centralized Hebrew `metricGlossary` and reusable `MetricHelp` control. Metric cards now have keyboard-accessible help affordances; the Phase 10B trend-chart block is no longer rendered and the annual summary remains. No backend, formulas, API contract, market values, TTM, ROIC, or score `/15` changed. Full selector-panel and verification work remains in progress.
+
 Final API market regression values: Sano `-0.70`, Shufersal `+0.25`, Rami Levy `+5.50`, Yochananof `+0.90`, and Neto Malinda `+4.70` ILS. Chrome CDP rendered all five company routes with `market=true`, four annual/interim period markers, `ttmUnavailable=true`, `mock=false`, and `errors=0`; `/companies` rendered with `errors=0`. No production data or scoring behavior changed.
 
 Phase 9B source inspection is in progress. Selected official FY2025 MAYA XBRL reports are Sano `1728715`, Shufersal `1734231`, Rami Levy `1731570`, Yochananof `1732159`, and Neto Malinda `1732821`. Documentation is being updated after each major extraction, validation, persistence, and verification task.

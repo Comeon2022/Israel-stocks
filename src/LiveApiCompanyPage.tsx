@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { apiFinancialRepository } from './data/apiRepository'
 import { apiGet } from './api/client'
+import { MetricHelp } from './components/MetricHelp'
 import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 import './LiveApiCompanyPage.css'
 
@@ -26,8 +27,8 @@ const price = (v: unknown) => <span dir="ltr" className="financial-number">{type
 const marketCap = (v: unknown) => <span dir="ltr" className="financial-number">{typeof v === 'number' ? (v >= 1000 ? `₪${(v / 1000).toFixed(2)} מיליארד` : `₪${v.toFixed(1)} מיליון`) : 'לא זמין'}</span>
 const basis = (v?: string) => v === 'LATEST_ANNUAL' ? 'שנה מלאה אחרונה' : v === 'TTM' ? '12 החודשים האחרונים' : v === 'QUARTER_ONLY' ? 'רבעון בלבד' : 'לא זמין'
 
-function Metric({ label, value, reason }: { label: string; value: React.ReactNode; reason?: { primary: string; secondary?: string } }) {
-  return <div className="valuation-metric"><span>{label}</span><strong>{value}</strong>{reason && <small>{reason.primary}{reason.secondary && <><br />{reason.secondary}</>}</small>}</div>
+function Metric({ label, metric, value, reason }: { label: string; metric?: string; value: React.ReactNode; reason?: { primary: string; secondary?: string } }) {
+  return <div className="valuation-metric"><span className="metric-label">{label}<MetricHelp metric={metric ?? 'unavailable'} /></span><strong>{value}</strong>{reason && <small>{reason.primary}{reason.secondary && <><br />{reason.secondary}</>}</small>}</div>
 }
 
 function MarketValuation({ market, companyId }: { market: any; companyId: string }) {
@@ -53,6 +54,7 @@ const signalText = (signal: any) => { const points = String(signal.explanation ?
 void signalText
 
 function TrendChart({ title, data, percent = false, color = '#1a73e8' }: { title: string; data: any[]; percent?: boolean; color?: string }) {
+  return null
   return <article className="trend-card"><div className="trend-heading"><h3>{title}</h3><span>שנים מלאות · מקור שנתי</span></div>{data.length ? <ResponsiveContainer width="100%" height={220}><LineChart data={data}><CartesianGrid stroke="#e0e3e7" strokeDasharray="3 3" /><XAxis dataKey="year" /><YAxis tickFormatter={v => percent ? `${v}%` : v} /><Tooltip formatter={(v: unknown) => { const n = typeof v === 'number' ? v : Number(v); return [percent ? `${n.toFixed(1)}%` : `${n.toFixed(1)} מיליון ₪`, title] }} /><Line type="monotone" dataKey="value" stroke={color} strokeWidth={3} dot={{ r: 4 }} connectNulls={false} /></LineChart></ResponsiveContainer> : <div className="trend-empty">{unavailable}: אין מספיק נתונים שנתיים ממקור מאומת</div>}</article>
 }
 
