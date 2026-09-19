@@ -4,6 +4,14 @@
 
 The specified official MAYA annual XBRL reports were inspected for FY2023-FY2025. Existing D1 contains some annual CFO and FY2025 Capex/lease values, but the selected XBRL attachments do not provide a complete explicit Capex/PPE cash-outflow series or complete explicit retailer lease cash-payment series. No inferred values were activated.
 
+## HTML/PDF fallback investigation
+
+The official HTML attachments were inspected for every selected report: `H1582311.htm`, `H1653761.htm`, `H1734231.htm`, `H1584746.htm`, `H1654478.htm`, `H1731570.htm`, `H1587708.htm`, `H1654778.htm`, `H1732159.htm`, `H1583630.htm`, `H1654861.htm`, and `H1732821.htm`. Their structured tables were enumerated and searched for cash-flow, Capex/PPE, lease-payment, and comparative-year rows. The available HTML structure did not expose an unambiguous annual cash-flow table/column mapping for the missing fields; no HTML value was accepted.
+
+The official PDF attachments `P1582311-00.pdf`, `P1653761-00.pdf`, `P1734231-00.pdf`, `P1584746-00.pdf`, `P1654478-00.pdf`, `P1731570-00.pdf`, `P1587708-00.pdf`, `P1654778-00.pdf`, `P1732159-00.pdf`, `P1583630-00.pdf`, `P1654861-00.pdf`, and `P1732821-00.pdf` were downloaded from MAYA and inspected with page-aware text extraction. The extracted PDF pages did not provide a stable, unambiguous row/column representation for the missing Capex or lease-cash values; Hebrew table text was not reliably recoverable as a deterministic table from this extraction path. No PDF-derived value was accepted. No exact page/table supplied an accepted FY2023/FY2024 Capex or retailer lease-payment value.
+
+Comparative columns were not used: no fallback table passed the same-statement, same-line-item, unambiguous-year, and unit checks. Existing validated FY2025 values were not overwritten.
+
 | Company | FY2023 CFO | FY2023 Capex | FY2024 CFO | FY2024 Capex | FY2025 CFO | FY2025 Capex | Lease cash payments | Result |
 |---|---:|---:|---:|---:|---:|---:|---|---|
 | Sano | NULL | NULL | NULL | NULL | 270.320 | 191.349 | N/A | FCF unavailable: insufficient annual history |
