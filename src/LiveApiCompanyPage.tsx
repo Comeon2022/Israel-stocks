@@ -111,6 +111,23 @@ function PeerComparisonSemantic() {
 void PeerComparisonSemantic
 
 function PeerEducation({ metric, shown }: { metric: string; shown: string }) {
+  if (metric === 'evEbitda') return <>
+    <h3>מכפיל EV / EBITDA</h3>
+    <p dir="ltr">EV / EBITDA = Enterprise Value to Earnings Before Interest, Taxes, Depreciation and Amortization — שווי פעילות ביחס ל־EBITDA</p>
+    <h4>מה זה?</h4>
+    <p>המכפיל משווה בין שווי הפעילות של החברה (EV) לבין ה־EBITDA השנתי שלה.</p>
+    <p>EV — Enterprise Value הוא שווי הפעילות של העסק. בפשטות, הוא מתחיל משווי השוק של החברה, מוסיף חוב פיננסי ומפחית מזומן.</p>
+    <p>EBITDA — Earnings Before Interest, Taxes, Depreciation and Amortization הוא הרווח של החברה לפני ריבית, מסים, פחת והפחתות.</p>
+    <p>במילים פשוטות, EBITDA מנסה להראות כמה העסק מרוויח מהפעילות שלו לפני השפעת מבנה המימון, המסים והוצאות חשבונאיות של פחת והפחתות.</p>
+    <h4>איך קוראים את המספר?</h4>
+    <p>אם מכפיל EV / EBITDA הוא {shown}×, זה אומר ששווי הפעילות של החברה הוא בערך פי {shown} מה־EBITDA השנתי שלה.</p>
+    <p>במילים פשוטות: על כל 1 ₪ של EBITDA שנתי שהחברה מייצרת, שווי הפעילות שלה הוא כיום כ־{shown} ₪.</p>
+    <h4>איך מפרשים את זה?</h4>
+    <p>מכפיל נמוך יותר יכול לפעמים להעיד על תמחור נמוך יותר ביחס לרווחיות התפעולית, בעוד שמכפיל גבוה יותר יכול לשקף ציפיות לצמיחה גבוהה יותר, עסק איכותי יותר או רווחיות יציבה יותר.</p>
+    <p>היתרון של EV / EBITDA הוא שהוא מאפשר להשוות בין חברות עם רמות חוב שונות, הוצאות ריבית שונות ושיעורי פחת שונים בצורה אחידה יותר.</p>
+    <p>אבל יש גם מגבלה חשובה: EBITDA אינו תזרים מזומנים. הוא לא מביא בחשבון השקעות הוניות (Capex), שינויים בהון חוזר או תשלומי חוב, ולכן אי אפשר להסתמך עליו לבדו.</p>
+    <p>גם כאן, אי אפשר לקבוע אם חברה זולה או יקרה לפי המכפיל בלבד. צריך להשוות לחברות דומות ולבדוק גם צמיחה, חוב, Capex, תזרים מזומנים ואיכות הרווח.</p>
+  </>
   if (metric === 'evEbit') return <>
     <h3>מכפיל EV / EBIT</h3>
     <p dir="ltr">EV / EBIT = Enterprise Value to Earnings Before Interest and Taxes — שווי פעילות ביחס לרווח התפעולי</p>
