@@ -772,6 +772,12 @@ The layer adjusts only FV2 EV/EBIT and P/E ledgers. FCF Yield is intentionally u
 
 FV1 and Phase 12 remain unchanged; all live responses report `valuationScore.modelVersion = FV1`. `npm test` passed 50, Worker tests 30, Worker check and build passed. Existing Worker deployed as `cee69175-a785-4ad2-aeee-9bbf3dd3cdbb`; existing Pages deployed at `https://d084448f.israel-stocks.pages.dev`. All five fair-value APIs were verified.
 
+## Phase 15A cash flow quality audit
+
+Audited annual FY2023–FY2025 working-capital and Capex evidence without changing production valuation behavior. Existing normalized rows lack complete explicit cash-flow WC components for all five companies, so WC contribution, core CFO, and core FCF remain null. No balance-sheet deltas were substituted. Capex intensity and descriptive stability were calculated; three-year Capex/D&A medians remain unavailable where D&A coverage is incomplete. Maintenance Capex feasibility is INSUFFICIENT_EVIDENCE for all five. Shufersal's 155.19% conversion cannot yet be proven robust after WC normalization; Sano FY2025 Capex appears elevated relative to its history, but growth versus maintenance cannot be proven.
+
+Added pure audit helpers and tests only. Phase 15B options are documented but not implemented. `npm test` passed 54, Worker tests 34, Worker check and build passed. No Worker or Pages deployment was required. Full audit: `docs/phase15a-cash-flow-quality-audit.md`. FV1, FV2, Phase 14, FCF Yield, Phase 12, and all production financial behavior remain unchanged.
+
 Activated validated annual FCF inputs from official MAYA consolidated evidence. Sano now has FCF 178.423 / 101.488 / 78.971 and normalized FCF 101.488. Shufersal adjusted FCF is 853 / 1390 / 1032 with normalized 1032. Yochananof adjusted FCF is 28.152 / 133.692 / 31.521 with normalized 31.521. Neto Malinda is 145.983 / 282.774 / -102.744 with normalized 145.983. Rami Levy Capex was activated, but principal-only lease repayments were not treated as total lease cash payments, so Rami remains 2/3 and FCF-unavailable.
 
 Neto FY2025 CFO was reconciled and corrected from positive 60.655 to negative -60.655 based on the official consolidated statement parentheses. Its FY2025 FCF is -102.744, while the positive three-year median makes the FCF method available.
