@@ -752,6 +752,14 @@ Live API results: Sano 3/15 (2/8 MOS, 1/4 confidence, 0/3 dispersion); Shufersal
 
 The score is exposed as `valuationScore` and rendered in the existing Fair Value section with the `/15` total and `/8`, `/4`, `/3` breakdown. Existing Fair Value values are unchanged. Tests passed: `npm test` 45, `npm run worker:test` 25, Worker check, and frontend build. Existing Worker deployed as `1d0d3691-cdee-4a1d-b195-d75a03e839ee` at `https://israel-stocks-api.karu-lior.workers.dev`. Existing Pages preview deployed at `https://7bc1569f.israel-stocks.pages.dev`; Chrome CDP verified all five company routes and `/companies` with score rendering and no DOM errors.
 
+## Phase 13 company-specific FV2
+
+Phase 13 was not present before this implementation. Added FV2 as an additive company-specific model while preserving FV1 and the Phase 12 score. FV2 uses annual FY2023–FY2025 source-backed inputs only, neutral anchors of EV/EBIT 12×, P/E 15×, and FCF Yield 5.5%, explicit company classifications, a visible adjustment ledger, scenario values, method availability, and bounded final assumptions. Full methodology, evidence, calculations, and concerns are documented in `docs/phase13-company-specific-fair-value.md`.
+
+Live FV2 base results: Sano ₪289.7354/share, Shufersal ₪47.3906, Rami Levy ₪318.4727, Yochananof ₪198.6274, and Neto Malinda ₪139.9483. FV1 values remain ₪284.5658, ₪46.7517, ₪311.3952, ₪188.2803, and ₪139.9483 respectively. FV2 current prices and upside are documented in the phase report. Rami Levy FCF remains unavailable because explicit total lease cash payments are missing; no principal-only lease figure was treated as total lease cash payment.
+
+Phase 12 remains unchanged and reports `valuationScore.modelVersion = FV1`: Sano 3/15, Shufersal 7/15, Rami Levy 4/15, Yochananof 1/15, Neto Malinda 11/15. `npm test` passed 47 tests, Worker tests 27, Worker check, and build passed. Existing Worker deployed as `edb32943-2a47-4b61-a100-4b3e14583436`; existing Pages deployed at `https://25dbc003.israel-stocks.pages.dev`. All five API routes were verified live. No new infrastructure was created.
+
 Activated validated annual FCF inputs from official MAYA consolidated evidence. Sano now has FCF 178.423 / 101.488 / 78.971 and normalized FCF 101.488. Shufersal adjusted FCF is 853 / 1390 / 1032 with normalized 1032. Yochananof adjusted FCF is 28.152 / 133.692 / 31.521 with normalized 31.521. Neto Malinda is 145.983 / 282.774 / -102.744 with normalized 145.983. Rami Levy Capex was activated, but principal-only lease repayments were not treated as total lease cash payments, so Rami remains 2/3 and FCF-unavailable.
 
 Neto FY2025 CFO was reconciled and corrected from positive 60.655 to negative -60.655 based on the official consolidated statement parentheses. Its FY2025 FCF is -102.744, while the positive three-year median makes the FCF method available.

@@ -319,6 +319,25 @@ function FairValueSection({ companyId }: { companyId: string }) {
         <span>בסיס: {moneyValue(data.perShare?.base)}</span>
         <span>אופטימי: {moneyValue(data.perShare?.optimistic)}</span>
       </div>
+      {data.fv2?.available && (
+        <div className="fv2-panel">
+          <div className="section-heading">
+            <h3>{'\u05de\u05d5\u05d3\u05dc \u05de\u05d5\u05ea\u05d0\u05dd \u05dc\u05d7\u05d1\u05e8\u05d4 \u2014 FV2'}</h3>
+            <span>{data.fv2.profile?.business}</span>
+          </div>
+          <div className="fair-value-cards">
+            <div><b>{'\u05e9\u05d5\u05d5\u05d9 \u05d4\u05d5\u05d2\u05df \u05d1\u05e1\u05d9\u05e1\u05d9'}</b><strong>{moneyValue(data.fv2.perShare?.base)}</strong></div>
+            <div><b>{'\u05d0\u05e4\u05e1\u05d9\u05d9\u05d3 / \u05d3\u05d0\u05d5\u05e0\u05e1\u05d9\u05d9\u05d3'}</b><strong>{pctValue(data.fv2.upside?.basePct)}</strong></div>
+          </div>
+          <div className="fv2-assumptions">
+            <span>EV / EBIT: {data.fv2.assumptions?.evEbit?.final?.toFixed(1)}×</span>
+            <span>P / E: {data.fv2.assumptions?.pe?.final?.toFixed(1)}×</span>
+            <span>FCF Yield: {data.fv2.assumptions?.fcfYield?.final?.toFixed(1)}%</span>
+          </div>
+          <div className="fair-scenarios"><span>{'\u05e9\u05de\u05e8\u05e0\u05d9'}: {moneyValue(data.fv2.perShare?.conservative)}</span><span>{'\u05d1\u05e1\u05d9\u05e1'}: {moneyValue(data.fv2.perShare?.base)}</span><span>{'\u05d0\u05d5\u05e4\u05d8\u05d9\u05de\u05d9'}: {moneyValue(data.fv2.perShare?.optimistic)}</span></div>
+          <small>{'\u05d4\u05ea\u05d0\u05de\u05d5\u05ea \u05d3\u05d8\u05e8\u05de\u05d9\u05e0\u05d9\u05d5\u05ea \u05dc\u05e0\u05ea\u05d5\u05e0\u05d9\u05dd \u05e9\u05e0\u05ea\u05d9\u05d9\u05dd \u05de\u05e7\u05d5\u05e8\u05d9\u05d9\u05dd; \u05d4\u05de\u05d5\u05d3\u05dc \u05d0\u05d9\u05e0\u05d5 \u05d0\u05de\u05d9\u05e8\u05d4 \u05dc\u05e0\u05db\u05ea\u05d5\u05e0\u05d5\u05ea \u05d4\u05e2\u05ea\u05d9\u05d3.'}</small>
+        </div>
+      )}
       <div className="fair-methods">
         {method("EV / EBIT", "evEbit")}
         {method("P / E", "pe")}

@@ -10,6 +10,14 @@ export const FAIR_VALUE_ASSUMPTIONS = {
 
 export const FAIR_VALUE_CONFIDENCE_THRESHOLDS = { low: 0.10, moderate: 0.20, high: 0.35 } as const
 
+export const FV2_PROFILES = {
+  sano: { business: 'CONSUMER_DEFENSIVE_BRANDED', cyclicality: 'LOW_TO_MODERATE' },
+  shufersal: { business: 'FOOD_RETAIL', cyclicality: 'LOW' },
+  'rami-levy': { business: 'FOOD_RETAIL', cyclicality: 'LOW' },
+  yochananof: { business: 'FOOD_RETAIL', cyclicality: 'LOW' },
+  'neto-malinda': { business: 'FOOD_DISTRIBUTION', cyclicality: 'MODERATE' },
+} as const
+
 export function marginOfSafetyScore(upsidePct: number | null) {
   if (upsidePct == null || !Number.isFinite(upsidePct)) return null
   if (upsidePct >= 0.4) return 8
@@ -33,8 +41,8 @@ export function buildValuationScore(upsidePct: number | null, perShare: number |
   else if (currentPrice == null || currentPrice <= 0) reason = 'MISSING_CURRENT_PRICE'
   else if (coverage < 2) reason = 'INSUFFICIENT_METHODS'
   else if (confidenceResult?.level === 'INSUFFICIENT') reason = 'INSUFFICIENT_CONFIDENCE'
-  if (reason || marginScore == null) return { available: false, total: null, max: 15, breakdown: { marginOfSafety: { score: null, max: 8, upsidePct }, confidence: { score: confidenceScore, max: 4, level: confidenceResult?.level ?? 'INSUFFICIENT' }, dispersion: { score: dispersionScore, max: 3, pct: confidenceResult?.dispersion?.pct ?? null, classification: confidenceResult?.dispersion?.classification ?? null } }, reason: reason ?? 'MISSING_UPSIDE' }
-  return { available: true, total: marginScore + confidenceScore + dispersionScore, max: 15, breakdown: { marginOfSafety: { score: marginScore, max: 8, upsidePct }, confidence: { score: confidenceScore, max: 4, level: confidenceResult.level }, dispersion: { score: dispersionScore, max: 3, pct: confidenceResult.dispersion.pct, classification: confidenceResult.dispersion.classification } }, reason: null }
+  if (reason || marginScore == null) return { modelVersion: 'FV1', available: false, total: null, max: 15, breakdown: { marginOfSafety: { score: null, max: 8, upsidePct }, confidence: { score: confidenceScore, max: 4, level: confidenceResult?.level ?? 'INSUFFICIENT' }, dispersion: { score: dispersionScore, max: 3, pct: confidenceResult?.dispersion?.pct ?? null, classification: confidenceResult?.dispersion?.classification ?? null } }, reason: reason ?? 'MISSING_UPSIDE' }
+  return { modelVersion: 'FV1', available: true, total: marginScore + confidenceScore + dispersionScore, max: 15, breakdown: { marginOfSafety: { score: marginScore, max: 8, upsidePct }, confidence: { score: confidenceScore, max: 4, level: confidenceResult.level }, dispersion: { score: dispersionScore, max: 3, pct: confidenceResult.dispersion.pct, classification: confidenceResult.dispersion.classification } }, reason: null }
 }
 
 type Scenario = 'conservative' | 'base' | 'optimistic'
@@ -56,6 +64,62 @@ export function normalizeAnnual(rows: any[], field: string, requirePositive = tr
 
 const unavailable = (reason: string, inputs: any = {}, assumptions: any = {}) => ({ available: false, value: null, reason, inputs, assumptions })
 const method = (values: Record<Scenario, number>, inputs: any, assumptions: any) => ({ available: true, value: values.base, conservative: values.conservative, base: values.base, optimistic: values.optimistic, inputs, assumptions })
+
+const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value))
+const annualValues = (rows: any[], field: string) => ['2023', '2024', '2025'].map(year => n(rows.find(r => r.period_type === 'ANNUAL' && String(r.fiscal_year) === year)?.[field]))
+const adjustment = (code: string, delta: number, evidence: string) => ({ code, delta, evidence })
+
+export function buildCompanySpecificFairValue(companyId: string, rows: any[], market: any, retailer: boolean, fv1: any) {
+  const profile = FV2_PROFILES[companyId as keyof typeof FV2_PROFILES]
+  if (!profile) return { available: false, reason: 'UNKNOWN_COMPANY_PROFILE' }
+  const revenue = annualValues(rows, 'revenue')
+  const ebit = annualValues(rows, 'operating_income')
+  const margins = revenue.map((value, index) => value != null && ebit[index] != null && value > 0 ? ebit[index]! / value : null)
+  const validMargins = margins.filter((value): value is number => value != null)
+  const growth = revenue.length === 3 && revenue[0] != null && revenue[2] != null && revenue[0] > 0 ? revenue[2]! / revenue[0]! - 1 : null
+  const marginSpread = validMargins.length === 3 ? Math.max(...validMargins) - Math.min(...validMargins) : null
+  const netDebt = fv1.basis?.netDebt as number | null
+  const normalizedEbit = fv1.normalization?.ebit?.value as number | null
+  const leverage = netDebt != null && normalizedEbit != null && normalizedEbit > 0 ? netDebt / normalizedEbit : null
+  const confidence = fv1.confidence?.level ?? 'INSUFFICIENT'
+  const common: any[] = []
+  const evAdjustments: any[] = []
+  const peAdjustments: any[] = []
+  const fcfAdjustments: any[] = []
+  if (netDebt != null && netDebt < 0) { const a = adjustment('NET_CASH', 0.5, `FY2025 net debt is ${netDebt.toFixed(3)} ILS millions`); evAdjustments.push(a); common.push(a) }
+  if (marginSpread != null && marginSpread <= 0.03) { const a = adjustment('MARGIN_STABLE', 0.5, `FY2023–FY2025 EBIT margin spread is ${(marginSpread * 100).toFixed(2)}%`); evAdjustments.push(a); peAdjustments.push(a); fcfAdjustments.push(a) }
+  if (growth != null && growth >= 0.10) { const a = adjustment('GROWTH_SUPPORTED', 0.5, `FY2023–FY2025 revenue growth is ${(growth * 100).toFixed(2)}%`); evAdjustments.push(a); peAdjustments.push(a); fcfAdjustments.push(a) }
+  else if (growth != null && growth < 0) { const a = adjustment('GROWTH_WEAK', -0.5, `FY2023–FY2025 revenue change is ${(growth * 100).toFixed(2)}%`); evAdjustments.push(a); peAdjustments.push(a); fcfAdjustments.push(a) }
+  if (leverage != null && leverage > 3) { const a = adjustment('LEVERAGE_HIGH', -0.5, `FY2025 net debt / normalized EBIT is ${leverage.toFixed(2)}x`); evAdjustments.push(a); peAdjustments.push(a); fcfAdjustments.push(a) }
+  if (profile.cyclicality === 'MODERATE') { const a = adjustment('CYCLICALITY_MODERATE', -0.5, 'Company profile classifies the business as moderately cyclical'); evAdjustments.push(a); peAdjustments.push(a); fcfAdjustments.push(a) }
+  if (confidence === 'LOW') { const a = adjustment('CONFIDENCE_LOW', -0.5, 'Existing FV1 confidence is LOW'); evAdjustments.push(a); peAdjustments.push(a); fcfAdjustments.push(a) }
+  const finalMultiple = (anchor: number, adjustments: any[], min: number, max: number) => ({ anchor, adjustments, final: clamp(anchor + adjustments.reduce((sum, item) => sum + item.delta, 0), min, max) })
+  const evAssumption = finalMultiple(12, evAdjustments, 7, 18)
+  const peAssumption = finalMultiple(15, peAdjustments, 8, 25)
+  const fcfAssumption = finalMultiple(5.5, fcfAdjustments, 3.5, 10)
+  const normalizedNetIncome = fv1.normalization?.netIncome?.value as number | null
+  const normalizedFcf = fv1.normalization?.fcf?.value as number | null
+  const shares = fv1.basis?.sharesOutstanding as number | null
+  const currentPrice = n(market?.share_price)
+  const evValue = fv1.normalization?.ebit?.available && netDebt != null ? normalizedEbit! * evAssumption.final - netDebt : null
+  const peValue = fv1.normalization?.netIncome?.available ? normalizedNetIncome! * peAssumption.final : null
+  const fcfValue = fv1.methods?.fcf?.available && normalizedFcf != null ? normalizedFcf / (fcfAssumption.final / 100) : null
+  const methods: any = {
+    evEbit: evValue != null ? method({ conservative: evValue * .85, base: evValue, optimistic: evValue * 1.15 }, { normalizedEbit, netDebt }, evAssumption) : unavailable('MISSING_EBIT_OR_NET_DEBT', { normalizedEbit, netDebt }, evAssumption),
+    pe: peValue != null ? method({ conservative: peValue * .85, base: peValue, optimistic: peValue * 1.15 }, { normalizedNetIncome }, peAssumption) : unavailable('MISSING_NET_INCOME', { normalizedNetIncome }, peAssumption),
+    fcf: fcfValue != null ? method({ conservative: fcfValue * .85, base: fcfValue, optimistic: fcfValue * 1.15 }, { normalizedFcf }, fcfAssumption) : unavailable('FCF_METHOD_UNAVAILABLE', { normalizedFcf }, fcfAssumption),
+  }
+  const available = Object.values(methods).filter((item: any) => item.available) as any[]
+  const weights = { evEbit: .4, pe: .35, fcf: .25 }
+  const totalWeight = Object.entries(methods).reduce((sum, [key, value]: any) => sum + (value.available ? weights[key as keyof typeof weights] : 0), 0)
+  const effectiveWeights = Object.fromEntries(Object.keys(methods).map(key => [key, (methods[key].available ? weights[key as keyof typeof weights] : 0) / (totalWeight || 1)]))
+  const blend = (scenario: Scenario) => available.length ? available.reduce((sum, value: any) => sum + value[scenario] * effectiveWeights[Object.keys(methods).find(key => methods[key] === value)!], 0) : null
+  const blended = { conservativeFairValue: blend('conservative'), baseFairValue: blend('base'), optimisticFairValue: blend('optimistic'), effectiveWeights, availableMethods: Object.entries(methods).filter(([, value]: any) => value.available).map(([key]) => key) }
+  const perShare = (value: number | null) => value != null && shares != null && shares > 0 ? value * 1_000_000 / shares : null
+  const perShareValues = { conservative: perShare(blended.conservativeFairValue), base: perShare(blended.baseFairValue), optimistic: perShare(blended.optimisticFairValue) }
+  const upside = (value: number | null) => value != null && currentPrice != null && currentPrice > 0 ? value / currentPrice - 1 : null
+  return { modelVersion: 'FV2', available: available.length > 0, profile: { ...profile, modelClassification: true }, evidence: { annualPeriods: ['2023', '2024', '2025'], revenue, ebit, ebitMargins: margins, revenueGrowth: growth, marginSpread, leverage, confidence, source: 'FV1 source-backed normalized annual inputs' }, assumptions: { evEbit: evAssumption, pe: peAssumption, fcfYield: fcfAssumption }, methods, blended, perShare: perShareValues, currentPrice, upside: { conservativePct: upside(perShareValues.conservative), basePct: upside(perShareValues.base), optimisticPct: upside(perShareValues.optimistic) }, marginOfSafety: { fairPrice: perShareValues.base, mos10: perShareValues.base != null ? perShareValues.base * .9 : null, mos20: perShareValues.base != null ? perShareValues.base * .8 : null, mos30: perShareValues.base != null ? perShareValues.base * .7 : null }, methodWeights: weights, availableMethods: blended.availableMethods, adjustmentRationale: { evEbit: evAdjustments, pe: peAdjustments, fcfYield: fcfAdjustments }, retailer, concerns: ['FV2 is a deterministic scenario model, not an objective truth', retailer && !fv1.methods?.fcf?.available ? 'FCF remains unavailable without explicit total lease cash payments' : null].filter(Boolean) }
+}
 
 function confidence(methods: Record<string, any>, normalization: { ebit: Normalized; netIncome: Normalized; fcf: Normalized }, netDebt: number | null, shares: number | null, currentPrice: number | null, marketCap: number | null, retailer: boolean) {
   const names = { evEbit: 'EV_EBIT', pe: 'PE', fcf: 'FCF' } as const
@@ -111,5 +175,6 @@ export function buildFairValue(companyId: string, rows: any[], market: any, reta
   const upside = (value: number | null) => value != null && currentPrice != null && currentPrice > 0 ? value / currentPrice - 1 : null
   const confidenceResult = confidence(methods, { ebit, netIncome, fcf }, netDebt, shares, currentPrice, marketCap, retailer)
   const upsideValues = { conservativePct: upside(perShareValues.conservative), basePct: upside(perShareValues.base), optimisticPct: upside(perShareValues.optimistic) }
-  return { companyId, market: { currentPrice, marketCap, asOf: market?.as_of ?? null, provider: market?.provider ?? null, delayMinutes: market?.delay_minutes ?? null }, normalization: { ebit, netIncome, fcf }, methods, blended, confidence: confidenceResult, valuationScore: buildValuationScore(upsideValues.basePct, perShareValues.base, currentPrice, confidenceResult), perShare: perShareValues, upside: upsideValues, marginOfSafety: { fairPrice: perShareValues.base, mos10: perShareValues.base != null ? perShareValues.base * .9 : null, mos20: perShareValues.base != null ? perShareValues.base * .8 : null, mos30: perShareValues.base != null ? perShareValues.base * .7 : null }, basis: { annualYears: ['2023', '2024', '2025'], normalizationMethod: 'DETERMINISTIC_3Y_MEDIAN', assumptionVersion: FAIR_VALUE_ASSUMPTIONS.version, retailer, netDebt, sharesOutstanding: shares, currentPrice, currentMarketCap: marketCap } }
+  const fv1 = { companyId, modelVersion: 'FV1', market: { currentPrice, marketCap, asOf: market?.as_of ?? null, provider: market?.provider ?? null, delayMinutes: market?.delay_minutes ?? null }, normalization: { ebit, netIncome, fcf }, methods, blended, confidence: confidenceResult, valuationScore: buildValuationScore(upsideValues.basePct, perShareValues.base, currentPrice, confidenceResult), perShare: perShareValues, upside: upsideValues, marginOfSafety: { fairPrice: perShareValues.base, mos10: perShareValues.base != null ? perShareValues.base * .9 : null, mos20: perShareValues.base != null ? perShareValues.base * .8 : null, mos30: perShareValues.base != null ? perShareValues.base * .7 : null }, basis: { annualYears: ['2023', '2024', '2025'], normalizationMethod: 'DETERMINISTIC_3Y_MEDIAN', assumptionVersion: FAIR_VALUE_ASSUMPTIONS.version, retailer, netDebt, sharesOutstanding: shares, currentPrice, currentMarketCap: marketCap } }
+  return { ...fv1, fv2: buildCompanySpecificFairValue(companyId, rows, market, retailer, fv1) }
 }
