@@ -19,14 +19,14 @@ The generic MAYA page is not sufficient evidence of a specific issuer identity. 
 
 | Company | Legal issuer / canonical ID | Ticker | Security ID | MAYA company ID | Sector group | Business summary | Verification source | Status |
 |---|---|---|---|---|---|---|---|---|
-| Strauss Group | Strauss Group Ltd / `strauss` | not verified | not verified | not verified | Branded Consumer | Food, beverages and consumer staples | Official MAYA/TASE selector response required | NEEDS_REVIEW |
+| Strauss Group | Strauss Group Ltd / `strauss` | not verified | not verified | not verified | Branded Consumer | Food, beverages and consumer staples | Official selector request blocked; see Phase 17D | BLOCKED |
 | Fox-Wizel | Fox-Wizel Ltd / `fox` | not verified | not verified | not verified | Apparel Retail | Apparel and lifestyle retail | Official MAYA/TASE selector response required | NEEDS_REVIEW |
 | Max Stock | Max Stock Ltd / `max-stock` | not verified | not verified | not verified | General Merchandise Retail | Discount/general merchandise retail | Official MAYA/TASE selector response required | NEEDS_REVIEW |
 | Delta Israel Brands | Delta Israel Brands Ltd / `delta-israel-brands` | not verified | not verified | not verified | Apparel Retail | Apparel, underwear and branded retail | Official MAYA/TASE selector response required | NEEDS_REVIEW |
 | Castro Model | Castro Model Ltd / `castro` | not verified | not verified | not verified | Apparel Retail | Fashion and apparel retail | Official MAYA/TASE selector response required | NEEDS_REVIEW |
 | Diplomat Holdings | Diplomat Holdings Ltd / `diplomat` | not verified | not verified | not verified | Consumer Distribution | Import, marketing and distribution of consumer products | Official MAYA/TASE selector response required | NEEDS_REVIEW |
-| Victory Supermarket Chain | Victory Supermarket Chain Ltd / `victory` | not verified | not verified | not verified | Food Retail | Food retail and supermarkets | Official MAYA/TASE selector response required | NEEDS_REVIEW |
-| Tiv Taam Holdings | Tiv Taam Holdings Ltd / `tiv-taam` | not verified | not verified | not verified | Food Retail | Food retail and supermarkets | Official MAYA/TASE selector response required | NEEDS_REVIEW |
+| Victory Supermarket Chain | Victory Supermarket Chain Ltd / `victory` | not verified | not verified | not verified | Food Retail | Food retail and supermarkets | Official selector request blocked; see Phase 17D | BLOCKED |
+| Tiv Taam Holdings | Tiv Taam Holdings Ltd / `tiv-taam` | not verified | not verified | not verified | Food Retail | Food retail and supermarkets | Official selector request blocked; see Phase 17D | BLOCKED |
 | Isrotel | Isrotel Ltd / `isrotel` | not verified | not verified | not verified | Hotels | Hotel chain and tourism | Official MAYA/TASE selector response required | NEEDS_REVIEW |
 | Dan Hotels | Dan Hotels Ltd / `dan-hotels` | not verified | not verified | not verified | Hotels | Hotels and tourism | Official MAYA/TASE selector response required | NEEDS_REVIEW |
 
