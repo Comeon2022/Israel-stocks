@@ -36,6 +36,10 @@ The final assumptions are bounded at EV/EBIT 7–18×, P/E 8–25×, and FCF Yie
 | Yochananof | FOOD_RETAIL | LOW |
 | Neto Malinda | FOOD_DISTRIBUTION | MODERATE |
 
+## PRE-FIX / HISTORICAL ONLY — superseded production comparison
+
+The following values document the implementation state before Phase 13-Fix. They are retained only for regression history and are not authoritative current production values.
+
 ## Production comparison
 
 | Company | Current price | FV1 base/share | FV2 base/share | FV1 upside | FV2 upside | FV2 EV/EBIT | FV2 P/E | FV2 FCF Yield | Methods | Confidence |
