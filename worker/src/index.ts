@@ -2,6 +2,7 @@
 import { GLOBES_MAP, fetchGlobesSnapshot } from "./market/globes-provider";
 import { buildAnalytics, peerComparison } from "./analytics";
 import { buildFairValue } from "./fairValue";
+import { buildScorecardV2 } from "./scorecardV2";
 export interface Env {
   DB: D1Database;
   ALLOWED_ORIGINS?: string;
@@ -248,6 +249,16 @@ async function fairValue(db: D1Database, id: string) {
     ["shufersal", "rami-levy", "yochananof"].includes(id),
   );
 }
+async function scorecardV2(db: D1Database, id: string) {
+  const rows = await financialRows(db, id);
+  const snapshot = await db
+    .prepare("SELECT * FROM market_snapshots WHERE company_id=? ORDER BY COALESCE(as_of,snapshot_date) DESC LIMIT 1")
+    .bind(id)
+    .first<Row>();
+  const fairValue = buildFairValue(id, rows, snapshot, ["shufersal", "rami-levy", "yochananof"].includes(id));
+  const businessClass: Record<string,string> = { sano: "CONSUMER_DEFENSIVE_BRANDED", shufersal: "FOOD_RETAIL", "rami-levy": "FOOD_RETAIL", yochananof: "FOOD_RETAIL", "neto-malinda": "FOOD_DISTRIBUTION" };
+  return buildScorecardV2(rows, snapshot, fairValue.fv2, businessClass[id] ?? "FOOD_DISTRIBUTION", ["shufersal", "rami-levy", "yochananof"].includes(id));
+}
 async function peerData(db: D1Database, retailersOnly = false) {
   const ids = retailersOnly
     ? ["shufersal", "rami-levy", "yochananof"]
@@ -314,6 +325,7 @@ export default {
         return reply({ error: { code: "NOT_FOUND" } }, 404, origin);
       const id = p[2];
       if (p[3] === "fair-value" && id) return reply(await fairValue(env.DB, id), 200, origin);
+      if (p[3] === "scorecard-v2" && id) return reply(await scorecardV2(env.DB, id), 200, origin);
       if (!id)
         return reply(
           {
