@@ -764,6 +764,14 @@ The superseded values previously shown in this section (Sano ₪289.7354, Shufer
 
 Phase 12 remains unchanged and reports `valuationScore.modelVersion = FV1`: Sano 3/15, Shufersal 7/15, Rami Levy 4/15, Yochananof 1/15, Neto Malinda 11/15. `npm test` passed 48 tests, Worker tests 28, Worker check, and build passed. Existing Worker deployed as `a3d7edb6-2e70-40bc-9b9e-d8ba545a7264`; existing Pages deployed at `https://d18d4425.israel-stocks.pages.dev`. All five API routes were verified live. No new infrastructure was created.
 
+## Phase 14 earnings quality / cash conversion
+
+Added the FV2-only normalized cash-conversion layer: normalized FCF divided by normalized net income, both based on FY2023–FY2025 deterministic annual medians. Quality thresholds are EXCELLENT ≥80%, GOOD 60–<80%, MODERATE 40–<60%, WEAK <40%, and UNAVAILABLE when inputs are missing. Negative annual FCF caps quality at MODERATE; non-positive normalized FCF is WEAK. Shufersal and Yochananof retailer FCF remain source-backed; Rami Levy remains unavailable.
+
+The layer adjusts only FV2 EV/EBIT and P/E ledgers. FCF Yield is intentionally unchanged by cash conversion. Live quality results are Sano WEAK (38.25%), Shufersal EXCELLENT (155.19%), Rami Levy UNAVAILABLE, Yochananof WEAK (16.65%), and Neto Malinda MODERATE (69.53%, capped by negative FY2025 FCF). Full before/after calculations are in `docs/phase14-earnings-quality.md`.
+
+FV1 and Phase 12 remain unchanged; all live responses report `valuationScore.modelVersion = FV1`. `npm test` passed 50, Worker tests 30, Worker check and build passed. Existing Worker deployed as `cee69175-a785-4ad2-aeee-9bbf3dd3cdbb`; existing Pages deployed at `https://d084448f.israel-stocks.pages.dev`. All five fair-value APIs were verified.
+
 Activated validated annual FCF inputs from official MAYA consolidated evidence. Sano now has FCF 178.423 / 101.488 / 78.971 and normalized FCF 101.488. Shufersal adjusted FCF is 853 / 1390 / 1032 with normalized 1032. Yochananof adjusted FCF is 28.152 / 133.692 / 31.521 with normalized 31.521. Neto Malinda is 145.983 / 282.774 / -102.744 with normalized 145.983. Rami Levy Capex was activated, but principal-only lease repayments were not treated as total lease cash payments, so Rami remains 2/3 and FCF-unavailable.
 
 Neto FY2025 CFO was reconciled and corrected from positive 60.655 to negative -60.655 based on the official consolidated statement parentheses. Its FY2025 FCF is -102.744, while the positive three-year median makes the FCF method available.
