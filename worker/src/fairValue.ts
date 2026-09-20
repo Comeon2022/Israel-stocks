@@ -149,7 +149,10 @@ const buildCompanySpecificFairValueFixed = (companyId: string, rows: any[], mark
   const negativeFcfYearPresent = fcfValues.some(value => value != null && value < 0)
   const earningsQuality = classifyEarningsQuality(cashConversionRatio, negativeFcfYearPresent, normalizedFcf)
   const earningsQualityReasons = cashConversionRatio == null ? ['MISSING_NORMALIZED_FCF_OR_NET_INCOME'] : normalizedFcf != null && normalizedFcf <= 0 ? ['NON_POSITIVE_NORMALIZED_FCF'] : negativeFcfYearPresent ? ['NEGATIVE_ANNUAL_FCF_LIMITS_QUALITY'] : ['NORMALIZED_FCF_TO_NET_INCOME']
-  const earningsQualityEvidence = { normalizedNetIncome, normalizedNetIncomeMethod: normalizedNetIncome != null ? 'DETERMINISTIC_3Y_MEDIAN' : null, normalizedFCF: normalizedFcf, cashConversionRatio, classification: earningsQuality, negativeFcfYearPresent, reasons: earningsQualityReasons }
+  const leaseEvidenceComplete = !retailer ? 'NOT_APPLICABLE' as const : companyId === 'shufersal' || companyId === 'yochananof' ? true : false
+  const capexInterpretationStatus = companyId === 'rami-levy' ? 'UNAVAILABLE' as const : 'UNRESOLVED' as const
+  const conversionConfidence = cashConversionConfidence({ normalizedFCF: normalizedFcf, normalizedNetIncome, workingCapitalCoverage: 'UNAVAILABLE', fcfEvidenceComplete: fv1.methods?.fcf?.available === true, leaseEvidenceComplete, capexInterpretationStatus, negativeFcfYearPresent })
+  const earningsQualityEvidence = { normalizedNetIncome, normalizedNetIncomeMethod: normalizedNetIncome != null ? 'DETERMINISTIC_3Y_MEDIAN' : null, normalizedFCF: normalizedFcf, cashConversionRatio, classification: earningsQuality, negativeFcfYearPresent, reasons: earningsQualityReasons, cashConversionConfidence: conversionConfidence }
   const evidence = { annualPeriods: years, revenueCagr, ebitCagr, netIncomeCagr, revenueGrowthClass: growthClass(revenueCagr), ebitGrowthClass: growthClass(ebitCagr), netIncomeGrowthClass: growthClass(netIncomeCagr), ebitMargins: margins, marginRange, marginStability, fcfValues, fcfRangeRatio, fcfStability, netIncomeValues: netIncome, earningsRangeRatio, earningsStability, netDebt, marketCap, netDebtToMarketCap, balanceSheet, confidence, earningsQuality: earningsQualityEvidence }
   const adjustment = (code: string, delta: number, source: string) => ({ code, delta, evidence: source })
   const balanceEv = balanceSheet === 'NET_CASH' ? adjustment('NET_CASH', .5, `net debt ${netDebt} ILSm`) : balanceSheet === 'MODERATE_LEVERAGE' ? adjustment('MODERATE_LEVERAGE', -.5, `${(netDebtToMarketCap! * 100).toFixed(2)}% of market cap`) : balanceSheet === 'HIGH_LEVERAGE' ? adjustment('HIGH_LEVERAGE', -1, `${(netDebtToMarketCap! * 100).toFixed(2)}% of market cap`) : null
@@ -185,6 +188,25 @@ export const classifyEarningsQuality = (ratio: number | null, negativeFcfYearPre
   if (ratio >= .6) return 'GOOD'
   if (ratio >= .4) return 'MODERATE'
   return 'WEAK'
+}
+export function cashConversionConfidence(input: { normalizedFCF: number | null; normalizedNetIncome: number | null; workingCapitalCoverage: 'COMPLETE' | 'PARTIAL' | 'UNAVAILABLE'; fcfEvidenceComplete: boolean; leaseEvidenceComplete: boolean | 'NOT_APPLICABLE'; capexInterpretationStatus: 'CLEAR' | 'PARTIAL' | 'UNRESOLVED' | 'NOT_MATERIAL' | 'UNAVAILABLE'; negativeFcfYearPresent?: boolean }) {
+  const reasons: string[] = []
+  if (input.normalizedFCF == null) reasons.push('FCF_UNAVAILABLE')
+  else if (input.fcfEvidenceComplete) reasons.push('FCF_SOURCE_BACKED')
+  if (input.normalizedNetIncome == null) reasons.push('NORMALIZED_NET_INCOME_UNAVAILABLE')
+  if (input.workingCapitalCoverage === 'COMPLETE') reasons.push('WC_EVIDENCE_COMPLETE')
+  else if (input.workingCapitalCoverage === 'PARTIAL') reasons.push('WC_EVIDENCE_PARTIAL')
+  else reasons.push('WC_EVIDENCE_INCOMPLETE')
+  if (input.leaseEvidenceComplete === 'NOT_APPLICABLE') reasons.push('LEASE_EVIDENCE_NOT_APPLICABLE')
+  else if (input.leaseEvidenceComplete) reasons.push('LEASE_EVIDENCE_COMPLETE')
+  else reasons.push('LEASE_EVIDENCE_INCOMPLETE')
+  if (input.capexInterpretationStatus === 'UNRESOLVED') reasons.push('CAPEX_INTERPRETATION_UNRESOLVED')
+  if (input.negativeFcfYearPresent) reasons.push('NEGATIVE_FCF_YEAR')
+  if (input.workingCapitalCoverage !== 'COMPLETE') reasons.push('CORE_CASH_FLOW_UNAVAILABLE')
+  const unavailable = input.normalizedFCF == null || input.normalizedNetIncome == null
+  const completeLease = input.leaseEvidenceComplete === true || input.leaseEvidenceComplete === 'NOT_APPLICABLE'
+  const level = unavailable ? 'UNAVAILABLE' : input.workingCapitalCoverage === 'COMPLETE' && completeLease && input.fcfEvidenceComplete ? 'HIGH' : input.workingCapitalCoverage === 'PARTIAL' && input.capexInterpretationStatus !== 'UNRESOLVED' && completeLease ? 'MEDIUM' : 'LOW'
+  return { level, reasons, workingCapitalCoverage: input.workingCapitalCoverage, fcfEvidenceComplete: input.fcfEvidenceComplete, leaseEvidenceComplete: input.leaseEvidenceComplete, capexInterpretationStatus: input.capexInterpretationStatus }
 }
 
 function confidence(methods: Record<string, any>, normalization: { ebit: Normalized; netIncome: Normalized; fcf: Normalized }, netDebt: number | null, shares: number | null, currentPrice: number | null, marketCap: number | null, retailer: boolean) {

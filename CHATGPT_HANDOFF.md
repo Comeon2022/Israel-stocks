@@ -784,6 +784,12 @@ Inspected the existing selected official MAYA annual report set and its XBRL, HT
 
 The proposed Cash Conversion Confidence overlay and Phase 15B options are documented but not activated. Production valuation behavior, D1 financial values, FV1, FV2, Phase 14, FCF Yield, and Phase 12 remain unchanged; production D1 financial writes were zero. Tests/build passed: `npm test` 54, Worker tests 34, Worker check, and build. No Worker or Pages deployment was performed. Full evidence: `docs/phase15a1-source-deep-dive.md`.
 
+## Phase 15B cash conversion confidence
+
+Implemented the explanatory `cashConversionConfidence` object inside FV2 earnings-quality evidence. States are HIGH, MEDIUM, LOW, and UNAVAILABLE. HIGH requires complete three-year WC evidence and complete retailer lease treatment; missing normalized FCF or net income is UNAVAILABLE; unresolved WC or Capex interpretation produces LOW. Phase 14 quality remains separate: Shufersal intentionally displays EXCELLENT quality with LOW confidence.
+
+Current states: Sano WEAK / 38.25% / LOW; Shufersal EXCELLENT / 155.19% / LOW; Rami Levy UNAVAILABLE / unavailable / UNAVAILABLE; Yochananof WEAK / 16.65% / LOW; Neto Malinda MODERATE / 69.53% / LOW. The confidence object is not consumed by valuation calculations. FV1, FV2 values, Phase 14, FCF Yield, and Phase 12 remain unchanged. Full details: `docs/phase15b-cash-conversion-confidence.md`.
+
 Activated validated annual FCF inputs from official MAYA consolidated evidence. Sano now has FCF 178.423 / 101.488 / 78.971 and normalized FCF 101.488. Shufersal adjusted FCF is 853 / 1390 / 1032 with normalized 1032. Yochananof adjusted FCF is 28.152 / 133.692 / 31.521 with normalized 31.521. Neto Malinda is 145.983 / 282.774 / -102.744 with normalized 145.983. Rami Levy Capex was activated, but principal-only lease repayments were not treated as total lease cash payments, so Rami remains 2/3 and FCF-unavailable.
 
 Neto FY2025 CFO was reconciled and corrected from positive 60.655 to negative -60.655 based on the official consolidated statement parentheses. Its FY2025 FCF is -102.744, while the positive three-year median makes the FCF method available.
