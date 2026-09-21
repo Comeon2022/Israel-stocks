@@ -32,6 +32,8 @@ The generic MAYA page is not sufficient evidence of a specific issuer identity. 
 
 The canonical IDs are a non-activating registry only. They do not imply verified issuer identity or eligibility.
 
+Phase 17D-Fix supersedes the prior review statuses for all ten entries: the supplied MAYA IDs and official MAYA company details are now verified; current status is `MARKET_MAPPING_PENDING` until exact Globes/provider identity is independently matched. See `docs/phase17d-fix-report-discovery.md`.
+
 ## Report and market-data status
 
 No new issuer passed the identity gate, so the selected-report table is intentionally empty rather than populated with guessed report IDs:

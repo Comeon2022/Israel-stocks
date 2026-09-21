@@ -2,6 +2,8 @@
 
 ## Outcome
 
+This original Batch 1 blocker record is superseded by Phase 17D-Fix. The supplied MAYA IDs enabled direct discovery; see `docs/phase17d-fix-verified-registry-discovery.md` for the current result.
+
 Batch 1 did not pass the official identity gate. Strauss, Victory, and Tiv Taam are all `BLOCKED` because the official MAYA company-selector request was blocked by Incapsula in the execution environment. The project did not guess identifiers or continue with unverified report/market data.
 
 ## Discovery evidence
