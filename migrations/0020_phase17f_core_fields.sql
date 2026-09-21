@@ -1,0 +1,1 @@
+CREATE TABLE IF NOT EXISTS financial_field_provenance (id TEXT PRIMARY KEY,company_id TEXT NOT NULL,period_id TEXT NOT NULL,field TEXT NOT NULL,concept TEXT,context_id TEXT,unit TEXT,raw_value TEXT,normalized_value REAL,provenance_type TEXT NOT NULL,created_at TEXT NOT NULL,UNIQUE(period_id,field));
