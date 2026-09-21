@@ -876,3 +876,10 @@ Phase 17F dry-run began for the ten target companies with zero writes and zero m
 The existing Worker was redeployed after the shared mapper/runtime change: `670e3da5-835b-4416-9dc6-f4403d05e680`, `https://israel-stocks-api.karu-lior.workers.dev`. `/api/health` returned `status=ok`; existing annual financial API behavior remained intact. No Pages deployment was required.
 
 Tests after the mapper and tests update: `npm test` 69 passed; `npm run worker:test` 49 passed; Worker check passed; frontend build passed. No scorecard rules, thresholds, FV1/FV2, market behavior, ROIC, DCF, or existing-five values were changed. Remaining blocker: complete official issuer-by-issuer XBRL candidate diagnostics and rerun dry-run before any Phase 17F field activation.
+## Phase 17F-Fix offline/source-URL concept resolution
+
+Replaced enrichment-time broad MAYA discovery with a source-first pipeline over the 30 known persisted annual D1 source/XBRL URLs. The pipeline verified all 30 report identities, fetched each source once sequentially, cached XML temporarily, enumerated/mapped candidates, and completed with 30/30 fetch/parse success, 0 failures, 0 dry-run writes, and 0 market writes. The non-dry enrichment was rerun twice; no field passed the conservative acceptance gate, so both runs were idempotent no-ops and provenance row count remains 0.
+
+Phase 17F-Fix availability remains 0/30 for Capex PP&E, Capex intangible, total Capex, cash, short-term debt, long-term debt, non-lease debt, D&A, lease principal, lease interest, total lease cash, FCF, and adjusted FCF. No values were fabricated, no missing components were treated as zero, and no lease liability movement was used. The exact matrix and acceptance registry are in `docs/phase17f-fix-concept-resolution.md`.
+
+Worker runtime was not changed after the Phase 17F deployment, so no new deployment was required. Existing Worker version remains `670e3da5-835b-4416-9dc6-f4403d05e680`. Pages was unchanged.
