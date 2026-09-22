@@ -1,0 +1,11 @@
+export type SourceType='MAYA_HTML'|'MAYA_PDF'
+export type Evidence={sourceType:SourceType;sourceUrl:string;sectionHeading:string|null;noteNumber:string|null;tableIndex:number;rowLabelRaw:string;rowLabelNormalized:string;columnHeader:string;reportedUnit:string|null;rawCellText:string;parsedNumericValue:number;normalizedILSMillions:number;currency:'ILS'|'UNKNOWN';signNormalization:'ABSOLUTE_CASH_OUTFLOW'|'NONE';pageNumber:number|null;evidenceConfidence:'HIGH'|'MEDIUM'|'LOW';validationNotes:string[]}
+export type Cell={text:string;rowSpan:number;colSpan:number}
+export function normalizeLabel(value:string){return value.replace(/\u00a0/g,' ').replace(/[\u200e\u200f]/g,'').replace(/ך/g,'כ').replace(/ם/g,'מ').replace(/ן/g,'נ').replace(/ף/g,'פ').replace(/ץ/g,'צ').replace(/[\s\u05be–—-]+/g,' ').replace(/[()[\]{}:;,./]/g,' ').replace(/\s+/g,' ').trim().toLocaleLowerCase()}
+export function parseNumeric(text:string):number|null{const s=text.replace(/\u00a0/g,' ').replace(/[₪$]/g,'').replace(/\s/g,'').replace(/,/g,'').replace(/\u05be/g,'-');if(!s||/^[-—–]$/.test(s))return null;const negative=/^\(.*\)$/.test(s);const n=Number(s.replace(/[()]/g,''));return Number.isFinite(n)?(negative?-1:1)*n:null}
+export function resolveYearColumn(headers:string[],year:number){const matches=headers.map((h,i)=>({i,h})).filter(x=>new RegExp(`(^|\\D)${year}($|\\D)`).test(x.h));return matches.length===1?matches[0]:null}
+export function detectUnit(text:string):'THOUSANDS_ILS'|'MILLIONS_ILS'|'ILS'|null{const s=normalizeLabel(text);if(/אלפי|thousand|000/.test(s))return 'THOUSANDS_ILS';if(/מיליוני|million/.test(s))return 'MILLIONS_ILS';if(/שח|nis|₪/.test(s))return 'ILS';return null}
+export function normalizeIlsMillions(value:number,unit:'THOUSANDS_ILS'|'MILLIONS_ILS'|'ILS'){return unit==='THOUSANDS_ILS'?value/1000:unit==='ILS'?value/1_000_000:value}
+export function normalizeCapex(value:number){return Math.abs(value)}
+export function isExplicitLeaseCashLabel(label:string){return /principal payments on lease liabilities|repayment of lease liabilities|קרן.*חכיר|פירעון.*חכיר/i.test(label)}
+export function isLeaseLiabilityBalance(label:string){return /lease liability|lease liabilities|התחייבות.*חכיר/i.test(label)&&!isExplicitLeaseCashLabel(label)}

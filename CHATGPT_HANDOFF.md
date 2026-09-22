@@ -891,3 +891,10 @@ Worker runtime was not changed after the Phase 17F deployment, so no new deploym
 - Added tested taxonomy evidence helpers in `worker/src/xbrlTaxonomy.ts`; no production aliases or financial values were activated.
 - Added `docs/phase17f1-extension-taxonomy-candidates.md` and `docs/phase17f1-taxonomy-registry-proposal.md` with candidate/rejection evidence and the empty HIGH-confidence registry result.
 - No D1 writes, score/FV/market changes, Worker deployment, or Pages deployment occurred. Existing five-company regression remains protected by the existing test suite.
+## Phase 17F.2 deterministic HTML/PDF financial extraction
+
+- Implemented deterministic document-extraction primitives and tests for RTL labels, year columns, units, signs, debt/lease separation, and missing-to-NULL behavior.
+- Audited all 30 selected annual D1 sources. The persisted `financial_sources` records expose XBRL URLs only; no HTML/PDF attachment URLs or attachment metadata are persisted.
+- Dry-run matrix: 30/30 report identities resolved, HTML fetches 0, PDF fallbacks 0, unresolved 30, writes 0. No attachment URL was guessed and no broad MAYA discovery was run.
+- No financial values, provenance rows, FCF, adjusted FCF, scores, FV, market data, or public UI changed. Existing-five regression remains protected by tests.
+- Full evidence is in `docs/phase17f2-html-pdf-extraction.md`; the blocker is missing persisted official attachment metadata, not parser acceptance.

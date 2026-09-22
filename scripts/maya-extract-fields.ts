@@ -1,0 +1,6 @@
+import {executeRemoteD1Query} from './d1-transport'
+type R={company_id:string;fiscal_year:number;period_id:string;report_id:string;url:string;notes:string|null}
+const ids=['strauss','victory','tiv-taam','fox','max-stock','delta-israel-brands','castro','diplomat','isrotel','dan-hotels']
+const rows=executeRemoteD1Query<R>(`SELECT p.company_id,p.fiscal_year,p.id AS period_id,replace(p.id,p.company_id||'-maya-','') AS report_id,s.url,s.notes FROM financial_periods p JOIN financial_sources s ON s.company_id=p.company_id AND s.report_period_end=p.period_end AND s.source_type='ANNUAL_REPORT' WHERE p.period_type='ANNUAL' AND p.company_id IN (${ids.map(x=>`'${x}'`).join(',')}) ORDER BY p.company_id,p.fiscal_year`)
+for(const r of rows){console.log(JSON.stringify({company:r.company_id,fy:r.fiscal_year,reportId:r.report_id,xbrlUrl:r.url,htmlUrl:null,pdfUrl:null,status:'NO_PERSISTED_HTML_PDF_SOURCE',fields:Object.fromEntries(['capexPpe','capexIntangibles','totalCapex','cashAndCashEquivalents','shortTermDebt','longTermDebt','nonLeaseDebt','depreciationAmortization','leasePrincipalCash','leaseInterestCash','cashLeasePayments'].map(k=>[k,null])),writes:0}))}
+console.error(`SUMMARY reports=${rows.length} html=0 pdf=0 unresolved=${rows.length} writes=0`)
