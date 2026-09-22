@@ -883,3 +883,11 @@ Replaced enrichment-time broad MAYA discovery with a source-first pipeline over 
 Phase 17F-Fix availability remains 0/30 for Capex PP&E, Capex intangible, total Capex, cash, short-term debt, long-term debt, non-lease debt, D&A, lease principal, lease interest, total lease cash, FCF, and adjusted FCF. No values were fabricated, no missing components were treated as zero, and no lease liability movement was used. The exact matrix and acceptance registry are in `docs/phase17f-fix-concept-resolution.md`.
 
 Worker runtime was not changed after the Phase 17F deployment, so no new deployment was required. Existing Worker version remains `670e3da5-835b-4416-9dc6-f4403d05e680`. Pages was unchanged.
+## Phase 17F.1 XBRL extension taxonomy reverse engineering
+
+- Analyzed the persisted FY2025 XBRL sources for Strauss 1730561, Victory 1730885, Fox 1729790, and Isrotel 1731504 using `scripts/phase17f1-taxonomy.ts`.
+- Parsed 323 facts total (83, 76, 79, and 85 respectively). All parsed numeric facts were standard IFRS namespace facts; the filings declare IFRS Full and IFRS-IL namespaces, but no issuer-specific numeric extension facts were observed.
+- The instance payloads contained no embedded presentation, calculation, or definition linkbases/role definitions. No target Capex, cash, debt, D&A, or lease-cash concept passed acceptance.
+- Added tested taxonomy evidence helpers in `worker/src/xbrlTaxonomy.ts`; no production aliases or financial values were activated.
+- Added `docs/phase17f1-extension-taxonomy-candidates.md` and `docs/phase17f1-taxonomy-registry-proposal.md` with candidate/rejection evidence and the empty HIGH-confidence registry result.
+- No D1 writes, score/FV/market changes, Worker deployment, or Pages deployment occurred. Existing five-company regression remains protected by the existing test suite.
