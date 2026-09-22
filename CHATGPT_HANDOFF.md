@@ -941,3 +941,12 @@ Real pilot result: Strauss, Victory, Fox, and Isrotel all remain LOW/rejected fo
 Added compact 1–4 line title-block reconstruction with raw/normalized text, y/x bounds, font statistics, alignment, controlled statement type/scope, and confidence. Reconstructed blocks are now fed into bounded-region diagnostics via `npm run maya:heading-regions`, which processes only Strauss `1730561`, Victory `1730885`, Fox `1729790`, and Isrotel `1731504` and writes untracked artifacts under `tmp/phase17f9/`.
 
 Real evidence: Strauss consolidated balance-sheet blocks were reconstructed on pages 263–264; Isrotel consolidated balance-sheet block on pages 75–76 and consolidated cash-flow blocks on pages 79–80. Victory and Fox did not yield controlled primary title blocks. No cash field reached HIGH: Cash HIGH remains 0/4. No D1 writes or activation occurred. Exact title blocks and remaining local-table blocker are documented in `docs/phase17f9-fragmented-heading-reconstruction.md`. Production values, scorecard, FV1/FV2, market data, and Worker infrastructure were unchanged.
+## Phase 17F.10 local table header/column reconstruction
+
+Executed the focused local-table task only for Strauss report `1730561` pages `263–264` and Isrotel report `1731504` pages `75–76`; fragmented-heading discovery was not rerun. Reconstructed local units, year coordinates, note/label columns, first 20 logical rows, and cash rows.
+
+Strauss: FY2024 x≈73.72, FY2025 x≈140.31, unit millions ILS, cash `1,142` / `535`. Official HTML is `535,266` thousand ILS, so the PDF/HTML unit-value match is not exact; confidence LOW and no activation.
+
+Isrotel: FY2024 x≈125.55, FY2025 x≈193.11, unit thousands ILS, cash `92,175` / `115,478`. Token `5` is in the note column (not FY2025); confidence MEDIUM and no activation.
+
+Both did not reach HIGH, so Victory/Fox were not processed. No D1 writes occurred. Exact local rows and coordinates are documented in `docs/phase17f10-local-table-reconstruction.md`. Production values, FV1/FV2, scorecard, market data, and lease policy were unchanged.

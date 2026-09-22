@@ -20,7 +20,8 @@
     "maya:evidence": "tsx scripts/maya-evidence.ts",
     "maya:geometry": "tsx scripts/maya-geometry-evidence.ts",
     "maya:structure": "tsx scripts/maya-structure-evidence.ts",
-    "maya:heading-regions": "tsx scripts/maya-heading-regions.ts"
+    "maya:heading-regions": "tsx scripts/maya-heading-regions.ts",
+    "maya:local-table": "tsx scripts/phase17f10-local-table.ts"
   },
   "dependencies": {
     "lucide-react": "^1.46.0",
