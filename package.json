@@ -19,7 +19,8 @@
     "market:globes-ingest": "tsx scripts/globes-market-ingest.ts",
     "maya:evidence": "tsx scripts/maya-evidence.ts",
     "maya:geometry": "tsx scripts/maya-geometry-evidence.ts",
-    "maya:structure": "tsx scripts/maya-structure-evidence.ts"
+    "maya:structure": "tsx scripts/maya-structure-evidence.ts",
+    "maya:heading-regions": "tsx scripts/maya-heading-regions.ts"
   },
   "dependencies": {
     "lucide-react": "^1.46.0",
