@@ -898,3 +898,11 @@ Worker runtime was not changed after the Phase 17F deployment, so no new deploym
 - Dry-run matrix: 30/30 report identities resolved, HTML fetches 0, PDF fallbacks 0, unresolved 30, writes 0. No attachment URL was guessed and no broad MAYA discovery was run.
 - No financial values, provenance rows, FCF, adjusted FCF, scores, FV, market data, or public UI changed. Existing-five regression remains protected by tests.
 - Full evidence is in `docs/phase17f2-html-pdf-extraction.md`; the blocker is missing persisted official attachment metadata, not parser acceptance.
+## Phase 17F.3 attachment metadata backfill and extraction
+
+- Added additive migration `0021_phase17f3_source_attachments.sql` and remote table `financial_source_attachments`.
+- Called the official MAYA detail endpoint for exactly the 30 fixed annual report IDs. Results: 30/30 identity verified, 0 failures, 30 XBRL, 30 HTML, 30 canonical PDF rows; API exposed 33 PDF entries before canonical source/type deduplication.
+- Remote D1 contains 90 attachment rows and 90 unique source/type pairs. No report, period, or statement duplicates were created.
+- HTML-first extraction fetched all 30 HTML attachments. Twenty exposed a deterministic consolidated-cash alias, but unit/year-column validation was unresolved, so 0 numeric fields were activated. No Capex, debt, D&A, or lease-cash fields passed validation.
+- PDF fallback was not run because `pdftotext` is unavailable; no OCR was used. No financial/provenance writes occurred, and all missing values remain NULL.
+- Full details: `docs/phase17f3-attachment-backfill.md`. Worker/Pages were not deployed because no API/UI code changed.

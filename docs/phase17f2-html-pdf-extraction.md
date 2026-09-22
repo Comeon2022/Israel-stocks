@@ -2,6 +2,8 @@
 
 ## Result
 
+Phase 17F.3 subsequently backfilled official HTML/PDF attachment metadata for all 30 reports. The original source-metadata blocker is resolved; extraction validation results are summarized in `docs/phase17f3-attachment-backfill.md`.
+
 The dry-run inspected all 30 selected annual periods through the persisted D1 source identity. Every persisted source record currently has an XBRL URL only. The `financial_sources` schema has no attachment metadata column, and the selected records contain no HTML or PDF URL in `notes`. Therefore no HTML/PDF fetch was attempted and no value was activated. This is an evidence-based source-metadata blocker, not a parser failure.
 
 The deterministic extraction primitives are implemented in `worker/src/documentExtraction.ts`: RTL-safe label normalization, parentheses/thousands parsing, unambiguous year-column resolution, stated-unit conversion, Capex sign normalization, and lease-liability versus lease-cash separation. `scripts/maya-extract-fields.ts` produces the zero-write 30-report matrix.
