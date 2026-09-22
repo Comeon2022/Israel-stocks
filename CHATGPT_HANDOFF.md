@@ -913,3 +913,11 @@ Worker runtime was not changed after the Phase 17F deployment, so no new deploym
 - Improved deterministic HTML table primitives for rowspan/colspan expansion and header-tree resolution, plus PDF line/year/unit helpers and strict explicit-total lease-cash gating.
 - Full HTML run covered all 30 reports. No HIGH-confidence fields passed year/unit/section/scope validation; numeric D1 writes and provenance writes remain 0. FCF and adjusted FCF remain NULL.
 - No score, FV, market, existing-five values, API/UI, or infrastructure behavior changed. Details: `docs/phase17f4-pilot.md` and `docs/phase17f4-real-document-extraction.md`.
+## Phase 17F.5 targeted page/table evidence mapping
+
+- Added `npm run maya:evidence -- --report <id> --field <field>` for targeted HTML/PDF evidence only. It writes temporary evidence under `tmp/phase17f5/` and never writes D1.
+- Pilot reports inspected: Strauss 1730561, Victory 1730885, Fox 1729790, Isrotel 1731504.
+- Strauss HTML exposes `CashEquivalentsConsolidated=535,266` and `CashEquivalentsSeparate=3,297`; unit, explicit current-year header, and consolidated scope were not simultaneously proven by the current table model. Other pilot cash searches likewise remained below HIGH confidence.
+- PDF coordinate evidence was generated for all four pilots. No target financial row passed the section/year/unit/scope and HTML/PDF agreement gates.
+- Pilot gate failed: HIGH-confidence Cash 0/4; HIGH-confidence Capex/debt 0/4. Full 30-report enrichment was intentionally not started; numeric D1/provenance writes remain 0.
+- No score, FV, market, existing-five values, or public UI changed. Details: `docs/phase17f5-pilot-evidence.md`.

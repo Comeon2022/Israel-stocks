@@ -1,0 +1,13 @@
+import {mkdirSync,writeFileSync} from 'node:fs'
+import {extractPdfLines} from './pdf-extract'
+type A={fileType:string;url:string;fileName?:string|null}
+const report=process.argv.includes('--report')?process.argv[process.argv.indexOf('--report')+1]:null
+const field=process.argv.includes('--field')?process.argv[process.argv.indexOf('--field')+1]:'cash'
+if(!report)throw new Error('Usage: tsx scripts/maya-evidence.ts --report <id> --field <cash|capex|st-debt|lt-debt|da|lease-principal|lease-interest|lease-total>')
+const terms:Record<string,RegExp>={cash:/cash|מזומ|CashEquivalents/i,capex:/purchase|רכיש|property|fixed assets|נכסים/i,'st-debt':/short.?term|current matur|borrow|הלווא|אשראי/i,'lt-debt':/long.?term|debenture|bond|borrow|הלווא|אגרות חוב/i,da:/depreci|amort|פחת/i,'lease-principal':/lease.*principal|principal.*lease|פירעון.*חכיר|תשלום.*קרן/i,'lease-interest':/lease.*interest|interest.*lease|ריבית.*חכיר/i,'lease-total':/total.*lease.*cash|total.*lease.*payment|סך.*תשלומי.*חכיר/i}
+const detail=await (await fetch(`https://maya.tase.co.il/api/v1/reports/${report}`)).json() as {attachments?:A[]}
+const url=(type:string)=>{const a=detail.attachments?.find(x=>x.fileType.toLowerCase().startsWith(type));return a?new URL(a.url,'https://mayafiles.tase.co.il/').toString():null}
+const dir=`tmp/phase17f5/${report}`;mkdirSync(dir,{recursive:true});const pattern=terms[field]??terms.cash
+const htmlUrl=url('htm');let htmlEvidence='';if(htmlUrl){const html=await (await fetch(htmlUrl)).text();const matches=[...html.matchAll(new RegExp(`.{0,100}(?:${pattern.source}).{0,300}`,'gi'))].slice(0,10).map(x=>x[0].replace(/>\s+</g,'><'));htmlEvidence=`REPORT ${report}\nFIELD ${field}\nHTML ${htmlUrl}\nMATCHES\n${matches.join('\n---\n')}`;writeFileSync(`${dir}/${field}-html.txt`,htmlEvidence)}
+const pdfUrl=url('pdf');let pdfEvidence='';if(pdfUrl){const pdf=await (await fetch(pdfUrl)).arrayBuffer();const lines=await extractPdfLines(new Uint8Array(pdf));const matches=lines.map((line,i)=>({line,i})).filter(x=>pattern.test(x.line.text)).slice(0,10);pdfEvidence=`REPORT ${report}\nFIELD ${field}\nPDF ${pdfUrl}\nMATCHES\n${matches.map(x=>[...lines.slice(Math.max(0,x.i-20),x.i+21)].map(l=>`page=${l.pageNumber} y=${l.y.toFixed(2)} items=${l.items.map(i=>`x=${i.x.toFixed(2)}:${JSON.stringify(i.text)}`).join(' | ')} text=${l.text}`).join('\n')).join('\n---\n')}`;writeFileSync(`${dir}/${field}-pdf.txt`,pdfEvidence)}
+console.log(JSON.stringify({report,field,htmlUrl,pdfUrl,htmlMatches:htmlEvidence?htmlEvidence.split('\n---\n').length-1:0,pdfMatches:pdfEvidence?pdfEvidence.split('\n---\n').length-1:0,accepted:false,reason:'TARGETED_EVIDENCE_ONLY'}))
