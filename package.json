@@ -17,7 +17,8 @@
     "maya:select-activate": "tsx scripts/maya-select-activate.ts",
     "market:globes-test": "tsx scripts/globes-market-test.ts",
     "market:globes-ingest": "tsx scripts/globes-market-ingest.ts",
-    "maya:evidence": "tsx scripts/maya-evidence.ts"
+    "maya:evidence": "tsx scripts/maya-evidence.ts",
+    "maya:geometry": "tsx scripts/maya-geometry-evidence.ts"
   },
   "dependencies": {
     "lucide-react": "^1.46.0",

@@ -921,3 +921,8 @@ Worker runtime was not changed after the Phase 17F deployment, so no new deploym
 - PDF coordinate evidence was generated for all four pilots. No target financial row passed the section/year/unit/scope and HTML/PDF agreement gates.
 - Pilot gate failed: HIGH-confidence Cash 0/4; HIGH-confidence Capex/debt 0/4. Full 30-report enrichment was intentionally not started; numeric D1/provenance writes remain 0.
 - No score, FV, market, existing-five values, or public UI changed. Details: `docs/phase17f5-pilot-evidence.md`.
+## Phase 17F.6 PDF table geometry reconstruction
+
+Implemented the Phase 17F.6 pilot-only geometry layer and diagnostic CLI. `worker/src/pdfTable.ts` now provides adaptive line clustering, numeric x-column clustering, explicit year-header binding, unit/scope detection, wrapped-label support, geometry row reconstruction, and ambiguity rejection. Added geometry tests and `npm run maya:geometry`, which processes only Strauss `1730561`, Victory `1730885`, Fox `1729790`, and Isrotel `1731504` official PDFs and writes untracked artifacts under `tmp/phase17f6/`.
+
+Pilot result: no values were activated and no D1 writes were made. Cash HIGH confidence is 0/4, and Capex/debt HIGH confidence is 0/4, so the gate fails and full 30-report processing remains stopped. Exact coordinate evidence and rejection reasons are in `docs/phase17f6-table-geometry-pilot.md`. Existing five-company production values, FV1/FV2, scoring, market data, and Worker infrastructure were unchanged.
