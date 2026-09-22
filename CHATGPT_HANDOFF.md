@@ -906,3 +906,10 @@ Worker runtime was not changed after the Phase 17F deployment, so no new deploym
 - HTML-first extraction fetched all 30 HTML attachments. Twenty exposed a deterministic consolidated-cash alias, but unit/year-column validation was unresolved, so 0 numeric fields were activated. No Capex, debt, D&A, or lease-cash fields passed validation.
 - PDF fallback was not run because `pdftotext` is unavailable; no OCR was used. No financial/provenance writes occurred, and all missing values remain NULL.
 - Full details: `docs/phase17f3-attachment-backfill.md`. Worker/Pages were not deployed because no API/UI code changed.
+## Phase 17F.4 self-contained real HTML/PDF extraction
+
+- Added local `pdfjs-dist` 6.3.289 parsing through `scripts/pdf-extract.ts`; no pdftotext, Poppler, OCR, or system executable is required.
+- PDF pilot results: Strauss 490 pages/14,435 lines, Victory 179/5,755, Fox 344/13,402, Isrotel 202/6,837. Coordinate-preserving extraction succeeded; accepted target fields remain 0.
+- Improved deterministic HTML table primitives for rowspan/colspan expansion and header-tree resolution, plus PDF line/year/unit helpers and strict explicit-total lease-cash gating.
+- Full HTML run covered all 30 reports. No HIGH-confidence fields passed year/unit/section/scope validation; numeric D1 writes and provenance writes remain 0. FCF and adjusted FCF remain NULL.
+- No score, FV, market, existing-five values, API/UI, or infrastructure behavior changed. Details: `docs/phase17f4-pilot.md` and `docs/phase17f4-real-document-extraction.md`.

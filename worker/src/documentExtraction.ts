@@ -9,3 +9,6 @@ export function normalizeIlsMillions(value:number,unit:'THOUSANDS_ILS'|'MILLIONS
 export function normalizeCapex(value:number){return Math.abs(value)}
 export function isExplicitLeaseCashLabel(label:string){return /principal payments on lease liabilities|repayment of lease liabilities|קרן.*חכיר|פירעון.*חכיר/i.test(label)}
 export function isLeaseLiabilityBalance(label:string){return /lease liability|lease liabilities|התחייבות.*חכיר/i.test(label)&&!isExplicitLeaseCashLabel(label)}
+export type HtmlCell={text:string;rowSpan?:number;colSpan?:number;header?:boolean}
+export function expandHtmlTable(rows:HtmlCell[][]){const grid:HtmlCell[][]=[];for(let r=0;r<rows.length;r++){grid[r]??=[];let c=0;for(const cell of rows[r]){while(grid[r][c])c++;const rs=cell.rowSpan??1,cs=cell.colSpan??1;for(let dr=0;dr<rs;dr++){grid[r+dr]??=[];for(let dc=0;dc<cs;dc++)grid[r+dr][c+dc]={...cell}}c+=cs}}return grid}
+export function resolveHtmlHeaders(grid:HtmlCell[][]){const headerRows=grid.filter(row=>row.some(c=>c.header));const width=Math.max(0,...grid.map(r=>r.length));return Array.from({length:width},(_,i)=>headerRows.map(r=>r[i]?.text??'').filter(Boolean).join(' ').replace(/\s+/g,' ').trim())}

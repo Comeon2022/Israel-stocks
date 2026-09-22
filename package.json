@@ -12,14 +12,15 @@
     "worker:check": "tsc -p worker/tsconfig.json",
     "worker:test": "vitest run worker/src",
     "maya:ingest-company": "tsx scripts/maya-ingest.ts company",
-    "maya:ingest-all": "tsx scripts/maya-ingest.ts all"
-    ,"maya:discover-history": "tsx scripts/maya-discover-history.ts"
-    ,"maya:select-activate": "tsx scripts/maya-select-activate.ts"
-    ,"market:globes-test": "tsx scripts/globes-market-test.ts"
-    ,"market:globes-ingest": "tsx scripts/globes-market-ingest.ts"
+    "maya:ingest-all": "tsx scripts/maya-ingest.ts all",
+    "maya:discover-history": "tsx scripts/maya-discover-history.ts",
+    "maya:select-activate": "tsx scripts/maya-select-activate.ts",
+    "market:globes-test": "tsx scripts/globes-market-test.ts",
+    "market:globes-ingest": "tsx scripts/globes-market-ingest.ts"
   },
   "dependencies": {
     "lucide-react": "^1.46.0",
+    "pdfjs-dist": "^6.3.289",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
     "react-router-dom": "^7.18.4",
