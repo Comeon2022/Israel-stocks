@@ -968,3 +968,6 @@ Inspected only the fixed official MAYA HTML attachments for Victory `1730885`/`1
 ## Phase 17F.16 HTML context binding
 
 Added same-container-first HTML context binding for the existing Victory/Fox `CashEquivalentsConsolidated` candidates. The fixed official structures contain no explicit bound fiscal years or monetary units at the candidate rows, so all four values remain LOW/NULL. No guessed year, magnitude unit, broad PDF fallback, or D1 write was used. Cash HIGH remains `2/4`; 16B/full-30 extraction was not run. Details: `docs/phase17f16-html-context-binding.md`.
+## Phase 17F.17 source schema / companion metadata
+
+Anchored on the four existing `CashEquivalentsConsolidated` fields and inventoried exact identifiers, row attributes, hidden inputs, and embedded metadata references in the fixed official HTML attachments. `Field747` was captured, but no exact field/section/questionnaire cross-reference, period metadata, currency, unit, or scale metadata exists in those attachments. All candidates remain LOW/NULL; Cash HIGH remains `2/4`, 17B/full-30 extraction was not run, and D1 writes remain zero. Details: `docs/phase17f17-source-schema-metadata.md`.
