@@ -1,0 +1,7 @@
+import {mkdirSync,rmSync,writeFileSync} from 'node:fs'
+import {extractPdfLines} from './pdf-extract'
+import {parseTocEntries} from '../worker/src/pdfTable'
+const targets=[{id:'1730885',name:'Victory',tocPages:[2,16,97]},{id:'1729790',name:'Fox',tocPages:[2,79,140,225]}]
+const root='tmp/phase17f14';rmSync(root,{recursive:true,force:true})
+for(const target of targets){const detail=await(await fetch(`https://maya.tase.co.il/api/v1/reports/${target.id}`)).json() as any;const a=(detail.attachments??[]).find((x:any)=>/^pdf/i.test(x.fileType));const dir=`${root}/${target.id}`;mkdirSync(dir,{recursive:true});if(!a){writeFileSync(`${dir}/toc-entries.json`,'[]');continue}const response=await fetch(new URL(a.url,'https://mayafiles.tase.co.il/'));const lines=await extractPdfLines(new Uint8Array(await response.arrayBuffer()));const selected=lines.filter(x=>target.tocPages.includes(x.pageNumber));const entries=target.tocPages.flatMap(page=>parseTocEntries(page,selected.filter(x=>x.pageNumber===page)));writeFileSync(`${dir}/toc-entries.json`,JSON.stringify(entries,null,2));writeFileSync(`${dir}/page-offsets.json`,JSON.stringify({status:'PENDING_MAPPED_TITLE_EVIDENCE',evidence:[]},null,2));writeFileSync(`${dir}/resolved-sections.json`,JSON.stringify([],null,2));writeFileSync(`${dir}/table-debug.txt`,selected.map(x=>`page=${x.pageNumber} y=${x.y.toFixed(2)} ${x.text}`).join('\n'))}
+console.log(JSON.stringify({reports:targets.map(x=>({reportId:x.id,tocPages:x.tocPages,artifacts:`${root}/${x.id}`,writes:0}))},null,2))

@@ -959,3 +959,6 @@ Targeted only reports `1653980` and `1653647` using local table geometry. Straus
 ## Phase 17F.13 Victory/Fox Cash completion
 
 Applied the existing deterministic pipeline to Victory `1730885` and Fox `1729790` in read-only mode. Neither issuer produced an accepted compact authoritative consolidated balance-sheet title block. Victory page 53 and Fox page 176 remain narrative/detail candidates; Fox page 133 is a cash-flow summary, not the balance sheet. No Cash value reached HIGH, no FY2024 comparative could be accepted, and no HTML/PDF reconciliation could be completed. Cash HIGH remains `2/4`, below the `3/4` gate; Capex/debt and full-30 extraction were not run. D1 writes remained `0`. Details: `docs/phase17f13-victory-fox-cash.md`.
+## Phase 17F.14 TOC-to-primary-statement resolution
+
+Added deterministic split-TOC parsing, controlled consolidated balance-sheet classification, printed-to-physical offset resolution, stable-offset confidence, and conflicting-offset rejection. The targeted Victory pages `2, 16, 97` and Fox pages `2, 79, 140, 225` produced no accepted consolidated balance-sheet TOC entry with a locally bound printed page. No page was mapped, no Cash value was accepted, Cash HIGH remains `2/4`, the Cash gate remains closed, Phase 17F.14B was not run, and D1 writes remain zero. Details: `docs/phase17f14-toc-primary-statement-resolution.md`.
