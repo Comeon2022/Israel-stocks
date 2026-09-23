@@ -989,6 +989,9 @@ Added reusable geometry-based year/header, note-column, RTL-row, numeric-cell, s
 ## Phase 17F.23B execute geometry binder on six validation PDFs
 
 Executed the fixed nine-report diagnostic CLI using official MAYA PDF attachments. All six FY2023/FY2024 reports and all three FY2025 regression reports remained NULL: Strauss reports hit multiple local year-header blocks; Fox and Isrotel reports lacked a uniquely detected local year-header map. FY2025 actuals were therefore NULL and the gate failed. No D1 writes, full-30 rerun, FCF/Scorecard changes, or production changes occurred. Details: `docs/phase17f23b-execute-geometry-binder.md`; diagnostics remain under untracked `tmp/phase17f23b/`.
+## Phase 17F.23C statement header window resolver
+
+Added a reusable bounded statement-window resolver for consolidated cash-flow titles, fragmented local year-header rows, explicit units, and adjacent statement pages. It is wired into the focused diagnostic path and covered by tests. The FY2025 Phase A gate remains failed because the real-PDF run still does not produce a unique accepted header window; no six-report Phase B run, D1 write, full-30 rerun, or production calculation change occurred. Details: `docs/phase17f23c-statement-header-window-resolver.md`.
 ## Phase 17F.20 direct FY2024 PDF page resolution
 
 Resolved the exact authoritative consolidated balance-sheet pages from the fixed official PDFs. Victory `1653470`: physical pages 98–99, printed pages 8–9, unit thousand ILS, pure Cash `104,060` (`104.060` ILSm). Fox `1654283`: physical pages 126–127, printed pages 125–126, unit thousand ILS, pure Cash `1,055,842` (`1,055.842` ILSm). Each FY2024 value matches the corresponding pure Cash comparative in FY2025 reports `1730885` and `1729790`; HTML broad aggregates remain rejected. Cash HIGH is now `4/4`; D1 remains `0`. Details: `docs/phase17f20-direct-fy2024-page-resolution.md`.

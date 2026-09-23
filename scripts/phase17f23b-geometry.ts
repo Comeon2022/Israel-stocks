@@ -1,6 +1,7 @@
 import { mkdirSync, writeFileSync } from 'node:fs'
 import { extractPdfLines } from './pdf-extract'
 import { bindNumericCells, clusterVisualRows, detectYearColumnMap, normalizeCashOutflow, type GeometryToken } from '../worker/src/pdfTableGeometry'
+import { resolveCashFlowStatementWindow } from '../worker/src/pdfStatementWindow'
 
 const targets = [
   ['Strauss', 2023, '1582703'], ['Strauss', 2024, '1653980'], ['Fox', 2023, '1581475'], ['Fox', 2024, '1654283'], ['Isrotel', 2023, '1582604'], ['Isrotel', 2024, '1653647'],
@@ -33,6 +34,7 @@ for (const [company, year, reportId] of targets) {
   if (!attachment) { results.push({ company, year, reportId, confidence: 'NULL', blocker: 'PDF_MISSING' }); continue }
   const sourceUrl = new URL(attachment.url, 'https://mayafiles.tase.co.il/').toString()
   const lines = await extractPdfLines(new Uint8Array(await (await fetch(sourceUrl)).arrayBuffer()))
+  const resolvedWindow = resolveCashFlowStatementWindow(lines, year)
   const titlePages = [...new Set(lines.filter(x => /תזרימי המזומנים|cash flows/i.test(x.text) && /מאוחדים|consolidated/i.test(x.text)).map(x => x.pageNumber))]
   const capexPages = [...new Set(lines.filter(x => (ppe.test(x.text) || intangible.test(x.text)) && !mixed.test(x.text)).map(x => x.pageNumber))]
   const candidatePages = capexPages.filter(page => titlePages.some(titlePage => Math.abs(titlePage - page) <= 3))
@@ -56,7 +58,7 @@ for (const [company, year, reportId] of targets) {
   const dir = `${root}/${reportId}`; mkdirSync(dir, { recursive: true })
   writeFileSync(`${dir}/pdf-meta.json`, JSON.stringify({ reportId, company, year, sourceUrl }, null, 2))
   writeFileSync(`${dir}/page-tokens.json`, JSON.stringify(tokens, null, 2))
-  writeFileSync(`${dir}/statement-resolution.json`, JSON.stringify({ titlePages, capexPages, candidatePages, selectedPages }, null, 2))
+  writeFileSync(`${dir}/statement-resolution.json`, JSON.stringify({ titlePages, capexPages, candidatePages, selectedPages, resolvedWindow }, null, 2))
   writeFileSync(`${dir}/rows.json`, JSON.stringify(rows, null, 2))
   writeFileSync(`${dir}/header-map.json`, JSON.stringify(headerMap, null, 2))
   writeFileSync(`${dir}/column-map.json`, JSON.stringify({ years: headerMap.years, noteColumnX: headerMap.noteColumnX, labelRegion: headerMap.labelRegion }, null, 2))
