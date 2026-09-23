@@ -974,3 +974,6 @@ Anchored on the four existing `CashEquivalentsConsolidated` fields and inventori
 ## Phase 17F.18 correct Cash semantics from authoritative PDF
 
 Added a deterministic Cash semantic safeguard. Victory HTML `74,243` is explicitly reconciled as `26,620` Cash plus `47,623` financial assets; Fox HTML `1,455,543` is explicitly reconciled as `895,652` Cash plus `559,891` short-term investments/deposits. Both aliases are classified as `CASH_PLUS_SHORT_TERM_FINANCIAL_ASSETS` and rejected as canonical Cash. Direct PDF Cash candidates are `26.620` ILSm for Victory and `895.652` ILSm for Fox, but FY2024 comparative validation remains pending, so no activation or D1 write occurred. Cash HIGH remains `2/4`; 18B was not run. Details: `docs/phase17f18-correct-cash-semantics.md`.
+## Phase 17F.19 FY2024 Cash comparative closeout
+
+Targeted only Victory `1653470` and Fox `1654283` official PDFs. Cash-related material was found, but the exact authoritative consolidated balance-sheet Cash row, unit, and FY2024 current-year binding were not proven by the deterministic extraction. Note/detail and cash-flow rows were rejected. FY2024 comparison remains `INSUFFICIENT_EVIDENCE`; Cash HIGH remains `2/4`, the gate remains closed, 19B was not run, and D1 writes remain zero. Details: `docs/phase17f19-fy2024-cash-comparative.md`.

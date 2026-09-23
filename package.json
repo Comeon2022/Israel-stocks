@@ -24,7 +24,8 @@
     "maya:local-table": "tsx scripts/phase17f10-local-table.ts",
     "maya:toc-resolution": "tsx scripts/phase17f14-toc-resolution.ts",
     "maya:html-cash": "tsx scripts/phase17f15-html-cash.ts",
-    "maya:schema-metadata": "tsx scripts/phase17f17-schema-metadata.ts"
+    "maya:schema-metadata": "tsx scripts/phase17f17-schema-metadata.ts",
+    "maya:fy2024-cash": "tsx scripts/phase17f19-fy2024-cash.ts"
   },
   "dependencies": {
     "lucide-react": "^1.46.0",
