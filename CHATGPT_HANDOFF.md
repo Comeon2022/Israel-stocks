@@ -983,6 +983,9 @@ Ran the second pilot on fixed FY2025 reports `1730561`, `1730885`, `1729790`, an
 ## Phase 17F.22 full-30 Capex expansion
 
 Processed the exact approved 30-report set in dry-run mode. PDF candidates showed unresolved column-order, note-token, and period binding in the batch resolver, so all 30 remained NULL for activation. No D1 writes, provenance writes, FCF changes, Scorecard changes, or Worker deployment were made. The three pilot FY2025 values remain unchanged. Details: `docs/phase17f22-full30-capex-expansion.md`, `docs/phase17f22-fcf-impact.md`, and `docs/phase17f22-scorecard-impact.md`.
+## Phase 17F.23 deterministic cash-flow column binding
+
+Added reusable geometry-based year/header, note-column, RTL-row, numeric-cell, sign, and unit binding with ambiguity rejection and focused fixtures. No D1 writes or full-30 rerun occurred. The six-report acceptance gate remains unclaimed until the new binder is executed against all six fixed PDFs and reproduces the three FY2025 pilot values plus at least five HIGH FY2023/FY2024 totals. Details: `docs/phase17f23-deterministic-cashflow-column-binding.md`.
 ## Phase 17F.20 direct FY2024 PDF page resolution
 
 Resolved the exact authoritative consolidated balance-sheet pages from the fixed official PDFs. Victory `1653470`: physical pages 98–99, printed pages 8–9, unit thousand ILS, pure Cash `104,060` (`104.060` ILSm). Fox `1654283`: physical pages 126–127, printed pages 125–126, unit thousand ILS, pure Cash `1,055,842` (`1,055.842` ILSm). Each FY2024 value matches the corresponding pure Cash comparative in FY2025 reports `1730885` and `1729790`; HTML broad aggregates remain rejected. Cash HIGH is now `4/4`; D1 remains `0`. Details: `docs/phase17f20-direct-fy2024-page-resolution.md`.
