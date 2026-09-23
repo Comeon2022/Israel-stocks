@@ -1,0 +1,3 @@
+import {describe,expect,it} from 'vitest'
+import {acceptPureCashRow,classifyCashAlias} from './cashSemantics'
+describe('cash semantics',()=>{it('rejects a broad liquidity alias',()=>{const x=classifyCashAlias(74243,26620,[47623]);expect(x.classification).toBe('CASH_PLUS_SHORT_TERM_FINANCIAL_ASSETS');expect(x.canonicalCash).toBeNull()});it('rejects arbitrary sums',()=>expect(classifyCashAlias(100,20,[70]).classification).toBe('UNKNOWN'));it('normalizes an explicit consolidated thousand-ILS row',()=>expect(acceptPureCashRow({statementTitle:'Consolidated Statements of Financial Position',scope:'CONSOLIDATED',unit:'THOUSANDS_ILS',periodEnd:'2025-12-31',rawValue:26620})?.normalizedILSm).toBe(26.62))})
