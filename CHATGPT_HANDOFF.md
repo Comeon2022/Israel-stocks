@@ -992,6 +992,12 @@ Executed the fixed nine-report diagnostic CLI using official MAYA PDF attachment
 ## Phase 17F.23C statement header window resolver
 
 Added a reusable bounded statement-window resolver for consolidated cash-flow titles, fragmented local year-header rows, explicit units, and adjacent statement pages. It is wired into the focused diagnostic path and covered by tests. The FY2025 Phase A gate remains failed because the real-PDF run still does not produce a unique accepted header window; no six-report Phase B run, D1 write, full-30 rerun, or production calculation change occurred. Details: `docs/phase17f23c-statement-header-window-resolver.md`.
+
+## Phase 17F.23D direct token forensics
+
+Executed diagnostic-only pdfjs extraction for the three fixed FY2025 PDFs, preserving raw item order/transform and visual rows. Ten artifacts per issuer are in untracked `tmp/phase17f23d/`. Likely consolidated cash-flow pages: Strauss 270–271, Fox 156–159 (investing 157), Isrotel 79–80. All put date text above the year row; continuation page x positions move. The old binder requires same-row date/year text, misses Strauss `באור`, and mishandles standalone mirrored parentheses. Phase 23C only logged its window result; it did not feed that window into the binder.
+
+Correction to earlier pilot claims: Strauss's 361/133 observations are FY2023 comparative cells, and its PPE row includes investment property. Fox's 226,316/9,038 observations are on parent-company page 295, not consolidated page 157. Therefore the prior 494.000/235.354 consolidated FY2025 reference claims require re-audit. This phase computes no replacement total and changes no accepted value. No D1/full-30, FCF/Scorecard/FV change, OCR, LLM extraction, or expected-value page search. See `docs/phase17f23d-direct-token-forensics.md` for exact title/unit/year/note/row evidence and next-phase recommendations.
 ## Phase 17F.20 direct FY2024 PDF page resolution
 
 Resolved the exact authoritative consolidated balance-sheet pages from the fixed official PDFs. Victory `1653470`: physical pages 98–99, printed pages 8–9, unit thousand ILS, pure Cash `104,060` (`104.060` ILSm). Fox `1654283`: physical pages 126–127, printed pages 125–126, unit thousand ILS, pure Cash `1,055,842` (`1,055.842` ILSm). Each FY2024 value matches the corresponding pure Cash comparative in FY2025 reports `1730885` and `1729790`; HTML broad aggregates remain rejected. Cash HIGH is now `4/4`; D1 remains `0`. Details: `docs/phase17f20-direct-fy2024-page-resolution.md`.
