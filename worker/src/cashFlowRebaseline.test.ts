@@ -3,6 +3,7 @@ import {classifyCashFlowScope,resolveCashFlowPages,deduplicateTitleBlocks} from 
 import {bindNumericCells,detectYearColumnMap,reconstructNumericFragments,normalizeCashOutflow} from './pdfTableGeometry'
 import {classifyCapexRow} from './capexSemanticClassifier'
 import type {PdfLine} from './pdfTable'
+import {extractPdfCapex} from './pdfCapexExtraction'
 
 function page(pageNumber:number,shift=0,note='ביאור'):PdfLine[] {
   const row=(y:number,parts:[string,number,number?][]):PdfLine=>({pageNumber,y,text:parts.map(p=>p[0]).join(' '),items:parts.map(([text,x,width=20])=>({pageNumber,text,x:x+shift,y,width,height:10}))})
@@ -12,6 +13,17 @@ function page(pageNumber:number,shift=0,note='ביאור'):PdfLine[] {
     row(550,[['רכישת נכסים בלתי מוחשיים',350,180],['14',295],[')',238,3],['5,144',241,24],['(',266,3],['3,263',175],['3,552',110]])]
 }
 describe('source-correct cash-flow rebaseline',()=>{
+  it('shares canonical extraction and records source-backed CFO without amount-driven selection',()=>{
+    const lines=page(1)
+    const ordinary=lines.find(l=>l.y===660)!
+    ordinary.items.find(t=>t.text==='תזרים מפעילות שוטפת')!.text='מזומנים נטו שנבעו מפעילות שוטפת'
+    const result=extractPdfCapex(lines,2025)
+    expect(result.totalCapex).toBe(320.660)
+    expect(result.cfoEvidence[0].normalized).toBe(0.1)
+    expect(result.evidence[0].rawNumericText).toBe('315,516')
+    lines.find(l=>l.y===692)!.items[0].text='אלפי דולר'
+    expect(extractPdfCapex(lines,2025).totalCapex).toBeNull()
+  })
   it.each(['דוחות מאוחדים על תזרימי המזומנים','דוח מאוחד על תזרימי המזומנים','דוחות על תזרימי מזומנים מאוחדים','דוחות תמציתיים מאוחדים על תזרימי המזומנים'])('accepts controlled title %s',title=>expect(classifyCashFlowScope(title)).toBe('CONSOLIDATED'))
   it.each([
     ['נתונים כספיים מתוך הדוחות המאוחדים על תזרימי המזומנים המיוחסים לחברה','PARENT_ONLY'],

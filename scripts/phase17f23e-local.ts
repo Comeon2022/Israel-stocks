@@ -1,8 +1,6 @@
 import {readFileSync,writeFileSync,mkdirSync,existsSync} from 'node:fs'
 import {extractPdfLines} from './pdf-extract'
-import {resolveCashFlowPages} from '../worker/src/pdfStatementWindow'
-import {bindNumericCells,normalizeCashOutflow} from '../worker/src/pdfTableGeometry'
-import {classifyCapexRow} from '../worker/src/capexSemanticClassifier'
+import {extractPdfCapex} from '../worker/src/pdfCapexExtraction'
 const root='tmp/phase17f23e'
 mkdirSync(root,{recursive:true})
 async function run(company:string,id:string,year:number) {
@@ -23,26 +21,9 @@ async function run(company:string,id:string,year:number) {
   let lines
   if(existsSync(`${dir}/lines.json`))lines=JSON.parse(readFileSync(`${dir}/lines.json`,'utf8'))
   else {const response=await fetch(meta.sourceUrl);if(!response.ok)throw Error(`HTTP ${response.status}`);lines=await extractPdfLines(new Uint8Array(await response.arrayBuffer()));writeFileSync(`${dir}/lines.json`,JSON.stringify(lines))}
-  const resolution=resolveCashFlowPages(lines,year),evidence:any[]=[]
-  if(!resolution.blocker)for(const p of resolution.pages) {
-    if(p.confidence!=='HIGH')continue
-    let excluded=false
-    for(const row of p.rows) {
-      const text=row.map(t=>t.text).join(' ')
-      if(/שלא במזומן|non.cash|רכישת חברות מאוחדות שאוחדו לראשונה בחברה הבת/.test(text))excluded=true
-      const label=row.filter(t=>/[א-ת]/.test(t.text)).sort((a,b)=>b.x-a.x).map(t=>t.text).join(' ').trim()
-      const semantic=classifyCapexRow(label)
-      if(semantic==='OTHER'||excluded)continue
-      const cells=bindNumericCells(row,p.map),current=cells?.find(c=>c.year===year)
-      evidence.push({page:p.page,title:p.title,unit:p.unit,years:p.map.years,note:p.map.noteColumnX,label,semantic,cells,raw:current?.value??null,normalized:current&&p.unit?normalizeCashOutflow(current.value,p.unit):null,blocker:current?null:'BINDER_ROW_AMBIGUOUS'})
-    }
-  }
-  const ppe=evidence.filter(e=>e.semantic==='PURE_PPE'),intangible=evidence.filter(e=>e.semantic==='PURE_INTANGIBLE')
-  const pv=ppe.length===1?ppe[0].normalized:null,iv=intangible.length===1?intangible[0].normalized:null
-  const total=pv!=null&&iv!=null?Number((pv+iv).toFixed(6)):null
-  const relevant=evidence.filter(e=>/PURE_|MIXED_/.test(e.semantic))
-  const high=!resolution.blocker&&relevant.length>=2&&relevant.every(e=>e.raw!=null)
-  const result={company,id,year,scope:resolution.blocker?null:'CONSOLIDATED',structuralConfidence:high?'HIGH':'LOW',capexPpe:high?pv:null,capexIntangibles:high?iv:null,totalCapex:high?total:null,canonicalConfidence:total!=null&&high?'HIGH':'NULL',blocker:resolution.blocker??(!high?'CAPEX_BINDING_INCOMPLETE':total==null?'SEMANTIC_COMPONENT_INCOMPLETE':null),evidence}
+  const {resolution,...extracted}=extractPdfCapex(lines,year)
+  const evidence=extracted.evidence
+  const result={company,id,year,...extracted}
   const save=(name:string,v:any)=>writeFileSync(`${dir}/${name}.json`,JSON.stringify(v,null,2))
   save('scope-candidates',resolution.candidates);save('deduped-title-blocks',resolution.pages.map(p=>({page:p.page,title:p.title,scope:p.scope})))
   save('page-local-header',resolution.pages.map(({rows,...p})=>p));save('year-map',resolution.pages.map(p=>({page:p.page,years:p.map.years})))
