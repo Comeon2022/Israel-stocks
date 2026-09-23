@@ -980,6 +980,9 @@ Targeted only Victory `1653470` and Fox `1654283` official PDFs. Cash-related ma
 ## Phase 17F.21 Capex/debt pilot
 
 Ran the second pilot on fixed FY2025 reports `1730561`, `1730885`, `1729790`, and `1731504`. Explicit consolidated cash-flow Capex reached HIGH for Strauss (`361.000` PPE + `133.000` intangible = `494.000` ILSm, page 270), Fox (`226.316` + `9.038` = `235.354` ILSm, page 295), and Isrotel (`315.516` + `5.144` = `320.660` ILSm, page 79). Victory remained NULL because its candidate was narrative rather than an explicit approved purchase row. Capex HIGH is `3/4`; Debt HIGH is `0/4` because financing completeness was not proven. The second gate passed on Capex; no D1 writes were made and no debt was inferred. Details: `docs/phase17f21-capex-debt-pilot.md`.
+## Phase 17F.22 full-30 Capex expansion
+
+Processed the exact approved 30-report set in dry-run mode. PDF candidates showed unresolved column-order, note-token, and period binding in the batch resolver, so all 30 remained NULL for activation. No D1 writes, provenance writes, FCF changes, Scorecard changes, or Worker deployment were made. The three pilot FY2025 values remain unchanged. Details: `docs/phase17f22-full30-capex-expansion.md`, `docs/phase17f22-fcf-impact.md`, and `docs/phase17f22-scorecard-impact.md`.
 ## Phase 17F.20 direct FY2024 PDF page resolution
 
 Resolved the exact authoritative consolidated balance-sheet pages from the fixed official PDFs. Victory `1653470`: physical pages 98–99, printed pages 8–9, unit thousand ILS, pure Cash `104,060` (`104.060` ILSm). Fox `1654283`: physical pages 126–127, printed pages 125–126, unit thousand ILS, pure Cash `1,055,842` (`1,055.842` ILSm). Each FY2024 value matches the corresponding pure Cash comparative in FY2025 reports `1730885` and `1729790`; HTML broad aggregates remain rejected. Cash HIGH is now `4/4`; D1 remains `0`. Details: `docs/phase17f20-direct-fy2024-page-resolution.md`.
