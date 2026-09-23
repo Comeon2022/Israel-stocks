@@ -1,0 +1,3 @@
+import {describe,expect,it} from 'vitest'
+import {extractHtmlCashEvidence} from './htmlCash'
+describe('HTML cash evidence',()=>{it('records consolidated candidates but preserves missing year/unit as LOW',()=>{const x=extractHtmlCashEvidence('r','<span FieldAlias="CashEquivalentsConsolidated">74,243</span>');expect(x[0].scope).toBe('CONSOLIDATED');expect(x[0].confidence).toBe('LOW');expect(x[0].unit).toBeNull();expect(x[0].fiscalYear).toBeNull()});it('rejects separate scope',()=>expect(extractHtmlCashEvidence('r','<span FieldAlias="CashEquivalentsSeparate">10</span>')[0].scope).toBe('SEPARATE'))})

@@ -22,7 +22,8 @@
     "maya:structure": "tsx scripts/maya-structure-evidence.ts",
     "maya:heading-regions": "tsx scripts/maya-heading-regions.ts",
     "maya:local-table": "tsx scripts/phase17f10-local-table.ts",
-    "maya:toc-resolution": "tsx scripts/phase17f14-toc-resolution.ts"
+    "maya:toc-resolution": "tsx scripts/phase17f14-toc-resolution.ts",
+    "maya:html-cash": "tsx scripts/phase17f15-html-cash.ts"
   },
   "dependencies": {
     "lucide-react": "^1.46.0",

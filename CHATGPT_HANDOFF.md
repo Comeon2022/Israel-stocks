@@ -962,3 +962,6 @@ Applied the existing deterministic pipeline to Victory `1730885` and Fox `172979
 ## Phase 17F.14 TOC-to-primary-statement resolution
 
 Added deterministic split-TOC parsing, controlled consolidated balance-sheet classification, printed-to-physical offset resolution, stable-offset confidence, and conflicting-offset rejection. The targeted Victory pages `2, 16, 97` and Fox pages `2, 79, 140, 225` produced no accepted consolidated balance-sheet TOC entry with a locally bound printed page. No page was mapped, no Cash value was accepted, Cash HIGH remains `2/4`, the Cash gate remains closed, Phase 17F.14B was not run, and D1 writes remain zero. Details: `docs/phase17f14-toc-primary-statement-resolution.md`.
+## Phase 17F.15 HTML-first Victory/Fox Cash
+
+Inspected only the fixed official MAYA HTML attachments for Victory `1730885`/`1653470` and Fox `1729790`/`1654283`. Structured `CashEquivalentsConsolidated` candidates were found, but the candidate questionnaire/detail content lacks explicit fiscal-year and monetary-unit binding. Candidates remain LOW/NULL; separate aliases were rejected. Cash HIGH remains `2/4`, the Cash gate remains closed, 15B/full-30 extraction was not run, and D1 writes remain zero. Details: `docs/phase17f15-html-first-cash.md`.
