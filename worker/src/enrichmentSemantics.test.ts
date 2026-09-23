@@ -4,10 +4,10 @@ import { acceptCapexComponent, acceptDebtTotal, completeCapex } from './enrichme
 const base = { statementType: 'CASH_FLOW', scope: 'CONSOLIDATED', unit: 'THOUSANDS_ILS', periodEnd: '2025-12-31' }
 describe('capex and debt enrichment semantics', () => {
   it('accepts explicit cash-flow components and normalizes outflow sign', () => {
-    const ppe = acceptCapexComponent({ ...base, field: 'capexPpe', rawValue: -226316, rowLabel: 'רכישת רכוש קבוע' })!
-    const intangible = acceptCapexComponent({ ...base, field: 'capexIntangibles', rawValue: -9038, rowLabel: 'רכישת נכסים בלתי מוחשיים' })!
-    expect(ppe.normalizedValue).toBe(226.316)
-    expect(completeCapex([ppe, intangible])).toBe(235.354)
+    const ppe = acceptCapexComponent({ ...base, field: 'capexPpe', rawValue: -315516, rowLabel: 'רכישת רכוש קבוע' })!
+    const intangible = acceptCapexComponent({ ...base, field: 'capexIntangibles', rawValue: -5144, rowLabel: 'רכישת נכסים בלתי מוחשיים' })!
+    expect(ppe.normalizedValue).toBe(315.516)
+    expect(completeCapex([ppe, intangible])).toBeCloseTo(320.660, 9)
   })
   it('keeps missing components and mixed acquisition lines NULL', () => {
     expect(completeCapex([acceptCapexComponent({ ...base, field: 'capexPpe', rawValue: -10, rowLabel: 'mixed acquisition and PPE', mixedAcquisition: true })].filter(Boolean) as any)).toBeNull()

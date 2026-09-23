@@ -26,7 +26,8 @@
     "maya:html-cash": "tsx scripts/phase17f15-html-cash.ts",
     "maya:schema-metadata": "tsx scripts/phase17f17-schema-metadata.ts",
     "maya:fy2024-cash": "tsx scripts/phase17f19-fy2024-cash.ts",
-    "maya:phase17f23b": "tsx scripts/phase17f23b-geometry.ts"
+    "maya:phase17f23b": "tsx scripts/phase17f23b-geometry.ts",
+    "maya:phase17f23e": "tsx scripts/phase17f23e-local.ts"
   },
   "dependencies": {
     "lucide-react": "^1.46.0",

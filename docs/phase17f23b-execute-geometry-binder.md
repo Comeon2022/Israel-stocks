@@ -1,5 +1,7 @@
 # Phase 17F.23B — Geometry Binder Execution
 
+Correction: the historical expected values below are superseded by [Phase 17F.23E](phase17f23e-correct-scope-local-header-rebaseline.md). Strauss 494.000 and Fox 235.354 are invalid consolidated FY2025 baselines; the revised gate measures structural correctness and preserves mixed-component NULLs.
+
 Executed `npm run maya:phase17f23b` against exactly the six validation PDFs and the three read-only FY2025 regression PDFs. Official fixed MAYA attachment URLs were resolved from each report detail. Diagnostics are under `tmp/phase17f23b/{reportId}/` and are untracked.
 
 | Company | Year | Report | Page | Year map | Unit | PPE | Intangible | Total | Confidence | Blocker |

@@ -1001,3 +1001,9 @@ Correction to earlier pilot claims: Strauss's 361/133 observations are FY2023 co
 ## Phase 17F.20 direct FY2024 PDF page resolution
 
 Resolved the exact authoritative consolidated balance-sheet pages from the fixed official PDFs. Victory `1653470`: physical pages 98–99, printed pages 8–9, unit thousand ILS, pure Cash `104,060` (`104.060` ILSm). Fox `1654283`: physical pages 126–127, printed pages 125–126, unit thousand ILS, pure Cash `1,055,842` (`1,055.842` ILSm). Each FY2024 value matches the corresponding pure Cash comparative in FY2025 reports `1730885` and `1729790`; HTML broad aggregates remain rejected. Cash HIGH is now `4/4`; D1 remains `0`. Details: `docs/phase17f20-direct-fy2024-page-resolution.md`.
+
+## Phase 17F.23E correct scope + local header binding + regression rebaseline
+
+Phase A PASS: Strauss, Fox, Isrotel FY2025 all structural HIGH. Strauss 494.000 old reference INVALID (FY2023 comparatives plus mixed investment property); Fox 235.354 old reference INVALID (parent-only page 295). Isrotel 320.660 reproduced from pure consolidated current-year components. Strauss/Fox totals remain NULL under mixed-component semantic policy. Parent statements are rejected; continuation geometry and date/year/unit/note evidence are page-local.
+
+Phase B PASS: all six fixed historical reports structural HIGH (6/6), using the same resolver after Phase A passed. Isrotel totals 247.344 (FY2023) and 541.568 (FY2024); Strauss/Fox totals NULL. Ready for Phase 17F.24, with no activation authorized or performed here. No D1 writes, SQL, full-30, production score/FCF/FV changes, OCR or LLM extraction. Lease TOTAL-only policy unchanged. Diagnostics remain untracked under tmp/phase17f23e. Full matrices and invariant qualifications: docs/phase17f23e-correct-scope-local-header-rebaseline.md.
