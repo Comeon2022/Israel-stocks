@@ -977,3 +977,6 @@ Added a deterministic Cash semantic safeguard. Victory HTML `74,243` is explicit
 ## Phase 17F.19 FY2024 Cash comparative closeout
 
 Targeted only Victory `1653470` and Fox `1654283` official PDFs. Cash-related material was found, but the exact authoritative consolidated balance-sheet Cash row, unit, and FY2024 current-year binding were not proven by the deterministic extraction. Note/detail and cash-flow rows were rejected. FY2024 comparison remains `INSUFFICIENT_EVIDENCE`; Cash HIGH remains `2/4`, the gate remains closed, 19B was not run, and D1 writes remain zero. Details: `docs/phase17f19-fy2024-cash-comparative.md`.
+## Phase 17F.20 direct FY2024 PDF page resolution
+
+Resolved the exact authoritative consolidated balance-sheet pages from the fixed official PDFs. Victory `1653470`: physical pages 98–99, printed pages 8–9, unit thousand ILS, pure Cash `104,060` (`104.060` ILSm). Fox `1654283`: physical pages 126–127, printed pages 125–126, unit thousand ILS, pure Cash `1,055,842` (`1,055.842` ILSm). Each FY2024 value matches the corresponding pure Cash comparative in FY2025 reports `1730885` and `1729790`; HTML broad aggregates remain rejected. Cash HIGH is now `4/4`; D1 remains `0`. Details: `docs/phase17f20-direct-fy2024-page-resolution.md`.
