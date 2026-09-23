@@ -965,3 +965,6 @@ Added deterministic split-TOC parsing, controlled consolidated balance-sheet cla
 ## Phase 17F.15 HTML-first Victory/Fox Cash
 
 Inspected only the fixed official MAYA HTML attachments for Victory `1730885`/`1653470` and Fox `1729790`/`1654283`. Structured `CashEquivalentsConsolidated` candidates were found, but the candidate questionnaire/detail content lacks explicit fiscal-year and monetary-unit binding. Candidates remain LOW/NULL; separate aliases were rejected. Cash HIGH remains `2/4`, the Cash gate remains closed, 15B/full-30 extraction was not run, and D1 writes remain zero. Details: `docs/phase17f15-html-first-cash.md`.
+## Phase 17F.16 HTML context binding
+
+Added same-container-first HTML context binding for the existing Victory/Fox `CashEquivalentsConsolidated` candidates. The fixed official structures contain no explicit bound fiscal years or monetary units at the candidate rows, so all four values remain LOW/NULL. No guessed year, magnitude unit, broad PDF fallback, or D1 write was used. Cash HIGH remains `2/4`; 16B/full-30 extraction was not run. Details: `docs/phase17f16-html-context-binding.md`.
