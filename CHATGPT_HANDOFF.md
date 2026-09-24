@@ -1030,7 +1030,7 @@ Full-30 dry run completed; activation BLOCKED. Structural HIGH 12/30, pure PPE 9
 
 ## Phase 17F.27 expanded-universe FY2025 balance recovery
 
-Guarded preflight completed for the exact ten FY2025 reports. All cash/short-debt/long-debt targets were NULL, but no candidate passed the complete consolidated scope/unit/non-lease aggregation proof required by the stop conditions. Zero production writes, zero provenance writes, and zero repair statements. Lease liabilities remained separate; no residual or comparative inference was used. Next step is a dedicated field-level FY2025 balance evidence phase before recovery.
+Fresh guarded preflight was blocked by Wrangler/Cloudflare authorization error 7403 before remote D1 query. No production writes, provenance writes, or repair statements occurred. The prior 17F.26 snapshot showed all cash/short-debt/long-debt targets NULL; no candidate was accepted without complete consolidated scope/unit/non-lease aggregation proof. Lease liabilities remained separate; no residual or comparative inference was used. Next step is to restore remote read authorization, then rerun the field-level FY2025 balance evidence gate.
 
 Read-only audit completed for all ten expanded companies. No production writes, resolver reopening, score/FV rule changes, class additions, lease inference, or Worker deployment. Castro and Isrotel have complete three-year base FCF; the other eight lack canonical total capex/FCF. Balance/EV readiness is blocked by missing or unavailable cash/debt/market inputs, and unsupported classes remain blocked. Machine-readable matrix: `tmp/phase17f26/completeness.json`; report: `docs/phase17f26-expanded-universe-financial-completeness-audit.md`.
 
