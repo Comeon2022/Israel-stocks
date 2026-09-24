@@ -1022,6 +1022,10 @@ Full-30 dry run completed; activation BLOCKED. Structural HIGH 12/30, pure PPE 9
 
 ## Phase 17F.25 remaining-18 report blocker analysis
 
+## Phase 17F.25A focused title/header reconstruction
+
+Zero-write research covered exactly the 14 title-failure reports. Raw token/title-cluster/page-summary artifacts are under `tmp/phase17f25a/`; no exact reusable cross-issuer consolidated title family was proven. No resolver code changed, no report became HIGH, and full coverage remains 12/30 HIGH, 6/30 total capex, and 6/30 FCF. False-positive TOC, policy, auditor, management, and parent/separate-statement cases remain rejected. No Worker deployment. Report: `docs/phase17f25a-focused-title-header-reconstruction.md`.
+
 Zero-write diagnostic completed. The fixed 18 rejected reports split into 14 title-variant/fragmentation failures and four consolidated capex-binding/year-geometry failures. No generic resolver change was justified without unsafe issuer-specific assumptions; coverage remains 12/30 HIGH, 9/30 pure PPE, 9/30 pure intangible, 6/30 total capex, and 6/30 FCF. All prior 12 HIGH regressions remain exact. Raw forensic artifacts and matrix are under `tmp/phase17f25/`; report: `docs/phase17f25-remaining-18-report-blocker-analysis.md`.
 
 Fresh dry-run PASSed immediately before write. The fixed 30-report manifest was activated with 9 PPE provenance/value records, 9 intangible provenance/value records, 6 canonical total-capex updates, and 6 derived FCF provenance records. Castro and Isrotel received the expected three-year totals and FCF; Strauss/Fox remain partial-component only; all rejected or mixed reports remain NULL. Original-five financials, Scorecard, FV1, and FV2 remained unchanged. D1 lifecycle counts and identities remained intact, the exact activation rerun was idempotent, and no Worker deployment was required. Report: `docs/phase17f24d-expanded-universe-high-only-activation.md`.
