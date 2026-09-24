@@ -1,0 +1,387 @@
+[
+  {
+    "companyId": "castro",
+    "reportId": 1728277,
+    "attachmentUrl": "https://mayafiles.tase.co.il/xbrl/1728001-1729000/X1728277.xbrl",
+    "attachmentAvailable": true,
+    "issuer": {
+      "reporterId": 280,
+      "securityId": 280016,
+      "title": "דוח תקופתי ושנתי לשנת 2025"
+    },
+    "contexts": {
+      "fy2025Instant": true,
+      "consolidatedEntity": "520037649"
+    },
+    "candidateFacts": [
+      {
+        "qname": "ifrs-full:CashFlowsFromUsedInOperatingActivities",
+        "attributes": " contextRef=\"Current_ForPeriod\" unitRef=\"U-Monetary\" decimals=\"-3\"",
+        "rawValue": "301874000"
+      },
+      {
+        "qname": "ifrs-full:CashFlowsFromUsedInInvestingActivities",
+        "attributes": " contextRef=\"Current_ForPeriod\" unitRef=\"U-Monetary\" decimals=\"-3\"",
+        "rawValue": "-100896000"
+      },
+      {
+        "qname": "ifrs-full:CashFlowsFromUsedInFinancingActivities",
+        "attributes": " contextRef=\"Current_ForPeriod\" unitRef=\"U-Monetary\" decimals=\"-3\"",
+        "rawValue": "54682000"
+      },
+      {
+        "qname": "ifrs-full:EffectOfExchangeRateChangesOnCashAndCashEquivalents",
+        "attributes": " contextRef=\"Current_ForPeriod\" unitRef=\"U-Monetary\" decimals=\"-3\"",
+        "rawValue": "0"
+      }
+    ],
+    "accepted": [],
+    "rejected": [
+      {
+        "field": "cash",
+        "reason": "NOT_FOUND_EXACT_XBRL_CONCEPT",
+        "candidates": [
+          {
+            "qname": "ifrs-full:CashFlowsFromUsedInOperatingActivities",
+            "attributes": " contextRef=\"Current_ForPeriod\" unitRef=\"U-Monetary\" decimals=\"-3\"",
+            "rawValue": "301874000"
+          },
+          {
+            "qname": "ifrs-full:CashFlowsFromUsedInInvestingActivities",
+            "attributes": " contextRef=\"Current_ForPeriod\" unitRef=\"U-Monetary\" decimals=\"-3\"",
+            "rawValue": "-100896000"
+          },
+          {
+            "qname": "ifrs-full:CashFlowsFromUsedInFinancingActivities",
+            "attributes": " contextRef=\"Current_ForPeriod\" unitRef=\"U-Monetary\" decimals=\"-3\"",
+            "rawValue": "54682000"
+          },
+          {
+            "qname": "ifrs-full:EffectOfExchangeRateChangesOnCashAndCashEquivalents",
+            "attributes": " contextRef=\"Current_ForPeriod\" unitRef=\"U-Monetary\" decimals=\"-3\"",
+            "rawValue": "0"
+          }
+        ]
+      },
+      {
+        "field": "shortTermDebt",
+        "reason": "NOT_FOUND_EXACT_XBRL_CONCEPT",
+        "candidates": []
+      },
+      {
+        "field": "longTermDebt",
+        "reason": "NOT_FOUND_EXACT_XBRL_CONCEPT",
+        "candidates": []
+      }
+    ],
+    "writeEligible": []
+  },
+  {
+    "companyId": "isrotel",
+    "reportId": 1731504,
+    "attachmentUrl": "https://mayafiles.tase.co.il/xbrl/1731001-1732000/X1731504.xbrl",
+    "attachmentAvailable": true,
+    "issuer": {
+      "reporterId": 1032,
+      "securityId": 1080985,
+      "title": "דוח תקופתי ושנתי לשנת 2025"
+    },
+    "contexts": {
+      "fy2025Instant": true,
+      "consolidatedEntity": "520042482"
+    },
+    "candidateFacts": [
+      {
+        "qname": "ifrs-full:CashFlowsFromUsedInOperatingActivities",
+        "attributes": " contextRef=\"Current_ForPeriod\" unitRef=\"U-Monetary\" decimals=\"-3\"",
+        "rawValue": "506027000"
+      },
+      {
+        "qname": "ifrs-full:CashFlowsFromUsedInInvestingActivities",
+        "attributes": " contextRef=\"Current_ForPeriod\" unitRef=\"U-Monetary\" decimals=\"-3\"",
+        "rawValue": "-216747000"
+      },
+      {
+        "qname": "ifrs-full:CashFlowsFromUsedInFinancingActivities",
+        "attributes": " contextRef=\"Current_ForPeriod\" unitRef=\"U-Monetary\" decimals=\"-3\"",
+        "rawValue": "-266225000"
+      },
+      {
+        "qname": "ifrs-full:EffectOfExchangeRateChangesOnCashAndCashEquivalents",
+        "attributes": " contextRef=\"Current_ForPeriod\" unitRef=\"U-Monetary\" decimals=\"-3\"",
+        "rawValue": "0"
+      }
+    ],
+    "accepted": [],
+    "rejected": [
+      {
+        "field": "cash",
+        "reason": "NOT_FOUND_EXACT_XBRL_CONCEPT",
+        "candidates": [
+          {
+            "qname": "ifrs-full:CashFlowsFromUsedInOperatingActivities",
+            "attributes": " contextRef=\"Current_ForPeriod\" unitRef=\"U-Monetary\" decimals=\"-3\"",
+            "rawValue": "506027000"
+          },
+          {
+            "qname": "ifrs-full:CashFlowsFromUsedInInvestingActivities",
+            "attributes": " contextRef=\"Current_ForPeriod\" unitRef=\"U-Monetary\" decimals=\"-3\"",
+            "rawValue": "-216747000"
+          },
+          {
+            "qname": "ifrs-full:CashFlowsFromUsedInFinancingActivities",
+            "attributes": " contextRef=\"Current_ForPeriod\" unitRef=\"U-Monetary\" decimals=\"-3\"",
+            "rawValue": "-266225000"
+          },
+          {
+            "qname": "ifrs-full:EffectOfExchangeRateChangesOnCashAndCashEquivalents",
+            "attributes": " contextRef=\"Current_ForPeriod\" unitRef=\"U-Monetary\" decimals=\"-3\"",
+            "rawValue": "0"
+          }
+        ]
+      },
+      {
+        "field": "shortTermDebt",
+        "reason": "NOT_FOUND_EXACT_XBRL_CONCEPT",
+        "candidates": []
+      },
+      {
+        "field": "longTermDebt",
+        "reason": "NOT_FOUND_EXACT_XBRL_CONCEPT",
+        "candidates": []
+      }
+    ],
+    "writeEligible": []
+  },
+  {
+    "companyId": "fox",
+    "reportId": 1729790,
+    "attachmentUrl": "https://mayafiles.tase.co.il/xbrl/1729001-1730000/X1729790.xbrl",
+    "attachmentAvailable": true,
+    "issuer": {
+      "reporterId": 1140,
+      "securityId": 1087022,
+      "title": "דוח תקופתי ושנתי לשנת 2025"
+    },
+    "contexts": {
+      "fy2025Instant": true,
+      "consolidatedEntity": "512157603"
+    },
+    "candidateFacts": [
+      {
+        "qname": "ifrs-full:CashFlowsFromUsedInOperatingActivities",
+        "attributes": " contextRef=\"Current_ForPeriod\" unitRef=\"U-Monetary\" decimals=\"-3\"",
+        "rawValue": "882499000"
+      },
+      {
+        "qname": "ifrs-full:CashFlowsFromUsedInInvestingActivities",
+        "attributes": " contextRef=\"Current_ForPeriod\" unitRef=\"U-Monetary\" decimals=\"-3\"",
+        "rawValue": "-630573000"
+      },
+      {
+        "qname": "ifrs-full:CashFlowsFromUsedInFinancingActivities",
+        "attributes": " contextRef=\"Current_ForPeriod\" unitRef=\"U-Monetary\" decimals=\"-3\"",
+        "rawValue": "-396761000"
+      },
+      {
+        "qname": "ifrs-full:EffectOfExchangeRateChangesOnCashAndCashEquivalents",
+        "attributes": " contextRef=\"Current_ForPeriod\" unitRef=\"U-Monetary\" decimals=\"-3\"",
+        "rawValue": "-15355000"
+      }
+    ],
+    "accepted": [],
+    "rejected": [
+      {
+        "field": "cash",
+        "reason": "NOT_FOUND_EXACT_XBRL_CONCEPT",
+        "candidates": [
+          {
+            "qname": "ifrs-full:CashFlowsFromUsedInOperatingActivities",
+            "attributes": " contextRef=\"Current_ForPeriod\" unitRef=\"U-Monetary\" decimals=\"-3\"",
+            "rawValue": "882499000"
+          },
+          {
+            "qname": "ifrs-full:CashFlowsFromUsedInInvestingActivities",
+            "attributes": " contextRef=\"Current_ForPeriod\" unitRef=\"U-Monetary\" decimals=\"-3\"",
+            "rawValue": "-630573000"
+          },
+          {
+            "qname": "ifrs-full:CashFlowsFromUsedInFinancingActivities",
+            "attributes": " contextRef=\"Current_ForPeriod\" unitRef=\"U-Monetary\" decimals=\"-3\"",
+            "rawValue": "-396761000"
+          },
+          {
+            "qname": "ifrs-full:EffectOfExchangeRateChangesOnCashAndCashEquivalents",
+            "attributes": " contextRef=\"Current_ForPeriod\" unitRef=\"U-Monetary\" decimals=\"-3\"",
+            "rawValue": "-15355000"
+          }
+        ]
+      },
+      {
+        "field": "shortTermDebt",
+        "reason": "NOT_FOUND_EXACT_XBRL_CONCEPT",
+        "candidates": []
+      },
+      {
+        "field": "longTermDebt",
+        "reason": "NOT_FOUND_EXACT_XBRL_CONCEPT",
+        "candidates": []
+      }
+    ],
+    "writeEligible": []
+  },
+  {
+    "companyId": "delta-israel-brands",
+    "reportId": 1722944,
+    "attachmentUrl": "https://mayafiles.tase.co.il/xbrl/1722001-1723000/X1722944.xbrl",
+    "attachmentAvailable": true,
+    "issuer": {
+      "reporterId": 1858,
+      "securityId": 1173699,
+      "title": "דוח תקופתי ושנתי לשנת 2025"
+    },
+    "contexts": {
+      "fy2025Instant": true,
+      "consolidatedEntity": "516250107"
+    },
+    "candidateFacts": [
+      {
+        "qname": "ifrs-full:CashFlowsFromUsedInOperatingActivities",
+        "attributes": " contextRef=\"Current_ForPeriod\" unitRef=\"U-Monetary\" decimals=\"-3\"",
+        "rawValue": "293706000"
+      },
+      {
+        "qname": "ifrs-full:CashFlowsFromUsedInInvestingActivities",
+        "attributes": " contextRef=\"Current_ForPeriod\" unitRef=\"U-Monetary\" decimals=\"-3\"",
+        "rawValue": "-50482000"
+      },
+      {
+        "qname": "ifrs-full:CashFlowsFromUsedInFinancingActivities",
+        "attributes": " contextRef=\"Current_ForPeriod\" unitRef=\"U-Monetary\" decimals=\"-3\"",
+        "rawValue": "-166068000"
+      },
+      {
+        "qname": "ifrs-full:EffectOfExchangeRateChangesOnCashAndCashEquivalents",
+        "attributes": " contextRef=\"Current_ForPeriod\" unitRef=\"U-Monetary\" decimals=\"-3\"",
+        "rawValue": "-161000"
+      }
+    ],
+    "accepted": [],
+    "rejected": [
+      {
+        "field": "cash",
+        "reason": "NOT_FOUND_EXACT_XBRL_CONCEPT",
+        "candidates": [
+          {
+            "qname": "ifrs-full:CashFlowsFromUsedInOperatingActivities",
+            "attributes": " contextRef=\"Current_ForPeriod\" unitRef=\"U-Monetary\" decimals=\"-3\"",
+            "rawValue": "293706000"
+          },
+          {
+            "qname": "ifrs-full:CashFlowsFromUsedInInvestingActivities",
+            "attributes": " contextRef=\"Current_ForPeriod\" unitRef=\"U-Monetary\" decimals=\"-3\"",
+            "rawValue": "-50482000"
+          },
+          {
+            "qname": "ifrs-full:CashFlowsFromUsedInFinancingActivities",
+            "attributes": " contextRef=\"Current_ForPeriod\" unitRef=\"U-Monetary\" decimals=\"-3\"",
+            "rawValue": "-166068000"
+          },
+          {
+            "qname": "ifrs-full:EffectOfExchangeRateChangesOnCashAndCashEquivalents",
+            "attributes": " contextRef=\"Current_ForPeriod\" unitRef=\"U-Monetary\" decimals=\"-3\"",
+            "rawValue": "-161000"
+          }
+        ]
+      },
+      {
+        "field": "shortTermDebt",
+        "reason": "NOT_FOUND_EXACT_XBRL_CONCEPT",
+        "candidates": []
+      },
+      {
+        "field": "longTermDebt",
+        "reason": "NOT_FOUND_EXACT_XBRL_CONCEPT",
+        "candidates": []
+      }
+    ],
+    "writeEligible": []
+  },
+  {
+    "companyId": "dan-hotels",
+    "reportId": 1732438,
+    "attachmentUrl": "https://mayafiles.tase.co.il/xbrl/1732001-1733000/X1732438.xbrl",
+    "attachmentAvailable": true,
+    "issuer": {
+      "reporterId": 822,
+      "securityId": 822015,
+      "title": "דוח תקופתי ושנתי לשנת 2025"
+    },
+    "contexts": {
+      "fy2025Instant": true,
+      "consolidatedEntity": "520023573"
+    },
+    "candidateFacts": [
+      {
+        "qname": "ifrs-full:CashFlowsFromUsedInOperatingActivities",
+        "attributes": " contextRef=\"Current_ForPeriod\" unitRef=\"U-Monetary\" decimals=\"-3\"",
+        "rawValue": "95458000"
+      },
+      {
+        "qname": "ifrs-full:CashFlowsFromUsedInInvestingActivities",
+        "attributes": " contextRef=\"Current_ForPeriod\" unitRef=\"U-Monetary\" decimals=\"-3\"",
+        "rawValue": "-190685000"
+      },
+      {
+        "qname": "ifrs-full:CashFlowsFromUsedInFinancingActivities",
+        "attributes": " contextRef=\"Current_ForPeriod\" unitRef=\"U-Monetary\" decimals=\"-3\"",
+        "rawValue": "122222000"
+      },
+      {
+        "qname": "ifrs-full:EffectOfExchangeRateChangesOnCashAndCashEquivalents",
+        "attributes": " contextRef=\"Current_ForPeriod\" unitRef=\"U-Monetary\" decimals=\"-3\"",
+        "rawValue": "-3898000"
+      }
+    ],
+    "accepted": [],
+    "rejected": [
+      {
+        "field": "cash",
+        "reason": "NOT_FOUND_EXACT_XBRL_CONCEPT",
+        "candidates": [
+          {
+            "qname": "ifrs-full:CashFlowsFromUsedInOperatingActivities",
+            "attributes": " contextRef=\"Current_ForPeriod\" unitRef=\"U-Monetary\" decimals=\"-3\"",
+            "rawValue": "95458000"
+          },
+          {
+            "qname": "ifrs-full:CashFlowsFromUsedInInvestingActivities",
+            "attributes": " contextRef=\"Current_ForPeriod\" unitRef=\"U-Monetary\" decimals=\"-3\"",
+            "rawValue": "-190685000"
+          },
+          {
+            "qname": "ifrs-full:CashFlowsFromUsedInFinancingActivities",
+            "attributes": " contextRef=\"Current_ForPeriod\" unitRef=\"U-Monetary\" decimals=\"-3\"",
+            "rawValue": "122222000"
+          },
+          {
+            "qname": "ifrs-full:EffectOfExchangeRateChangesOnCashAndCashEquivalents",
+            "attributes": " contextRef=\"Current_ForPeriod\" unitRef=\"U-Monetary\" decimals=\"-3\"",
+            "rawValue": "-3898000"
+          }
+        ]
+      },
+      {
+        "field": "shortTermDebt",
+        "reason": "NOT_FOUND_EXACT_XBRL_CONCEPT",
+        "candidates": []
+      },
+      {
+        "field": "longTermDebt",
+        "reason": "NOT_FOUND_EXACT_XBRL_CONCEPT",
+        "candidates": []
+      }
+    ],
+    "writeEligible": []
+  }
+]

@@ -1,0 +1,59 @@
+{
+  "id": 1722944,
+  "title": "דוח תקופתי ושנתי לשנת 2025",
+  "publishDate": "2026-02-17T08:53:03.67",
+  "isPriority": false,
+  "translated": false,
+  "deletedTranslated": false,
+  "translatedUpdated": null,
+  "reportType": null,
+  "isIntendToTaseMember": false,
+  "comment": null,
+  "reporterId": 1858,
+  "reporterSecurityId": 1173699,
+  "formId": "ת930",
+  "page": 5,
+  "companies": [
+    {
+      "companyId": 1858,
+      "name": "דלתא מותגים",
+      "isAssociated": false,
+      "isDual": false,
+      "isDeleted": false,
+      "companyType": 1,
+      "mainSecurityId": 1173699,
+      "tradeHaltTypeName": null,
+      "isTase": false,
+      "isTaseUp": false,
+      "indications": [],
+      "tradeHaltMessage": null
+    }
+  ],
+  "attachments": [
+    {
+      "reportId": 1722944,
+      "fileType": "htm",
+      "fileName": null,
+      "fileSize": 118,
+      "translated": false,
+      "url": "rhtm/1722001-1723000/H1722944.htm"
+    },
+    {
+      "reportId": 1722944,
+      "fileType": "pdf1",
+      "fileName": "דוח_תקופתי_לשנת_2025_isa.pdf",
+      "fileSize": 11547,
+      "translated": false,
+      "url": "rpdf/1722001-1723000/P1722944-00.pdf"
+    },
+    {
+      "reportId": 1722944,
+      "fileType": "xbrl",
+      "fileName": null,
+      "fileSize": 20,
+      "translated": false,
+      "url": "xbrl/1722001-1723000/X1722944.xbrl"
+    }
+  ],
+  "correctives": null
+}

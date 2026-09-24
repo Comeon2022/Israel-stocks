@@ -1,0 +1,59 @@
+{
+  "id": 1728277,
+  "title": "דוח תקופתי ושנתי לשנת 2025",
+  "publishDate": "2026-03-17T09:18:22.487",
+  "isPriority": false,
+  "translated": false,
+  "deletedTranslated": false,
+  "translatedUpdated": null,
+  "reportType": null,
+  "isIntendToTaseMember": false,
+  "comment": null,
+  "reporterId": 280,
+  "reporterSecurityId": 280016,
+  "formId": "ת930",
+  "page": 5,
+  "companies": [
+    {
+      "companyId": 280,
+      "name": "קסטרו",
+      "isAssociated": false,
+      "isDual": false,
+      "isDeleted": false,
+      "companyType": 1,
+      "mainSecurityId": 280016,
+      "tradeHaltTypeName": null,
+      "isTase": false,
+      "isTaseUp": false,
+      "indications": [],
+      "tradeHaltMessage": null
+    }
+  ],
+  "attachments": [
+    {
+      "reportId": 1728277,
+      "fileType": "htm",
+      "fileName": null,
+      "fileSize": 119,
+      "translated": false,
+      "url": "rhtm/1728001-1729000/H1728277.htm"
+    },
+    {
+      "reportId": 1728277,
+      "fileType": "pdf1",
+      "fileName": "קסטרו_דוח_תקופתי_2025_מונגש_isa.pdf",
+      "fileSize": 4260,
+      "translated": false,
+      "url": "rpdf/1728001-1729000/P1728277-00.pdf"
+    },
+    {
+      "reportId": 1728277,
+      "fileType": "xbrl",
+      "fileName": null,
+      "fileSize": 20,
+      "translated": false,
+      "url": "xbrl/1728001-1729000/X1728277.xbrl"
+    }
+  ],
+  "correctives": null
+}

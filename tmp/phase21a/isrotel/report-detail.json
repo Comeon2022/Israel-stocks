@@ -1,0 +1,59 @@
+{
+  "id": 1731504,
+  "title": "דוח תקופתי ושנתי לשנת 2025",
+  "publishDate": "2026-03-26T17:35:03.52",
+  "isPriority": false,
+  "translated": false,
+  "deletedTranslated": false,
+  "translatedUpdated": null,
+  "reportType": null,
+  "isIntendToTaseMember": false,
+  "comment": null,
+  "reporterId": 1032,
+  "reporterSecurityId": 1080985,
+  "formId": "ת930",
+  "page": 6,
+  "companies": [
+    {
+      "companyId": 1032,
+      "name": "ישרוטל",
+      "isAssociated": false,
+      "isDual": false,
+      "isDeleted": false,
+      "companyType": 1,
+      "mainSecurityId": 1080985,
+      "tradeHaltTypeName": null,
+      "isTase": false,
+      "isTaseUp": false,
+      "indications": [],
+      "tradeHaltMessage": null
+    }
+  ],
+  "attachments": [
+    {
+      "reportId": 1731504,
+      "fileType": "htm",
+      "fileName": null,
+      "fileSize": 119,
+      "translated": false,
+      "url": "rhtm/1731001-1732000/H1731504.htm"
+    },
+    {
+      "reportId": 1731504,
+      "fileType": "pdf1",
+      "fileName": "Isrotel2025_isa.pdf",
+      "fileSize": 5077,
+      "translated": false,
+      "url": "rpdf/1731001-1732000/P1731504-00.pdf"
+    },
+    {
+      "reportId": 1731504,
+      "fileType": "xbrl",
+      "fileName": null,
+      "fileSize": 20,
+      "translated": false,
+      "url": "xbrl/1731001-1732000/X1731504.xbrl"
+    }
+  ],
+  "correctives": null
+}

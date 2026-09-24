@@ -1108,3 +1108,9 @@ Remote counts unchanged: 15 companies, exactly 30 expanded annual periods, 0 dup
 - No D1, provenance, financial, Capex, FCF, lease, or market writes. No extraction pipeline was reopened.
 - Market data remains available; Castro/Isrotel retain P/E + FCF Yield while EV/EBIT remains balance-blocked. Fox/Delta retain P/E; Dan remains method-blocked.
 - Status: PARTIAL. Recommended Phase 22 is targeted exact-source retrieval for these five only, not broad extraction.
+## Phase 21A exact FY2025 XBRL balance retrieval
+
+- Retrieved exact XBRL attachments for Castro 1728277, Isrotel 1731504, Fox 1729790, Delta Israel Brands 1722944, and Dan Hotels 1732438.
+- XBRL availability: 5/5. Accepted balance fields: 0/15; cash 0/5, short-term debt 0/5, long-term debt 0/5.
+- No D1/provenance writes, no activation, no broad parser, no lease mixing, residual arithmetic, historical backfill, class/model changes, or fabricated values.
+- Existing market/model state unchanged. Worker deployment: NO. Recommended next step is review of the exact rejected matrix before any further narrowly scoped source work.

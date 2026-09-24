@@ -1,0 +1,59 @@
+{
+  "id": 1729790,
+  "title": "דוח תקופתי ושנתי לשנת 2025",
+  "publishDate": "2026-03-23T08:06:04.227",
+  "isPriority": false,
+  "translated": false,
+  "deletedTranslated": false,
+  "translatedUpdated": null,
+  "reportType": null,
+  "isIntendToTaseMember": false,
+  "comment": null,
+  "reporterId": 1140,
+  "reporterSecurityId": 1087022,
+  "formId": "ת930",
+  "page": 16,
+  "companies": [
+    {
+      "companyId": 1140,
+      "name": "פוקס",
+      "isAssociated": false,
+      "isDual": false,
+      "isDeleted": false,
+      "companyType": 1,
+      "mainSecurityId": 1087022,
+      "tradeHaltTypeName": null,
+      "isTase": false,
+      "isTaseUp": false,
+      "indications": [],
+      "tradeHaltMessage": null
+    }
+  ],
+  "attachments": [
+    {
+      "reportId": 1729790,
+      "fileType": "htm",
+      "fileName": null,
+      "fileSize": 117,
+      "translated": false,
+      "url": "rhtm/1729001-1730000/H1729790.htm"
+    },
+    {
+      "reportId": 1729790,
+      "fileType": "pdf1",
+      "fileName": "fox31122025_isa.pdf",
+      "fileSize": 5426,
+      "translated": false,
+      "url": "rpdf/1729001-1730000/P1729790-00.pdf"
+    },
+    {
+      "reportId": 1729790,
+      "fileType": "xbrl",
+      "fileName": null,
+      "fileSize": 19,
+      "translated": false,
+      "url": "xbrl/1729001-1730000/X1729790.xbrl"
+    }
+  ],
+  "correctives": null
+}

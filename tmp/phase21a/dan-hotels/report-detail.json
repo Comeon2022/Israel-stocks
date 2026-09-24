@@ -1,0 +1,59 @@
+{
+  "id": 1732438,
+  "title": "דוח תקופתי ושנתי לשנת 2025",
+  "publishDate": "2026-03-30T16:09:04.2",
+  "isPriority": false,
+  "translated": false,
+  "deletedTranslated": false,
+  "translatedUpdated": null,
+  "reportType": null,
+  "isIntendToTaseMember": false,
+  "comment": null,
+  "reporterId": 822,
+  "reporterSecurityId": 822015,
+  "formId": "ת930",
+  "page": 1,
+  "companies": [
+    {
+      "companyId": 822,
+      "name": "דן מלונות",
+      "isAssociated": false,
+      "isDual": false,
+      "isDeleted": false,
+      "companyType": 1,
+      "mainSecurityId": 822015,
+      "tradeHaltTypeName": "ה\"ק",
+      "isTase": false,
+      "isTaseUp": false,
+      "indications": [],
+      "tradeHaltMessage": "ה\"ק נפתחה ב 16:08"
+    }
+  ],
+  "attachments": [
+    {
+      "reportId": 1732438,
+      "fileType": "htm",
+      "fileName": null,
+      "fileSize": 118,
+      "translated": false,
+      "url": "rhtm/1732001-1733000/H1732438.htm"
+    },
+    {
+      "reportId": 1732438,
+      "fileType": "pdf1",
+      "fileName": "דן_isa.pdf",
+      "fileSize": 1698,
+      "translated": false,
+      "url": "rpdf/1732001-1733000/P1732438-00.pdf"
+    },
+    {
+      "reportId": 1732438,
+      "fileType": "xbrl",
+      "fileName": null,
+      "fileSize": 19,
+      "translated": false,
+      "url": "xbrl/1732001-1733000/X1732438.xbrl"
+    }
+  ],
+  "correctives": null
+}

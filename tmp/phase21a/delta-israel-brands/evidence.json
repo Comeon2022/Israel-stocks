@@ -1,0 +1,77 @@
+{
+  "companyId": "delta-israel-brands",
+  "reportId": 1722944,
+  "attachmentUrl": "https://mayafiles.tase.co.il/xbrl/1722001-1723000/X1722944.xbrl",
+  "attachmentAvailable": true,
+  "issuer": {
+    "reporterId": 1858,
+    "securityId": 1173699,
+    "title": "דוח תקופתי ושנתי לשנת 2025"
+  },
+  "contexts": {
+    "fy2025Instant": true,
+    "consolidatedEntity": "516250107"
+  },
+  "candidateFacts": [
+    {
+      "qname": "ifrs-full:CashFlowsFromUsedInOperatingActivities",
+      "attributes": " contextRef=\"Current_ForPeriod\" unitRef=\"U-Monetary\" decimals=\"-3\"",
+      "rawValue": "293706000"
+    },
+    {
+      "qname": "ifrs-full:CashFlowsFromUsedInInvestingActivities",
+      "attributes": " contextRef=\"Current_ForPeriod\" unitRef=\"U-Monetary\" decimals=\"-3\"",
+      "rawValue": "-50482000"
+    },
+    {
+      "qname": "ifrs-full:CashFlowsFromUsedInFinancingActivities",
+      "attributes": " contextRef=\"Current_ForPeriod\" unitRef=\"U-Monetary\" decimals=\"-3\"",
+      "rawValue": "-166068000"
+    },
+    {
+      "qname": "ifrs-full:EffectOfExchangeRateChangesOnCashAndCashEquivalents",
+      "attributes": " contextRef=\"Current_ForPeriod\" unitRef=\"U-Monetary\" decimals=\"-3\"",
+      "rawValue": "-161000"
+    }
+  ],
+  "accepted": [],
+  "rejected": [
+    {
+      "field": "cash",
+      "reason": "NOT_FOUND_EXACT_XBRL_CONCEPT",
+      "candidates": [
+        {
+          "qname": "ifrs-full:CashFlowsFromUsedInOperatingActivities",
+          "attributes": " contextRef=\"Current_ForPeriod\" unitRef=\"U-Monetary\" decimals=\"-3\"",
+          "rawValue": "293706000"
+        },
+        {
+          "qname": "ifrs-full:CashFlowsFromUsedInInvestingActivities",
+          "attributes": " contextRef=\"Current_ForPeriod\" unitRef=\"U-Monetary\" decimals=\"-3\"",
+          "rawValue": "-50482000"
+        },
+        {
+          "qname": "ifrs-full:CashFlowsFromUsedInFinancingActivities",
+          "attributes": " contextRef=\"Current_ForPeriod\" unitRef=\"U-Monetary\" decimals=\"-3\"",
+          "rawValue": "-166068000"
+        },
+        {
+          "qname": "ifrs-full:EffectOfExchangeRateChangesOnCashAndCashEquivalents",
+          "attributes": " contextRef=\"Current_ForPeriod\" unitRef=\"U-Monetary\" decimals=\"-3\"",
+          "rawValue": "-161000"
+        }
+      ]
+    },
+    {
+      "field": "shortTermDebt",
+      "reason": "NOT_FOUND_EXACT_XBRL_CONCEPT",
+      "candidates": []
+    },
+    {
+      "field": "longTermDebt",
+      "reason": "NOT_FOUND_EXACT_XBRL_CONCEPT",
+      "candidates": []
+    }
+  ],
+  "writeEligible": []
+}

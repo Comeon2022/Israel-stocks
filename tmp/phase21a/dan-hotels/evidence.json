@@ -1,0 +1,77 @@
+{
+  "companyId": "dan-hotels",
+  "reportId": 1732438,
+  "attachmentUrl": "https://mayafiles.tase.co.il/xbrl/1732001-1733000/X1732438.xbrl",
+  "attachmentAvailable": true,
+  "issuer": {
+    "reporterId": 822,
+    "securityId": 822015,
+    "title": "דוח תקופתי ושנתי לשנת 2025"
+  },
+  "contexts": {
+    "fy2025Instant": true,
+    "consolidatedEntity": "520023573"
+  },
+  "candidateFacts": [
+    {
+      "qname": "ifrs-full:CashFlowsFromUsedInOperatingActivities",
+      "attributes": " contextRef=\"Current_ForPeriod\" unitRef=\"U-Monetary\" decimals=\"-3\"",
+      "rawValue": "95458000"
+    },
+    {
+      "qname": "ifrs-full:CashFlowsFromUsedInInvestingActivities",
+      "attributes": " contextRef=\"Current_ForPeriod\" unitRef=\"U-Monetary\" decimals=\"-3\"",
+      "rawValue": "-190685000"
+    },
+    {
+      "qname": "ifrs-full:CashFlowsFromUsedInFinancingActivities",
+      "attributes": " contextRef=\"Current_ForPeriod\" unitRef=\"U-Monetary\" decimals=\"-3\"",
+      "rawValue": "122222000"
+    },
+    {
+      "qname": "ifrs-full:EffectOfExchangeRateChangesOnCashAndCashEquivalents",
+      "attributes": " contextRef=\"Current_ForPeriod\" unitRef=\"U-Monetary\" decimals=\"-3\"",
+      "rawValue": "-3898000"
+    }
+  ],
+  "accepted": [],
+  "rejected": [
+    {
+      "field": "cash",
+      "reason": "NOT_FOUND_EXACT_XBRL_CONCEPT",
+      "candidates": [
+        {
+          "qname": "ifrs-full:CashFlowsFromUsedInOperatingActivities",
+          "attributes": " contextRef=\"Current_ForPeriod\" unitRef=\"U-Monetary\" decimals=\"-3\"",
+          "rawValue": "95458000"
+        },
+        {
+          "qname": "ifrs-full:CashFlowsFromUsedInInvestingActivities",
+          "attributes": " contextRef=\"Current_ForPeriod\" unitRef=\"U-Monetary\" decimals=\"-3\"",
+          "rawValue": "-190685000"
+        },
+        {
+          "qname": "ifrs-full:CashFlowsFromUsedInFinancingActivities",
+          "attributes": " contextRef=\"Current_ForPeriod\" unitRef=\"U-Monetary\" decimals=\"-3\"",
+          "rawValue": "122222000"
+        },
+        {
+          "qname": "ifrs-full:EffectOfExchangeRateChangesOnCashAndCashEquivalents",
+          "attributes": " contextRef=\"Current_ForPeriod\" unitRef=\"U-Monetary\" decimals=\"-3\"",
+          "rawValue": "-3898000"
+        }
+      ]
+    },
+    {
+      "field": "shortTermDebt",
+      "reason": "NOT_FOUND_EXACT_XBRL_CONCEPT",
+      "candidates": []
+    },
+    {
+      "field": "longTermDebt",
+      "reason": "NOT_FOUND_EXACT_XBRL_CONCEPT",
+      "candidates": []
+    }
+  ],
+  "writeEligible": []
+}
