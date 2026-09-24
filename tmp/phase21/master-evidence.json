@@ -1,0 +1,317 @@
+[
+  {
+    "companyId": "castro",
+    "reportId": 1728277,
+    "fields": {
+      "cash": {
+        "status": "REJECTED_AMBIGUOUS",
+        "value": null,
+        "confidence": "LOW",
+        "sourceType": null,
+        "reportId": "1728277",
+        "sourceFiles": {
+          "pdf": "tmp/phase17f24/1728277/source.pdf",
+          "lines": "tmp/phase17f24/1728277/lines.json"
+        },
+        "reason": "No cached exact XBRL fact or unambiguous consolidated FY2025 statement row passed the scope, unit, semantic, and non-lease proof gate; no activation permitted."
+      },
+      "shortTermDebt": {
+        "status": "REJECTED_AMBIGUOUS",
+        "value": null,
+        "confidence": "LOW",
+        "sourceType": null,
+        "reportId": "1728277",
+        "sourceFiles": {
+          "pdf": "tmp/phase17f24/1728277/source.pdf",
+          "lines": "tmp/phase17f24/1728277/lines.json"
+        },
+        "reason": "No cached exact XBRL fact or unambiguous consolidated FY2025 statement row passed the scope, unit, semantic, and non-lease proof gate; no activation permitted."
+      },
+      "longTermDebt": {
+        "status": "REJECTED_AMBIGUOUS",
+        "value": null,
+        "confidence": "LOW",
+        "sourceType": null,
+        "reportId": "1728277",
+        "sourceFiles": {
+          "pdf": "tmp/phase17f24/1728277/source.pdf",
+          "lines": "tmp/phase17f24/1728277/lines.json"
+        },
+        "reason": "No cached exact XBRL fact or unambiguous consolidated FY2025 statement row passed the scope, unit, semantic, and non-lease proof gate; no activation permitted."
+      }
+    },
+    "accepted": [],
+    "rejected": [
+      {
+        "field": "cash",
+        "candidateValue": null,
+        "reason": "No cached exact XBRL fact or unambiguous consolidated FY2025 statement row passed the scope, unit, semantic, and non-lease proof gate; no activation permitted."
+      },
+      {
+        "field": "shortTermDebt",
+        "candidateValue": null,
+        "reason": "No cached exact XBRL fact or unambiguous consolidated FY2025 statement row passed the scope, unit, semantic, and non-lease proof gate; no activation permitted."
+      },
+      {
+        "field": "longTermDebt",
+        "candidateValue": null,
+        "reason": "No cached exact XBRL fact or unambiguous consolidated FY2025 statement row passed the scope, unit, semantic, and non-lease proof gate; no activation permitted."
+      }
+    ],
+    "leaseExclusion": "Lease liabilities excluded; no debt field was derived or lease-mixed.",
+    "writeEligible": [],
+    "remainingAmbiguity": "No cached exact XBRL fact or unambiguous consolidated FY2025 statement row passed the scope, unit, semantic, and non-lease proof gate; no activation permitted."
+  },
+  {
+    "companyId": "isrotel",
+    "reportId": 1731504,
+    "fields": {
+      "cash": {
+        "status": "REJECTED_AMBIGUOUS",
+        "value": null,
+        "confidence": "LOW",
+        "sourceType": null,
+        "reportId": "1731504",
+        "sourceFiles": {
+          "pdf": "tmp/phase17f24/1731504/source.pdf",
+          "lines": "tmp/phase17f24/1731504/lines.json"
+        },
+        "reason": "No cached exact XBRL fact or unambiguous consolidated FY2025 statement row passed the scope, unit, semantic, and non-lease proof gate; no activation permitted."
+      },
+      "shortTermDebt": {
+        "status": "REJECTED_AMBIGUOUS",
+        "value": null,
+        "confidence": "LOW",
+        "sourceType": null,
+        "reportId": "1731504",
+        "sourceFiles": {
+          "pdf": "tmp/phase17f24/1731504/source.pdf",
+          "lines": "tmp/phase17f24/1731504/lines.json"
+        },
+        "reason": "No cached exact XBRL fact or unambiguous consolidated FY2025 statement row passed the scope, unit, semantic, and non-lease proof gate; no activation permitted."
+      },
+      "longTermDebt": {
+        "status": "REJECTED_AMBIGUOUS",
+        "value": null,
+        "confidence": "LOW",
+        "sourceType": null,
+        "reportId": "1731504",
+        "sourceFiles": {
+          "pdf": "tmp/phase17f24/1731504/source.pdf",
+          "lines": "tmp/phase17f24/1731504/lines.json"
+        },
+        "reason": "No cached exact XBRL fact or unambiguous consolidated FY2025 statement row passed the scope, unit, semantic, and non-lease proof gate; no activation permitted."
+      }
+    },
+    "accepted": [],
+    "rejected": [
+      {
+        "field": "cash",
+        "candidateValue": null,
+        "reason": "No cached exact XBRL fact or unambiguous consolidated FY2025 statement row passed the scope, unit, semantic, and non-lease proof gate; no activation permitted."
+      },
+      {
+        "field": "shortTermDebt",
+        "candidateValue": null,
+        "reason": "No cached exact XBRL fact or unambiguous consolidated FY2025 statement row passed the scope, unit, semantic, and non-lease proof gate; no activation permitted."
+      },
+      {
+        "field": "longTermDebt",
+        "candidateValue": null,
+        "reason": "No cached exact XBRL fact or unambiguous consolidated FY2025 statement row passed the scope, unit, semantic, and non-lease proof gate; no activation permitted."
+      }
+    ],
+    "leaseExclusion": "Lease liabilities excluded; no debt field was derived or lease-mixed.",
+    "writeEligible": [],
+    "remainingAmbiguity": "No cached exact XBRL fact or unambiguous consolidated FY2025 statement row passed the scope, unit, semantic, and non-lease proof gate; no activation permitted."
+  },
+  {
+    "companyId": "fox",
+    "reportId": 1729790,
+    "fields": {
+      "cash": {
+        "status": "REJECTED_AMBIGUOUS",
+        "value": null,
+        "confidence": "LOW",
+        "sourceType": null,
+        "reportId": "1729790",
+        "sourceFiles": {
+          "pdf": "tmp/phase17f24/1729790/source.pdf",
+          "lines": "tmp/phase17f24/1729790/lines.json"
+        },
+        "reason": "No cached exact XBRL fact or unambiguous consolidated FY2025 statement row passed the scope, unit, semantic, and non-lease proof gate; no activation permitted."
+      },
+      "shortTermDebt": {
+        "status": "REJECTED_AMBIGUOUS",
+        "value": null,
+        "confidence": "LOW",
+        "sourceType": null,
+        "reportId": "1729790",
+        "sourceFiles": {
+          "pdf": "tmp/phase17f24/1729790/source.pdf",
+          "lines": "tmp/phase17f24/1729790/lines.json"
+        },
+        "reason": "No cached exact XBRL fact or unambiguous consolidated FY2025 statement row passed the scope, unit, semantic, and non-lease proof gate; no activation permitted."
+      },
+      "longTermDebt": {
+        "status": "REJECTED_AMBIGUOUS",
+        "value": null,
+        "confidence": "LOW",
+        "sourceType": null,
+        "reportId": "1729790",
+        "sourceFiles": {
+          "pdf": "tmp/phase17f24/1729790/source.pdf",
+          "lines": "tmp/phase17f24/1729790/lines.json"
+        },
+        "reason": "No cached exact XBRL fact or unambiguous consolidated FY2025 statement row passed the scope, unit, semantic, and non-lease proof gate; no activation permitted."
+      }
+    },
+    "accepted": [],
+    "rejected": [
+      {
+        "field": "cash",
+        "candidateValue": null,
+        "reason": "No cached exact XBRL fact or unambiguous consolidated FY2025 statement row passed the scope, unit, semantic, and non-lease proof gate; no activation permitted."
+      },
+      {
+        "field": "shortTermDebt",
+        "candidateValue": null,
+        "reason": "No cached exact XBRL fact or unambiguous consolidated FY2025 statement row passed the scope, unit, semantic, and non-lease proof gate; no activation permitted."
+      },
+      {
+        "field": "longTermDebt",
+        "candidateValue": null,
+        "reason": "No cached exact XBRL fact or unambiguous consolidated FY2025 statement row passed the scope, unit, semantic, and non-lease proof gate; no activation permitted."
+      }
+    ],
+    "leaseExclusion": "Lease liabilities excluded; no debt field was derived or lease-mixed.",
+    "writeEligible": [],
+    "remainingAmbiguity": "No cached exact XBRL fact or unambiguous consolidated FY2025 statement row passed the scope, unit, semantic, and non-lease proof gate; no activation permitted."
+  },
+  {
+    "companyId": "delta-israel-brands",
+    "reportId": 1722944,
+    "fields": {
+      "cash": {
+        "status": "REJECTED_AMBIGUOUS",
+        "value": null,
+        "confidence": "LOW",
+        "sourceType": null,
+        "reportId": "1722944",
+        "sourceFiles": {
+          "pdf": "tmp/phase17f24/1722944/source.pdf",
+          "lines": "tmp/phase17f24/1722944/lines.json"
+        },
+        "reason": "No cached exact XBRL fact or unambiguous consolidated FY2025 statement row passed the scope, unit, semantic, and non-lease proof gate; no activation permitted."
+      },
+      "shortTermDebt": {
+        "status": "REJECTED_AMBIGUOUS",
+        "value": null,
+        "confidence": "LOW",
+        "sourceType": null,
+        "reportId": "1722944",
+        "sourceFiles": {
+          "pdf": "tmp/phase17f24/1722944/source.pdf",
+          "lines": "tmp/phase17f24/1722944/lines.json"
+        },
+        "reason": "No cached exact XBRL fact or unambiguous consolidated FY2025 statement row passed the scope, unit, semantic, and non-lease proof gate; no activation permitted."
+      },
+      "longTermDebt": {
+        "status": "REJECTED_AMBIGUOUS",
+        "value": null,
+        "confidence": "LOW",
+        "sourceType": null,
+        "reportId": "1722944",
+        "sourceFiles": {
+          "pdf": "tmp/phase17f24/1722944/source.pdf",
+          "lines": "tmp/phase17f24/1722944/lines.json"
+        },
+        "reason": "No cached exact XBRL fact or unambiguous consolidated FY2025 statement row passed the scope, unit, semantic, and non-lease proof gate; no activation permitted."
+      }
+    },
+    "accepted": [],
+    "rejected": [
+      {
+        "field": "cash",
+        "candidateValue": null,
+        "reason": "No cached exact XBRL fact or unambiguous consolidated FY2025 statement row passed the scope, unit, semantic, and non-lease proof gate; no activation permitted."
+      },
+      {
+        "field": "shortTermDebt",
+        "candidateValue": null,
+        "reason": "No cached exact XBRL fact or unambiguous consolidated FY2025 statement row passed the scope, unit, semantic, and non-lease proof gate; no activation permitted."
+      },
+      {
+        "field": "longTermDebt",
+        "candidateValue": null,
+        "reason": "No cached exact XBRL fact or unambiguous consolidated FY2025 statement row passed the scope, unit, semantic, and non-lease proof gate; no activation permitted."
+      }
+    ],
+    "leaseExclusion": "Lease liabilities excluded; no debt field was derived or lease-mixed.",
+    "writeEligible": [],
+    "remainingAmbiguity": "No cached exact XBRL fact or unambiguous consolidated FY2025 statement row passed the scope, unit, semantic, and non-lease proof gate; no activation permitted."
+  },
+  {
+    "companyId": "dan-hotels",
+    "reportId": 1732438,
+    "fields": {
+      "cash": {
+        "status": "REJECTED_AMBIGUOUS",
+        "value": null,
+        "confidence": "LOW",
+        "sourceType": null,
+        "reportId": "1732438",
+        "sourceFiles": {
+          "pdf": "tmp/phase17f24/1732438/source.pdf",
+          "lines": "tmp/phase17f24/1732438/lines.json"
+        },
+        "reason": "No cached exact XBRL fact or unambiguous consolidated FY2025 statement row passed the scope, unit, semantic, and non-lease proof gate; no activation permitted."
+      },
+      "shortTermDebt": {
+        "status": "REJECTED_AMBIGUOUS",
+        "value": null,
+        "confidence": "LOW",
+        "sourceType": null,
+        "reportId": "1732438",
+        "sourceFiles": {
+          "pdf": "tmp/phase17f24/1732438/source.pdf",
+          "lines": "tmp/phase17f24/1732438/lines.json"
+        },
+        "reason": "No cached exact XBRL fact or unambiguous consolidated FY2025 statement row passed the scope, unit, semantic, and non-lease proof gate; no activation permitted."
+      },
+      "longTermDebt": {
+        "status": "REJECTED_AMBIGUOUS",
+        "value": null,
+        "confidence": "LOW",
+        "sourceType": null,
+        "reportId": "1732438",
+        "sourceFiles": {
+          "pdf": "tmp/phase17f24/1732438/source.pdf",
+          "lines": "tmp/phase17f24/1732438/lines.json"
+        },
+        "reason": "No cached exact XBRL fact or unambiguous consolidated FY2025 statement row passed the scope, unit, semantic, and non-lease proof gate; no activation permitted."
+      }
+    },
+    "accepted": [],
+    "rejected": [
+      {
+        "field": "cash",
+        "candidateValue": null,
+        "reason": "No cached exact XBRL fact or unambiguous consolidated FY2025 statement row passed the scope, unit, semantic, and non-lease proof gate; no activation permitted."
+      },
+      {
+        "field": "shortTermDebt",
+        "candidateValue": null,
+        "reason": "No cached exact XBRL fact or unambiguous consolidated FY2025 statement row passed the scope, unit, semantic, and non-lease proof gate; no activation permitted."
+      },
+      {
+        "field": "longTermDebt",
+        "candidateValue": null,
+        "reason": "No cached exact XBRL fact or unambiguous consolidated FY2025 statement row passed the scope, unit, semantic, and non-lease proof gate; no activation permitted."
+      }
+    ],
+    "leaseExclusion": "Lease liabilities excluded; no debt field was derived or lease-mixed.",
+    "writeEligible": [],
+    "remainingAmbiguity": "No cached exact XBRL fact or unambiguous consolidated FY2025 statement row passed the scope, unit, semantic, and non-lease proof gate; no activation permitted."
+  }
+]

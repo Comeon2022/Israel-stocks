@@ -1101,3 +1101,10 @@ Remote counts unchanged: 15 companies, exactly 30 expanded annual periods, 0 dup
 - Castro exposes P/E + FCF FV2 methods and Scorecard output; Isrotel exposes P/E + FCF methods. Remaining blockers are unchanged for other companies.
 - Max Stock remains class-unsupported; Diplomat remains provisional. No financial extraction or financial writes.
 - Worker deployed after provider runtime update; `/market/latest`, `/fair-value`, and `/scorecard-v2` returned HTTP 200 for all ten expanded IDs. Pages/browser verification remains subject to deployment/browser availability.
+## Phase 21 targeted balance inputs for valuation unlock
+
+- Completed zero-write evidence pass for Castro, Isrotel, Fox, Delta Israel Brands, and Dan Hotels using only FY2025 scope.
+- Accepted fields: 0/15; all remain NULL because exact consolidated non-lease cash/debt proof was unresolved.
+- No D1, provenance, financial, Capex, FCF, lease, or market writes. No extraction pipeline was reopened.
+- Market data remains available; Castro/Isrotel retain P/E + FCF Yield while EV/EBIT remains balance-blocked. Fox/Delta retain P/E; Dan remains method-blocked.
+- Status: PARTIAL. Recommended Phase 22 is targeted exact-source retrieval for these five only, not broad extraction.
