@@ -1063,3 +1063,10 @@ Remote counts unchanged: 15 companies, exactly 30 expanded annual periods, 0 dup
 - All 30 cash/short-term-debt/long-term-debt fields remain `REJECTED_AMBIGUOUS`, LOW confidence, null; no values were fabricated.
 - Lease liabilities were diagnostic-only and excluded from debt. No residual debt inference, broad cash interpretation, comparative substitution, Capex reopening, or Score/FV change occurred.
 - Castro and Isrotel are not balance-evidence-ready; Victory and Tiv Taam remain unresolved. Recommended 17F.27B scope is a fresh exact XBRL/PDF proof pass before any activation.
+## Phase 18 expanded-universe product activation
+
+- Added live API routing for all ten expanded company IDs; API errors do not fall back to local mock data.
+- Added API-backed `/companies` and a `/coverage` matrix for the full 15-company universe.
+- Missing financial, market, balance, scorecard, and fair-value inputs remain visibly unavailable.
+- Castro/Isrotel canonical FCF remains source/API-dependent; Strauss/Fox partial Capex is not treated as total Capex; Victory/Tiv Taam lease-payment blockers remain explicit.
+- No financial writes, recovery work, model-rule changes, or Worker deployment.
