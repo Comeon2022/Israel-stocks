@@ -1,0 +1,6 @@
+{
+  "phase": "17F.27A",
+  "zeroWrite": true,
+  "eligible": [],
+  "reason": "No HIGH-confidence ACCEPTED_EXACT or ACCEPTED_DERIVED_CANDIDATE fields."
+}

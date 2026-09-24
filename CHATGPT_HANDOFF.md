@@ -1055,3 +1055,11 @@ The original-four non-Sano annual periods were recreated on 2026-09-21 with one 
 Required original-five regressions already fail: Sano score 70 passes; the other four scores are NULL, with FV2 bases differing from the historical targets. Before/after D1 and API snapshots confirm no changes to these companies or FV1/FV2. Repair was not authorized and was not attempted. Expanded Scorecard totals remain NULL for all ten; no new business-class approval was inferred. Conflicts in proposed expanded Capex fields: NONE.
 
 Remote counts unchanged: 15 companies, exactly 30 expanded annual periods, 0 duplicate annual identities, 0 provenance rows/duplicates. Financial/source/lifecycle tables are byte-equivalent in ordered JSON snapshots; scheduled market data excluded. Repeated zero-write runs and local SQLite SQL idempotency tests pass; remote activation/idempotency was NOT RUN because preflight failed. No Worker deployment or migration. Original lease policy remains explicit single TOTAL only, never principal + interest. Diagnostics untracked in tmp/phase17f24; full matrix and blockers: docs/phase17f24-full30-high-only-capex-activation.md. Phase files are committed/pushed separately from preserved unrelated work; final hash and remote equality are reported in the delivery response.
+## Phase 17F.27A FY2025 balance evidence extraction
+
+- Zero-write evidence-only phase completed for the exact ten reports and FY2025 scope.
+- Cloudflare 7403/D1 was not required; no remote mutation or Worker deployment occurred.
+- Accepted exact fields: 0. Accepted derived candidates: 0. Candidate activation count: 0.
+- All 30 cash/short-term-debt/long-term-debt fields remain `REJECTED_AMBIGUOUS`, LOW confidence, null; no values were fabricated.
+- Lease liabilities were diagnostic-only and excluded from debt. No residual debt inference, broad cash interpretation, comparative substitution, Capex reopening, or Score/FV change occurred.
+- Castro and Isrotel are not balance-evidence-ready; Victory and Tiv Taam remain unresolved. Recommended 17F.27B scope is a fresh exact XBRL/PDF proof pass before any activation.

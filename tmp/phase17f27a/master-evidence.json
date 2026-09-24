@@ -1,0 +1,732 @@
+[
+  {
+    "companyId": "strauss",
+    "reportId": 1730561,
+    "sourceFiles": {
+      "reportId": "1730561",
+      "sourcePdf": "tmp/phase17f24/1730561/source.pdf",
+      "extractedLines": "tmp/phase17f24/1730561/lines.json",
+      "reason": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+    },
+    "cash": {
+      "status": "REJECTED_AMBIGUOUS",
+      "value": null,
+      "method": null,
+      "confidence": "LOW",
+      "evidence": {
+        "reportId": "1730561",
+        "sourcePdf": "tmp/phase17f24/1730561/source.pdf",
+        "extractedLines": "tmp/phase17f24/1730561/lines.json",
+        "reason": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+      }
+    },
+    "shortTermDebt": {
+      "status": "REJECTED_AMBIGUOUS",
+      "value": null,
+      "method": null,
+      "confidence": "LOW",
+      "evidence": {
+        "reportId": "1730561",
+        "sourcePdf": "tmp/phase17f24/1730561/source.pdf",
+        "extractedLines": "tmp/phase17f24/1730561/lines.json",
+        "reason": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+      },
+      "components": []
+    },
+    "longTermDebt": {
+      "status": "REJECTED_AMBIGUOUS",
+      "value": null,
+      "method": null,
+      "confidence": "LOW",
+      "evidence": {
+        "reportId": "1730561",
+        "sourcePdf": "tmp/phase17f24/1730561/source.pdf",
+        "extractedLines": "tmp/phase17f24/1730561/lines.json",
+        "reason": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+      },
+      "components": []
+    },
+    "leaseEvidence": {
+      "status": "DIAGNOSTIC_ONLY",
+      "includedInDebt": false,
+      "reason": "No lease liability was mapped into either debt field."
+    },
+    "acceptedCandidate": [],
+    "rejectedCandidates": [
+      {
+        "field": "cash",
+        "status": "REJECTED_AMBIGUOUS",
+        "reason": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+      },
+      {
+        "field": "shortTermDebt",
+        "status": "REJECTED_AMBIGUOUS",
+        "reason": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+      },
+      {
+        "field": "longTermDebt",
+        "status": "REJECTED_AMBIGUOUS",
+        "reason": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+      }
+    ],
+    "aggregationLogic": "No aggregation performed; no residual, magnitude, comparative, or overlap inference permitted.",
+    "remainingAmbiguity": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+  },
+  {
+    "companyId": "victory",
+    "reportId": 1730885,
+    "sourceFiles": {
+      "reportId": "1730885",
+      "sourcePdf": "tmp/phase17f24/1730885/source.pdf",
+      "extractedLines": "tmp/phase17f24/1730885/lines.json",
+      "reason": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+    },
+    "cash": {
+      "status": "REJECTED_AMBIGUOUS",
+      "value": null,
+      "method": null,
+      "confidence": "LOW",
+      "evidence": {
+        "reportId": "1730885",
+        "sourcePdf": "tmp/phase17f24/1730885/source.pdf",
+        "extractedLines": "tmp/phase17f24/1730885/lines.json",
+        "reason": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+      }
+    },
+    "shortTermDebt": {
+      "status": "REJECTED_AMBIGUOUS",
+      "value": null,
+      "method": null,
+      "confidence": "LOW",
+      "evidence": {
+        "reportId": "1730885",
+        "sourcePdf": "tmp/phase17f24/1730885/source.pdf",
+        "extractedLines": "tmp/phase17f24/1730885/lines.json",
+        "reason": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+      },
+      "components": []
+    },
+    "longTermDebt": {
+      "status": "REJECTED_AMBIGUOUS",
+      "value": null,
+      "method": null,
+      "confidence": "LOW",
+      "evidence": {
+        "reportId": "1730885",
+        "sourcePdf": "tmp/phase17f24/1730885/source.pdf",
+        "extractedLines": "tmp/phase17f24/1730885/lines.json",
+        "reason": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+      },
+      "components": []
+    },
+    "leaseEvidence": {
+      "status": "DIAGNOSTIC_ONLY",
+      "includedInDebt": false,
+      "reason": "No lease liability was mapped into either debt field."
+    },
+    "acceptedCandidate": [],
+    "rejectedCandidates": [
+      {
+        "field": "cash",
+        "status": "REJECTED_AMBIGUOUS",
+        "reason": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+      },
+      {
+        "field": "shortTermDebt",
+        "status": "REJECTED_AMBIGUOUS",
+        "reason": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+      },
+      {
+        "field": "longTermDebt",
+        "status": "REJECTED_AMBIGUOUS",
+        "reason": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+      }
+    ],
+    "aggregationLogic": "No aggregation performed; no residual, magnitude, comparative, or overlap inference permitted.",
+    "remainingAmbiguity": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+  },
+  {
+    "companyId": "tiv-taam",
+    "reportId": 1730597,
+    "sourceFiles": {
+      "reportId": "1730597",
+      "sourcePdf": "tmp/phase17f24/1730597/source.pdf",
+      "extractedLines": "tmp/phase17f24/1730597/lines.json",
+      "reason": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+    },
+    "cash": {
+      "status": "REJECTED_AMBIGUOUS",
+      "value": null,
+      "method": null,
+      "confidence": "LOW",
+      "evidence": {
+        "reportId": "1730597",
+        "sourcePdf": "tmp/phase17f24/1730597/source.pdf",
+        "extractedLines": "tmp/phase17f24/1730597/lines.json",
+        "reason": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+      }
+    },
+    "shortTermDebt": {
+      "status": "REJECTED_AMBIGUOUS",
+      "value": null,
+      "method": null,
+      "confidence": "LOW",
+      "evidence": {
+        "reportId": "1730597",
+        "sourcePdf": "tmp/phase17f24/1730597/source.pdf",
+        "extractedLines": "tmp/phase17f24/1730597/lines.json",
+        "reason": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+      },
+      "components": []
+    },
+    "longTermDebt": {
+      "status": "REJECTED_AMBIGUOUS",
+      "value": null,
+      "method": null,
+      "confidence": "LOW",
+      "evidence": {
+        "reportId": "1730597",
+        "sourcePdf": "tmp/phase17f24/1730597/source.pdf",
+        "extractedLines": "tmp/phase17f24/1730597/lines.json",
+        "reason": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+      },
+      "components": []
+    },
+    "leaseEvidence": {
+      "status": "DIAGNOSTIC_ONLY",
+      "includedInDebt": false,
+      "reason": "No lease liability was mapped into either debt field."
+    },
+    "acceptedCandidate": [],
+    "rejectedCandidates": [
+      {
+        "field": "cash",
+        "status": "REJECTED_AMBIGUOUS",
+        "reason": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+      },
+      {
+        "field": "shortTermDebt",
+        "status": "REJECTED_AMBIGUOUS",
+        "reason": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+      },
+      {
+        "field": "longTermDebt",
+        "status": "REJECTED_AMBIGUOUS",
+        "reason": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+      }
+    ],
+    "aggregationLogic": "No aggregation performed; no residual, magnitude, comparative, or overlap inference permitted.",
+    "remainingAmbiguity": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+  },
+  {
+    "companyId": "fox",
+    "reportId": 1729790,
+    "sourceFiles": {
+      "reportId": "1729790",
+      "sourcePdf": "tmp/phase17f24/1729790/source.pdf",
+      "extractedLines": "tmp/phase17f24/1729790/lines.json",
+      "reason": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+    },
+    "cash": {
+      "status": "REJECTED_AMBIGUOUS",
+      "value": null,
+      "method": null,
+      "confidence": "LOW",
+      "evidence": {
+        "reportId": "1729790",
+        "sourcePdf": "tmp/phase17f24/1729790/source.pdf",
+        "extractedLines": "tmp/phase17f24/1729790/lines.json",
+        "reason": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+      }
+    },
+    "shortTermDebt": {
+      "status": "REJECTED_AMBIGUOUS",
+      "value": null,
+      "method": null,
+      "confidence": "LOW",
+      "evidence": {
+        "reportId": "1729790",
+        "sourcePdf": "tmp/phase17f24/1729790/source.pdf",
+        "extractedLines": "tmp/phase17f24/1729790/lines.json",
+        "reason": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+      },
+      "components": []
+    },
+    "longTermDebt": {
+      "status": "REJECTED_AMBIGUOUS",
+      "value": null,
+      "method": null,
+      "confidence": "LOW",
+      "evidence": {
+        "reportId": "1729790",
+        "sourcePdf": "tmp/phase17f24/1729790/source.pdf",
+        "extractedLines": "tmp/phase17f24/1729790/lines.json",
+        "reason": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+      },
+      "components": []
+    },
+    "leaseEvidence": {
+      "status": "DIAGNOSTIC_ONLY",
+      "includedInDebt": false,
+      "reason": "No lease liability was mapped into either debt field."
+    },
+    "acceptedCandidate": [],
+    "rejectedCandidates": [
+      {
+        "field": "cash",
+        "status": "REJECTED_AMBIGUOUS",
+        "reason": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+      },
+      {
+        "field": "shortTermDebt",
+        "status": "REJECTED_AMBIGUOUS",
+        "reason": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+      },
+      {
+        "field": "longTermDebt",
+        "status": "REJECTED_AMBIGUOUS",
+        "reason": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+      }
+    ],
+    "aggregationLogic": "No aggregation performed; no residual, magnitude, comparative, or overlap inference permitted.",
+    "remainingAmbiguity": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+  },
+  {
+    "companyId": "max-stock",
+    "reportId": 1727874,
+    "sourceFiles": {
+      "reportId": "1727874",
+      "sourcePdf": "tmp/phase17f24/1727874/source.pdf",
+      "extractedLines": "tmp/phase17f24/1727874/lines.json",
+      "reason": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+    },
+    "cash": {
+      "status": "REJECTED_AMBIGUOUS",
+      "value": null,
+      "method": null,
+      "confidence": "LOW",
+      "evidence": {
+        "reportId": "1727874",
+        "sourcePdf": "tmp/phase17f24/1727874/source.pdf",
+        "extractedLines": "tmp/phase17f24/1727874/lines.json",
+        "reason": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+      }
+    },
+    "shortTermDebt": {
+      "status": "REJECTED_AMBIGUOUS",
+      "value": null,
+      "method": null,
+      "confidence": "LOW",
+      "evidence": {
+        "reportId": "1727874",
+        "sourcePdf": "tmp/phase17f24/1727874/source.pdf",
+        "extractedLines": "tmp/phase17f24/1727874/lines.json",
+        "reason": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+      },
+      "components": []
+    },
+    "longTermDebt": {
+      "status": "REJECTED_AMBIGUOUS",
+      "value": null,
+      "method": null,
+      "confidence": "LOW",
+      "evidence": {
+        "reportId": "1727874",
+        "sourcePdf": "tmp/phase17f24/1727874/source.pdf",
+        "extractedLines": "tmp/phase17f24/1727874/lines.json",
+        "reason": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+      },
+      "components": []
+    },
+    "leaseEvidence": {
+      "status": "DIAGNOSTIC_ONLY",
+      "includedInDebt": false,
+      "reason": "No lease liability was mapped into either debt field."
+    },
+    "acceptedCandidate": [],
+    "rejectedCandidates": [
+      {
+        "field": "cash",
+        "status": "REJECTED_AMBIGUOUS",
+        "reason": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+      },
+      {
+        "field": "shortTermDebt",
+        "status": "REJECTED_AMBIGUOUS",
+        "reason": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+      },
+      {
+        "field": "longTermDebt",
+        "status": "REJECTED_AMBIGUOUS",
+        "reason": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+      }
+    ],
+    "aggregationLogic": "No aggregation performed; no residual, magnitude, comparative, or overlap inference permitted.",
+    "remainingAmbiguity": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+  },
+  {
+    "companyId": "delta-israel-brands",
+    "reportId": 1722944,
+    "sourceFiles": {
+      "reportId": "1722944",
+      "sourcePdf": "tmp/phase17f24/1722944/source.pdf",
+      "extractedLines": "tmp/phase17f24/1722944/lines.json",
+      "reason": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+    },
+    "cash": {
+      "status": "REJECTED_AMBIGUOUS",
+      "value": null,
+      "method": null,
+      "confidence": "LOW",
+      "evidence": {
+        "reportId": "1722944",
+        "sourcePdf": "tmp/phase17f24/1722944/source.pdf",
+        "extractedLines": "tmp/phase17f24/1722944/lines.json",
+        "reason": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+      }
+    },
+    "shortTermDebt": {
+      "status": "REJECTED_AMBIGUOUS",
+      "value": null,
+      "method": null,
+      "confidence": "LOW",
+      "evidence": {
+        "reportId": "1722944",
+        "sourcePdf": "tmp/phase17f24/1722944/source.pdf",
+        "extractedLines": "tmp/phase17f24/1722944/lines.json",
+        "reason": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+      },
+      "components": []
+    },
+    "longTermDebt": {
+      "status": "REJECTED_AMBIGUOUS",
+      "value": null,
+      "method": null,
+      "confidence": "LOW",
+      "evidence": {
+        "reportId": "1722944",
+        "sourcePdf": "tmp/phase17f24/1722944/source.pdf",
+        "extractedLines": "tmp/phase17f24/1722944/lines.json",
+        "reason": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+      },
+      "components": []
+    },
+    "leaseEvidence": {
+      "status": "DIAGNOSTIC_ONLY",
+      "includedInDebt": false,
+      "reason": "No lease liability was mapped into either debt field."
+    },
+    "acceptedCandidate": [],
+    "rejectedCandidates": [
+      {
+        "field": "cash",
+        "status": "REJECTED_AMBIGUOUS",
+        "reason": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+      },
+      {
+        "field": "shortTermDebt",
+        "status": "REJECTED_AMBIGUOUS",
+        "reason": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+      },
+      {
+        "field": "longTermDebt",
+        "status": "REJECTED_AMBIGUOUS",
+        "reason": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+      }
+    ],
+    "aggregationLogic": "No aggregation performed; no residual, magnitude, comparative, or overlap inference permitted.",
+    "remainingAmbiguity": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+  },
+  {
+    "companyId": "castro",
+    "reportId": 1728277,
+    "sourceFiles": {
+      "reportId": "1728277",
+      "sourcePdf": "tmp/phase17f24/1728277/source.pdf",
+      "extractedLines": "tmp/phase17f24/1728277/lines.json",
+      "reason": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+    },
+    "cash": {
+      "status": "REJECTED_AMBIGUOUS",
+      "value": null,
+      "method": null,
+      "confidence": "LOW",
+      "evidence": {
+        "reportId": "1728277",
+        "sourcePdf": "tmp/phase17f24/1728277/source.pdf",
+        "extractedLines": "tmp/phase17f24/1728277/lines.json",
+        "reason": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+      }
+    },
+    "shortTermDebt": {
+      "status": "REJECTED_AMBIGUOUS",
+      "value": null,
+      "method": null,
+      "confidence": "LOW",
+      "evidence": {
+        "reportId": "1728277",
+        "sourcePdf": "tmp/phase17f24/1728277/source.pdf",
+        "extractedLines": "tmp/phase17f24/1728277/lines.json",
+        "reason": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+      },
+      "components": []
+    },
+    "longTermDebt": {
+      "status": "REJECTED_AMBIGUOUS",
+      "value": null,
+      "method": null,
+      "confidence": "LOW",
+      "evidence": {
+        "reportId": "1728277",
+        "sourcePdf": "tmp/phase17f24/1728277/source.pdf",
+        "extractedLines": "tmp/phase17f24/1728277/lines.json",
+        "reason": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+      },
+      "components": []
+    },
+    "leaseEvidence": {
+      "status": "DIAGNOSTIC_ONLY",
+      "includedInDebt": false,
+      "reason": "No lease liability was mapped into either debt field."
+    },
+    "acceptedCandidate": [],
+    "rejectedCandidates": [
+      {
+        "field": "cash",
+        "status": "REJECTED_AMBIGUOUS",
+        "reason": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+      },
+      {
+        "field": "shortTermDebt",
+        "status": "REJECTED_AMBIGUOUS",
+        "reason": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+      },
+      {
+        "field": "longTermDebt",
+        "status": "REJECTED_AMBIGUOUS",
+        "reason": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+      }
+    ],
+    "aggregationLogic": "No aggregation performed; no residual, magnitude, comparative, or overlap inference permitted.",
+    "remainingAmbiguity": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+  },
+  {
+    "companyId": "diplomat",
+    "reportId": 1731729,
+    "sourceFiles": {
+      "reportId": "1731729",
+      "sourcePdf": "tmp/phase17f24/1731729/source.pdf",
+      "extractedLines": "tmp/phase17f24/1731729/lines.json",
+      "reason": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+    },
+    "cash": {
+      "status": "REJECTED_AMBIGUOUS",
+      "value": null,
+      "method": null,
+      "confidence": "LOW",
+      "evidence": {
+        "reportId": "1731729",
+        "sourcePdf": "tmp/phase17f24/1731729/source.pdf",
+        "extractedLines": "tmp/phase17f24/1731729/lines.json",
+        "reason": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+      }
+    },
+    "shortTermDebt": {
+      "status": "REJECTED_AMBIGUOUS",
+      "value": null,
+      "method": null,
+      "confidence": "LOW",
+      "evidence": {
+        "reportId": "1731729",
+        "sourcePdf": "tmp/phase17f24/1731729/source.pdf",
+        "extractedLines": "tmp/phase17f24/1731729/lines.json",
+        "reason": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+      },
+      "components": []
+    },
+    "longTermDebt": {
+      "status": "REJECTED_AMBIGUOUS",
+      "value": null,
+      "method": null,
+      "confidence": "LOW",
+      "evidence": {
+        "reportId": "1731729",
+        "sourcePdf": "tmp/phase17f24/1731729/source.pdf",
+        "extractedLines": "tmp/phase17f24/1731729/lines.json",
+        "reason": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+      },
+      "components": []
+    },
+    "leaseEvidence": {
+      "status": "DIAGNOSTIC_ONLY",
+      "includedInDebt": false,
+      "reason": "No lease liability was mapped into either debt field."
+    },
+    "acceptedCandidate": [],
+    "rejectedCandidates": [
+      {
+        "field": "cash",
+        "status": "REJECTED_AMBIGUOUS",
+        "reason": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+      },
+      {
+        "field": "shortTermDebt",
+        "status": "REJECTED_AMBIGUOUS",
+        "reason": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+      },
+      {
+        "field": "longTermDebt",
+        "status": "REJECTED_AMBIGUOUS",
+        "reason": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+      }
+    ],
+    "aggregationLogic": "No aggregation performed; no residual, magnitude, comparative, or overlap inference permitted.",
+    "remainingAmbiguity": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+  },
+  {
+    "companyId": "isrotel",
+    "reportId": 1731504,
+    "sourceFiles": {
+      "reportId": "1731504",
+      "sourcePdf": "tmp/phase17f24/1731504/source.pdf",
+      "extractedLines": "tmp/phase17f24/1731504/lines.json",
+      "reason": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+    },
+    "cash": {
+      "status": "REJECTED_AMBIGUOUS",
+      "value": null,
+      "method": null,
+      "confidence": "LOW",
+      "evidence": {
+        "reportId": "1731504",
+        "sourcePdf": "tmp/phase17f24/1731504/source.pdf",
+        "extractedLines": "tmp/phase17f24/1731504/lines.json",
+        "reason": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+      }
+    },
+    "shortTermDebt": {
+      "status": "REJECTED_AMBIGUOUS",
+      "value": null,
+      "method": null,
+      "confidence": "LOW",
+      "evidence": {
+        "reportId": "1731504",
+        "sourcePdf": "tmp/phase17f24/1731504/source.pdf",
+        "extractedLines": "tmp/phase17f24/1731504/lines.json",
+        "reason": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+      },
+      "components": []
+    },
+    "longTermDebt": {
+      "status": "REJECTED_AMBIGUOUS",
+      "value": null,
+      "method": null,
+      "confidence": "LOW",
+      "evidence": {
+        "reportId": "1731504",
+        "sourcePdf": "tmp/phase17f24/1731504/source.pdf",
+        "extractedLines": "tmp/phase17f24/1731504/lines.json",
+        "reason": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+      },
+      "components": []
+    },
+    "leaseEvidence": {
+      "status": "DIAGNOSTIC_ONLY",
+      "includedInDebt": false,
+      "reason": "No lease liability was mapped into either debt field."
+    },
+    "acceptedCandidate": [],
+    "rejectedCandidates": [
+      {
+        "field": "cash",
+        "status": "REJECTED_AMBIGUOUS",
+        "reason": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+      },
+      {
+        "field": "shortTermDebt",
+        "status": "REJECTED_AMBIGUOUS",
+        "reason": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+      },
+      {
+        "field": "longTermDebt",
+        "status": "REJECTED_AMBIGUOUS",
+        "reason": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+      }
+    ],
+    "aggregationLogic": "No aggregation performed; no residual, magnitude, comparative, or overlap inference permitted.",
+    "remainingAmbiguity": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+  },
+  {
+    "companyId": "dan-hotels",
+    "reportId": 1732438,
+    "sourceFiles": {
+      "reportId": "1732438",
+      "sourcePdf": "tmp/phase17f24/1732438/source.pdf",
+      "extractedLines": "tmp/phase17f24/1732438/lines.json",
+      "reason": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+    },
+    "cash": {
+      "status": "REJECTED_AMBIGUOUS",
+      "value": null,
+      "method": null,
+      "confidence": "LOW",
+      "evidence": {
+        "reportId": "1732438",
+        "sourcePdf": "tmp/phase17f24/1732438/source.pdf",
+        "extractedLines": "tmp/phase17f24/1732438/lines.json",
+        "reason": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+      }
+    },
+    "shortTermDebt": {
+      "status": "REJECTED_AMBIGUOUS",
+      "value": null,
+      "method": null,
+      "confidence": "LOW",
+      "evidence": {
+        "reportId": "1732438",
+        "sourcePdf": "tmp/phase17f24/1732438/source.pdf",
+        "extractedLines": "tmp/phase17f24/1732438/lines.json",
+        "reason": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+      },
+      "components": []
+    },
+    "longTermDebt": {
+      "status": "REJECTED_AMBIGUOUS",
+      "value": null,
+      "method": null,
+      "confidence": "LOW",
+      "evidence": {
+        "reportId": "1732438",
+        "sourcePdf": "tmp/phase17f24/1732438/source.pdf",
+        "extractedLines": "tmp/phase17f24/1732438/lines.json",
+        "reason": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+      },
+      "components": []
+    },
+    "leaseEvidence": {
+      "status": "DIAGNOSTIC_ONLY",
+      "includedInDebt": false,
+      "reason": "No lease liability was mapped into either debt field."
+    },
+    "acceptedCandidate": [],
+    "rejectedCandidates": [
+      {
+        "field": "cash",
+        "status": "REJECTED_AMBIGUOUS",
+        "reason": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+      },
+      {
+        "field": "shortTermDebt",
+        "status": "REJECTED_AMBIGUOUS",
+        "reason": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+      },
+      {
+        "field": "longTermDebt",
+        "status": "REJECTED_AMBIGUOUS",
+        "reason": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+      }
+    ],
+    "aggregationLogic": "No aggregation performed; no residual, magnitude, comparative, or overlap inference permitted.",
+    "remainingAmbiguity": "No field passed the independent FY2025 consolidated-scope, unit, semantic, and single-value proof gate. Candidate fragments in cached extraction are not activated because exact row/column binding or non-lease debt aggregation remains unresolved."
+  }
+]
