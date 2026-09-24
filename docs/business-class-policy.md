@@ -14,7 +14,7 @@ General Merchandise is rejected: Max Stock is currently the only legitimate memb
 
 ## Threshold and anchor policy
 
-The existing generic margin-stability ladder remains unchanged: spread `<= 2%` is stable, `>2% and <=5%` moderate, and `>5%` volatile. No new issuer-specific margin ladder, Scorecard threshold, or FV2 anchor was added in this phase. Existing FV2 anchors remain the model defaults (EV/EBIT 12, P/E 15, FCF yield 5.5); FCF-yield logic is unchanged. Apparel and Hotels are policy classes, not a license to bypass existing evidence and coverage gates.
+The generic margin-stability ladder remains unchanged: spread `<= 2%` is stable, `>2% and <=5%` moderate, and `>5%` volatile. The class-dependent Scorecard margin-level ladders are: Apparel Retail `>=12%=10`, `9-<12%=8`, `6-<9%=6`, `3-<6%=4`, `>0-<3%=2`, `<=0%=0`; Hotels `>=15%=10`, `12-<15%=8`, `9-<12%=6`, `6-<9%=4`, `>0-<6%=2`, `<=0%=0`. FV2 anchors are Apparel Retail EV/EBIT 10 and P/E 14; Hotels EV/EBIT 11 and P/E 16. FCF-yield anchor remains 5.5% and all adjustment/clamp/weight/confidence mechanics are unchanged.
 
 ## Decisions
 

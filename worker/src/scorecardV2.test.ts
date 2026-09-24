@@ -1,11 +1,12 @@
 import { describe, expect, it } from 'vitest'
-import { buildScorecardV2, SCORECARD_V2_VERSION } from './scorecardV2'
+import { buildScorecardV2, SCORECARD_V2_VERSION, SCORECARD_MARGIN_LADDERS } from './scorecardV2'
 
 const rows=(overrides:any={})=>[2023,2024,2025].map((year,i)=>({fiscal_year:year,period_type:'ANNUAL',revenue:1000+i*100,operating_income:100+i*10,net_income:80+i*8,cash_flow_from_operations:150+i*10,capex:40+i*2,cash_and_cash_equivalents:200,short_term_debt:20,long_term_debt:30,total_lease_cash_payments:10,...overrides}))
 const fv2=(upside=0.1)=>({upside:{basePct:upside},methods:{evEbit:{available:true},pe:{available:true},fcf:{available:true}},evidence:{earningsQuality:{classification:'GOOD',cashConversionConfidence:{level:'LOW'}}}})
 const rule=(x:any,id:string)=>x.rules.find((r:any)=>r.ruleId===id)
 
 describe('Scorecard V2 shadow engine',()=>{
+  it('uses shared apparel and hotel margin ladders at exact boundaries',()=>{expect(SCORECARD_MARGIN_LADDERS.APPAREL_RETAIL[0]).toEqual([.12,10,'>=12%']);expect(SCORECARD_MARGIN_LADDERS.APPAREL_RETAIL[1]).toEqual([.09,8,'9-<12%']);expect(SCORECARD_MARGIN_LADDERS.HOTELS[0]).toEqual([.15,10,'>=15%']);expect(SCORECARD_MARGIN_LADDERS.HOTELS[1]).toEqual([.12,8,'12-<15%']);expect(SCORECARD_MARGIN_LADDERS.APPAREL_RETAIL).toHaveLength(6);expect(SCORECARD_MARGIN_LADDERS.HOTELS).toHaveLength(6)})
   it('uses the versioned shadow contract and reconciles five dimensions to 100',()=>{const x=buildScorecardV2(rows(),{market_cap:1000},fv2(), 'FOOD_RETAIL',true);expect(x.modelVersion).toBe(SCORECARD_V2_VERSION);expect(x.status).toBe('SHADOW');expect(Object.values(x.dimensions).reduce((s:any,d:any)=>s+d.maxScore,0)).toBe(100);expect(x.legacyComparison.available).toBe(false)})
   it('keeps unavailable evidence null and does not convert missing lease/FCF evidence to zero',()=>{const x:any=buildScorecardV2(rows({cash_flow_from_operations:null,capex:null,total_lease_cash_payments:null}),{market_cap:1000},fv2(), 'FOOD_RETAIL',true);expect(rule(x.dimensions.cashFlow,'CF_FCF_AVAILABILITY').points).toBeNull();expect(rule(x.dimensions.balanceSheet,'B_LEASE_EVIDENCE').points).toBeNull();expect(x.dimensions.cashFlow.status).toBe('INSUFFICIENT_EVIDENCE')})
   it('does not score valuation dispersion and preserves quarter-only exclusion',()=>{const x:any=buildScorecardV2([...rows(),{fiscal_year:2026,period_type:'QUARTER_ONLY',revenue:999999,operating_income:999999}],{market_cap:1000},fv2(.4),'FOOD_RETAIL',true);expect(rule(x.dimensions.valuation,'V_MOS').points).toBe(10);expect(x.dimensions.valuation.rules.some((r:any)=>/dispersion/i.test(r.ruleId))).toBe(false);expect(rule(x.dimensions.growth,'G_REVENUE_CAGR').value).toBeLessThan(1)})

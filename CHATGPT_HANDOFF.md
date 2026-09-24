@@ -1086,3 +1086,10 @@ Remote counts unchanged: 15 companies, exactly 30 expanded annual periods, 0 dup
 - Preserved existing Scorecard/FV rules, thresholds, anchors, FCF logic, and evidence gates.
 - Added class/support columns to `/coverage`; live company pages retain method-level valuation reason UX.
 - No extraction, financial writes, lease inference, fabricated values, Worker deployment, or Pages deployment.
+## Phase 19A backend activation of approved business classes
+
+- Activated `APPAREL_RETAIL` for Fox, Delta Israel Brands, and Castro; `HOTELS` for Isrotel and Dan Hotels.
+- Scorecard margin ladders: Apparel 12/9/6/3/0%; Hotels 15/12/9/6/0%, monotonic and class-wide.
+- FV2 anchors: Apparel EV/EBIT 10, P/E 14; Hotels EV/EBIT 11, P/E 16; FCF yield unchanged at 5.5%.
+- Max Stock remains unsupported; Diplomat remains provisional.
+- No financial writes, extraction, lease inference, issuer-specific rules, or FV1 changes.

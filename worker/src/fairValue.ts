@@ -10,12 +10,16 @@ export const FAIR_VALUE_ASSUMPTIONS = {
 
 export const FAIR_VALUE_CONFIDENCE_THRESHOLDS = { low: 0.10, moderate: 0.20, high: 0.35 } as const
 
+export const FV2_CLASS_PROFILES = {
+  CONSUMER_DEFENSIVE_BRANDED: { business: 'CONSUMER_DEFENSIVE_BRANDED', cyclicality: 'LOW_TO_MODERATE', evEbitAnchor: 12, peAnchor: 15 },
+  FOOD_RETAIL: { business: 'FOOD_RETAIL', cyclicality: 'LOW', evEbitAnchor: 12, peAnchor: 15 },
+  FOOD_DISTRIBUTION: { business: 'FOOD_DISTRIBUTION', cyclicality: 'MODERATE', evEbitAnchor: 12, peAnchor: 15 },
+  APPAREL_RETAIL: { business: 'APPAREL_RETAIL', cyclicality: 'MODERATE', evEbitAnchor: 10, peAnchor: 14 },
+  HOTELS: { business: 'HOTELS', cyclicality: 'MODERATE', evEbitAnchor: 11, peAnchor: 16 },
+} as const
 export const FV2_PROFILES = {
-  sano: { business: 'CONSUMER_DEFENSIVE_BRANDED', cyclicality: 'LOW_TO_MODERATE' },
-  shufersal: { business: 'FOOD_RETAIL', cyclicality: 'LOW' },
-  'rami-levy': { business: 'FOOD_RETAIL', cyclicality: 'LOW' },
-  yochananof: { business: 'FOOD_RETAIL', cyclicality: 'LOW' },
-  'neto-malinda': { business: 'FOOD_DISTRIBUTION', cyclicality: 'MODERATE' },
+  sano: FV2_CLASS_PROFILES.CONSUMER_DEFENSIVE_BRANDED, shufersal: FV2_CLASS_PROFILES.FOOD_RETAIL, 'rami-levy': FV2_CLASS_PROFILES.FOOD_RETAIL, yochananof: FV2_CLASS_PROFILES.FOOD_RETAIL, 'neto-malinda': FV2_CLASS_PROFILES.FOOD_DISTRIBUTION,
+  fox: FV2_CLASS_PROFILES.APPAREL_RETAIL, 'delta-israel-brands': FV2_CLASS_PROFILES.APPAREL_RETAIL, castro: FV2_CLASS_PROFILES.APPAREL_RETAIL, isrotel: FV2_CLASS_PROFILES.HOTELS, 'dan-hotels': FV2_CLASS_PROFILES.HOTELS,
 } as const
 
 export function marginOfSafetyScore(upsidePct: number | null) {
@@ -166,7 +170,7 @@ const buildCompanySpecificFairValueFixed = (companyId: string, rows: any[], mark
   const peAdjustments = [growthAdj('NET_INCOME_GROWTH', netIncomeCagr, 2, 1, -1), earningsStability === 'STABLE' ? adjustment('EARNINGS_STABLE', 1, `${(earningsRangeRatio! * 100).toFixed(2)}% range ratio`) : adjustment('EARNINGS_VARIABLE', -1, earningsRangeRatio == null ? 'missing/negative annual earnings' : `${(earningsRangeRatio * 100).toFixed(2)}% range ratio`), balancePe, profile.cyclicality === 'LOW' ? adjustment('CYCLICITY_LOW', 1, profile.cyclicality) : profile.cyclicality === 'MODERATE' ? adjustment('CYCLICITY_MODERATE', -1, profile.cyclicality) : null, confidence === 'LOW' ? adjustment('CONFIDENCE_LOW', -1, confidence) : null, qualityPe].filter(Boolean) as any[]
   const fcfAdjustments = [fcfStability === 'STABLE' ? adjustment('FCF_STABLE', -.5, `${(fcfRangeRatio! * 100).toFixed(2)}% range ratio`) : fcfStability === 'VARIABLE' ? adjustment('FCF_VARIABLE', .5, `${(fcfRangeRatio! * 100).toFixed(2)}% range ratio`) : fcfStability === 'HIGHLY_VARIABLE' ? adjustment('FCF_HIGHLY_VARIABLE', 1.5, fcfValues.some(value => value != null && value < 0) ? 'negative annual FCF' : `${(fcfRangeRatio! * 100).toFixed(2)}% range ratio`) : null, balanceFcf, profile.cyclicality === 'LOW' ? adjustment('CYCLICITY_LOW', -.25, profile.cyclicality) : profile.cyclicality === 'MODERATE' ? adjustment('CYCLICITY_MODERATE', .5, profile.cyclicality) : null, confidence === 'LOW' ? adjustment('CONFIDENCE_LOW', .5, confidence) : null].filter(Boolean) as any[]
   const assumption = (anchor: number, adjustments: any[], min: number, max: number, scenarioDelta: number) => { const preClamp = anchor + adjustments.reduce((sum, item) => sum + item.delta, 0); const final = clamp(preClamp, min, max); return { anchor, adjustments, preClamp, clamped: final, final, conservative: clamp(final - scenarioDelta, min, max), base: final, optimistic: clamp(final + scenarioDelta, min, max) } }
-  const evAssumption = assumption(12, evAdjustments, 7, 18, 2), peAssumption = assumption(15, peAdjustments, 8, 25, 3), fcfAssumption = assumption(5.5, fcfAdjustments, 3.5, 10, 1.5)
+  const evAssumption = assumption(profile.evEbitAnchor, evAdjustments, 7, 18, 2), peAssumption = assumption(profile.peAnchor, peAdjustments, 8, 25, 3), fcfAssumption = assumption(5.5, fcfAdjustments, 3.5, 10, 1.5)
   const fcfAvailable = fv1.methods?.fcf?.available === true && normalizedFcf != null
   const normalizedEbit = fv1.normalization?.ebit?.value as number | null, shares = fv1.basis?.sharesOutstanding as number | null, currentPrice = n(market?.share_price)
   const methodValues = { evEbit: normalizedEbit != null && netDebt != null ? method({ conservative: normalizedEbit * evAssumption.conservative - netDebt, base: normalizedEbit * evAssumption.base - netDebt, optimistic: normalizedEbit * evAssumption.optimistic - netDebt }, { normalizedEbit, netDebt }, evAssumption) : unavailable('MISSING_EBIT_OR_NET_DEBT', { normalizedEbit, netDebt }, evAssumption), pe: normalizedNetIncome != null ? method({ conservative: normalizedNetIncome * peAssumption.conservative, base: normalizedNetIncome * peAssumption.base, optimistic: normalizedNetIncome * peAssumption.optimistic }, { normalizedNetIncome }, peAssumption) : unavailable('MISSING_NET_INCOME', { normalizedNetIncome }, peAssumption), fcf: fcfAvailable ? method({ conservative: normalizedFcf! / (fcfAssumption.conservative / 100), base: normalizedFcf! / (fcfAssumption.base / 100), optimistic: normalizedFcf! / (fcfAssumption.optimistic / 100) }, { normalizedFcf }, fcfAssumption) : unavailable('FCF_METHOD_UNAVAILABLE', { normalizedFcf }, fcfAssumption) }

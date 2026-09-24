@@ -256,7 +256,7 @@ async function scorecardV2(db: D1Database, id: string) {
     .bind(id)
     .first<Row>();
   const fairValue = buildFairValue(id, rows, snapshot, ["shufersal", "rami-levy", "yochananof"].includes(id));
-  const businessClass: Record<string,string> = { sano: "CONSUMER_DEFENSIVE_BRANDED", shufersal: "FOOD_RETAIL", "rami-levy": "FOOD_RETAIL", yochananof: "FOOD_RETAIL", "neto-malinda": "FOOD_DISTRIBUTION" };
+  const businessClass: Record<string,string> = { sano: "CONSUMER_DEFENSIVE_BRANDED", shufersal: "FOOD_RETAIL", "rami-levy": "FOOD_RETAIL", yochananof: "FOOD_RETAIL", "neto-malinda": "FOOD_DISTRIBUTION", fox: "APPAREL_RETAIL", "delta-israel-brands": "APPAREL_RETAIL", castro: "APPAREL_RETAIL", isrotel: "HOTELS", "dan-hotels": "HOTELS" };
   return buildScorecardV2(rows, snapshot, fairValue.fv2, businessClass[id] ?? "FOOD_DISTRIBUTION", ["shufersal", "rami-levy", "yochananof"].includes(id));
 }
 async function peerData(db: D1Database, retailersOnly = false) {
