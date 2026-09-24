@@ -1026,6 +1026,10 @@ Full-30 dry run completed; activation BLOCKED. Structural HIGH 12/30, pure PPE 9
 
 ## Phase 17F.25B Max Stock + Delta geometry analysis
 
+## Phase 17F.26 expanded-universe financial completeness audit
+
+Read-only audit completed for all ten expanded companies. No production writes, resolver reopening, score/FV rule changes, class additions, lease inference, or Worker deployment. Castro and Isrotel have complete three-year base FCF; the other eight lack canonical total capex/FCF. Balance/EV readiness is blocked by missing or unavailable cash/debt/market inputs, and unsupported classes remain blocked. Machine-readable matrix: `tmp/phase17f26/completeness.json`; report: `docs/phase17f26-expanded-universe-financial-completeness-audit.md`.
+
 Zero-write analysis covered exactly Max Stock FY2023–FY2025 and Delta FY2025. Max Stock has consolidated HIGH page-local headers across all three years, but split numeric fragments/parentheses fail unambiguous cell and ordinary-row validation. Delta FY2025 has a distinct geometry and the same fail-closed result. No generic geometry rule was justified or implemented; coverage remains 12/30 HIGH, 6/30 total capex, and 6/30 FCF. No deployment. Artifacts: `tmp/phase17f25b/`; report: `docs/phase17f25b-max-stock-delta-geometry-analysis.md`.
 
 Zero-write research covered exactly the 14 title-failure reports. Raw token/title-cluster/page-summary artifacts are under `tmp/phase17f25a/`; no exact reusable cross-issuer consolidated title family was proven. No resolver code changed, no report became HIGH, and full coverage remains 12/30 HIGH, 6/30 total capex, and 6/30 FCF. False-positive TOC, policy, auditor, management, and parent/separate-statement cases remain rejected. No Worker deployment. Report: `docs/phase17f25a-focused-title-header-reconstruction.md`.
