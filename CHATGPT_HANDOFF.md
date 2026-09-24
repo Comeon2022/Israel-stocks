@@ -1024,6 +1024,10 @@ Full-30 dry run completed; activation BLOCKED. Structural HIGH 12/30, pure PPE 9
 
 ## Phase 17F.25A focused title/header reconstruction
 
+## Phase 17F.25B Max Stock + Delta geometry analysis
+
+Zero-write analysis covered exactly Max Stock FY2023–FY2025 and Delta FY2025. Max Stock has consolidated HIGH page-local headers across all three years, but split numeric fragments/parentheses fail unambiguous cell and ordinary-row validation. Delta FY2025 has a distinct geometry and the same fail-closed result. No generic geometry rule was justified or implemented; coverage remains 12/30 HIGH, 6/30 total capex, and 6/30 FCF. No deployment. Artifacts: `tmp/phase17f25b/`; report: `docs/phase17f25b-max-stock-delta-geometry-analysis.md`.
+
 Zero-write research covered exactly the 14 title-failure reports. Raw token/title-cluster/page-summary artifacts are under `tmp/phase17f25a/`; no exact reusable cross-issuer consolidated title family was proven. No resolver code changed, no report became HIGH, and full coverage remains 12/30 HIGH, 6/30 total capex, and 6/30 FCF. False-positive TOC, policy, auditor, management, and parent/separate-statement cases remain rejected. No Worker deployment. Report: `docs/phase17f25a-focused-title-header-reconstruction.md`.
 
 Zero-write diagnostic completed. The fixed 18 rejected reports split into 14 title-variant/fragmentation failures and four consolidated capex-binding/year-geometry failures. No generic resolver change was justified without unsafe issuer-specific assumptions; coverage remains 12/30 HIGH, 9/30 pure PPE, 9/30 pure intangible, 6/30 total capex, and 6/30 FCF. All prior 12 HIGH regressions remain exact. Raw forensic artifacts and matrix are under `tmp/phase17f25/`; report: `docs/phase17f25-remaining-18-report-blocker-analysis.md`.
