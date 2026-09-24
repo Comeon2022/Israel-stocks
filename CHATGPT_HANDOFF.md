@@ -1079,3 +1079,10 @@ Remote counts unchanged: 15 companies, exactly 30 expanded annual periods, 0 dup
 - Castro/Isrotel remain API-dependent for FCF; Strauss/Fox partial Capex is not canonical; Victory/Tiv adjusted FCF remains blocked without explicit lease cash totals.
 - Full tests/build passed. Worker deployment: NO. Pages deployment was not initiated; existing Pages deployment was HTTP-verified.
 - No financial writes, extraction recovery, new business classes, Scorecard/FV changes, lease inference, or fabricated values.
+## Phase 19 business-class policy and valuation UX
+
+- Defined deterministic policy for Consumer Branded, Food Retail, Distribution, Apparel Retail, and Hotels.
+- Approved reusable Apparel Retail (Fox, Delta Israel Brands, Castro) and Hotels (Isrotel, Dan Hotels); rejected one-company General Merchandise (Max Stock); Diplomat remains provisional.
+- Preserved existing Scorecard/FV rules, thresholds, anchors, FCF logic, and evidence gates.
+- Added class/support columns to `/coverage`; live company pages retain method-level valuation reason UX.
+- No extraction, financial writes, lease inference, fabricated values, Worker deployment, or Pages deployment.
