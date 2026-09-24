@@ -20,6 +20,6 @@ The generated guarded SQL is `tmp/phase17f24c/repair-plan-c.sql`; it uses field-
 
 ## Remaining status
 
-The destructive-ingest root cause remains the historical sparse `INSERT OR REPLACE` path. The selected annual statement path has the Phase 17F.24B merge protection. Full source-link merge hardening remains outstanding in the legacy ingestion path and is not claimed as complete here. The global Phase 17F.24 dry-run must be rerun and its current score/FV results recorded separately; historical outputs are not forced.
+The destructive-ingest root cause remains the historical sparse `INSERT OR REPLACE` path. The selected annual statement path has the Phase 17F.24B merge protection. Full source-link merge hardening remains outstanding in the legacy ingestion path and is not claimed as complete here. The global Phase 17F.24 dry-run was rerun read-only on 2026-09-24 and PASSed with zero writes; no expanded-universe activation was executed and historical outputs were not forced.
 
 Rami Levy total lease cash remains NULL. No memory-only restoration, OCR, LLM extraction, magnitude inference, balance-delta inference, parent-only value, or lease-principal-plus-interest derivation was used.
