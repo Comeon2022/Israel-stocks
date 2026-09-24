@@ -1014,6 +1014,12 @@ Full-30 dry run completed; activation BLOCKED. Structural HIGH 12/30, pure PPE 9
 
 ## Phase 17F.24A original-five source-state audit
 
+## Phase 17F.24B original-five repair + null-preservation fix
+
+Fresh preflight passed and the exact 18-field repair executed remotely: 12 capex fields and six explicit total-lease-cash fields. Readback matched every expected value; 18 supported-schema provenance rows were inserted. The second identical repair wrote zero statement rows and produced no duplicate provenance, period, or source rows. Counts remain 15 companies, 54 periods/statements, and 18 provenance rows. Rami Levy total lease cash remains NULL; principal plus interest was never used.
+
+The selected annual Maya activation path now merges nullable financial fields with `ON CONFLICT`/`COALESCE`, preserving existing canonical values when a sparse ingest supplies NULL or omits a field. This is CLI-only; no Worker deployment was required. The Phase 17F.24 dry-run was rerun with zero writes and remains blocked by the four existing non-Sano baseline mismatches and missing balance/debt/EBITDA inputs. No expanded-universe write was executed. Documentation: `docs/phase17f24b-original-five-repair-and-null-preservation.md`.
+
 Audit-only follow-up completed 2026-09-24. Remote snapshots, migration ledger, historical 0019 writes, exact persisted MAYA source URLs, attachments, validation/provenance/discovered-report state, API responses, and cached official PDFs are recorded under `tmp/phase17f24a/`. No D1 write, repair execution, migration, or deployment occurred.
 
 The original-four non-Sano annual periods were recreated on 2026-09-21 with one XBRL source link each. CFO survived, while 12 capex fields and six Shufersal/Yochananof lease-total fields became NULL. This supports `OVERWRITTEN_BY_LATER_INGEST`; the exact remote operator event remains unproven because no execution log exists. Period identity was retained and source identity changed. The generated, unexecuted field-specific SQL plan is `tmp/phase17f24a/repair-plan.sql`; it contains only 12 source-proven capex values and six source-proven lease totals, guarded by current NULL state. Rami lease totals remain withheld because inspected principal/combined-payment candidates do not establish the required total semantics. Missing FY2025 balance/debt/EBITDA fields remain unproven and are not backfilled.
