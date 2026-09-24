@@ -1016,6 +1016,10 @@ Full-30 dry run completed; activation BLOCKED. Structural HIGH 12/30, pure PPE 9
 
 ## Phase 17F.24B original-five repair + null-preservation fix
 
+## Phase 17F.24C recover original-five balance/debt/EBITDA inputs
+
+Recovered 48 source-proven FY2024–FY2025 fields for Shufersal, Rami Levy, Yochananof, and Neto-Malinda: cash, short-term debt, long-term debt, current/non-current lease liabilities, and D&A. Fresh preflight passed; readback matched; the second run wrote zero statement rows and created no duplicate provenance. FY2023 balance fields remain untouched because the current selected source set did not independently re-prove them. No EBITDA or EBITDA-ex-IFRS16 value was fabricated. Rami total lease cash remains NULL. No expanded-universe write or deployment occurred. Full report: `docs/phase17f24c-recover-original-five-balance-debt-ebitda.md`.
+
 Fresh preflight passed and the exact 18-field repair executed remotely: 12 capex fields and six explicit total-lease-cash fields. Readback matched every expected value; 18 supported-schema provenance rows were inserted. The second identical repair wrote zero statement rows and produced no duplicate provenance, period, or source rows. Counts remain 15 companies, 54 periods/statements, and 18 provenance rows. Rami Levy total lease cash remains NULL; principal plus interest was never used.
 
 The selected annual Maya activation path now merges nullable financial fields with `ON CONFLICT`/`COALESCE`, preserving existing canonical values when a sparse ingest supplies NULL or omits a field. This is CLI-only; no Worker deployment was required. The Phase 17F.24 dry-run was rerun with zero writes and remains blocked by the four existing non-Sano baseline mismatches and missing balance/debt/EBITDA inputs. No expanded-universe write was executed. Documentation: `docs/phase17f24b-original-five-repair-and-null-preservation.md`.
