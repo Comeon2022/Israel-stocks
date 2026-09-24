@@ -1,0 +1,52 @@
+﻿[
+    {
+        "id":  "strauss",
+        "available":  true,
+        "price":  111.5
+    },
+    {
+        "id":  "victory",
+        "available":  true,
+        "price":  39.44
+    },
+    {
+        "id":  "tiv-taam",
+        "available":  true,
+        "price":  11.75
+    },
+    {
+        "id":  "fox",
+        "available":  true,
+        "price":  307.9
+    },
+    {
+        "id":  "max-stock",
+        "available":  true,
+        "price":  33.84
+    },
+    {
+        "id":  "delta-israel-brands",
+        "available":  true,
+        "price":  103.5
+    },
+    {
+        "id":  "castro",
+        "available":  true,
+        "price":  158.8
+    },
+    {
+        "id":  "diplomat",
+        "available":  true,
+        "price":  44.89
+    },
+    {
+        "id":  "isrotel",
+        "available":  true,
+        "price":  133.7
+    },
+    {
+        "id":  "dan-hotels",
+        "available":  true,
+        "price":  26.89
+    }
+]

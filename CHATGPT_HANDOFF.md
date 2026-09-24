@@ -1093,3 +1093,11 @@ Remote counts unchanged: 15 companies, exactly 30 expanded annual periods, 0 dup
 - FV2 anchors: Apparel EV/EBIT 10, P/E 14; Hotels EV/EBIT 11, P/E 16; FCF yield unchanged at 5.5%.
 - Max Stock remains unsupported; Diplomat remains provisional.
 - No financial writes, extraction, lease inference, issuer-specific rules, or FV1 changes.
+## Phase 20 expanded-universe market data onboarding
+
+- Extended the existing Globes provider with verified mappings for all ten expanded companies; all ten market snapshots activated.
+- Normalization preserved: agorot → ILS price `/100`, market cap `/1000` to ILS millions, direct shares, 15-minute delay semantics.
+- Dry run recorded zero writes; market-only idempotent refresh was run twice.
+- Castro exposes P/E + FCF FV2 methods and Scorecard output; Isrotel exposes P/E + FCF methods. Remaining blockers are unchanged for other companies.
+- Max Stock remains class-unsupported; Diplomat remains provisional. No financial extraction or financial writes.
+- Worker deployed after provider runtime update; `/market/latest`, `/fair-value`, and `/scorecard-v2` returned HTTP 200 for all ten expanded IDs. Pages/browser verification remains subject to deployment/browser availability.
