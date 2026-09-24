@@ -1,0 +1,74 @@
+﻿[
+    {
+        "path":  "/",
+        "status":  200
+    },
+    {
+        "path":  "/companies",
+        "status":  200
+    },
+    {
+        "path":  "/coverage",
+        "status":  200
+    },
+    {
+        "path":  "/company/sano",
+        "status":  200
+    },
+    {
+        "path":  "/company/shufersal",
+        "status":  200
+    },
+    {
+        "path":  "/company/rami-levy",
+        "status":  200
+    },
+    {
+        "path":  "/company/yochananof",
+        "status":  200
+    },
+    {
+        "path":  "/company/neto-malinda",
+        "status":  200
+    },
+    {
+        "path":  "/company/strauss",
+        "status":  200
+    },
+    {
+        "path":  "/company/victory",
+        "status":  200
+    },
+    {
+        "path":  "/company/tiv-taam",
+        "status":  200
+    },
+    {
+        "path":  "/company/fox",
+        "status":  200
+    },
+    {
+        "path":  "/company/max-stock",
+        "status":  200
+    },
+    {
+        "path":  "/company/delta-israel-brands",
+        "status":  200
+    },
+    {
+        "path":  "/company/castro",
+        "status":  200
+    },
+    {
+        "path":  "/company/diplomat",
+        "status":  200
+    },
+    {
+        "path":  "/company/isrotel",
+        "status":  200
+    },
+    {
+        "path":  "/company/dan-hotels",
+        "status":  200
+    }
+]

@@ -1,0 +1,722 @@
+﻿[
+    {
+        "id":  "sano",
+        "path":  "/api/companies/sano",
+        "status":  200,
+        "body":  "{\"company\":{\"id\":\"sano\",\"ticker\":\"SANO\",\"name_he\":\"סנו\",\"name_en\":\"Sano Bruno\u0027s Enterprises Ltd.\",\"sector\":\"Consumer\",\"subsector\":\"Household Consumer Products\",\"is_active\":1,\"creat"
+    },
+    {
+        "id":  "sano",
+        "path":  "/api/companies/sano/financials?periodType=ANNUAL",
+        "status":  200,
+        "body":  "{\"financials\":[{\"id\":\"sano-annual-2023\",\"company_id\":\"sano\",\"fiscal_year\":2023,\"fiscal_quarter\":null,\"period_type\":\"ANNUAL\",\"period_start\":null,\"period_end\":\"2023-12-31\",\"report_da"
+    },
+    {
+        "id":  "sano",
+        "path":  "/api/companies/sano/financials/latest",
+        "status":  200,
+        "body":  "{\"financial\":{\"id\":\"sano-annual-2025\",\"company_id\":\"sano\",\"fiscal_year\":2025,\"fiscal_quarter\":null,\"period_type\":\"ANNUAL\",\"period_start\":null,\"period_end\":\"2025-12-31\",\"report_date"
+    },
+    {
+        "id":  "sano",
+        "path":  "/api/companies/sano/sources",
+        "status":  200,
+        "body":  "{\"sources\":[{\"id\":\"sano-annual-2023\",\"company_id\":\"sano\",\"title\":\"דוח תקופתי לשנת 2023\",\"source_type\":\"ANNUAL_REPORT\",\"url\":\"https://www.sano.co.il/media/SANO_31_12_2023-%D7%9E%D7%"
+    },
+    {
+        "id":  "sano",
+        "path":  "/api/companies/sano/validation",
+        "status":  200,
+        "body":  "{\"validation\":[{\"id\":\"sano-2025-source\",\"company_id\":\"sano\",\"period_id\":\"sano-annual-2025\",\"severity\":\"INFO\",\"code\":\"SOURCE_LINKED\",\"message\":\"Official Sano report linked; manually"
+    },
+    {
+        "id":  "sano",
+        "path":  "/api/companies/sano/scorecard-v2",
+        "status":  200,
+        "body":  "{\"modelVersion\":\"SCORECARD_V2_SHADOW_1\",\"status\":\"SHADOW\",\"available\":true,\"dimensions\":{\"quality\":{\"score\":26,\"maxScore\":30,\"rawPoints\":26,\"availableMax\":30,\"evidenceCoverage\":1,\""
+    },
+    {
+        "id":  "sano",
+        "path":  "/api/companies/sano/fair-value",
+        "status":  200,
+        "body":  "{\"companyId\":\"sano\",\"modelVersion\":\"FV1\",\"market\":{\"currentPrice\":340.9,\"marketCap\":4188.979,\"asOf\":\"Sep 24 2026 12:37PM\",\"provider\":\"GLOBES\",\"delayMinutes\":15},\"normalization\":{\"e"
+    },
+    {
+        "id":  "sano",
+        "path":  "/api/companies/sano/market/latest",
+        "status":  200,
+        "body":  "{\"market\":{\"id\":\"globes-sano-Sep 24 2026 12:37PM\",\"company_id\":\"sano\",\"snapshot_date\":\"Sep 24 2026 12:37PM\",\"share_price\":340.9,\"shares_outstanding\":12288000,\"market_cap\":4188.979,"
+    },
+    {
+        "id":  "shufersal",
+        "path":  "/api/companies/shufersal",
+        "status":  200,
+        "body":  "{\"company\":{\"id\":\"shufersal\",\"ticker\":\"SAE\",\"name_he\":\"שופרסל\",\"name_en\":\"Shufersal\",\"sector\":\"Food Retail\",\"subsector\":\"Food Retail\",\"is_active\":1,\"created_at\":\"2026-09-17 18:48:3"
+    },
+    {
+        "id":  "shufersal",
+        "path":  "/api/companies/shufersal/financials?periodType=ANNUAL",
+        "status":  200,
+        "body":  "{\"financials\":[{\"id\":\"shufersal-maya-1582311\",\"company_id\":\"shufersal\",\"fiscal_year\":2023,\"fiscal_quarter\":null,\"period_type\":\"ANNUAL\",\"period_start\":\"2023-01-01\",\"period_end\":\"202"
+    },
+    {
+        "id":  "shufersal",
+        "path":  "/api/companies/shufersal/financials/latest",
+        "status":  200,
+        "body":  "{\"financial\":{\"id\":\"shufersal-maya-1734231\",\"company_id\":\"shufersal\",\"fiscal_year\":2025,\"fiscal_quarter\":null,\"period_type\":\"ANNUAL\",\"period_start\":\"2025-01-01\",\"period_end\":\"2025-"
+    },
+    {
+        "id":  "shufersal",
+        "path":  "/api/companies/shufersal/sources",
+        "status":  200,
+        "body":  "{\"sources\":[{\"id\":\"maya-1766686\",\"company_id\":\"shufersal\",\"title\":\"MAYA report 1766686\",\"source_type\":\"QUARTERLY_REPORT\",\"url\":\"https://mayafiles.tase.co.il/xbrl/1766001-1767000/X1"
+    },
+    {
+        "id":  "shufersal",
+        "path":  "/api/companies/shufersal/validation",
+        "status":  200,
+        "body":  "{\"validation\":[{\"id\":\"shufersal-maya-1688899-BALANCE_RECONCILES-0\",\"company_id\":\"shufersal\",\"period_id\":\"shufersal-maya-1688899\",\"severity\":\"INFO\",\"code\":\"BALANCE_RECONCILES\",\"mess"
+    },
+    {
+        "id":  "shufersal",
+        "path":  "/api/companies/shufersal/scorecard-v2",
+        "status":  200,
+        "body":  "{\"modelVersion\":\"SCORECARD_V2_SHADOW_1\",\"status\":\"SHADOW\",\"available\":true,\"dimensions\":{\"quality\":{\"score\":20,\"maxScore\":30,\"rawPoints\":20,\"availableMax\":30,\"evidenceCoverage\":1,\""
+    },
+    {
+        "id":  "shufersal",
+        "path":  "/api/companies/shufersal/fair-value",
+        "status":  200,
+        "body":  "{\"companyId\":\"shufersal\",\"modelVersion\":\"FV1\",\"market\":{\"currentPrice\":36.74,\"marketCap\":9747.235,\"asOf\":\"Sep 24 2026 12:43PM\",\"provider\":\"GLOBES\",\"delayMinutes\":15},\"normalization"
+    },
+    {
+        "id":  "shufersal",
+        "path":  "/api/companies/shufersal/market/latest",
+        "status":  200,
+        "body":  "{\"market\":{\"id\":\"globes-shufersal-Sep 24 2026 12:43PM\",\"company_id\":\"shufersal\",\"snapshot_date\":\"Sep 24 2026 12:43PM\",\"share_price\":36.74,\"shares_outstanding\":265303075,\"market_cap"
+    },
+    {
+        "id":  "rami-levy",
+        "path":  "/api/companies/rami-levy",
+        "status":  200,
+        "body":  "{\"company\":{\"id\":\"rami-levy\",\"ticker\":\"RMLI\",\"name_he\":\"רמי לוי\",\"name_en\":\"Rami Levy\",\"sector\":\"Food Retail\",\"subsector\":\"Food Retail\",\"is_active\":1,\"created_at\":\"2026-09-17 18:48"
+    },
+    {
+        "id":  "rami-levy",
+        "path":  "/api/companies/rami-levy/financials?periodType=ANNUAL",
+        "status":  200,
+        "body":  "{\"financials\":[{\"id\":\"rami-levy-maya-1584746\",\"company_id\":\"rami-levy\",\"fiscal_year\":2023,\"fiscal_quarter\":null,\"period_type\":\"ANNUAL\",\"period_start\":\"2023-01-01\",\"period_end\":\"202"
+    },
+    {
+        "id":  "rami-levy",
+        "path":  "/api/companies/rami-levy/financials/latest",
+        "status":  200,
+        "body":  "{\"financial\":{\"id\":\"rami-levy-maya-1731570\",\"company_id\":\"rami-levy\",\"fiscal_year\":2025,\"fiscal_quarter\":null,\"period_type\":\"ANNUAL\",\"period_start\":\"2025-01-01\",\"period_end\":\"2025-"
+    },
+    {
+        "id":  "rami-levy",
+        "path":  "/api/companies/rami-levy/sources",
+        "status":  200,
+        "body":  "{\"sources\":[{\"id\":\"maya-1764608\",\"company_id\":\"rami-levy\",\"title\":\"MAYA report 1764608\",\"source_type\":\"QUARTERLY_REPORT\",\"url\":\"https://mayafiles.tase.co.il/xbrl/1764001-1765000/X1"
+    },
+    {
+        "id":  "rami-levy",
+        "path":  "/api/companies/rami-levy/validation",
+        "status":  200,
+        "body":  "{\"validation\":[{\"id\":\"rami-levy-maya-1686628-BALANCE_RECONCILES-0\",\"company_id\":\"rami-levy\",\"period_id\":\"rami-levy-maya-1686628\",\"severity\":\"INFO\",\"code\":\"BALANCE_RECONCILES\",\"mess"
+    },
+    {
+        "id":  "rami-levy",
+        "path":  "/api/companies/rami-levy/scorecard-v2",
+        "status":  200,
+        "body":  "{\"modelVersion\":\"SCORECARD_V2_SHADOW_1\",\"status\":\"SHADOW\",\"available\":true,\"dimensions\":{\"quality\":{\"score\":24,\"maxScore\":30,\"rawPoints\":24,\"availableMax\":30,\"evidenceCoverage\":1,\""
+    },
+    {
+        "id":  "rami-levy",
+        "path":  "/api/companies/rami-levy/fair-value",
+        "status":  200,
+        "body":  "{\"companyId\":\"rami-levy\",\"modelVersion\":\"FV1\",\"market\":{\"currentPrice\":334.3,\"marketCap\":4605.177,\"asOf\":\"Sep 24 2026 12:44PM\",\"provider\":\"GLOBES\",\"delayMinutes\":15},\"normalization"
+    },
+    {
+        "id":  "rami-levy",
+        "path":  "/api/companies/rami-levy/market/latest",
+        "status":  200,
+        "body":  "{\"market\":{\"id\":\"globes-rami-levy-Sep 24 2026 12:44PM\",\"company_id\":\"rami-levy\",\"snapshot_date\":\"Sep 24 2026 12:44PM\",\"share_price\":334.3,\"shares_outstanding\":13775583,\"market_cap\""
+    },
+    {
+        "id":  "yochananof",
+        "path":  "/api/companies/yochananof",
+        "status":  200,
+        "body":  "{\"company\":{\"id\":\"yochananof\",\"ticker\":\"YHNF\",\"name_he\":\"יוחננוף\",\"name_en\":\"Yochananof\",\"sector\":\"Food Retail\",\"subsector\":\"Food Retail\",\"is_active\":1,\"created_at\":\"2026-09-17 19:"
+    },
+    {
+        "id":  "yochananof",
+        "path":  "/api/companies/yochananof/financials?periodType=ANNUAL",
+        "status":  200,
+        "body":  "{\"financials\":[{\"id\":\"yochananof-maya-1587708\",\"company_id\":\"yochananof\",\"fiscal_year\":2023,\"fiscal_quarter\":null,\"period_type\":\"ANNUAL\",\"period_start\":\"2023-01-01\",\"period_end\":\"2"
+    },
+    {
+        "id":  "yochananof",
+        "path":  "/api/companies/yochananof/financials/latest",
+        "status":  200,
+        "body":  "{\"financial\":{\"id\":\"yochananof-maya-1732159\",\"company_id\":\"yochananof\",\"fiscal_year\":2025,\"fiscal_quarter\":null,\"period_type\":\"ANNUAL\",\"period_start\":\"2025-01-01\",\"period_end\":\"202"
+    },
+    {
+        "id":  "yochananof",
+        "path":  "/api/companies/yochananof/sources",
+        "status":  200,
+        "body":  "{\"sources\":[{\"id\":\"maya-1687009-xbrl\",\"company_id\":\"yochananof\",\"title\":\"דוח רבעון 2/חצי שנתי לשנת 2025\",\"source_type\":\"QUARTERLY_REPORT\",\"url\":\"https://mayafiles.tase.co.il/xbrl/1"
+    },
+    {
+        "id":  "yochananof",
+        "path":  "/api/companies/yochananof/validation",
+        "status":  200,
+        "body":  "{\"validation\":[{\"id\":\"yochananof-maya-1687009-BALANCE_RECONCILES-0\",\"company_id\":\"yochananof\",\"period_id\":\"yochananof-maya-1687009\",\"severity\":\"INFO\",\"code\":\"BALANCE_RECONCILES\",\"m"
+    },
+    {
+        "id":  "yochananof",
+        "path":  "/api/companies/yochananof/scorecard-v2",
+        "status":  200,
+        "body":  "{\"modelVersion\":\"SCORECARD_V2_SHADOW_1\",\"status\":\"SHADOW\",\"available\":true,\"dimensions\":{\"quality\":{\"score\":24,\"maxScore\":30,\"rawPoints\":24,\"availableMax\":30,\"evidenceCoverage\":1,\""
+    },
+    {
+        "id":  "yochananof",
+        "path":  "/api/companies/yochananof/fair-value",
+        "status":  200,
+        "body":  "{\"companyId\":\"yochananof\",\"modelVersion\":\"FV1\",\"market\":{\"currentPrice\":325.7,\"marketCap\":4717.986,\"asOf\":\"Sep 24 2026 12:43PM\",\"provider\":\"GLOBES\",\"delayMinutes\":15},\"normalizatio"
+    },
+    {
+        "id":  "yochananof",
+        "path":  "/api/companies/yochananof/market/latest",
+        "status":  200,
+        "body":  "{\"market\":{\"id\":\"globes-yochananof-Sep 24 2026 12:43PM\",\"company_id\":\"yochananof\",\"snapshot_date\":\"Sep 24 2026 12:43PM\",\"share_price\":325.7,\"shares_outstanding\":14485679,\"market_ca"
+    },
+    {
+        "id":  "neto-malinda",
+        "path":  "/api/companies/neto-malinda",
+        "status":  200,
+        "body":  "{\"company\":{\"id\":\"neto-malinda\",\"ticker\":\"NTML\",\"name_he\":\"נטו מלינדה\",\"name_en\":\"Neto Malinda\",\"sector\":\"Food Distribution\",\"subsector\":\"Food Import \u0026 Distribution\",\"is_active\":1,"
+    },
+    {
+        "id":  "neto-malinda",
+        "path":  "/api/companies/neto-malinda/financials?periodType=ANNUAL",
+        "status":  200,
+        "body":  "{\"financials\":[{\"id\":\"neto-malinda-maya-1583630\",\"company_id\":\"neto-malinda\",\"fiscal_year\":2023,\"fiscal_quarter\":null,\"period_type\":\"ANNUAL\",\"period_start\":\"2023-01-01\",\"period_end"
+    },
+    {
+        "id":  "neto-malinda",
+        "path":  "/api/companies/neto-malinda/financials/latest",
+        "status":  200,
+        "body":  "{\"financial\":{\"id\":\"neto-malinda-maya-1732821\",\"company_id\":\"neto-malinda\",\"fiscal_year\":2025,\"fiscal_quarter\":null,\"period_type\":\"ANNUAL\",\"period_start\":\"2025-01-01\",\"period_end\":"
+    },
+    {
+        "id":  "neto-malinda",
+        "path":  "/api/companies/neto-malinda/sources",
+        "status":  200,
+        "body":  "{\"sources\":[{\"id\":\"maya-1687465-xbrl\",\"company_id\":\"neto-malinda\",\"title\":\"דוח רבעון 2/חצי שנתי לשנת 2025\",\"source_type\":\"QUARTERLY_REPORT\",\"url\":\"https://mayafiles.tase.co.il/xbrl"
+    },
+    {
+        "id":  "neto-malinda",
+        "path":  "/api/companies/neto-malinda/validation",
+        "status":  200,
+        "body":  "{\"validation\":[{\"id\":\"neto-malinda-maya-1687465-BALANCE_RECONCILES-0\",\"company_id\":\"neto-malinda\",\"period_id\":\"neto-malinda-maya-1687465\",\"severity\":\"INFO\",\"code\":\"BALANCE_RECONCIL"
+    },
+    {
+        "id":  "neto-malinda",
+        "path":  "/api/companies/neto-malinda/scorecard-v2",
+        "status":  200,
+        "body":  "{\"modelVersion\":\"SCORECARD_V2_SHADOW_1\",\"status\":\"SHADOW\",\"available\":true,\"dimensions\":{\"quality\":{\"score\":18,\"maxScore\":30,\"rawPoints\":18,\"availableMax\":30,\"evidenceCoverage\":1,\""
+    },
+    {
+        "id":  "neto-malinda",
+        "path":  "/api/companies/neto-malinda/fair-value",
+        "status":  200,
+        "body":  "{\"companyId\":\"neto-malinda\",\"modelVersion\":\"FV1\",\"market\":{\"currentPrice\":116.7,\"marketCap\":2436.2,\"asOf\":\"Sep 24 2026 12:39PM\",\"provider\":\"GLOBES\",\"delayMinutes\":15},\"normalizatio"
+    },
+    {
+        "id":  "neto-malinda",
+        "path":  "/api/companies/neto-malinda/market/latest",
+        "status":  200,
+        "body":  "{\"market\":{\"id\":\"globes-neto-malinda-Sep 24 2026 12:39PM\",\"company_id\":\"neto-malinda\",\"snapshot_date\":\"Sep 24 2026 12:39PM\",\"share_price\":116.7,\"shares_outstanding\":20875754,\"marke"
+    },
+    {
+        "id":  "strauss",
+        "path":  "/api/companies/strauss",
+        "status":  200,
+        "body":  "{\"company\":{\"id\":\"strauss\",\"ticker\":\"שטרס\",\"name_he\":\"שטראוס\",\"name_en\":\"Strauss Group\",\"sector\":\"Branded Consumer\",\"subsector\":null,\"is_active\":1,\"created_at\":\"2026-09-21 16:56:58"
+    },
+    {
+        "id":  "strauss",
+        "path":  "/api/companies/strauss/financials?periodType=ANNUAL",
+        "status":  200,
+        "body":  "{\"financials\":[{\"id\":\"strauss-maya-1582703\",\"company_id\":\"strauss\",\"fiscal_year\":2023,\"fiscal_quarter\":null,\"period_type\":\"ANNUAL\",\"period_start\":\"2023-01-01\",\"period_end\":\"2023-12"
+    },
+    {
+        "id":  "strauss",
+        "path":  "/api/companies/strauss/financials/latest",
+        "status":  200,
+        "body":  "{\"financial\":{\"id\":\"strauss-maya-1730561\",\"company_id\":\"strauss\",\"fiscal_year\":2025,\"fiscal_quarter\":null,\"period_type\":\"ANNUAL\",\"period_start\":\"2025-01-01\",\"period_end\":\"2025-12-3"
+    },
+    {
+        "id":  "strauss",
+        "path":  "/api/companies/strauss/sources",
+        "status":  200,
+        "body":  "{\"sources\":[{\"id\":\"maya-1582703-xbrl\",\"company_id\":\"strauss\",\"title\":\"דוח תקופתי ושנתי לשנת 2023 - תיקון -טעות סופר\",\"source_type\":\"ANNUAL_REPORT\",\"url\":\"https://mayafiles.tase.co."
+    },
+    {
+        "id":  "strauss",
+        "path":  "/api/companies/strauss/validation",
+        "status":  200,
+        "body":  "{\"validation\":[{\"id\":\"strauss-maya-1582703-BALANCE_RECONCILES-0\",\"company_id\":\"strauss\",\"period_id\":\"strauss-maya-1582703\",\"severity\":\"INFO\",\"code\":\"BALANCE_RECONCILES\",\"message\":\""
+    },
+    {
+        "id":  "strauss",
+        "path":  "/api/companies/strauss/scorecard-v2",
+        "status":  200,
+        "body":  "{\"modelVersion\":\"SCORECARD_V2_SHADOW_1\",\"status\":\"SHADOW\",\"available\":false,\"dimensions\":{\"quality\":{\"score\":24,\"maxScore\":30,\"rawPoints\":24,\"availableMax\":30,\"evidenceCoverage\":1,"
+    },
+    {
+        "id":  "strauss",
+        "path":  "/api/companies/strauss/fair-value",
+        "status":  200,
+        "body":  "{\"companyId\":\"strauss\",\"modelVersion\":\"FV1\",\"market\":{\"currentPrice\":null,\"marketCap\":null,\"asOf\":null,\"provider\":null,\"delayMinutes\":null},\"normalization\":{\"ebit\":{\"value\":837,\"me"
+    },
+    {
+        "id":  "strauss",
+        "path":  "/api/companies/strauss/market/latest",
+        "status":  200,
+        "body":  "{\"market\":null}"
+    },
+    {
+        "id":  "victory",
+        "path":  "/api/companies/victory",
+        "status":  200,
+        "body":  "{\"company\":{\"id\":\"victory\",\"ticker\":\"וקטר\",\"name_he\":\"ויקטורי\",\"name_en\":\"Victory\",\"sector\":\"Food Retail\",\"subsector\":null,\"is_active\":1,\"created_at\":\"2026-09-21 17:03:07\",\"updated"
+    },
+    {
+        "id":  "victory",
+        "path":  "/api/companies/victory/financials?periodType=ANNUAL",
+        "status":  200,
+        "body":  "{\"financials\":[{\"id\":\"victory-maya-1581569\",\"company_id\":\"victory\",\"fiscal_year\":2023,\"fiscal_quarter\":null,\"period_type\":\"ANNUAL\",\"period_start\":\"2023-01-01\",\"period_end\":\"2023-12"
+    },
+    {
+        "id":  "victory",
+        "path":  "/api/companies/victory/financials/latest",
+        "status":  200,
+        "body":  "{\"financial\":{\"id\":\"victory-maya-1730885\",\"company_id\":\"victory\",\"fiscal_year\":2025,\"fiscal_quarter\":null,\"period_type\":\"ANNUAL\",\"period_start\":\"2025-01-01\",\"period_end\":\"2025-12-3"
+    },
+    {
+        "id":  "victory",
+        "path":  "/api/companies/victory/sources",
+        "status":  200,
+        "body":  "{\"sources\":[{\"id\":\"maya-1581569-xbrl\",\"company_id\":\"victory\",\"title\":\"דוח תקופתי ושנתי לשנת 2023\",\"source_type\":\"ANNUAL_REPORT\",\"url\":\"https://mayafiles.tase.co.il/xbrl/1581001-158"
+    },
+    {
+        "id":  "victory",
+        "path":  "/api/companies/victory/validation",
+        "status":  200,
+        "body":  "{\"validation\":[]}"
+    },
+    {
+        "id":  "victory",
+        "path":  "/api/companies/victory/scorecard-v2",
+        "status":  200,
+        "body":  "{\"modelVersion\":\"SCORECARD_V2_SHADOW_1\",\"status\":\"SHADOW\",\"available\":false,\"dimensions\":{\"quality\":{\"score\":20,\"maxScore\":30,\"rawPoints\":20,\"availableMax\":30,\"evidenceCoverage\":1,"
+    },
+    {
+        "id":  "victory",
+        "path":  "/api/companies/victory/fair-value",
+        "status":  200,
+        "body":  "{\"companyId\":\"victory\",\"modelVersion\":\"FV1\",\"market\":{\"currentPrice\":null,\"marketCap\":null,\"asOf\":null,\"provider\":null,\"delayMinutes\":null},\"normalization\":{\"ebit\":{\"value\":86.242,"
+    },
+    {
+        "id":  "victory",
+        "path":  "/api/companies/victory/market/latest",
+        "status":  200,
+        "body":  "{\"market\":null}"
+    },
+    {
+        "id":  "tiv-taam",
+        "path":  "/api/companies/tiv-taam",
+        "status":  200,
+        "body":  "{\"company\":{\"id\":\"tiv-taam\",\"ticker\":\"טטעמ\",\"name_he\":\"טיב טעם\",\"name_en\":\"Tiv Taam\",\"sector\":\"Food Retail\",\"subsector\":null,\"is_active\":1,\"created_at\":\"2026-09-21 17:03:57\",\"updat"
+    },
+    {
+        "id":  "tiv-taam",
+        "path":  "/api/companies/tiv-taam/financials?periodType=ANNUAL",
+        "status":  200,
+        "body":  "{\"financials\":[{\"id\":\"tiv-taam-maya-1581930\",\"company_id\":\"tiv-taam\",\"fiscal_year\":2023,\"fiscal_quarter\":null,\"period_type\":\"ANNUAL\",\"period_start\":\"2023-01-01\",\"period_end\":\"2023-"
+    },
+    {
+        "id":  "tiv-taam",
+        "path":  "/api/companies/tiv-taam/financials/latest",
+        "status":  200,
+        "body":  "{\"financial\":{\"id\":\"tiv-taam-maya-1730597\",\"company_id\":\"tiv-taam\",\"fiscal_year\":2025,\"fiscal_quarter\":null,\"period_type\":\"ANNUAL\",\"period_start\":\"2025-01-01\",\"period_end\":\"2025-12"
+    },
+    {
+        "id":  "tiv-taam",
+        "path":  "/api/companies/tiv-taam/sources",
+        "status":  200,
+        "body":  "{\"sources\":[{\"id\":\"maya-1581930-xbrl\",\"company_id\":\"tiv-taam\",\"title\":\"דוח תקופתי ושנתי לשנת 2023\",\"source_type\":\"ANNUAL_REPORT\",\"url\":\"https://mayafiles.tase.co.il/xbrl/1581001-15"
+    },
+    {
+        "id":  "tiv-taam",
+        "path":  "/api/companies/tiv-taam/validation",
+        "status":  200,
+        "body":  "{\"validation\":[]}"
+    },
+    {
+        "id":  "tiv-taam",
+        "path":  "/api/companies/tiv-taam/scorecard-v2",
+        "status":  200,
+        "body":  "{\"modelVersion\":\"SCORECARD_V2_SHADOW_1\",\"status\":\"SHADOW\",\"available\":false,\"dimensions\":{\"quality\":{\"score\":22,\"maxScore\":30,\"rawPoints\":22,\"availableMax\":30,\"evidenceCoverage\":1,"
+    },
+    {
+        "id":  "tiv-taam",
+        "path":  "/api/companies/tiv-taam/fair-value",
+        "status":  200,
+        "body":  "{\"companyId\":\"tiv-taam\",\"modelVersion\":\"FV1\",\"market\":{\"currentPrice\":null,\"marketCap\":null,\"asOf\":null,\"provider\":null,\"delayMinutes\":null},\"normalization\":{\"ebit\":{\"value\":103.92"
+    },
+    {
+        "id":  "tiv-taam",
+        "path":  "/api/companies/tiv-taam/market/latest",
+        "status":  200,
+        "body":  "{\"market\":null}"
+    },
+    {
+        "id":  "fox",
+        "path":  "/api/companies/fox",
+        "status":  200,
+        "body":  "{\"company\":{\"id\":\"fox\",\"ticker\":\"פוקס\",\"name_he\":\"פוקס\",\"name_en\":\"Fox-Wizel\",\"sector\":\"Apparel Retail\",\"subsector\":null,\"is_active\":1,\"created_at\":\"2026-09-21 17:04:55\",\"updated_a"
+    },
+    {
+        "id":  "fox",
+        "path":  "/api/companies/fox/financials?periodType=ANNUAL",
+        "status":  200,
+        "body":  "{\"financials\":[{\"id\":\"fox-maya-1581475\",\"company_id\":\"fox\",\"fiscal_year\":2023,\"fiscal_quarter\":null,\"period_type\":\"ANNUAL\",\"period_start\":\"2023-01-01\",\"period_end\":\"2023-12-31\",\"re"
+    },
+    {
+        "id":  "fox",
+        "path":  "/api/companies/fox/financials/latest",
+        "status":  200,
+        "body":  "{\"financial\":{\"id\":\"fox-maya-1729790\",\"company_id\":\"fox\",\"fiscal_year\":2025,\"fiscal_quarter\":null,\"period_type\":\"ANNUAL\",\"period_start\":\"2025-01-01\",\"period_end\":\"2025-12-31\",\"repo"
+    },
+    {
+        "id":  "fox",
+        "path":  "/api/companies/fox/sources",
+        "status":  200,
+        "body":  "{\"sources\":[{\"id\":\"maya-1581475-xbrl\",\"company_id\":\"fox\",\"title\":\"דוח תקופתי ושנתי לשנת 2023- תיקון טעות סופר\",\"source_type\":\"ANNUAL_REPORT\",\"url\":\"https://mayafiles.tase.co.il/xbr"
+    },
+    {
+        "id":  "fox",
+        "path":  "/api/companies/fox/validation",
+        "status":  200,
+        "body":  "{\"validation\":[{\"id\":\"fox-maya-1581475-BALANCE_RECONCILES-0\",\"company_id\":\"fox\",\"period_id\":\"fox-maya-1581475\",\"severity\":\"INFO\",\"code\":\"BALANCE_RECONCILES\",\"message\":\"Assets recon"
+    },
+    {
+        "id":  "fox",
+        "path":  "/api/companies/fox/scorecard-v2",
+        "status":  200,
+        "body":  "{\"modelVersion\":\"SCORECARD_V2_SHADOW_1\",\"status\":\"SHADOW\",\"available\":false,\"dimensions\":{\"quality\":{\"score\":22,\"maxScore\":30,\"rawPoints\":22,\"availableMax\":30,\"evidenceCoverage\":1,"
+    },
+    {
+        "id":  "fox",
+        "path":  "/api/companies/fox/fair-value",
+        "status":  200,
+        "body":  "{\"companyId\":\"fox\",\"modelVersion\":\"FV1\",\"market\":{\"currentPrice\":null,\"marketCap\":null,\"asOf\":null,\"provider\":null,\"delayMinutes\":null},\"normalization\":{\"ebit\":{\"value\":621.959,\"me"
+    },
+    {
+        "id":  "fox",
+        "path":  "/api/companies/fox/market/latest",
+        "status":  200,
+        "body":  "{\"market\":null}"
+    },
+    {
+        "id":  "max-stock",
+        "path":  "/api/companies/max-stock",
+        "status":  200,
+        "body":  "{\"company\":{\"id\":\"max-stock\",\"ticker\":\"מקסו\",\"name_he\":\"מקס סטוק\",\"name_en\":\"Max Stock\",\"sector\":\"General Merchandise Retail\",\"subsector\":null,\"is_active\":1,\"created_at\":\"2026-09-2"
+    },
+    {
+        "id":  "max-stock",
+        "path":  "/api/companies/max-stock/financials?periodType=ANNUAL",
+        "status":  200,
+        "body":  "{\"financials\":[{\"id\":\"max-stock-maya-1581936\",\"company_id\":\"max-stock\",\"fiscal_year\":2023,\"fiscal_quarter\":null,\"period_type\":\"ANNUAL\",\"period_start\":\"2023-01-01\",\"period_end\":\"202"
+    },
+    {
+        "id":  "max-stock",
+        "path":  "/api/companies/max-stock/financials/latest",
+        "status":  200,
+        "body":  "{\"financial\":{\"id\":\"max-stock-maya-1727874\",\"company_id\":\"max-stock\",\"fiscal_year\":2025,\"fiscal_quarter\":null,\"period_type\":\"ANNUAL\",\"period_start\":\"2025-01-01\",\"period_end\":\"2025-"
+    },
+    {
+        "id":  "max-stock",
+        "path":  "/api/companies/max-stock/sources",
+        "status":  200,
+        "body":  "{\"sources\":[{\"id\":\"maya-1581936-xbrl\",\"company_id\":\"max-stock\",\"title\":\"דוח תקופתי ושנתי לשנת 2023\",\"source_type\":\"ANNUAL_REPORT\",\"url\":\"https://mayafiles.tase.co.il/xbrl/1581001-1"
+    },
+    {
+        "id":  "max-stock",
+        "path":  "/api/companies/max-stock/validation",
+        "status":  200,
+        "body":  "{\"validation\":[{\"id\":\"max-stock-maya-1581936-BALANCE_RECONCILES-0\",\"company_id\":\"max-stock\",\"period_id\":\"max-stock-maya-1581936\",\"severity\":\"INFO\",\"code\":\"BALANCE_RECONCILES\",\"mess"
+    },
+    {
+        "id":  "max-stock",
+        "path":  "/api/companies/max-stock/scorecard-v2",
+        "status":  200,
+        "body":  "{\"modelVersion\":\"SCORECARD_V2_SHADOW_1\",\"status\":\"SHADOW\",\"available\":false,\"dimensions\":{\"quality\":{\"score\":24,\"maxScore\":30,\"rawPoints\":24,\"availableMax\":30,\"evidenceCoverage\":1,"
+    },
+    {
+        "id":  "max-stock",
+        "path":  "/api/companies/max-stock/fair-value",
+        "status":  200,
+        "body":  "{\"companyId\":\"max-stock\",\"modelVersion\":\"FV1\",\"market\":{\"currentPrice\":null,\"marketCap\":null,\"asOf\":null,\"provider\":null,\"delayMinutes\":null},\"normalization\":{\"ebit\":{\"value\":183.9"
+    },
+    {
+        "id":  "max-stock",
+        "path":  "/api/companies/max-stock/market/latest",
+        "status":  200,
+        "body":  "{\"market\":null}"
+    },
+    {
+        "id":  "delta-israel-brands",
+        "path":  "/api/companies/delta-israel-brands",
+        "status":  200,
+        "body":  "{\"company\":{\"id\":\"delta-israel-brands\",\"ticker\":\"דלתי\",\"name_he\":\"דלתא ישראל מותגים\",\"name_en\":\"Delta Israel Brands\",\"sector\":\"Apparel Retail\",\"subsector\":null,\"is_active\":1,\"creat"
+    },
+    {
+        "id":  "delta-israel-brands",
+        "path":  "/api/companies/delta-israel-brands/financials?periodType=ANNUAL",
+        "status":  200,
+        "body":  "{\"financials\":[{\"id\":\"delta-israel-brands-maya-1575392\",\"company_id\":\"delta-israel-brands\",\"fiscal_year\":2023,\"fiscal_quarter\":null,\"period_type\":\"ANNUAL\",\"period_start\":\"2023-01-0"
+    },
+    {
+        "id":  "delta-israel-brands",
+        "path":  "/api/companies/delta-israel-brands/financials/latest",
+        "status":  200,
+        "body":  "{\"financial\":{\"id\":\"delta-israel-brands-maya-1722944\",\"company_id\":\"delta-israel-brands\",\"fiscal_year\":2025,\"fiscal_quarter\":null,\"period_type\":\"ANNUAL\",\"period_start\":\"2025-01-01\""
+    },
+    {
+        "id":  "delta-israel-brands",
+        "path":  "/api/companies/delta-israel-brands/sources",
+        "status":  200,
+        "body":  "{\"sources\":[{\"id\":\"maya-1575392-xbrl\",\"company_id\":\"delta-israel-brands\",\"title\":\"דוח תקופתי ושנתי לשנת 2023\",\"source_type\":\"ANNUAL_REPORT\",\"url\":\"https://mayafiles.tase.co.il/xbrl"
+    },
+    {
+        "id":  "delta-israel-brands",
+        "path":  "/api/companies/delta-israel-brands/validation",
+        "status":  200,
+        "body":  "{\"validation\":[{\"id\":\"delta-israel-brands-maya-1575392-BALANCE_RECONCILES-0\",\"company_id\":\"delta-israel-brands\",\"period_id\":\"delta-israel-brands-maya-1575392\",\"severity\":\"INFO\",\"co"
+    },
+    {
+        "id":  "delta-israel-brands",
+        "path":  "/api/companies/delta-israel-brands/scorecard-v2",
+        "status":  200,
+        "body":  "{\"modelVersion\":\"SCORECARD_V2_SHADOW_1\",\"status\":\"SHADOW\",\"available\":false,\"dimensions\":{\"quality\":{\"score\":24,\"maxScore\":30,\"rawPoints\":24,\"availableMax\":30,\"evidenceCoverage\":1,"
+    },
+    {
+        "id":  "delta-israel-brands",
+        "path":  "/api/companies/delta-israel-brands/fair-value",
+        "status":  200,
+        "body":  "{\"companyId\":\"delta-israel-brands\",\"modelVersion\":\"FV1\",\"market\":{\"currentPrice\":null,\"marketCap\":null,\"asOf\":null,\"provider\":null,\"delayMinutes\":null},\"normalization\":{\"ebit\":{\"va"
+    },
+    {
+        "id":  "delta-israel-brands",
+        "path":  "/api/companies/delta-israel-brands/market/latest",
+        "status":  200,
+        "body":  "{\"market\":null}"
+    },
+    {
+        "id":  "castro",
+        "path":  "/api/companies/castro",
+        "status":  200,
+        "body":  "{\"company\":{\"id\":\"castro\",\"ticker\":\"קסטרו\",\"name_he\":\"קסטרו\",\"name_en\":\"Castro Model\",\"sector\":\"Apparel Retail\",\"subsector\":null,\"is_active\":1,\"created_at\":\"2026-09-21 17:09:10\",\"u"
+    },
+    {
+        "id":  "castro",
+        "path":  "/api/companies/castro/financials?periodType=ANNUAL",
+        "status":  200,
+        "body":  "{\"financials\":[{\"id\":\"castro-maya-1581072\",\"company_id\":\"castro\",\"fiscal_year\":2023,\"fiscal_quarter\":null,\"period_type\":\"ANNUAL\",\"period_start\":\"2023-01-01\",\"period_end\":\"2023-12-3"
+    },
+    {
+        "id":  "castro",
+        "path":  "/api/companies/castro/financials/latest",
+        "status":  200,
+        "body":  "{\"financial\":{\"id\":\"castro-maya-1728277\",\"company_id\":\"castro\",\"fiscal_year\":2025,\"fiscal_quarter\":null,\"period_type\":\"ANNUAL\",\"period_start\":\"2025-01-01\",\"period_end\":\"2025-12-31\""
+    },
+    {
+        "id":  "castro",
+        "path":  "/api/companies/castro/sources",
+        "status":  200,
+        "body":  "{\"sources\":[{\"id\":\"maya-1581072-xbrl\",\"company_id\":\"castro\",\"title\":\"דוח תקופתי ושנתי לשנת 2023\",\"source_type\":\"ANNUAL_REPORT\",\"url\":\"https://mayafiles.tase.co.il/xbrl/1581001-1582"
+    },
+    {
+        "id":  "castro",
+        "path":  "/api/companies/castro/validation",
+        "status":  200,
+        "body":  "{\"validation\":[{\"id\":\"castro-maya-1581072-BALANCE_RECONCILES-0\",\"company_id\":\"castro\",\"period_id\":\"castro-maya-1581072\",\"severity\":\"INFO\",\"code\":\"BALANCE_RECONCILES\",\"message\":\"Ass"
+    },
+    {
+        "id":  "castro",
+        "path":  "/api/companies/castro/scorecard-v2",
+        "status":  200,
+        "body":  "{\"modelVersion\":\"SCORECARD_V2_SHADOW_1\",\"status\":\"SHADOW\",\"available\":false,\"dimensions\":{\"quality\":{\"score\":18,\"maxScore\":30,\"rawPoints\":18,\"availableMax\":30,\"evidenceCoverage\":1,"
+    },
+    {
+        "id":  "castro",
+        "path":  "/api/companies/castro/fair-value",
+        "status":  200,
+        "body":  "{\"companyId\":\"castro\",\"modelVersion\":\"FV1\",\"market\":{\"currentPrice\":null,\"marketCap\":null,\"asOf\":null,\"provider\":null,\"delayMinutes\":null},\"normalization\":{\"ebit\":{\"value\":183.797,"
+    },
+    {
+        "id":  "castro",
+        "path":  "/api/companies/castro/market/latest",
+        "status":  200,
+        "body":  "{\"market\":null}"
+    },
+    {
+        "id":  "diplomat",
+        "path":  "/api/companies/diplomat",
+        "status":  200,
+        "body":  "{\"company\":{\"id\":\"diplomat\",\"ticker\":\"דיפל\",\"name_he\":\"דיפלומט\",\"name_en\":\"Diplomat Holdings\",\"sector\":\"Consumer Distribution\",\"subsector\":null,\"is_active\":1,\"created_at\":\"2026-09-"
+    },
+    {
+        "id":  "diplomat",
+        "path":  "/api/companies/diplomat/financials?periodType=ANNUAL",
+        "status":  200,
+        "body":  "{\"financials\":[{\"id\":\"diplomat-maya-1582679\",\"company_id\":\"diplomat\",\"fiscal_year\":2023,\"fiscal_quarter\":null,\"period_type\":\"ANNUAL\",\"period_start\":\"2023-01-01\",\"period_end\":\"2023-"
+    },
+    {
+        "id":  "diplomat",
+        "path":  "/api/companies/diplomat/financials/latest",
+        "status":  200,
+        "body":  "{\"financial\":{\"id\":\"diplomat-maya-1731729\",\"company_id\":\"diplomat\",\"fiscal_year\":2025,\"fiscal_quarter\":null,\"period_type\":\"ANNUAL\",\"period_start\":\"2025-01-01\",\"period_end\":\"2025-12"
+    },
+    {
+        "id":  "diplomat",
+        "path":  "/api/companies/diplomat/sources",
+        "status":  200,
+        "body":  "{\"sources\":[{\"id\":\"maya-1582679-xbrl\",\"company_id\":\"diplomat\",\"title\":\"דוח תקופתי ושנתי לשנת 2023 - תיקון - נרשם הערכות שווי מהותיות במקום הערכות שווי מהותיות מאוד\",\"source_type\":\""
+    },
+    {
+        "id":  "diplomat",
+        "path":  "/api/companies/diplomat/validation",
+        "status":  200,
+        "body":  "{\"validation\":[{\"id\":\"diplomat-maya-1582679-BALANCE_RECONCILES-0\",\"company_id\":\"diplomat\",\"period_id\":\"diplomat-maya-1582679\",\"severity\":\"INFO\",\"code\":\"BALANCE_RECONCILES\",\"message"
+    },
+    {
+        "id":  "diplomat",
+        "path":  "/api/companies/diplomat/scorecard-v2",
+        "status":  200,
+        "body":  "{\"modelVersion\":\"SCORECARD_V2_SHADOW_1\",\"status\":\"SHADOW\",\"available\":false,\"dimensions\":{\"quality\":{\"score\":22,\"maxScore\":30,\"rawPoints\":22,\"availableMax\":30,\"evidenceCoverage\":1,"
+    },
+    {
+        "id":  "diplomat",
+        "path":  "/api/companies/diplomat/fair-value",
+        "status":  200,
+        "body":  "{\"companyId\":\"diplomat\",\"modelVersion\":\"FV1\",\"market\":{\"currentPrice\":null,\"marketCap\":null,\"asOf\":null,\"provider\":null,\"delayMinutes\":null},\"normalization\":{\"ebit\":{\"value\":138.72"
+    },
+    {
+        "id":  "diplomat",
+        "path":  "/api/companies/diplomat/market/latest",
+        "status":  200,
+        "body":  "{\"market\":null}"
+    },
+    {
+        "id":  "isrotel",
+        "path":  "/api/companies/isrotel",
+        "status":  200,
+        "body":  "{\"company\":{\"id\":\"isrotel\",\"ticker\":\"ישרטל\",\"name_he\":\"ישרוטל\",\"name_en\":\"Isrotel\",\"sector\":\"Hotels\",\"subsector\":null,\"is_active\":1,\"created_at\":\"2026-09-21 17:11:05\",\"updated_at\":"
+    },
+    {
+        "id":  "isrotel",
+        "path":  "/api/companies/isrotel/financials?periodType=ANNUAL",
+        "status":  200,
+        "body":  "{\"financials\":[{\"id\":\"isrotel-maya-1582604\",\"company_id\":\"isrotel\",\"fiscal_year\":2023,\"fiscal_quarter\":null,\"period_type\":\"ANNUAL\",\"period_start\":\"2023-01-01\",\"period_end\":\"2023-12"
+    },
+    {
+        "id":  "isrotel",
+        "path":  "/api/companies/isrotel/financials/latest",
+        "status":  200,
+        "body":  "{\"financial\":{\"id\":\"isrotel-maya-1731504\",\"company_id\":\"isrotel\",\"fiscal_year\":2025,\"fiscal_quarter\":null,\"period_type\":\"ANNUAL\",\"period_start\":\"2025-01-01\",\"period_end\":\"2025-12-3"
+    },
+    {
+        "id":  "isrotel",
+        "path":  "/api/companies/isrotel/sources",
+        "status":  200,
+        "body":  "{\"sources\":[{\"id\":\"maya-1582604-xbrl\",\"company_id\":\"isrotel\",\"title\":\"דוח תקופתי ושנתי לשנת 2023\",\"source_type\":\"ANNUAL_REPORT\",\"url\":\"https://mayafiles.tase.co.il/xbrl/1582001-158"
+    },
+    {
+        "id":  "isrotel",
+        "path":  "/api/companies/isrotel/validation",
+        "status":  200,
+        "body":  "{\"validation\":[{\"id\":\"isrotel-maya-1582604-BALANCE_RECONCILES-0\",\"company_id\":\"isrotel\",\"period_id\":\"isrotel-maya-1582604\",\"severity\":\"INFO\",\"code\":\"BALANCE_RECONCILES\",\"message\":\""
+    },
+    {
+        "id":  "isrotel",
+        "path":  "/api/companies/isrotel/scorecard-v2",
+        "status":  200,
+        "body":  "{\"modelVersion\":\"SCORECARD_V2_SHADOW_1\",\"status\":\"SHADOW\",\"available\":false,\"dimensions\":{\"quality\":{\"score\":24,\"maxScore\":30,\"rawPoints\":24,\"availableMax\":30,\"evidenceCoverage\":1,"
+    },
+    {
+        "id":  "isrotel",
+        "path":  "/api/companies/isrotel/fair-value",
+        "status":  200,
+        "body":  "{\"companyId\":\"isrotel\",\"modelVersion\":\"FV1\",\"market\":{\"currentPrice\":null,\"marketCap\":null,\"asOf\":null,\"provider\":null,\"delayMinutes\":null},\"normalization\":{\"ebit\":{\"value\":372.048"
+    },
+    {
+        "id":  "isrotel",
+        "path":  "/api/companies/isrotel/market/latest",
+        "status":  200,
+        "body":  "{\"market\":null}"
+    },
+    {
+        "id":  "dan-hotels",
+        "path":  "/api/companies/dan-hotels",
+        "status":  200,
+        "body":  "{\"company\":{\"id\":\"dan-hotels\",\"ticker\":\"דן\",\"name_he\":\"מלונות דן\",\"name_en\":\"Dan Hotels\",\"sector\":\"Hotels\",\"subsector\":null,\"is_active\":1,\"created_at\":\"2026-09-21 17:12:25\",\"update"
+    },
+    {
+        "id":  "dan-hotels",
+        "path":  "/api/companies/dan-hotels/financials?periodType=ANNUAL",
+        "status":  200,
+        "body":  "{\"financials\":[{\"id\":\"dan-hotels-maya-1580895\",\"company_id\":\"dan-hotels\",\"fiscal_year\":2023,\"fiscal_quarter\":null,\"period_type\":\"ANNUAL\",\"period_start\":\"2023-01-01\",\"period_end\":\"2"
+    },
+    {
+        "id":  "dan-hotels",
+        "path":  "/api/companies/dan-hotels/financials/latest",
+        "status":  200,
+        "body":  "{\"financial\":{\"id\":\"dan-hotels-maya-1732438\",\"company_id\":\"dan-hotels\",\"fiscal_year\":2025,\"fiscal_quarter\":null,\"period_type\":\"ANNUAL\",\"period_start\":\"2025-01-01\",\"period_end\":\"202"
+    },
+    {
+        "id":  "dan-hotels",
+        "path":  "/api/companies/dan-hotels/sources",
+        "status":  200,
+        "body":  "{\"sources\":[{\"id\":\"maya-1580895-xbrl\",\"company_id\":\"dan-hotels\",\"title\":\"דוח תקופתי ושנתי לשנת 2023\",\"source_type\":\"ANNUAL_REPORT\",\"url\":\"https://mayafiles.tase.co.il/xbrl/1580001-"
+    },
+    {
+        "id":  "dan-hotels",
+        "path":  "/api/companies/dan-hotels/validation",
+        "status":  200,
+        "body":  "{\"validation\":[]}"
+    },
+    {
+        "id":  "dan-hotels",
+        "path":  "/api/companies/dan-hotels/scorecard-v2",
+        "status":  200,
+        "body":  "{\"modelVersion\":\"SCORECARD_V2_SHADOW_1\",\"status\":\"SHADOW\",\"available\":false,\"dimensions\":{\"quality\":{\"score\":20,\"maxScore\":30,\"rawPoints\":16,\"availableMax\":24,\"evidenceCoverage\":0."
+    },
+    {
+        "id":  "dan-hotels",
+        "path":  "/api/companies/dan-hotels/fair-value",
+        "status":  200,
+        "body":  "{\"companyId\":\"dan-hotels\",\"modelVersion\":\"FV1\",\"market\":{\"currentPrice\":null,\"marketCap\":null,\"asOf\":null,\"provider\":null,\"delayMinutes\":null},\"normalization\":{\"ebit\":{\"value\":110."
+    },
+    {
+        "id":  "dan-hotels",
+        "path":  "/api/companies/dan-hotels/market/latest",
+        "status":  200,
+        "body":  "{\"market\":null}"
+    }
+]

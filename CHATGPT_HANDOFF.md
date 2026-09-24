@@ -1070,3 +1070,12 @@ Remote counts unchanged: 15 companies, exactly 30 expanded annual periods, 0 dup
 - Missing financial, market, balance, scorecard, and fair-value inputs remain visibly unavailable.
 - Castro/Isrotel canonical FCF remains source/API-dependent; Strauss/Fox partial Capex is not treated as total Capex; Victory/Tiv Taam lease-payment blockers remain explicit.
 - No financial writes, recovery work, model-rule changes, or Worker deployment.
+## Phase 18A production closeout
+
+- Status: PARTIAL because browser-rendered verification was unavailable; production HTTP verification succeeded.
+- Worker API: 120/120 endpoint probes returned HTTP 200 across all 15 companies and eight endpoint families.
+- Pages: `/`, `/companies`, `/coverage`, and all 15 company routes returned HTTP 200.
+- Expanded routes use API mode with explicit loading/error states and no local mock fallback. `/companies` returned 15 companies; `/coverage` exposes separate readiness columns.
+- Castro/Isrotel remain API-dependent for FCF; Strauss/Fox partial Capex is not canonical; Victory/Tiv adjusted FCF remains blocked without explicit lease cash totals.
+- Full tests/build passed. Worker deployment: NO. Pages deployment was not initiated; existing Pages deployment was HTTP-verified.
+- No financial writes, extraction recovery, new business classes, Scorecard/FV changes, lease inference, or fabricated values.
