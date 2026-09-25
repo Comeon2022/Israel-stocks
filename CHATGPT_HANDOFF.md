@@ -1504,6 +1504,48 @@ Add optional user-controlled backup-file encryption guidance without adding serv
 ## Phase 28 final state
 Phase 28: COMPLETE
 
+# Phase 29 — Backup Security Guidance & Recovery UX
+
+## Status
+PARTIAL
+
+## Implemented
+- Added expandable `How encrypted backups work` guidance covering local encryption, no password storage/upload, unrecoverable forgotten passwords, separate file/passphrase storage, readable plain JSON, and protected encrypted contents.
+- Added passphrase guidance and explicit recovery warning before encrypted export.
+- Added read-only `Verify backup file` flow for plain backups and encrypted backups through the existing decryptor and Phase 27 validator; verification does not call any storage writer.
+- Added accessible labels and live error messaging while preserving Phase 27/28 import/export behavior.
+
+## Verification
+- Frontend: 188 tests passed across 39 files.
+- Worker: 123 tests passed across 27 files.
+- Worker check: passed.
+- Build: passed.
+- Local isolated Chrome/CDP: guidance, recovery warning, Verify backup file, plain verification success, zero storage mutation, 390px mobile no overflow, browser errors: 0.
+- Cloudflare Pages deployment: `55dbf8d9-e7b2-4b6b-838d-712394ea5418`, Production/Active, source `5d57937`, URL `https://55dbf8d9.israel-stocks.pages.dev`.
+- Production routes `/workspace-backup`, `/watchlist`, `/research`, `/review`, and `/companies`: HTTP 200; deployed encrypted UI bundle active.
+- Production encrypted verify, wrong-password verify, and zero-mutation production-origin smoke remain to be completed before Phase 29 can be marked COMPLETE.
+
+## Backend / D1
+NONE
+
+## Worker deployment
+NO
+
+## Git
+- Product commit: `5d5793780a0f424e7225dc2720088a54a7194a1c`.
+- Push: successful to `origin/main`.
+- `HEAD == origin/main`: Yes.
+
+## Limitations
+- No password recovery, cloud sync, automatic backups, or server-side storage.
+- Guidance is informational; the user remains responsible for storing the backup file and passphrase safely.
+
+## Recommended next phase
+Complete production-origin encrypted Verify backup file, wrong-password, and zero-mutation smoke coverage.
+
+## Phase 29 final state
+Phase 29: PARTIAL — production encrypted verification evidence is incomplete
+
 # Phase 27A — Production Hydration Fix & Final Closeout
 
 ## Status
