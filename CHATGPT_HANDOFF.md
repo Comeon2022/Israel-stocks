@@ -1425,7 +1425,9 @@ COMPLETE
 - `npm run build`: passed.
 - Local hydrated Chrome/CDP on isolated profile and port 9334: `/workspace-backup` hydrated, supported workspace counts rendered, 390px mobile had no horizontal overflow, console/runtime errors: 0.
 - The backup contract tests verified supported-scope export, malformed root/version rejection, canonical filtering, partial invalid records, deterministic merge, replace isolation, and unrelated localStorage preservation.
-- Production route/hydration and production-origin backup/restore smoke are pending the Pages deployment created by the closeout push.
+- Pages deployment verified: `b18c9696-0782-4022-8b64-7c852dd6fbbb`, active Production, source `c5bc752`, URL `https://b18c9696.israel-stocks.pages.dev`.
+- Production routes `/workspace-backup`, `/watchlist`, `/research`, `/review`, and `/companies` returned HTTP 200.
+- Production isolated Chrome/CDP on port 9334 reached `https://israel-stocks.pages.dev/workspace-backup`; mobile overflow was false and console/runtime errors were 0, but the expected hydrated backup UI was not observed, so production backup/restore acceptance is not claimed.
 
 ## Backend / D1
 NONE
@@ -1434,9 +1436,9 @@ NONE
 NO
 
 ## Git
-- Product commit: pending closeout commit.
-- Push: pending.
-- `HEAD == origin/main`: pending.
+- Product commit: `c5bc752ac1d5090da3a09220d1face5bf22b3f2d`.
+- Push: successful to `origin/main`.
+- `HEAD == origin/main`: verified.
 
 ## Limitations
 - Backup files remain local files with no encryption; users must protect exported files themselves.
