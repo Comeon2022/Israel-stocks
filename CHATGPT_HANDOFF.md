@@ -1161,3 +1161,38 @@ Git:
 
 Remaining limitations / recommended next phase:
 - Optional company favorites/watchlist was intentionally skipped; saved comparison sets are complete.
+# Phase 24 — Watchlist & Investor Workspace UX
+
+Status: PARTIAL
+
+Implemented:
+- Added versioned local watchlist persistence under `israel-stocks.watchlist.v1`.
+- Added canonical ID normalization, invalid/stale ID rejection, duplicate removal, malformed-storage safety, storage-error safety, and bounded local storage.
+- Added `/watchlist` with empty state, API-backed overview table, explicit unavailable values, per-company failure isolation, remove controls, clear-all confirmation, and 2–4 canonical comparison selection.
+- Added `/watchlist` to application routing and preserved Phase 23C saved-comparison storage separately.
+
+Storage behavior:
+- Only canonical company IDs are stored; no financial, market, valuation, Scorecard, or provenance values are persisted.
+- Maximum 50 IDs; malformed or unavailable storage falls back safely.
+
+Backend / financial logic changes:
+- NONE
+
+Verification:
+- Frontend tests: 173 passed (35 files)
+- Worker tests: 123 passed (27 files)
+- Worker typecheck/check: passed
+- Production build: passed
+- Browser verification: unavailable; hydrated favorite persistence was not claimed.
+- Route checks: `/watchlist` route is implemented; HTTP route verification was not run after this change.
+
+Worker deployment:
+- NO
+
+Git:
+- Commit: ad1eb18
+- Push: successful after handoff finalization
+- HEAD == origin/main: Yes
+
+Remaining limitations / recommended next phase:
+- Add one shared favorite toggle to `/companies`, live company pages, and `/compare`, then perform browser-rendered persistence verification.

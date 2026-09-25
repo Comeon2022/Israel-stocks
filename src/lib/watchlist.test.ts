@@ -1,0 +1,4 @@
+import {describe,expect,it} from 'vitest'
+import {normalizeWatchlist,readWatchlist,toggleWatchlist,writeWatchlist} from './watchlist'
+const u=['castro','fox','isrotel']
+describe('watchlist storage',()=>{it('normalizes valid unique IDs',()=>expect(normalizeWatchlist(['CASTRO','castro','bad'],u)).toEqual(['castro']));it('fails safely on malformed JSON',()=>expect(readWatchlist({getItem:()=>'{bad'} as any,u)).toEqual([]));it('adds/removes and persists IDs only',()=>{const s:any={data:'',setItem:(_:string,v:string)=>{s.data=v},getItem:()=>s.data};const a=toggleWatchlist(s,[],'fox',u);expect(a).toEqual(['fox']);expect(JSON.parse(s.data)).toEqual(['fox']);expect(toggleWatchlist(s,a,'fox',u)).toEqual([])});it('handles throwing storage',()=>expect(writeWatchlist({setItem:()=>{throw Error()} } as any,['fox'],u)).toEqual(['fox']))})
