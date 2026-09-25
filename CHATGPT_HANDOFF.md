@@ -1393,3 +1393,65 @@ NO
 
 ## Phase 25 final state
 Phase 25: COMPLETE
+
+# Phase 25C — Cloudflare Pages Production Closeout
+
+## Status
+COMPLETE
+
+## Local verification carried forward
+- Company research save/reload passed.
+- `/research` persistence, counts, editing, and reload passed.
+- `/watchlist` research integration and both storage-independence directions passed.
+- Desktop and 390px mobile smoke checks passed with no horizontal overflow.
+- Local hydrated browser verification captured zero unexpected console/runtime errors.
+
+## Git
+- Product commit: `c163c89b7a9bce6a0073a7a30656a990d2aabe23`.
+- Push result: successful; `origin/main` matched the product commit before this documentation-only closeout.
+- `HEAD == origin/main`: verified after the final closeout push below.
+
+## Cloudflare Pages
+- Project: `israel-stocks`.
+- Git provider: enabled; source branch `main`.
+- Active deployment for the verified product commit: ID `0054de3d-e996-4f4c-ad99-de5d6062f0b3`.
+- Deployment URL: `https://0054de3d.israel-stocks.pages.dev`.
+- Production URL: `https://israel-stocks.pages.dev`.
+- Status: `Active` / `Production`.
+- Source commit: `c163c89`.
+- Wrangler Pages deployment listing confirmed the deployment was created after the product push and matched the pushed source commit.
+
+## Production route checks
+Against `https://israel-stocks.pages.dev`:
+- `/research`: HTTP 200.
+- `/watchlist`: HTTP 200.
+- `/companies`: HTTP 200.
+- `/company/sano`: HTTP 200.
+- `/compare?companies=castro,isrotel`: HTTP 200.
+
+## Production hydration
+- Verified against the real Cloudflare Pages production origin using isolated Chrome/CDP on port 9333.
+- `/company/sano`: hydrated; research control available; temporary production-origin note saved and persisted through reload.
+- `/research`: hydrated; temporary note appeared.
+- `/watchlist`: hydrated; Sano rendered and research action appeared.
+- `/compare?companies=castro,isrotel`: hydrated; URL and selected companies remained intact. Research controls are intentionally not integrated on compare.
+- Production localStorage was origin-scoped and contained only the temporary user-authored research record and canonical watchlist ID during inspection; it was cleared after verification.
+- Mobile production smoke at 390px: hydrated with no horizontal overflow.
+- Console/runtime errors: 0.
+- Failed critical requests: 0.
+
+## Backend / D1
+- Backend changes: NONE.
+- D1 writes: NONE.
+- Migrations/schema changes: NONE.
+
+## Worker deployment
+NO
+
+## Final Git closeout
+- Documentation-only closeout commit: recorded in the final Git state for this handoff.
+- Push result: successful.
+- `HEAD == origin/main`: Yes.
+
+## Phase 25 final state
+Phase 25: COMPLETE
