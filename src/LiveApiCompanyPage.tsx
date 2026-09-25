@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { apiFinancialRepository } from "./data/apiRepository";
 import { apiGet } from "./api/client";
 import { MetricHelp } from "./components/MetricHelp";
+import { valuationCoverage } from "./lib/valuationCoverage";
 import {
   describeMetricValue,
   formatMetricValue,
@@ -270,6 +271,7 @@ function FairValueSection({ companyId }: { companyId: string }) {
       .catch(() => setData(null));
   }, [companyId]);
   if (!data) return null;
+  const coverage = valuationCoverage(data.methods);
   const moneyValue = (v: number | null) =>
     v == null ? "לא זמין" : `₪${v.toFixed(2)}`;
   const pctValue = (v: number | null) =>
@@ -353,6 +355,8 @@ function FairValueSection({ companyId }: { companyId: string }) {
         </div>
       )}
       <div className="fair-methods">
+        <div className="fair-method"><h3>Valuation coverage</h3><strong dir="ltr">{coverage.availableMethods} / {coverage.totalMethods} · {coverage.label}</strong><p>Model coverage only; not an investment rating.</p></div>
+        <div className="fair-method"><h3>Valuation coverage</h3><strong dir="ltr">{coverage.availableMethods} / {coverage.totalMethods} · {coverage.label}</strong><p>Model coverage only; not an investment rating.</p></div>
         {method("EV / EBIT", "evEbit")}
         {method("P / E", "pe")}
         {method("FCF", "fcf")}

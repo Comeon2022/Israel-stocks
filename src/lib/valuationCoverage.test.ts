@@ -1,0 +1,6 @@
+import { describe, expect, it } from 'vitest'
+import { blockerCategory, valuationCoverage } from './valuationCoverage'
+describe('valuation coverage presentation',()=>{
+  it('maps method counts to descriptive coverage labels without creating values',()=>{expect(valuationCoverage({evEbit:{available:true},pe:{available:true},fcf:{available:true}}).label).toBe('FULL');expect(valuationCoverage({pe:{available:true},fcf:{available:true}}).label).toBe('PARTIAL');expect(valuationCoverage({pe:{available:true}}).label).toBe('MINIMAL');expect(valuationCoverage({}).label).toBe('NONE');expect(valuationCoverage({pe:{available:true}}).methods.evEbit.available).not.toBe(true)})
+  it('maps backend blockers to display categories',()=>{expect(blockerCategory('MISSING_NET_DEBT')).toBe('BALANCE_INPUTS');expect(blockerCategory('MISSING_FCF')).toBe('FCF_INPUT');expect(blockerCategory('MISSING_RETAIL_LEASE_CASH_PAYMENTS')).toBe('LEASE_INPUT');expect(blockerCategory('UNKNOWN_COMPANY_PROFILE')).toBe('CLASS_SUPPORT');expect(blockerCategory('MISSING_CURRENT_PRICE')).toBe('MARKET_DATA');expect(blockerCategory('INSUFFICIENT_ANNUAL_HISTORY')).toBe('INSUFFICIENT_HISTORY');expect(blockerCategory('INSUFFICIENT_METHODS')).toBe('INSUFFICIENT_METHODS');expect(blockerCategory('x')).toBe('OTHER')})
+})

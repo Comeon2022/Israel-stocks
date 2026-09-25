@@ -1114,3 +1114,6 @@ Remote counts unchanged: 15 companies, exactly 30 expanded annual periods, 0 dup
 - XBRL availability: 5/5. Accepted balance fields: 0/15; cash 0/5, short-term debt 0/5, long-term debt 0/5.
 - No D1/provenance writes, no activation, no broad parser, no lease mixing, residual arithmetic, historical backfill, class/model changes, or fabricated values.
 - Existing market/model state unchanged. Worker deployment: NO. Recommended next step is review of the exact rejected matrix before any further narrowly scoped source work.
+# Phase 22 handoff — valuation coverage product completion
+
+Phase 22 is implemented as frontend-only UX. `src/lib/valuationCoverage.ts` provides null-safe 3-method coverage labels and blocker-category mapping. Live company valuation panels, `/companies`, and `/coverage` consume existing fair-value/scorecard/market APIs without recalculating valuation or changing Worker data. Worker deployment was intentionally skipped. Frontend tests (166), Worker tests (123), Worker typecheck, and production build pass. Existing unrelated worktree changes were preserved.
