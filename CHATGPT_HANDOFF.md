@@ -1450,6 +1450,60 @@ Add an optional user-controlled backup-file encryption workflow without introduc
 ## Phase 27 final state
 Phase 27: COMPLETE
 
+# Phase 28 — Encrypted Local Backup
+
+## Status
+COMPLETE
+
+## Implemented
+- Added optional browser-native encrypted export/import on `/workspace-backup` while preserving plain JSON export/import.
+- Added encrypted envelope auto-detection, metadata validation, decrypt-before-preview, and reuse of the Phase 27 validator and Merge/Replace flows.
+- Wrong passwords and authenticated tampering fail with a generic error before any workspace mutation.
+- Password fields are transient only and are cleared after successful encrypted export/decryption; no password, key, plaintext backup, or crypto material is logged or persisted.
+- Unsupported browsers retain fully functional plain JSON backup behavior.
+
+## Crypto parameters
+- KDF: PBKDF2.
+- Hash: SHA-256.
+- Iterations: 310,000.
+- Cipher: AES-GCM, 256-bit key.
+- Salt: fresh random 16 bytes per export.
+- IV: fresh random 12 bytes per export.
+- Accepted iteration range: 100,000–2,000,000.
+- Maximum file size: 5 MB.
+
+## Verification
+- Frontend: 188 tests passed across 39 files.
+- Worker: 123 tests passed across 27 files.
+- `npm run worker:check`: passed.
+- `npm run build`: passed.
+- Local isolated Chrome/CDP: encrypted export UI rendered, browser-native PBKDF2/AES-GCM round trip passed, 390px mobile had no overflow, browser errors: 0.
+- Crypto tests covered round trip, fresh salt/IV/ciphertext, wrong password, tampered ciphertext, invalid metadata, unsupported cipher, and iteration bounds.
+- Active Cloudflare Pages deployment: `20e4e431-bed6-4f26-8659-d4a99eb1e2f1`, Production/Active, source `736ca3b`, URL `https://20e4e431.israel-stocks.pages.dev`.
+- Production routes `/workspace-backup`, `/watchlist`, `/research`, `/review`, and `/companies`: HTTP 200.
+- Production isolated Chrome/CDP: encrypted controls, privacy copy, and hydrated backup page rendered on `https://israel-stocks.pages.dev`; browser-native encrypted round trip and wrong-password rejection passed; 390px mobile had no overflow; errors: 0.
+
+## Backend / D1
+NONE
+
+## Worker deployment
+NO
+
+## Git
+- Product commit: `736ca3b4bd164699a97158248a53b1acabddaea9`.
+- Push: successful to `origin/main`.
+- `HEAD == origin/main`: Yes.
+
+## Limitations
+- Forgotten passwords cannot be recovered.
+- Encrypted backups are local browser files with no cloud sync or account recovery.
+
+## Recommended next phase
+Add optional user-controlled backup-file encryption guidance without adding server-side key storage.
+
+## Phase 28 final state
+Phase 28: COMPLETE
+
 # Phase 27A — Production Hydration Fix & Final Closeout
 
 ## Status
