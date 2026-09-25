@@ -1414,12 +1414,12 @@ COMPLETE
 ## Cloudflare Pages
 - Project: `israel-stocks`.
 - Git provider: enabled; source branch `main`.
-- Active deployment for the verified product commit: ID `0054de3d-e996-4f4c-ad99-de5d6062f0b3`.
-- Deployment URL: `https://0054de3d.israel-stocks.pages.dev`.
+- Active deployment for the final pushed commit: ID `535e00cb-1ac9-4507-a089-3a2a7c7c0922`.
+- Deployment URL: `https://535e00cb.israel-stocks.pages.dev`.
 - Production URL: `https://israel-stocks.pages.dev`.
 - Status: `Active` / `Production`.
-- Source commit: `c163c89`.
-- Wrangler Pages deployment listing confirmed the deployment was created after the product push and matched the pushed source commit.
+- Source commit: `c3f42af`.
+- Wrangler Pages deployment listing confirmed the deployment was created after the final push and matched the pushed source commit.
 
 ## Production route checks
 Against `https://israel-stocks.pages.dev`:
@@ -1449,7 +1449,7 @@ Against `https://israel-stocks.pages.dev`:
 NO
 
 ## Final Git closeout
-- Documentation-only closeout commit: recorded in the final Git state for this handoff.
+- Documentation-only handoff update follows the verified frontend closeout commit `c3f42af`.
 - Push result: successful.
 - `HEAD == origin/main`: Yes.
 
