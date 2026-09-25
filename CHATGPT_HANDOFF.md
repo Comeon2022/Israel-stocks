@@ -1394,6 +1394,68 @@ NO
 ## Phase 25 final state
 Phase 25: COMPLETE
 
+# Phase 26 — Investor Review Queue & What Changed Workspace
+
+## Status
+COMPLETE
+
+## Implemented
+- Added `israel-stocks.review-state.v1` with canonical company IDs and explicit local `lastReviewedAt` timestamps only.
+- Added defensive review-state parsing, timestamp validation, deduplication, bounds, storage-event synchronization, and write-failure safety.
+- Added `/review` using the existing watchlist as its exact universe.
+- Added neutral statuses: `No review yet`, `New filing`, `Research updated`, and `Reviewed`, with deterministic metadata-only reasons.
+- Reused existing research notes, watchlist, freshness, valuation coverage, market, and Scorecard API contracts without changing them.
+- Added neutral filters and sorting, company/research actions, explicit `Mark reviewed`/`Review again`, empty state, and responsive review cards.
+
+## Storage
+- Key: `israel-stocks.review-state.v1`.
+- Schema: `{ companyId: string; lastReviewedAt: string }` only.
+- Browser-local semantics: `lastReviewedAt` is the time the user explicitly marked a company reviewed; it is not a filing, market, source, valuation, or recommendation timestamp.
+- No financial, market, valuation, Scorecard, source, provenance, or API snapshots are stored.
+- Watchlist and research storage remain separate.
+
+## Review logic
+`Needs review` is represented neutrally by `No review yet`, `New filing`, or `Research updated` when:
+- no local review timestamp exists;
+- freshness reports a newer report or source date than the review timestamp; or
+- the research-note `updatedAt` is newer than the review timestamp.
+
+Otherwise the row is `Reviewed`. API failures isolate to source/live-context fields and do not remove local review actions.
+
+## Verification
+- Frontend tests: 180 passed (37 files).
+- Worker tests: 123 passed (27 files).
+- Worker check/typecheck: passed.
+- Build: passed.
+- Local hydrated Chrome/CDP: passed on an isolated profile; no-review state, mark-reviewed persistence, research-updated detection, watchlist removal preservation, re-add timestamp restoration, and mobile smoke all passed.
+- Local mobile: 390px, no horizontal overflow.
+- Local browser errors: 0.
+- Cloudflare Pages project: `israel-stocks`.
+- Active Pages deployment: `e5dee785-4715-4569-8171-bf47e065abad`, `https://e5dee785.israel-stocks.pages.dev`, Production/Active, branch `main`, source `d5f2c91`.
+- Production routes: `/review`, `/watchlist`, `/research`, `/companies`, `/company/sano` all returned HTTP 200.
+- Production hydration: `/review` hydrated on `https://israel-stocks.pages.dev`; mobile 390px had no overflow; console/runtime errors: 0.
+
+## Backend / financial logic changes
+NONE
+
+## Worker deployment
+NO
+
+## Git
+- Commit: `d5f2c91f004c3e2d92973a4f1d18508a2544e90e`.
+- Push result: successful to `origin/main`.
+- `HEAD == origin/main`: Yes.
+
+## Limitations
+- Review state is browser-local and has no cloud sync.
+- No recommendation, ranking, Buy/Sell/Hold, target-price, AI, financial, valuation, Scorecard, market, ingestion, backend, D1, or Worker logic was added.
+
+## Recommended next phase
+Add optional production-origin review-state persistence smoke coverage to the Pages browser checklist without changing the review contract.
+
+## Phase 26 final state
+Phase 26: COMPLETE
+
 # Phase 25C — Cloudflare Pages Production Closeout
 
 ## Status
