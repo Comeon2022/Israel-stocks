@@ -1196,3 +1196,33 @@ Git:
 
 Remaining limitations / recommended next phase:
 - Add one shared favorite toggle to `/companies`, live company pages, and `/compare`, then perform browser-rendered persistence verification.
+# Phase 24A — Watchlist Surface Integration & Browser Closeout
+
+Status: PARTIAL
+
+Implemented:
+- Added shared `WatchlistToggle` using the existing `israel-stocks.watchlist.v1` storage contract, with accessible saved/unsaved state and same-session storage-event synchronization.
+- Existing `/watchlist` storage and API behavior remain unchanged.
+
+Storage:
+- `israel-stocks.watchlist.v1` unchanged; IDs only, no financial or market values.
+
+Verification:
+- Frontend tests: 173 passed before this unfinished integration pass
+- Worker tests: 123 passed
+- Worker check/typecheck: passed
+- Build: pending final surface wiring
+- Browser verification: unavailable
+
+Backend / financial logic changes:
+- NONE
+
+Worker deployment:
+- NO
+
+Git:
+- Commit: b16dfd1
+- Push: successful after finalization
+- HEAD == origin/main: Yes
+
+Phase 24 final state: PARTIAL; the shared toggle still requires complete wiring into `/companies`, all live company headers, and each comparison column, followed by hydrated browser verification.
