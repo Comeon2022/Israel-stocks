@@ -1394,6 +1394,60 @@ NO
 ## Phase 25 final state
 Phase 25: COMPLETE
 
+# Phase 27 — Local Workspace Backup & Restore
+
+## Status
+COMPLETE
+
+## Implemented
+- Added `/workspace-backup` with versioned `israel-stocks.workspace-backup` version 1 JSON export.
+- Export reads only the four supported local contracts and downloads locally.
+- Added import size/root/schema/version/timestamp validation, canonical company-ID enforcement, section-level invalid-record reporting, and preview before mutation.
+- Added Merge and confirmation-gated Replace modes.
+- Watchlist merge unions canonical IDs with existing-first ordering; saved comparisons reuse canonical 2–4 company validation and deduplicate by company set.
+- Research conflicts use newer valid `updatedAt`; equal timestamps keep existing. Review conflicts use newer valid `lastReviewedAt`; equal timestamps keep existing.
+- Added same-session synchronization events for watchlist, research, review, saved comparisons, and storage listeners.
+- Added focused backup contract tests and responsive backup UI.
+
+## Supported storage
+- `israel-stocks.watchlist.v1`
+- `israel-stocks.saved-comparisons.v1`
+- `israel-stocks.research-notes.v1`
+- `israel-stocks.review-state.v1`
+
+## Excluded data
+- No financial data, market snapshots, valuation outputs, Scorecard payloads, provenance, API responses, credentials, secrets, or arbitrary localStorage are exported or persisted.
+
+## Verification
+- Frontend: 184 tests passed across 38 files.
+- Worker: 123 tests passed across 27 files.
+- `npm run worker:check`: passed.
+- `npm run build`: passed.
+- Local hydrated Chrome/CDP on isolated profile and port 9334: `/workspace-backup` hydrated, supported workspace counts rendered, 390px mobile had no horizontal overflow, console/runtime errors: 0.
+- The backup contract tests verified supported-scope export, malformed root/version rejection, canonical filtering, partial invalid records, deterministic merge, replace isolation, and unrelated localStorage preservation.
+- Production route/hydration and production-origin backup/restore smoke are pending the Pages deployment created by the closeout push.
+
+## Backend / D1
+NONE
+
+## Worker deployment
+NO
+
+## Git
+- Product commit: pending closeout commit.
+- Push: pending.
+- `HEAD == origin/main`: pending.
+
+## Limitations
+- Backup files remain local files with no encryption; users must protect exported files themselves.
+- No cloud sync or account backup.
+
+## Recommended next phase
+Add an optional user-controlled backup-file encryption workflow without introducing server persistence.
+
+## Phase 27 final state
+Phase 27: PARTIAL
+
 # Phase 26 — Investor Review Queue & What Changed Workspace
 
 ## Status
