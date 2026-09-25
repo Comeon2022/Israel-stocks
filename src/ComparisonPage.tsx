@@ -3,6 +3,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { apiGet } from './api/client'
 import { valuationCoverage, blockerCategory } from './lib/valuationCoverage'
+import { WatchlistToggle } from './WatchlistToggle'
 type Company={id:string;name_en?:string;name_he?:string;ticker?:string}; type Detail={market?:any;fv?:any;score?:any}
 const policy:Record<string,[string,string]>={sano:['Consumer Branded','SUPPORTED'],shufersal:['Food Retail','SUPPORTED'],'rami-levy':['Food Retail','SUPPORTED'],yochananof:['Food Retail','SUPPORTED'],victory:['Food Retail','SUPPORTED'],'tiv-taam':['Food Retail','SUPPORTED'],strauss:['Consumer Branded','SUPPORTED'],'neto-malinda':['Distribution','SUPPORTED'],diplomat:['Distribution','PROVISIONAL'],fox:['Apparel Retail','SUPPORTED'],'delta-israel-brands':['Apparel Retail','SUPPORTED'],castro:['Apparel Retail','SUPPORTED'],isrotel:['Hotels','SUPPORTED'],'dan-hotels':['Hotels','SUPPORTED'],'max-stock':['Unsupported / Provisional','UNSUPPORTED']}; const ids=Object.keys(policy); const display=(v:any)=>v==null?'לא זמין':typeof v==='number'?v.toLocaleString('en-US',{maximumFractionDigits:2}):String(v); const scoreState=(d:Detail)=>d.score?.available?'AVAILABLE':d.score?.dimensions?'PARTIAL':'UNAVAILABLE'
 const load=(id:string)=>Promise.all([apiGet<any>(`/api/companies/${id}/market/latest`),apiGet<any>(`/api/companies/${id}/fair-value`),apiGet<any>(`/api/companies/${id}/scorecard-v2`)]).then(([m,f,s])=>({market:m.market,fv:f,score:s})).catch(()=>({}))

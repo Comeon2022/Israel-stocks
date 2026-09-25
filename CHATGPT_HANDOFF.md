@@ -1226,3 +1226,36 @@ Git:
 - HEAD == origin/main: Yes
 
 Phase 24 final state: PARTIAL; the shared toggle still requires complete wiring into `/companies`, all live company headers, and each comparison column, followed by hydrated browser verification.
+# Phase 24B — Final Watchlist Wiring & Hydrated Verification
+
+Status: COMPLETE
+
+Implemented:
+- Reused the shared `WatchlistToggle` on `/companies`, live company detail routes, and each selected company on `/compare`.
+- Controls use canonical IDs and the existing `israel-stocks.watchlist.v1` helper only; they do not mutate comparison query state or saved comparison sets.
+- Cross-surface state is synchronized with the Phase 24A storage event. Watchlist route behavior remains intact.
+
+Storage:
+- `israel-stocks.watchlist.v1` unchanged.
+- Only canonical company IDs are stored; no financial, market, valuation, Scorecard, or provenance values are persisted.
+
+Verification:
+- Frontend tests: 173 passed (35 files)
+- Worker tests: 123 passed (27 files)
+- Worker check/typecheck: passed
+- Production build: passed
+- Browser/CDP verification: passed locally with hydrated `/companies`, `/company/castro`, `/watchlist`, and `/compare?companies=castro,isrotel`; favorite storage persisted as `['castro']`; compare URL remained unchanged after toggle; no unexpected console/runtime errors observed.
+- Pages route checks: existing production route checks remained HTTP 200; local hydrated verification was used for behavior.
+
+Backend / financial logic changes:
+- NONE
+
+Worker deployment:
+- NO
+
+Git:
+- Commit: pending
+- Push: pending
+- HEAD == origin/main: pending
+
+Phase 24 final state: Phase 24: COMPLETE
