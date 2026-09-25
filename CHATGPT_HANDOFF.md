@@ -1306,3 +1306,42 @@ NO
 
 ## Recommended next phase
 Complete hydrated Chrome/CDP interaction verification across company, research, watchlist, and compare surfaces.
+
+# Phase 25A — Research Workspace Integration & Browser Closeout
+
+## Status
+PARTIAL — hydrated Chrome/CDP verification could not be completed in this environment.
+
+## Implemented
+- Added per-company research visibility and the shared research editor action to `/watchlist`.
+- Preserved watchlist selection, comparison selection, remove behavior, and the existing research editor/helper.
+- Added a focused storage-independence regression test.
+
+## Storage
+- `israel-stocks.research-notes.v1` unchanged.
+- `israel-stocks.watchlist.v1` unchanged.
+- No cross-storage duplication; research content is not stored in watchlist records and watchlist IDs are not stored in research records.
+- No financial snapshots are stored.
+
+## Verification
+- Frontend tests: 177 passed (36 files).
+- Worker tests: 123 passed (27 files).
+- Worker check/typecheck: passed.
+- Build: passed.
+- Local route checks: `/research`, `/watchlist`, `/companies`, `/company/castro`, and `/compare?companies=castro,isrotel` returned HTTP 200.
+- Chrome/CDP verification: not completed. The repository CDP script was found and a fresh Chrome launch was attempted, but Chrome absorbed/exited the remote-debugging launch before a stable port-9222 page target was available; the CDP script returned `ECONNREFUSED 127.0.0.1:9222`.
+- Console/runtime error count: unavailable because no hydrated session completed.
+
+## Backend / financial logic changes
+NONE
+
+## Worker deployment
+NO
+
+## Git
+- Commit: `821c480ce4f3110a41e79bd66a4fe25040062e58`.
+- Push result: successful.
+- `HEAD == origin/main`: Yes.
+
+## Phase 25 final state
+Phase 25: PARTIAL — hydrated Chrome/CDP verification remains the exact blocker.
