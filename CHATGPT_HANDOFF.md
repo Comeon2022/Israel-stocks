@@ -1345,3 +1345,51 @@ NO
 
 ## Phase 25 final state
 Phase 25: PARTIAL — hydrated Chrome/CDP verification remains the exact blocker.
+
+# Phase 25B — Hydrated Browser Verification Final Closeout
+
+## Status
+COMPLETE
+
+## Browser launch resolution
+- Chrome executable: `C:\Program Files\Google\Chrome\Application\chrome.exe`.
+- Normal profile was not used.
+- Isolated profile: temporary `israel-stocks-cdp-25l` user-data directory.
+- Debug port: `9333` after the prior 9222 refusal.
+- Verified before automation: `http://127.0.0.1:9333/json/version` and `/json` both returned valid JSON with a page target.
+- CDP connected through the repository’s WebSocket/Runtime approach adapted to port 9333.
+
+## Hydrated verification
+- Company `/company/sano`: hydrated successfully; saved thesis, catalyst, risk, open question, and general note; reload/reopen returned exact values.
+- `/research`: saved company appeared; counts were `1 catalysts`, `1 risks`, `1 open questions`; note-edit timestamp was visible; thesis edit persisted through save/reload.
+- `/watchlist`: research action was visible; opening it loaded the edited Sano thesis.
+- Watchlist removal independence: after removing Sano, `israel-stocks.watchlist.v1` became `[]` while the research note remained and survived navigation/reload.
+- Reverse independence: after re-adding Sano, deleting the research note left `israel-stocks.watchlist.v1` as `["sano"]`; the watchlist remained and the UI returned to `Add research notes`.
+- Storage inspection: research keys were exactly `catalysts`, `companyId`, `generalNotes`, `questions`, `risks`, `thesis`, `updatedAt`; financial snapshot key scan was empty. Watchlist storage contained only canonical IDs.
+- Compare: research controls are intentionally not integrated on `/compare`, so compare URL safety is non-applicable and compare selection is untouched.
+- Desktop smoke: hydrated at width `929`, no horizontal overflow.
+- Mobile smoke: hydrated at width `390`, no horizontal overflow; research route remained usable.
+
+## Browser errors
+- Console/runtime/React errors: `0` captured in the exercised flow.
+
+## Tests
+- Frontend tests: 177 passed (36 files).
+- Worker tests: 123 passed (27 files).
+- Worker check/typecheck: passed.
+- Build: passed.
+- Local route checks: `/research`, `/watchlist`, `/companies`, `/company/castro`, and `/compare?companies=castro,isrotel` returned HTTP 200.
+
+## Backend / financial logic changes
+NONE
+
+## Worker deployment
+NO
+
+## Git
+- Commit: pending final closeout commit.
+- Push result: pending.
+- `HEAD == origin/main`: pending.
+
+## Phase 25 final state
+Phase 25: COMPLETE
