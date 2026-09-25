@@ -1120,3 +1120,6 @@ Phase 22 is implemented as frontend-only UX. `src/lib/valuationCoverage.ts` prov
 # Phase 23 comparison and discovery UX
 
 Added API-backed discovery filters, neutral sorting, bounded 2–4 company selection, `/compare?companies=...`, side-by-side live metrics, company compare actions, and same-policy peer shortcuts. Null and failed responses remain unavailable. No financial writes, extraction/recovery, market, class-policy, Scorecard, FV, or frontend valuation-calculation changes were made. Worker deployment: NO; this is frontend-only. Browser rendering was unavailable; production route checks should be run after Pages deployment. Recommended Phase 24: saved comparison/watchlist-style local state, richer charts, and source/provenance access without changing models.
+# Phase 23A comparison/discovery refinement
+
+Refined Phase 23 with URL-backed validated filters (`q`, class, support, coverage, scorecard, FV2, sort/direction), stable null-last sorting, selection chips and 2–4 canonical comparison IDs, blocker categories, and richer side-by-side live API rows. No financial/model/backend changes or Worker deployment. Frontend tests/build, Worker tests, and Worker check passed. Browser verification remains unavailable.
