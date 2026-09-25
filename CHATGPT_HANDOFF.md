@@ -1259,3 +1259,50 @@ Git:
 - HEAD == origin/main: Yes
 
 Phase 24 final state: Phase 24: COMPLETE
+
+# Phase 25 — Research Notes, Thesis & Catalysts Workspace
+
+## Status
+PARTIAL
+
+## Implemented
+- Added the separate `israel-stocks.research-notes.v1` local storage helper with canonical company IDs, trimming, bounds, malformed-data safety, deduplication, quota safety, and storage-event synchronization.
+- Added a reusable research-note button/editor with thesis, catalysts, risks, open questions, general notes, save/cancel/delete behavior, confirmation, and local note-edit timestamps.
+- Added `/research` with local search, watchlist/open-question filters, neutral note counts, quick company/edit actions, delete confirmation, and browser-local privacy copy.
+- Added company-page research access for legacy and live company routes.
+- Added `/research` to application routing. Watchlist and compare storage contracts remain separate and no research data is written into them.
+
+## Storage
+- Key: `israel-stocks.research-notes.v1`.
+- Records contain only canonical `companyId`, user-authored `thesis`, `catalysts`, `risks`, `questions`, `generalNotes`, and local `updatedAt`.
+- Notes are local to this browser and are not synced across devices.
+- No financial, valuation, market, Scorecard, provenance, or API snapshots are persisted.
+
+## Verification
+- Frontend tests: 176 passed (36 files).
+- Worker tests: 123 passed (27 files).
+- Worker check/typecheck: passed.
+- Production build: passed.
+- Browser verification: hydrated Chrome/CDP automation was unavailable in the tool environment; not claimed.
+- Route checks: local production build completed successfully; hydrated route checks were not available.
+- Console/runtime errors: no hydrated browser run was available to collect; not claimed.
+
+## Backend / financial logic changes
+NONE
+
+## Worker deployment
+NO
+
+## Git
+- Commit: `065e388`.
+- Push result: pending final push.
+- `HEAD == origin/main`: pending final push verification.
+
+## Limitations
+- Local browser only; no cloud sync.
+- No AI-generated research.
+- No recommendation, ranking, Buy/Sell, conviction, target-price, or financial-model logic.
+- Hydrated browser verification remains to be run when CDP automation is available.
+
+## Recommended next phase
+Complete hydrated Chrome/CDP interaction verification across company, research, watchlist, and compare surfaces.
