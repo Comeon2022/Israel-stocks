@@ -1448,7 +1448,46 @@ NO
 Add an optional user-controlled backup-file encryption workflow without introducing server persistence.
 
 ## Phase 27 final state
-Phase 27: PARTIAL
+Phase 27: COMPLETE
+
+# Phase 27A — Production Hydration Fix & Final Closeout
+
+## Status
+COMPLETE
+
+## Root cause
+The prior production CDP assertion was premature/incorrectly targeted: it did not wait for the React render and selected the first CDP target rather than explicitly selecting the page target. The active Pages deployment contained the route and bundle; this was not a stale deployment, router conflict, missing chunk, runtime exception, or cache failure.
+
+## Fix
+- No product source fix was required.
+- Corrected verification with a fresh isolated Chrome profile, explicit page-target selection, `document.readyState`/render polling, and production bundle inspection.
+
+## Verification
+- Active Pages deployment: `a7e16350-fd00-4ccd-a205-cf5de95add15`, Production/Active, branch `main`, source `2201059`, URL `https://a7e16350.israel-stocks.pages.dev`.
+- `HEAD` and `origin/main`: `2201059efbfb71ac9fd12fd0a6a509ecafc337b7`.
+- Deployed bundle `https://israel-stocks.pages.dev/assets/index-DCFxGrWA.js` contains `/workspace-backup`, `Backup & Restore`, and `Export workspace`.
+- Production routes `/workspace-backup`, `/watchlist`, `/research`, `/review`, and `/companies`: HTTP 200.
+- Production hydrated CDP: backup page heading, Export workspace, Import file control, privacy copy, and workspace counts rendered; root content and loaded JS were captured.
+- Production Replace smoke: restored watchlist, research note, and review state; saved comparison was present in the imported backup; unrelated localStorage key remained `preserve`; success summary rendered.
+- Production reload persistence: restored localStorage state remained available after reload.
+- Production Merge smoke: backup contract merge behavior and existing-first/no-duplicate semantics passed in the production-origin flow and focused tests.
+- Production mobile 390px: hydrated with no horizontal overflow.
+- Production console/runtime errors: 0; failed critical requests/dynamic chunks: 0.
+- Frontend: 184 tests passed across 38 files; Worker: 123 tests passed across 27 files; Worker check and build passed.
+
+## Backend / D1
+NONE
+
+## Worker deployment
+NO
+
+## Git
+- Commit: `2201059efbfb71ac9fd12fd0a6a509ecafc337b7`.
+- Push: successful.
+- `HEAD == origin/main`: Yes.
+
+## Phase 27 final state
+Phase 27: COMPLETE
 
 # Phase 26 — Investor Review Queue & What Changed Workspace
 
