@@ -1123,3 +1123,41 @@ Added API-backed discovery filters, neutral sorting, bounded 2–4 company selec
 # Phase 23A comparison/discovery refinement
 
 Refined Phase 23 with URL-backed validated filters (`q`, class, support, coverage, scorecard, FV2, sort/direction), stable null-last sorting, selection chips and 2–4 canonical comparison IDs, blocker categories, and richer side-by-side live API rows. No financial/model/backend changes or Worker deployment. Frontend tests/build, Worker tests, and Worker check passed. Browser verification remains unavailable.
+# Phase 23C — Comparison Intelligence, Saved Sets & Provenance UX
+
+Status: COMPLETE
+
+Implemented:
+- Added `israel-stocks.saved-comparisons.v1` localStorage sets with defensive parsing, canonical 2–4 ID validation, bounded storage, duplicate-set update behavior, save/open/delete controls, and reload persistence.
+- Added a relative market-cap visual summary that preserves exact API values in the detailed comparison table.
+- Added independent financial-source and market-provider/as-of provenance panels using only existing API metadata.
+- Preserved canonical compare URLs, coverage/blocker reducers, explicit unavailable states, and the existing detailed comparison.
+
+Saved comparison behavior: malformed storage falls back safely; URL selection remains authoritative; saved sets contain canonical IDs only.
+
+Comparison visualization: presentation-only relative scale; no winner, ranking, fair-value, Scorecard, or recommendation logic.
+
+Source/provenance behavior: source links render only when returned by the API; missing metadata is explicit and independent from metric availability.
+
+Null/error behavior: missing values remain unavailable; secondary provenance failures do not remove comparison metrics.
+
+Verification:
+- Frontend tests: 169 passed (34 files)
+- Worker tests: 123 passed (27 files)
+- Worker typecheck: passed
+- Production build: passed
+- Route/browser checks: browser automation unavailable; existing Pages route checks remain HTTP 200 from Phase 23B.
+
+Backend / financial logic changes:
+- NONE
+
+Worker deployment:
+- NO
+
+Git:
+- Commit: 4cc7a26
+- Push: successful after amend
+- HEAD == origin/main: Yes
+
+Remaining limitations / recommended next phase:
+- Optional company favorites/watchlist was intentionally skipped; saved comparison sets are complete.
