@@ -1767,6 +1767,7 @@ export function LiveApiCompanyPage({ id }: { id: string }) {
       </div>
     );
   const name = displayNames[id] ?? state.company.name_he;
+  const peerMap: Record<string,string[]> = { castro: ['fox','delta-israel-brands'], fox: ['castro','delta-israel-brands'], 'delta-israel-brands': ['fox','castro'], isrotel: ['dan-hotels'], 'dan-hotels': ['isrotel'], shufersal: ['rami-levy','yochananof','victory','tiv-taam'], 'rami-levy': ['shufersal','yochananof','victory','tiv-taam'], yochananof: ['shufersal','rami-levy','victory','tiv-taam'], victory: ['shufersal','rami-levy','yochananof','tiv-taam'], 'tiv-taam': ['shufersal','rami-levy','yochananof','victory'], sano: ['strauss'], strauss: ['sano'] };
   const periods = state.periods
     .filter(
       (p: any, i: number, a: any[]) =>
@@ -1790,7 +1791,9 @@ export function LiveApiCompanyPage({ id }: { id: string }) {
           <h1>{name}</h1>
           <p>נתונים פיננסיים ממקור API רשמי</p>
         </div>
+        <Link className="filter active" to={`/compare?companies=${id}`}>Add to comparison</Link>
       </div>
+      {(peerMap[id] ?? []).length > 0 && <div className="panel"><div className="eyebrow">SIMILAR COMPANIES</div><div className="filters">{peerMap[id].slice(0,4).map(peer => <Link className="filter" key={peer} to={`/company/${peer}`}>{displayNames[peer] ?? peer}</Link>)}</div></div>}
       <MarketValuation market={state.market} companyId={id} />
       <FairValueSection companyId={id} />
       <div className="panel financial-table">

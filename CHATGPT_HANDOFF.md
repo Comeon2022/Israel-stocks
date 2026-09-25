@@ -1117,3 +1117,6 @@ Remote counts unchanged: 15 companies, exactly 30 expanded annual periods, 0 dup
 # Phase 22 handoff — valuation coverage product completion
 
 Phase 22 is implemented as frontend-only UX. `src/lib/valuationCoverage.ts` provides null-safe 3-method coverage labels and blocker-category mapping. Live company valuation panels, `/companies`, and `/coverage` consume existing fair-value/scorecard/market APIs without recalculating valuation or changing Worker data. Worker deployment was intentionally skipped. Frontend tests (166), Worker tests (123), Worker typecheck, and production build pass. Existing unrelated worktree changes were preserved.
+# Phase 23 comparison and discovery UX
+
+Added API-backed discovery filters, neutral sorting, bounded 2–4 company selection, `/compare?companies=...`, side-by-side live metrics, company compare actions, and same-policy peer shortcuts. Null and failed responses remain unavailable. No financial writes, extraction/recovery, market, class-policy, Scorecard, FV, or frontend valuation-calculation changes were made. Worker deployment: NO; this is frontend-only. Browser rendering was unavailable; production route checks should be run after Pages deployment. Recommended Phase 24: saved comparison/watchlist-style local state, richer charts, and source/provenance access without changing models.
