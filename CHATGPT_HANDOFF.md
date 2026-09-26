@@ -1658,6 +1658,36 @@ NO
 ## Phase 29 final state
 Phase 29: PARTIAL — decrypt action/result transition remains unresolved
 
+# Phase 29E — Instrumented Encrypted Verify Final Closeout
+
+## Status
+PARTIAL
+
+## Instrumentation evidence
+- The temporary browser harness was prepared to record only click counts, submit counts, and `importKey`/`deriveKey`/`decrypt` call and resolve/reject counters.
+- The harness stalled after installing the temporary Web Crypto wrappers and did not produce a trustworthy execution trace.
+- No passphrase, key material, plaintext, ciphertext, salt, IV, or research content was logged.
+
+## Root cause
+- The remaining encrypted action/result transition is still unresolved. Prior production evidence proves encrypted detection, passphrase UI, DOM state update, enabled action, and zero browser errors; this attempt did not conclusively establish whether crypto was invoked.
+
+## Resolution
+- No product source or crypto implementation change was made. Temporary fixtures, instrumentation, and passphrase-bearing artifacts were removed.
+
+## Production state
+- Correct-password `Backup verified`: not proven.
+- Wrong-password generic failure: not proven.
+- Mobile/hydration and prior zero-mutation evidence remain carried forward.
+
+## Backend / D1
+NONE
+
+## Worker deployment
+NO
+
+## Phase 29 final state
+Phase 29: PARTIAL — encrypted Verify execution trace and both outcomes remain unproven
+
 # Phase 27A — Production Hydration Fix & Final Closeout
 
 ## Status
