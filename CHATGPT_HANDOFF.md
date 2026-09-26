@@ -1569,6 +1569,37 @@ PARTIAL
 ## Phase 29 final state
 Phase 29: PARTIAL — production encrypted Verify file evidence is incomplete
 
+# Phase 29B — Production Verify Without Download Dependency
+
+## Status
+PARTIAL
+
+## Why Phase 29A was blocked
+- Chrome/CDP download-directory automation did not produce backup files; no product defect was established from that limitation.
+
+## New verification method
+- Generated temporary plain and encrypted fixtures using the existing Phase 27 payload and Phase 28 crypto helper.
+- Attempted direct production file-input injection with CDP `DOM.setFileInputFiles`, without relying on browser downloads.
+- Temporary fixtures and harness files were deleted after the attempt.
+
+## Production verification evidence
+- Fresh isolated Chrome/CDP profile used against `https://israel-stocks.pages.dev/workspace-backup`.
+- Production page hydrated and Verify control rendered.
+- Direct plain fixture upload succeeded; `Backup verified` rendered.
+- Plain verification left all supported storage strings and the unrelated sentinel unchanged.
+- Mobile 390px smoke passed with no horizontal overflow.
+- Browser error capture: 0 unexpected errors.
+
+## Remaining blocker
+- Direct encrypted fixture injection did not produce the encrypted verification result in the production UI, so correct-passphrase success and wrong-password failure were not observed. The phase is not marked complete.
+
+## Git
+- Latest pushed commit: `13830e634a2549d0d9d6917144ca8c8766c36589`.
+- `HEAD == origin/main`: Yes.
+
+## Phase 29 final state
+Phase 29: PARTIAL — encrypted production Verify evidence remains incomplete
+
 # Phase 27A — Production Hydration Fix & Final Closeout
 
 ## Status
