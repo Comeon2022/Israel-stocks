@@ -1626,6 +1626,38 @@ PARTIAL
 ## Phase 29 final state
 Phase 29: PARTIAL — encrypted decrypt state transition remains unverified
 
+# Phase 29D — Encrypted Verify Action/Handler Final Diagnosis
+
+## Status
+PARTIAL
+
+## Root cause diagnosis
+- React-compatible browser-side input injection was used with the native prototype setter plus `input` and `change` events.
+- The passphrase field was present and its value length updated.
+- The exact action was the `button` whose accessible text was `Decrypt and preview`; it was enabled and both native click and mouse-event attempts were issued.
+- The encrypted branch remained rendered after the action, but neither `Backup verified` nor the generic decrypt error appeared. No browser runtime, console, or critical-request errors were captured.
+- Because the decrypt call/result transition could not be conclusively instrumented without product instrumentation, no source fix was made.
+
+## Resolution / verification
+- Automation-only diagnosis completed as far as the production DOM exposed it; no crypto parameters, schemas, or product source were changed.
+- Encrypted schema detection and passphrase UI remain proven from Phase 29C.
+- Correct-password success and wrong-password generic failure remain unproven.
+- Temporary fixtures and browser harness artifacts were removed.
+
+## Browser/mobile
+- Production hydration: passed.
+- Mobile 390px: passed with no horizontal overflow.
+- Console/runtime/critical-request errors: 0 observed.
+
+## Backend / D1
+NONE
+
+## Worker deployment
+NO
+
+## Phase 29 final state
+Phase 29: PARTIAL — decrypt action/result transition remains unresolved
+
 # Phase 27A — Production Hydration Fix & Final Closeout
 
 ## Status
