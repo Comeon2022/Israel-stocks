@@ -1688,6 +1688,40 @@ NO
 ## Phase 29 final state
 Phase 29: PARTIAL — encrypted Verify execution trace and both outcomes remain unproven
 
+# Phase 29F — Trusted Browser E2E Final Closeout
+
+## Status
+PARTIAL
+
+## Browser method
+- Fresh isolated Chrome profile with trusted CDP fallback.
+- Native file selection via CDP file-input assignment, browser-level keyboard input via `Input.insertText`, and browser-level mouse press/release on the exact `Decrypt and preview` button.
+- No Web Crypto monkey-patching and no page-scripted `element.click()` used.
+
+## Evidence
+- Production page hydrated and encrypted file was recognized.
+- Password input accepted browser-level text; observed length was non-zero.
+- Exact `Decrypt and preview` action was enabled and physically clicked.
+- Correct-password `Backup verified`: not rendered.
+- Wrong-password generic failure: not rendered.
+- Plain Verify regression succeeded.
+- Supported storage and sentinel remained unchanged in the attempted flows.
+- Mobile 390px had no horizontal overflow.
+- Console/runtime/critical-request errors: 0.
+
+## Root cause / remaining blocker
+- Trusted browser interaction reproduces the failure after the enabled action is clicked: the UI remains on the encrypted prompt with neither result nor generic error. This is meaningful product-path failure evidence, but the exact handler/crypto cause is not yet proven; no speculative source fix was made.
+- Temporary fixtures and harness artifacts were deleted.
+
+## Backend / D1
+NONE
+
+## Worker deployment
+NO
+
+## Phase 29 final state
+Phase 29: PARTIAL — trusted browser click does not produce encrypted Verify result
+
 # Phase 27A — Production Hydration Fix & Final Closeout
 
 ## Status
