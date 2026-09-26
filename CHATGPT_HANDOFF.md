@@ -1600,6 +1600,32 @@ PARTIAL
 ## Phase 29 final state
 Phase 29: PARTIAL — encrypted production Verify evidence remains incomplete
 
+# Phase 29C — Encrypted Verify Production Branch Closeout
+
+## Status
+PARTIAL
+
+## Root cause observed
+- The browser-side `File` + `DataTransfer` injection succeeded: the production input reported one file with the expected filename/size, the encrypted schema was accepted, `Encrypted backup detected` rendered, and the passphrase field appeared.
+- The subsequent production UI decrypt interaction did not produce either `Backup verified` or the generic decrypt error, so the final decrypt state transition could not be proven. No source change was made without a confirmed handler/runtime defect.
+
+## Verification method
+- Generated a temporary encrypted fixture with the existing Phase 28 helper and unchanged parameters.
+- Injected it into the production Verify input using a real browser `File`, `DataTransfer`, and explicit `input`/`change` events.
+- Temporary fixture and harness artifacts were deleted after testing.
+
+## Evidence
+- Production encrypted schema detection: passed.
+- Passphrase UI: passed.
+- Correct-passphrase Verify success: not observed.
+- Wrong-password failure: not observed.
+- Plain Verify regression and prior zero-mutation evidence remain valid.
+- Mobile 390px and production hydration: passed.
+- Browser errors captured during the attempt: 0.
+
+## Phase 29 final state
+Phase 29: PARTIAL — encrypted decrypt state transition remains unverified
+
 # Phase 27A — Production Hydration Fix & Final Closeout
 
 ## Status
