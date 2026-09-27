@@ -1425,6 +1425,44 @@ Added `verifyEncryptedBackup(...)` as a small internal orchestration module. It 
 
 Backend changes: NONE. D1 changes: NONE. Migrations: NONE. Worker deployment: NO.
 
+# Phase 29I — Production Acceptance Final Closeout
+
+## Status
+Phase 29: PARTIAL — production encrypted Verify reached hydration, encrypted-file recognition, and browser password entry, but produced neither `Backup verified` nor the generic decrypt error after the action interaction.
+
+## Baseline
+- Phase 29H product fix: `e9a1e5e84212dcdf23e320ca501ed1018a8ed311`.
+- Active Pages deployment: `9e50efc5-d7b1-4d6c-b274-33ee894e9df5`.
+- Pages source: `e9a1e5e`.
+- No new source diagnosis or source changes were made in Phase 29I.
+
+## Production evidence
+- Fresh isolated Chrome/CDP profile and production origin were used.
+- `/workspace-backup` hydrated with Backup & Restore and Verify controls visible.
+- Temporary valid Phase 27 plain/encrypted fixtures were generated from the existing contracts; fixtures and passphrase were not logged or committed.
+- Encrypted fixture was recognized by the production UI.
+- Browser-level passphrase entry updated the passphrase field to 29 characters.
+- After the Decrypt and preview interaction, neither `Backup verified` nor the generic decrypt failure rendered; storage remained unchanged. This is the exact remaining production blocker.
+- Because the encrypted terminal path did not complete, mandatory correct-password, wrong-password, plain Verify, mobile, and browser-health acceptance could not all be certified.
+
+## Routes
+- `/workspace-backup`: HTTP 200
+- `/watchlist`: HTTP 200
+- `/research`: HTTP 200
+- `/review`: HTTP 200
+- `/companies`: HTTP 200
+
+## Storage and scope
+The supported workspace values and unrelated sentinel were unchanged during the attempted encrypted Verify flow. Backend changes: NONE. D1 changes: NONE. Migrations: NONE. Worker deployment: NO.
+
+## Git
+- Current commit: `96229ec86dca1982aeabc52dc8d433dc65b3a123`.
+- Push result: successful.
+- `HEAD == origin/main`: Yes.
+
+## Phase 29 final state
+Phase 29: PARTIAL — production encrypted Verify remains silent after hydration, encrypted detection, and browser-native password entry; no completion claim is made.
+
 # Phase 27 — Local Workspace Backup & Restore
 
 ## Status
