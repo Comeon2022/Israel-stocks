@@ -1394,6 +1394,37 @@ NO
 ## Phase 25 final state
 Phase 25: COMPLETE
 
+# Phase 29H — Encrypted Verify Orchestration Isolation & Final Product Fix
+
+## Status
+Phase 29: PARTIAL — production trusted-browser correct-password and wrong-password acceptance could not be completed in this run.
+
+## Scope and diagnosis
+Phase 29G history was preserved; no browser-click experiment was repeated as the primary diagnosis. Source tracing covered encrypted envelope selection, ref/state passphrase sources, handler, decrypt helper, UTF-8 decode, JSON parsing, Phase 27 validation, result/error state, and loading cleanup. The verified product defect was orchestration coupling: the React handler performed decrypt, validation, and terminal UI updates in one inline closure without an independently testable settling boundary or `finally` cleanup. The Phase 28 crypto helper itself settles for correct and wrong passwords; the Phase 27 parser/validator settles for valid and invalid plaintext.
+
+## Exact fix
+Added `verifyEncryptedBackup(...)` as a small internal orchestration module. It converts decrypt rejection to `DECRYPT_FAILED`, converts decrypted validation failure to `INVALID_BACKUP`, and always returns a terminal result. The React handler now uses that result, exposes a verifying state, disables the action while active, clears the loading state in `finally`, and preserves the existing import preview flow. No crypto parameters or backup schemas changed.
+
+## Tests and verification
+- Frontend: 192 tests passed.
+- Worker: 123 tests passed.
+- `npm run worker:check`: passed.
+- `npm run build`: passed.
+- Focused tests prove correct-password success, wrong-password safe failure, invalid decrypted backup failure, plain validation availability, and byte-for-byte read-only storage behavior including an unrelated sentinel.
+- Local isolated Chrome CDP `/json/version`: verified on port 9224 with a fresh profile.
+- Production Pages route checks on deployment URL `https://9e50efc5.israel-stocks.pages.dev`: `/workspace-backup`, `/watchlist`, `/research`, `/review`, and `/companies` all returned HTTP 200.
+- Production trusted-browser terminal encrypted Verify results were not completed, so correct-password, wrong-password, zero-mutation, mobile, and zero-browser-error acceptance remain unverified.
+
+## Pages and Git
+- Active Pages deployment: `9e50efc5-d7b1-4d6c-b274-33ee894e9df5`.
+- Deployment URL: `https://9e50efc5.israel-stocks.pages.dev`.
+- Pages source: `e9a1e5e`, matching pushed product-fix commit `e9a1e5e84212dcdf23e320ca501ed1018a8ed311`.
+- Commit: `e9a1e5e Fix encrypted backup verify orchestration`.
+- Push result: successful.
+- `HEAD == origin/main`: Yes.
+
+Backend changes: NONE. D1 changes: NONE. Migrations: NONE. Worker deployment: NO.
+
 # Phase 27 — Local Workspace Backup & Restore
 
 ## Status
