@@ -1688,6 +1688,51 @@ NO
 ## Phase 29 final state
 Phase 29: PARTIAL — encrypted Verify execution trace and both outcomes remain unproven
 
+# Phase 29G — Encrypted Verify Source-Level Diagnosis & Minimal Fix
+
+## Status
+PARTIAL
+
+## Proven source diagnosis
+- The source path is: `verifyFile` parses and validates the encrypted envelope, stores `encryptedImport`, and renders the passphrase/action branch; `decryptImport` awaits `decryptWorkspaceBackup`, parses the plaintext through `parseWorkspaceBackup`, then sets verified/preview state or a generic error.
+- The stale-closure hypothesis was tested with synchronized refs for the encrypted envelope and passphrase. The fix preserved all contracts but did not change the production result: the action remains silent while plain Verify succeeds.
+- Therefore stale React state was not the complete root cause. No further speculative source change was made.
+
+## Product fix attempted
+- `src/WorkspaceBackupPage.tsx`: synchronized refs were added for the latest encrypted envelope and passphrase, and the decrypt handler reads those refs.
+- Crypto parameters, backup schemas, import/export, Merge/Replace, and storage contracts were unchanged.
+
+## Tests
+- Frontend: 188 tests passed across 39 files.
+- Worker: 123 tests passed across 27 files.
+- Worker check: passed.
+- Build: passed.
+
+## Production verification
+- Pages deployment: `43a04242-54c7-4455-9903-d0798d9b1b70`, Active Production, source `95323e8`, URL `https://43a04242.israel-stocks.pages.dev`.
+- Production page hydrated; encrypted detection and enabled action rendered.
+- Correct-password encrypted Verify: still not rendered.
+- Wrong-password generic error: still not rendered.
+- Plain Verify: succeeded.
+- Supported storage and sentinel: unchanged during the attempted flows.
+- Mobile 390px: no overflow.
+- Browser errors: 0.
+- Temporary fixtures and harness artifacts were deleted.
+
+## Backend / D1
+NONE
+
+## Worker deployment
+NO
+
+## Git
+- Product fix commit: `95323e87701aa95d63f6c264dca2fcac4ca49b6d`.
+- Push: successful.
+- `HEAD == origin/main`: Yes.
+
+## Phase 29 final state
+Phase 29: PARTIAL — encrypted Verify remains silent after the minimal stale-state fix
+
 # Phase 29F — Trusted Browser E2E Final Closeout
 
 ## Status
